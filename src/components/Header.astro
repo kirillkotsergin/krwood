@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations, anchorLink, localizePath } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, anchorLink, localizePath, routePath } from '../i18n/utils';
 import Logo from './Logo.astro';
 import LanguagePicker from './LanguagePicker.astro';
 
@@ -12,7 +12,7 @@ const navItems = [
   { href: anchorLink('features', lang), label: t('nav.features') },
   { href: anchorLink('specs', lang), label: t('nav.specs') },
   { href: anchorLink('packaging', lang), label: t('nav.packaging') },
-  { href: localizePath('/lignin-pellets', lang), label: t('nav.lignin') },
+  { href: routePath('ligninPellets', lang), label: t('nav.lignin') },
   { href: anchorLink('contact', lang), label: t('nav.contact') },
 ];
 

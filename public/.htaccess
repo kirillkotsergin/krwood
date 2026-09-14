@@ -26,6 +26,12 @@ Options -Indexes
   # Drop the www. prefix so krwood.ee is the single canonical host.
   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
   RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+  # --- Legacy slug redirects ---------------------------------------------
+  # The Estonian lignin page briefly used the English slug. Anchored to the
+  # start of the path, so /en/lignin-pellets/ and /pl/lignin-pellets/ are
+  # left alone.
+  RewriteRule ^lignin-pellets/?$ /ligniin-pelletid/ [R=301,L]
 </IfModule>
 
 # --------------------------------------------------------------------------
