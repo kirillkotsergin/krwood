@@ -221,6 +221,106 @@ const et = {
   'privacy.s7.body':
     'Privaatsusega seotud küsimustes kirjutage meile aadressil:',
   'privacy.back': 'Tagasi avalehele',
+
+  // --- Lignin pellets landing page ----------------------------------------
+  'nav.lignin': 'Ligniini pelletid',
+
+  'lignin.meta.title': 'Ligniini pelletid 8 mm | Big Bag 1000 kg | KR Wood',
+  'lignin.meta.description':
+    'Ligniini pelletid 8 mm, tarnitakse 1000 kg suurkottides. Kõrge kütteväärtusega biokütus ja tööstuslik tooraine asfaldi, betooni, põllumajanduse ja keemiatööstuse jaoks.',
+  'lignin.meta.imageAlt': 'Ligniini pelletid 8 mm, valatuna 1000 kg suurkotist',
+
+  'lignin.hero.badge': '8 mm · Big Bag 1000 kg',
+  'lignin.hero.title': 'Ligniini pelletid',
+  'lignin.hero.titleAccent': 'Energiarikas kütus ja tööstuslik tooraine',
+  'lignin.hero.lead':
+    'Ligniin on looduslik polümeer, mis annab puidule tugevuse — ja üks energiarikkamaid biomassi fraktsioone. 8 mm pelletiks pressitult ja 1000 kg suurkottides tarnituna põleb see kuumemalt kui tavalised puidugraanulid ning leiab kasutust paljudes tööstusharudes väljaspool katlamaja.',
+  'lignin.hero.ctaPrimary': 'Küsi pakkumist',
+  'lignin.hero.ctaSecondary': 'Vaata tehnilisi andmeid',
+
+  'lignin.overview.eyebrow': 'Toote ülevaade',
+  'lignin.overview.title': 'Mis on ligniini pelletid',
+  'lignin.overview.p1':
+    'Ligniin on tselluloosi järel maailma levinuim orgaaniline polümeer. See seob taimekiud omavahel ja muudab puidu jäigaks. Tselluloositööstuse ja biorafineerimise kõrvalsaadusena eraldatuna sisaldab ligniin märgatavalt rohkem energiat kui teda ümbritsev tselluloos — just see teeb temast väärtusliku kütuse.',
+  'lignin.overview.p2':
+    'Võimalik, et kasutate ligniini juba praegu, ise seda teadmata. Tavaliste puidugraanulite tootmisel kasutatakse ligniini sageli loodusliku sideainena tärklise asemel: kuumus ja rõhk pehmendavad puidu enda ligniini, mis seejärel tahkub ja hoiab graanuli koos. Sünteetilist liimi pole vaja. Käesolev toode koondab sama aine eraldi pelletiks.',
+
+  'lignin.benefits.title': 'Peamised eelised',
+  'lignin.benefits.b1.title': 'Kõrgem kütteväärtus',
+  'lignin.benefits.b1.text':
+    'Ligniin sisaldab kilogrammi kohta rohkem energiat kui tselluloos, seega annab iga tonn rohkem soojust kui tavalised puidugraanulid.',
+  'lignin.benefits.b2.title': 'Valmis suuremahuliseks logistikaks',
+  'lignin.benefits.b2.text':
+    '1000 kg suurkotid tõstesangadega liiguvad tõstuki ja teleskooplaaduriga — käsitsi tõstmist ega aluste lahtivõtmist pole vaja.',
+  'lignin.benefits.b3.title': 'Kahesuguse otstarbega materjal',
+  'lignin.benefits.b3.text':
+    'Sama toode sobib nii tahke biokütusena kui ka toorainena ehitus-, keemia- ja põllumajandustööstusele.',
+  'lignin.benefits.b4.title': 'Taastuv kõrvalsaadus',
+  'lignin.benefits.b4.text':
+    'Ligniin saadakse olemasolevatest tööstusvoogudest, mitte kütuseks kasvatatud puidust — seega ei lisandu survet metsadele.',
+
+  'lignin.audience.title': 'Kellele see sobib',
+  'lignin.audience.a1': 'Tööstuslikud katlamajad ja koostootmisjaamad, kes otsivad tonni kohta suuremat energiatihedust',
+  'lignin.audience.a2': 'Asfalditehased ja betoonitootjad, kes kasutavad ligniini modifikaatori või plastifikaatorina',
+  'lignin.audience.a3': 'Keemia- ja biorafineerimisettevõtted, kes hangivad ligniini toorainena',
+  'lignin.audience.a4': 'Põllumajandus- ja söödatootjad, kes valmistavad sorbente ja mullaparandajaid',
+
+  'lignin.specs.title': 'Tehnilised andmed',
+  'lignin.specs.subtitle':
+    'Tarnime ühes standardformaadis. Küsige iga tarne juurde täielikku analüüsisertifikaati.',
+  'lignin.row.packaging': 'Pakend',
+  'lignin.row.origin': 'Tooraine',
+  'lignin.value.diameter': '8 mm',
+  'lignin.value.length': '10–40 mm',
+  'lignin.value.packaging': 'Big Bag 1000 kg',
+  'lignin.value.calorific': '≥ 5,0 kWh/kg',
+  'lignin.value.moisture': '≤ 10 %',
+  'lignin.value.ash': '≤ 3 %',
+  'lignin.value.density': '≥ 600 kg/m³',
+  'lignin.value.origin': 'Puidupõhine ligniin',
+  'lignin.specs.note':
+    'Väärtused on selle klassi tüüpilised näitajad. Täpsed andmed kinnitatakse iga partii kohta kaasasolevas analüüsisertifikaadis.',
+
+  'lignin.apps.eyebrow': 'Rohkem kui küte',
+  'lignin.apps.title': 'Ligniini alternatiivsed tööstuslikud kasutusalad',
+  'lignin.apps.subtitle':
+    'Ligniin on platvormmaterjal. Selle fenoolne struktuur, siduvusvõime ja hüdrofoobsus teevad temast kasuliku tooraine kaugelt väljaspool energeetikat.',
+
+  'lignin.apps.roads.title': 'Teedeehitus, asfalt ja bituumen',
+  'lignin.apps.roads.lead':
+    'Ligniini kiireimini kasvav kasutusala. Bituumenile ja teekattele lisatuna asendab see osaliselt naftapõhist sideainet ja toimib antioksüdandina.',
+  'lignin.apps.roads.i1': 'Suurendab teekatte vastupidavust ja kasutusiga',
+  'lignin.apps.roads.i2': 'Kaitseb pragunemise eest ja aeglustab bituumeni vananemist',
+  'lignin.apps.roads.i3': 'Parandab vastupidavust temperatuurikõikumistele ja termilisele pingele',
+
+  'lignin.apps.concrete.title': 'Betoon ja ehitusmaterjalid',
+  'lignin.apps.concrete.i1': 'Lignosulfonaadid toimivad plastifikaatorina, suurendades betooni tugevust',
+  'lignin.apps.concrete.i2': 'Vähendab segu veevajadust, säilitades töödeldavuse',
+  'lignin.apps.concrete.i3': 'Kasutatakse sideainena plaatide ja komposiitide tootmisel',
+
+  'lignin.apps.agri.title': 'Põllumajandus ja loomakasvatus',
+  'lignin.apps.agri.i1': 'Enterosorbendid loomadele — seovad ja eemaldavad söödast mükotoksiine',
+  'lignin.apps.agri.i2': 'Väetised ja mullaparandajad — parandavad mulla struktuuri, õhustatust ja niiskuse sidumist',
+  'lignin.apps.agri.i3': 'Agrokeemia — dispergaator pestitsiidide koostises',
+
+  'lignin.apps.chem.title': 'Keemiatööstus',
+  'lignin.apps.chem.i1': 'Vanilliini tootmine',
+  'lignin.apps.chem.i2': 'Plastid ja vaigud, asendades mürgist fenooli',
+  'lignin.apps.chem.i3': 'Süsinikkiu lähteaine',
+  'lignin.apps.chem.i4': 'Aktiivsüsi',
+
+  'lignin.apps.oil.title': 'Naftatootmine ja metallurgia',
+  'lignin.apps.oil.i1': 'Lisand puurimisvedelikes',
+  'lignin.apps.oil.i2': 'Sideaine valuvormisegudes',
+
+  'lignin.apps.eco.title': 'Ökoloogia ja reostustõrje',
+  'lignin.apps.eco.i1':
+    'Naftareostuse likvideerimine — ligniin toimib hüdrofoobse sorbendina, sidudes süsivesinikke nii vees kui pinnases',
+
+  'lignin.cta.title': 'Vajate ligniini pelleteid suuremas koguses?',
+  'lignin.cta.text':
+    'Andke teada aastane kogus, tarnekoht ja kavandatav kasutusala ning saadame pakkumise koos analüüsisertifikaadiga.',
+  'lignin.cta.button': 'Küsi pakkumist',
 } as const;
 
 /* -------------------------------------------------------------------------- */
@@ -411,6 +511,106 @@ const en: Dictionary = {
   'privacy.s7.title': 'Contact',
   'privacy.s7.body': 'For any privacy-related questions, please write to us at:',
   'privacy.back': 'Back to homepage',
+
+  // --- Lignin pellets landing page ----------------------------------------
+  'nav.lignin': 'Lignin pellets',
+
+  'lignin.meta.title': 'Lignin Pellets 8 mm | 1000 kg Big Bags | KR Wood Estonia',
+  'lignin.meta.description':
+    'Lignin pellets, 8 mm, supplied in 1000 kg big bags. High-calorific biofuel and industrial raw material for asphalt, concrete, agriculture and chemistry. EU-wide delivery.',
+  'lignin.meta.imageAlt': 'Lignin pellets 8 mm poured from a 1000 kg big bag',
+
+  'lignin.hero.badge': '8 mm · Big Bag 1000 kg',
+  'lignin.hero.title': 'Lignin Pellets',
+  'lignin.hero.titleAccent': 'Energy-dense fuel and industrial raw material',
+  'lignin.hero.lead':
+    'Lignin is the natural polymer that gives wood its strength — and one of the most energy-dense fractions of biomass. Pressed into 8 mm pellets and supplied in 1000 kg big bags, it burns hotter than conventional wood pellets and feeds a wide range of industries far beyond the boiler room.',
+  'lignin.hero.ctaPrimary': 'Request a quote',
+  'lignin.hero.ctaSecondary': 'See specifications',
+
+  'lignin.overview.eyebrow': 'Product overview',
+  'lignin.overview.title': 'What lignin pellets are',
+  'lignin.overview.p1':
+    'Lignin is the second most abundant organic polymer on Earth after cellulose. It binds plant fibres together and makes wood rigid. Isolated as a by-product of pulp and biorefinery processes, it carries a markedly higher energy content than the cellulose around it — which is precisely what makes it valuable as a fuel.',
+  'lignin.overview.p2':
+    'You may already be using lignin without realising it. In the production of standard wood pellets, lignin is frequently used as a natural binder in place of starch: heat and pressure soften the wood’s own lignin, which then sets and holds each pellet together, with no synthetic glue required. This product concentrates that same substance into a pellet of its own.',
+
+  'lignin.benefits.title': 'Key benefits',
+  'lignin.benefits.b1.title': 'Higher calorific value',
+  'lignin.benefits.b1.text':
+    'Lignin carries more energy per kilogram than cellulose, so every tonne delivers more heat than conventional wood pellets.',
+  'lignin.benefits.b2.title': 'Bulk-ready logistics',
+  'lignin.benefits.b2.text':
+    '1000 kg big bags with lifting loops move by forklift or telehandler — no manual bag handling and no pallet breakdown.',
+  'lignin.benefits.b3.title': 'Dual-purpose material',
+  'lignin.benefits.b3.text':
+    'The same product serves both as a solid biofuel and as a feedstock for construction, chemical and agricultural processing.',
+  'lignin.benefits.b4.title': 'Renewable by-product',
+  'lignin.benefits.b4.text':
+    'Lignin is recovered from existing industrial streams rather than grown for fuel, so it places no additional pressure on forests.',
+
+  'lignin.audience.title': 'Who it is for',
+  'lignin.audience.a1': 'Industrial boiler houses and CHP plants seeking higher energy density per tonne',
+  'lignin.audience.a2': 'Asphalt plants and concrete producers using lignin as a modifier or plasticiser',
+  'lignin.audience.a3': 'Chemical and biorefinery operations sourcing lignin as a feedstock',
+  'lignin.audience.a4': 'Agricultural and feed manufacturers producing sorbents and soil improvers',
+
+  'lignin.specs.title': 'Technical specifications',
+  'lignin.specs.subtitle':
+    'Supplied in a single standard format. A full certificate of analysis is available with every delivery.',
+  'lignin.row.packaging': 'Packaging',
+  'lignin.row.origin': 'Raw material',
+  'lignin.value.diameter': '8 mm',
+  'lignin.value.length': '10–40 mm',
+  'lignin.value.packaging': 'Big Bag 1000 kg',
+  'lignin.value.calorific': '≥ 5.0 kWh/kg',
+  'lignin.value.moisture': '≤ 10 %',
+  'lignin.value.ash': '≤ 3 %',
+  'lignin.value.density': '≥ 600 kg/m³',
+  'lignin.value.origin': 'Wood-derived lignin',
+  'lignin.specs.note':
+    'Values are typical for this grade. Exact figures are confirmed per batch on the accompanying certificate of analysis.',
+
+  'lignin.apps.eyebrow': 'Beyond heating',
+  'lignin.apps.title': 'Alternative industrial applications of lignin',
+  'lignin.apps.subtitle':
+    'Lignin is a platform material. Its phenolic structure, binding power and hydrophobic behaviour make it useful well outside the energy sector.',
+
+  'lignin.apps.roads.title': 'Road construction, asphalt and bitumen',
+  'lignin.apps.roads.lead':
+    'The fastest-growing use for lignin. Added to bitumen and road surfaces, it acts as a partial bio-based replacement for petroleum binder and as an antioxidant.',
+  'lignin.apps.roads.i1': 'Increases the durability and service life of road surfaces',
+  'lignin.apps.roads.i2': 'Protects against cracking and slows age-hardening of bitumen',
+  'lignin.apps.roads.i3': 'Improves resistance to temperature fluctuation and thermal stress',
+
+  'lignin.apps.concrete.title': 'Concrete and building materials',
+  'lignin.apps.concrete.i1': 'Lignosulfonates act as plasticisers, increasing concrete strength',
+  'lignin.apps.concrete.i2': 'Reduces the water demand of the mix while preserving workability',
+  'lignin.apps.concrete.i3': 'Used as a binder in board and composite production',
+
+  'lignin.apps.agri.title': 'Agriculture and animal husbandry',
+  'lignin.apps.agri.i1': 'Enterosorbents for livestock — absorb and remove mycotoxins from feed',
+  'lignin.apps.agri.i2': 'Fertilisers and soil conditioners — improve structure, aeration and moisture retention',
+  'lignin.apps.agri.i3': 'Agrochemistry — dispersant in pesticide formulations',
+
+  'lignin.apps.chem.title': 'Chemical industry',
+  'lignin.apps.chem.i1': 'Production of vanillin',
+  'lignin.apps.chem.i2': 'Plastics and resins, replacing toxic phenol',
+  'lignin.apps.chem.i3': 'Carbon fibre precursor',
+  'lignin.apps.chem.i4': 'Activated carbon',
+
+  'lignin.apps.oil.title': 'Oil production and metallurgy',
+  'lignin.apps.oil.i1': 'Additive in drilling fluids',
+  'lignin.apps.oil.i2': 'Binder material in foundry moulding sands',
+
+  'lignin.apps.eco.title': 'Ecology and spill response',
+  'lignin.apps.eco.i1':
+    'Oil spill cleanup — lignin acts as a hydrophobic sorbent, binding hydrocarbons on water and in soil',
+
+  'lignin.cta.title': 'Need lignin pellets in volume?',
+  'lignin.cta.text':
+    'Tell us your annual tonnage, delivery point and intended application, and we will come back with a quote and a certificate of analysis.',
+  'lignin.cta.button': 'Request a quote',
 };
 
 /* -------------------------------------------------------------------------- */
@@ -592,6 +792,106 @@ const pl: Dictionary = {
   'privacy.s7.title': 'Kontakt',
   'privacy.s7.body': 'W sprawach dotyczących prywatności prosimy o kontakt pod adresem:',
   'privacy.back': 'Powrót na stronę główną',
+
+  // --- Lignin pellets landing page ----------------------------------------
+  'nav.lignin': 'Pellet ligninowy',
+
+  'lignin.meta.title': 'Pellet ligninowy 8 mm | Big Bag 1000 kg | KR Wood',
+  'lignin.meta.description':
+    'Pellet ligninowy 8 mm w big bagach 1000 kg. Biopaliwo o wysokiej wartości opałowej i surowiec przemysłowy do asfaltu, betonu, rolnictwa i chemii. Dostawa na terenie UE.',
+  'lignin.meta.imageAlt': 'Pellet ligninowy 8 mm wysypany z big baga 1000 kg',
+
+  'lignin.hero.badge': '8 mm · Big Bag 1000 kg',
+  'lignin.hero.title': 'Pellet ligninowy',
+  'lignin.hero.titleAccent': 'Paliwo o wysokiej energetyczności i surowiec przemysłowy',
+  'lignin.hero.lead':
+    'Lignina to naturalny polimer, który nadaje drewnu wytrzymałość — i jedna z najbardziej energetycznych frakcji biomasy. Sprasowana w pellet 8 mm i dostarczana w big bagach 1000 kg spala się goręcej niż zwykły pellet drzewny i znajduje zastosowanie w wielu branżach daleko poza kotłownią.',
+  'lignin.hero.ctaPrimary': 'Zapytaj o ofertę',
+  'lignin.hero.ctaSecondary': 'Zobacz dane techniczne',
+
+  'lignin.overview.eyebrow': 'Opis produktu',
+  'lignin.overview.title': 'Czym jest pellet ligninowy',
+  'lignin.overview.p1':
+    'Lignina jest drugim po celulozie najpowszechniejszym polimerem organicznym na Ziemi. To ona spaja włókna roślinne i nadaje drewnu sztywność. Wyodrębniona jako produkt uboczny przemysłu celulozowego i biorafinerii zawiera wyraźnie więcej energii niż otaczająca ją celuloza — i właśnie to czyni ją wartościowym paliwem.',
+  'lignin.overview.p2':
+    'Być może już używasz ligniny, nie zdając sobie z tego sprawy. W produkcji standardowego pelletu drzewnego lignina jest często wykorzystywana jako naturalne spoiwo zamiast skrobi: ciepło i ciśnienie zmiękczają własną ligninę drewna, która następnie twardnieje i spaja pellet, bez potrzeby stosowania syntetycznego kleju. Ten produkt koncentruje tę samą substancję w osobnym pellecie.',
+
+  'lignin.benefits.title': 'Najważniejsze zalety',
+  'lignin.benefits.b1.title': 'Wyższa wartość opałowa',
+  'lignin.benefits.b1.text':
+    'Lignina zawiera więcej energii w kilogramie niż celuloza, więc każda tona daje więcej ciepła niż zwykły pellet drzewny.',
+  'lignin.benefits.b2.title': 'Logistyka gotowa na duże wolumeny',
+  'lignin.benefits.b2.text':
+    'Big bagi 1000 kg z uchwytami przenosi się wózkiem widłowym lub ładowarką teleskopową — bez ręcznego przenoszenia worków i rozbierania palet.',
+  'lignin.benefits.b3.title': 'Materiał o podwójnym zastosowaniu',
+  'lignin.benefits.b3.text':
+    'Ten sam produkt służy jako stałe biopaliwo oraz jako surowiec dla budownictwa, przemysłu chemicznego i rolnictwa.',
+  'lignin.benefits.b4.title': 'Odnawialny produkt uboczny',
+  'lignin.benefits.b4.text':
+    'Lignina pochodzi z istniejących strumieni przemysłowych, a nie z drewna uprawianego na paliwo, więc nie zwiększa presji na lasy.',
+
+  'lignin.audience.title': 'Dla kogo',
+  'lignin.audience.a1': 'Przemysłowe kotłownie i elektrociepłownie szukające większej gęstości energii na tonę',
+  'lignin.audience.a2': 'Wytwórnie mas bitumicznych i producenci betonu stosujący ligninę jako modyfikator lub plastyfikator',
+  'lignin.audience.a3': 'Zakłady chemiczne i biorafinerie pozyskujące ligninę jako surowiec',
+  'lignin.audience.a4': 'Producenci rolni i paszowi wytwarzający sorbenty i polepszacze gleby',
+
+  'lignin.specs.title': 'Dane techniczne',
+  'lignin.specs.subtitle':
+    'Dostarczamy w jednym standardowym formacie. Do każdej dostawy dostępny jest pełny certyfikat analizy.',
+  'lignin.row.packaging': 'Opakowanie',
+  'lignin.row.origin': 'Surowiec',
+  'lignin.value.diameter': '8 mm',
+  'lignin.value.length': '10–40 mm',
+  'lignin.value.packaging': 'Big Bag 1000 kg',
+  'lignin.value.calorific': '≥ 5,0 kWh/kg',
+  'lignin.value.moisture': '≤ 10 %',
+  'lignin.value.ash': '≤ 3 %',
+  'lignin.value.density': '≥ 600 kg/m³',
+  'lignin.value.origin': 'Lignina drzewna',
+  'lignin.specs.note':
+    'Wartości są typowe dla tej klasy. Dokładne dane potwierdzane są dla każdej partii w załączonym certyfikacie analizy.',
+
+  'lignin.apps.eyebrow': 'Więcej niż ogrzewanie',
+  'lignin.apps.title': 'Alternatywne zastosowania przemysłowe ligniny',
+  'lignin.apps.subtitle':
+    'Lignina jest materiałem platformowym. Jej fenolowa struktura, zdolność wiązania i hydrofobowość sprawiają, że jest przydatna daleko poza energetyką.',
+
+  'lignin.apps.roads.title': 'Budowa dróg, asfalt i bitum',
+  'lignin.apps.roads.lead':
+    'Najszybciej rosnące zastosowanie ligniny. Dodawana do bitumu i nawierzchni drogowych częściowo zastępuje lepiszcze naftowe i działa jako przeciwutleniacz.',
+  'lignin.apps.roads.i1': 'Zwiększa trwałość i żywotność nawierzchni drogowych',
+  'lignin.apps.roads.i2': 'Chroni przed pękaniem i spowalnia starzenie się bitumu',
+  'lignin.apps.roads.i3': 'Poprawia odporność na wahania temperatury i naprężenia termiczne',
+
+  'lignin.apps.concrete.title': 'Beton i materiały budowlane',
+  'lignin.apps.concrete.i1': 'Lignosulfoniany działają jako plastyfikatory, zwiększając wytrzymałość betonu',
+  'lignin.apps.concrete.i2': 'Zmniejszają zapotrzebowanie mieszanki na wodę, zachowując urabialność',
+  'lignin.apps.concrete.i3': 'Stosowane jako spoiwo w produkcji płyt i kompozytów',
+
+  'lignin.apps.agri.title': 'Rolnictwo i hodowla zwierząt',
+  'lignin.apps.agri.i1': 'Enterosorbenty dla zwierząt — wiążą i usuwają mikotoksyny z paszy',
+  'lignin.apps.agri.i2': 'Nawozy i polepszacze gleby — poprawiają strukturę, napowietrzenie i retencję wody',
+  'lignin.apps.agri.i3': 'Agrochemia — dyspergator w formulacjach pestycydów',
+
+  'lignin.apps.chem.title': 'Przemysł chemiczny',
+  'lignin.apps.chem.i1': 'Produkcja waniliny',
+  'lignin.apps.chem.i2': 'Tworzywa sztuczne i żywice, zastępujące toksyczny fenol',
+  'lignin.apps.chem.i3': 'Prekursor włókna węglowego',
+  'lignin.apps.chem.i4': 'Węgiel aktywny',
+
+  'lignin.apps.oil.title': 'Wydobycie ropy i metalurgia',
+  'lignin.apps.oil.i1': 'Dodatek do płuczek wiertniczych',
+  'lignin.apps.oil.i2': 'Spoiwo w masach formierskich w odlewnictwie',
+
+  'lignin.apps.eco.title': 'Ekologia i usuwanie skażeń',
+  'lignin.apps.eco.i1':
+    'Usuwanie wycieków ropy — lignina działa jako sorbent hydrofobowy, wiążąc węglowodory na wodzie i w glebie',
+
+  'lignin.cta.title': 'Potrzebujesz pelletu ligninowego w dużych ilościach?',
+  'lignin.cta.text':
+    'Podaj roczny tonaż, miejsce dostawy i planowane zastosowanie, a przyślemy ofertę wraz z certyfikatem analizy.',
+  'lignin.cta.button': 'Zapytaj o ofertę',
 };
 
 /* -------------------------------------------------------------------------- */

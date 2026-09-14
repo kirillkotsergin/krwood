@@ -6,11 +6,14 @@ import LanguagePicker from './LanguagePicker.astro';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+// Anchor items point at sections of the landing page; the lignin entry is a
+// real sub-page, so its href is a localized path rather than an anchor.
 const navItems = [
-  { id: 'features', label: t('nav.features') },
-  { id: 'specs', label: t('nav.specs') },
-  { id: 'packaging', label: t('nav.packaging') },
-  { id: 'contact', label: t('nav.contact') },
+  { href: anchorLink('features', lang), label: t('nav.features') },
+  { href: anchorLink('specs', lang), label: t('nav.specs') },
+  { href: anchorLink('packaging', lang), label: t('nav.packaging') },
+  { href: localizePath('/lignin-pellets', lang), label: t('nav.lignin') },
+  { href: anchorLink('contact', lang), label: t('nav.contact') },
 ];
 
 const homeHref = localizePath('/', lang);
@@ -38,7 +41,7 @@ const contactHref = anchorLink('contact', lang);
           navItems.map((item) => (
             <li>
               <a
-                href={anchorLink(item.id, lang)}
+                href={item.href}
                 class="group relative block rounded-lg px-3.5 py-2 text-sm font-semibold text-stone-600 transition-colors duration-200 hover:text-forest-800"
               >
                 {item.label}
@@ -136,7 +139,7 @@ const contactHref = anchorLink('contact', lang);
           navItems.map((item) => (
             <li>
               <a
-                href={anchorLink(item.id, lang)}
+                href={item.href}
                 data-menu-link
                 class="flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-semibold text-stone-700 transition-colors duration-200 hover:bg-white hover:text-forest-800"
               >

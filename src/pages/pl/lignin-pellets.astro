@@ -1,0 +1,12 @@
+---
+// Polish — /pl/lignin-pellets/
+import Layout from '../../layouts/Layout.astro';
+import LigninPellets from '../../components/LigninPellets.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<Layout title={t('lignin.meta.title')} description={t('lignin.meta.description')}>
+  <LigninPellets />
+</Layout>

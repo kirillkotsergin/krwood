@@ -1,0 +1,549 @@
+---
+/**
+ * Lignin pellets product landing page.
+ *
+ * All copy comes from `src/i18n/ui.ts` under the `lignin.*` keys, so the
+ * Estonian, English and Polish versions of this page stay in sync and a
+ * missing translation fails `npm run check`.
+ */
+import { getLangFromUrl, useTranslations, anchorLink, localizePath } from '../i18n/utils';
+import { languageTags } from '../i18n/ui';
+import { siteConfig } from '../config/site';
+import { ORGANIZATION_ID } from '../config/schema';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const origin = Astro.site ?? new URL(Astro.url.origin);
+const pageUrl = new URL(Astro.url.pathname, origin).href;
+const imagePath = '/images/lignin-pellets.webp';
+const imageUrl = new URL(imagePath, origin).href;
+
+const contactHref = anchorLink('contact', lang);
+
+/* ------------------------------------------------------------------ */
+/* Content                                                            */
+/* ------------------------------------------------------------------ */
+
+const heroSpecs = [
+  { label: t('specs.row.diameter'), value: t('lignin.value.diameter') },
+  { label: t('lignin.row.packaging'), value: t('lignin.value.packaging') },
+  { label: t('specs.row.calorific'), value: t('lignin.value.calorific') },
+];
+
+const benefits = [
+  { title: t('lignin.benefits.b1.title'), text: t('lignin.benefits.b1.text') },
+  { title: t('lignin.benefits.b2.title'), text: t('lignin.benefits.b2.text') },
+  { title: t('lignin.benefits.b3.title'), text: t('lignin.benefits.b3.text') },
+  { title: t('lignin.benefits.b4.title'), text: t('lignin.benefits.b4.text') },
+];
+
+const audience = [
+  t('lignin.audience.a1'),
+  t('lignin.audience.a2'),
+  t('lignin.audience.a3'),
+  t('lignin.audience.a4'),
+];
+
+/** 8 mm and Big Bag 1000 kg are the two confirmed figures; see specs note. */
+const specRows = [
+  { label: t('specs.row.diameter'), value: t('lignin.value.diameter'), highlight: true },
+  { label: t('lignin.row.packaging'), value: t('lignin.value.packaging'), highlight: true },
+  { label: t('specs.row.length'), value: t('lignin.value.length'), highlight: false },
+  { label: t('specs.row.calorific'), value: t('lignin.value.calorific'), highlight: false },
+  { label: t('specs.row.moisture'), value: t('lignin.value.moisture'), highlight: false },
+  { label: t('specs.row.ash'), value: t('lignin.value.ash'), highlight: false },
+  { label: t('specs.row.density'), value: t('lignin.value.density'), highlight: false },
+  { label: t('lignin.row.origin'), value: t('lignin.value.origin'), highlight: false },
+];
+
+type AppIcon = 'road' | 'concrete' | 'agri' | 'chem' | 'oil' | 'eco';
+
+interface Application {
+  icon: AppIcon;
+  title: string;
+  lead?: string;
+  items: string[];
+  featured: boolean;
+}
+
+/* Road construction leads the section — it is the fastest-growing use. */
+const applications: Application[] = [
+  {
+    icon: 'road',
+    title: t('lignin.apps.roads.title'),
+    lead: t('lignin.apps.roads.lead'),
+    items: [t('lignin.apps.roads.i1'), t('lignin.apps.roads.i2'), t('lignin.apps.roads.i3')],
+    featured: true,
+  },
+  {
+    icon: 'concrete',
+    title: t('lignin.apps.concrete.title'),
+    items: [t('lignin.apps.concrete.i1'), t('lignin.apps.concrete.i2'), t('lignin.apps.concrete.i3')],
+    featured: false,
+  },
+  {
+    icon: 'agri',
+    title: t('lignin.apps.agri.title'),
+    items: [t('lignin.apps.agri.i1'), t('lignin.apps.agri.i2'), t('lignin.apps.agri.i3')],
+    featured: false,
+  },
+  {
+    icon: 'chem',
+    title: t('lignin.apps.chem.title'),
+    items: [
+      t('lignin.apps.chem.i1'),
+      t('lignin.apps.chem.i2'),
+      t('lignin.apps.chem.i3'),
+      t('lignin.apps.chem.i4'),
+    ],
+    featured: false,
+  },
+  {
+    icon: 'oil',
+    title: t('lignin.apps.oil.title'),
+    items: [t('lignin.apps.oil.i1'), t('lignin.apps.oil.i2')],
+    featured: false,
+  },
+  {
+    icon: 'eco',
+    title: t('lignin.apps.eco.title'),
+    items: [t('lignin.apps.eco.i1')],
+    featured: false,
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* Structured data                                                    */
+/* ------------------------------------------------------------------ */
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  '@id': `${pageUrl}#product`,
+  name: t('lignin.hero.title'),
+  description: t('lignin.meta.description'),
+  image: imageUrl,
+  url: pageUrl,
+  category: 'Biofuel / Industrial raw material',
+  material: t('lignin.value.origin'),
+  inLanguage: languageTags[lang],
+  brand: { '@id': ORGANIZATION_ID },
+  manufacturer: { '@id': ORGANIZATION_ID },
+  additionalProperty: specRows.map((row) => ({
+    '@type': 'PropertyValue',
+    name: row.label,
+    value: row.value,
+  })),
+  offers: {
+    '@type': 'Offer',
+    availability: 'https://schema.org/InStock',
+    seller: { '@id': ORGANIZATION_ID },
+    url: pageUrl,
+    // Price is quoted per enquiry; no priceSpecification is published.
+    businessFunction: 'https://purl.org/goodrelations/v1#Sell',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: siteConfig.name,
+      item: new URL(localizePath('/', lang), origin).href,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: t('lignin.hero.title'),
+      item: pageUrl,
+    },
+  ],
+};
+---
+
+<article>
+  <!-- ==================== Hero ==================== -->
+  <section class="relative overflow-hidden bg-forest-950 py-20 lg:py-28">
+    <div
+      class="pointer-events-none absolute -right-32 -top-32 size-[34rem] rounded-full bg-wood-600/15 blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="relative mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:items-center lg:gap-16">
+      <div>
+        <nav aria-label="Breadcrumb" class="mb-6">
+          <ol class="flex items-center gap-2 text-sm text-stone-400">
+            <li>
+              <a href={localizePath('/', lang)} class="transition-colors hover:text-wood-300">
+                {siteConfig.name}
+              </a>
+            </li>
+            <li aria-hidden="true" class="text-stone-600">/</li>
+            <li class="font-semibold text-wood-300" aria-current="page">{t('lignin.hero.title')}</li>
+          </ol>
+        </nav>
+
+        <p
+          data-animate
+          class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-wood-100 ring-1 ring-inset ring-white/20"
+        >
+          {t('lignin.hero.badge')}
+        </p>
+
+        <h1
+          data-animate
+          style="--animate-delay:80ms"
+          class="mt-6 text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
+        >
+          {t('lignin.hero.title')}
+          <span class="mt-2 block text-2xl text-gradient-wood sm:text-3xl lg:text-4xl">
+            {t('lignin.hero.titleAccent')}
+          </span>
+        </h1>
+
+        <p data-animate style="--animate-delay:160ms" class="mt-7 text-lg leading-relaxed text-stone-300">
+          {t('lignin.hero.lead')}
+        </p>
+
+        <div data-animate style="--animate-delay:240ms" class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a
+            href={contactHref}
+            class="group inline-flex items-center justify-center gap-2 rounded-full bg-wood-600 px-8 py-4 text-base font-bold text-white shadow-xl shadow-wood-950/30 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:bg-wood-500 active:translate-y-0"
+          >
+            {t('lignin.hero.ctaPrimary')}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="size-5 transition-transform duration-300 group-hover:translate-x-1"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6"></path>
+            </svg>
+          </a>
+          <a
+            href="#lignin-specs"
+            class="inline-flex items-center justify-center rounded-full bg-white/10 px-8 py-4 text-base font-bold text-white ring-1 ring-inset ring-white/30 transition-all duration-300 hover:-translate-y-1 hover:bg-white/20 active:translate-y-0"
+          >
+            {t('lignin.hero.ctaSecondary')}
+          </a>
+        </div>
+
+        <dl data-animate style="--animate-delay:320ms" class="mt-12 grid grid-cols-3 gap-4 border-t border-white/15 pt-8">
+          {
+            heroSpecs.map((spec) => (
+              <div class="flex flex-col">
+                <dt class="order-2 mt-1 text-xs font-medium uppercase tracking-wider text-stone-400">
+                  {spec.label}
+                </dt>
+                <dd class="order-1 text-xl font-extrabold text-white sm:text-2xl">{spec.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+
+      <!-- Product photo -->
+      <figure data-animate style="--animate-delay:200ms" class="relative">
+        <img
+          src={imagePath}
+          alt={t('lignin.meta.imageAlt')}
+          width="1200"
+          height="900"
+          loading="eager"
+          decoding="async"
+          class="w-full rounded-3xl object-cover shadow-2xl shadow-black/40 ring-1 ring-white/10"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <!-- ==================== Overview ==================== -->
+  <section id="lignin-overview" class="scroll-mt-20 bg-stone-50 py-24 lg:py-32">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="mx-auto max-w-3xl">
+        <p
+          data-animate
+          class="inline-flex items-center gap-2 rounded-full bg-forest-100 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-forest-700"
+        >
+          <span class="size-1.5 rounded-full bg-forest-500"></span>
+          {t('lignin.overview.eyebrow')}
+        </p>
+        <h2 data-animate style="--animate-delay:60ms" class="mt-5 text-3xl sm:text-4xl lg:text-5xl">
+          {t('lignin.overview.title')}
+        </h2>
+        <p data-animate style="--animate-delay:120ms" class="mt-6 text-lg leading-relaxed text-stone-600">
+          {t('lignin.overview.p1')}
+        </p>
+
+        <!-- Natural-binder fact, given its own visual weight -->
+        <aside
+          data-animate
+          style="--animate-delay:180ms"
+          class="mt-8 rounded-2xl border-l-4 border-wood-500 bg-wood-50/70 p-6"
+        >
+          <p class="text-[1.0625rem] leading-relaxed text-stone-700">{t('lignin.overview.p2')}</p>
+        </aside>
+      </div>
+
+      <!-- Benefits -->
+      <h3 data-animate class="mt-16 text-center text-2xl sm:text-3xl">{t('lignin.benefits.title')}</h3>
+      <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          benefits.map((benefit) => (
+            <li
+              data-animate
+              data-animate-stagger
+              class="rounded-2xl border border-stone-200 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-wood-200 hover:shadow-xl"
+            >
+              <h4 class="text-lg font-bold text-stone-900">{benefit.title}</h4>
+              <p class="mt-3 text-[0.9375rem] leading-relaxed text-stone-600">{benefit.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- Target audience -->
+      <div data-animate class="mx-auto mt-16 max-w-3xl rounded-3xl bg-forest-900 p-8 text-white lg:p-10">
+        <h3 class="text-2xl text-white">{t('lignin.audience.title')}</h3>
+        <ul class="mt-6 flex flex-col gap-4">
+          {
+            audience.map((item) => (
+              <li class="flex items-start gap-3 text-[0.9375rem] leading-relaxed text-stone-200">
+                <span class="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-wood-500 text-white">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="size-3"
+                    aria-hidden="true"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                </span>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Specifications ==================== -->
+  <section id="lignin-specs" class="scroll-mt-20 bg-white py-24 lg:py-32">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8">
+      <h2 data-animate class="text-3xl sm:text-4xl lg:text-5xl">{t('lignin.specs.title')}</h2>
+      <p data-animate style="--animate-delay:60ms" class="mt-5 text-lg leading-relaxed text-stone-600">
+        {t('lignin.specs.subtitle')}
+      </p>
+
+      <div
+        data-animate
+        style="--animate-delay:120ms"
+        class="mt-10 overflow-hidden rounded-3xl border border-stone-200 shadow-sm"
+      >
+        <table class="w-full border-collapse text-left">
+          <caption class="sr-only">{t('lignin.specs.title')}</caption>
+          <thead class="bg-stone-100">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-xs font-bold uppercase tracking-wider text-stone-500">
+                {t('specs.table.param')}
+              </th>
+              <th scope="col" class="px-6 py-3 text-right text-xs font-bold uppercase tracking-wider text-stone-500">
+                {t('specs.table.value')}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              specRows.map((row) => (
+                <tr class="border-t border-stone-100">
+                  <th scope="row" class="px-6 py-4 font-medium text-stone-600">
+                    {row.label}
+                  </th>
+                  <td
+                    class={`px-6 py-4 text-right font-bold ${
+                      row.highlight ? 'text-lg text-wood-700' : 'text-stone-900'
+                    }`}
+                  >
+                    {row.value}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <p data-animate class="mt-5 text-sm leading-relaxed text-stone-500">{t('lignin.specs.note')}</p>
+    </div>
+  </section>
+
+  <!-- ==================== Industrial applications ==================== -->
+  <section id="lignin-applications" class="scroll-mt-20 bg-stone-100/70 py-24 lg:py-32">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <p
+          data-animate
+          class="inline-flex items-center gap-2 rounded-full bg-wood-100 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-wood-700"
+        >
+          <span class="size-1.5 rounded-full bg-wood-500"></span>
+          {t('lignin.apps.eyebrow')}
+        </p>
+        <h2 data-animate style="--animate-delay:60ms" class="mt-5 text-3xl sm:text-4xl lg:text-5xl">
+          {t('lignin.apps.title')}
+        </h2>
+        <p data-animate style="--animate-delay:120ms" class="mt-5 text-lg leading-relaxed text-stone-600">
+          {t('lignin.apps.subtitle')}
+        </p>
+      </div>
+
+      <ul class="mt-16 grid gap-6 md:grid-cols-2 lg:mt-20 lg:grid-cols-3">
+        {
+          applications.map((app) => (
+            <li
+              data-animate
+              data-animate-stagger
+              class={`group flex flex-col rounded-3xl border bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${
+                app.featured
+                  ? 'border-wood-300 ring-1 ring-wood-200 md:col-span-2 lg:col-span-3'
+                  : 'border-stone-200 hover:border-forest-200'
+              }`}
+            >
+              <div class={app.featured ? 'flex flex-col gap-6 lg:flex-row lg:items-start' : ''}>
+                <span
+                  class={`grid size-14 shrink-0 place-items-center rounded-2xl text-white shadow-lg transition-transform duration-300 group-hover:scale-105 ${
+                    app.featured
+                      ? 'bg-gradient-to-br from-wood-500 to-wood-700 shadow-wood-900/25'
+                      : 'bg-gradient-to-br from-forest-700 to-forest-900 shadow-forest-900/25'
+                  }`}
+                >
+                  {app.icon === 'road' && (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7" aria-hidden="true">
+                      <path d="M4 21 7.5 3M20 21 16.5 3" />
+                      <path d="M12 4v2.5M12 10.5v3M12 17.5V20" />
+                    </svg>
+                  )}
+                  {app.icon === 'concrete' && (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7" aria-hidden="true">
+                      <rect x="2.5" y="5" width="19" height="6" rx="1" />
+                      <rect x="2.5" y="13" width="19" height="6" rx="1" />
+                      <path d="M9 5v6M15 13v6" />
+                    </svg>
+                  )}
+                  {app.icon === 'agri' && (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7" aria-hidden="true">
+                      <path d="M12 21c0-6 2-10 8-12-1 7-4 10-8 12Z" />
+                      <path d="M12 21C12 15 10 11 4 9c1 7 4 10 8 12Z" />
+                      <path d="M12 21v-4" />
+                    </svg>
+                  )}
+                  {app.icon === 'chem' && (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7" aria-hidden="true">
+                      <path d="M9.5 3v6.2L4.7 17.6A2 2 0 0 0 6.4 20.7h11.2a2 2 0 0 0 1.7-3.1L14.5 9.2V3" />
+                      <path d="M8.5 3h7" />
+                      <path d="M7.4 14.5h9.2" />
+                    </svg>
+                  )}
+                  {app.icon === 'oil' && (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7" aria-hidden="true">
+                      <path d="M12 2.7s5.5 6.1 5.5 10.1a5.5 5.5 0 0 1-11 0C6.5 8.8 12 2.7 12 2.7Z" />
+                      <path d="M9.7 13.6a2.4 2.4 0 0 0 2.3 2.4" />
+                    </svg>
+                  )}
+                  {app.icon === 'eco' && (
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="size-7" aria-hidden="true">
+                      <path d="M2.5 17.5c2-1.6 4-1.6 6 0s4 1.6 6 0 4-1.6 6 0" />
+                      <path d="M2.5 21c2-1.6 4-1.6 6 0s4 1.6 6 0 4-1.6 6 0" />
+                      <path d="M12 3c3 2.4 4.5 4.8 4.5 7.2a4.5 4.5 0 0 1-9 0C7.5 7.8 9 5.4 12 3Z" />
+                    </svg>
+                  )}
+                </span>
+
+                <div class="min-w-0 flex-1">
+                  <h3 class={`${app.featured ? 'text-2xl' : 'mt-6 text-xl'}`}>{app.title}</h3>
+                  {app.lead && (
+                    <p class="mt-3 text-[0.9375rem] leading-relaxed text-stone-600">{app.lead}</p>
+                  )}
+
+                  <ul
+                    class={`mt-5 grid gap-2.5 ${
+                      app.featured ? 'sm:grid-cols-2 lg:grid-cols-3' : ''
+                    }`}
+                  >
+                    {app.items.map((item) => (
+                      <li class="flex items-start gap-3 text-[0.9375rem] leading-relaxed text-stone-700">
+                        <span
+                          class={`mt-1.5 size-1.5 shrink-0 rounded-full ${
+                            app.featured ? 'bg-wood-500' : 'bg-forest-500'
+                          }`}
+                          aria-hidden="true"
+                        />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================== Closing CTA ==================== -->
+  <section class="bg-white py-20 lg:py-28">
+    <div class="mx-auto max-w-4xl px-5 sm:px-8">
+      <div
+        data-animate
+        class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-forest-800 to-forest-950 p-10 text-center shadow-xl shadow-forest-950/20 lg:p-14"
+      >
+        <span
+          class="pointer-events-none absolute -right-20 -top-20 size-56 rounded-full bg-wood-500/20 blur-3xl"
+          aria-hidden="true"></span>
+
+        <h2 class="relative text-3xl text-white sm:text-4xl">{t('lignin.cta.title')}</h2>
+        <p class="relative mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-stone-300">
+          {t('lignin.cta.text')}
+        </p>
+        <a
+          href={contactHref}
+          class="group relative mt-9 inline-flex items-center justify-center gap-2 rounded-full bg-wood-600 px-8 py-4 text-base font-bold text-white shadow-lg shadow-wood-950/30 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:bg-wood-500 active:translate-y-0"
+        >
+          {t('lignin.cta.button')}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="size-5 transition-transform duration-300 group-hover:translate-x-1"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</article>
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
