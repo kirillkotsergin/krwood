@@ -1,8 +1,21 @@
-name: Deploy to Radicenter
+name: Deploy to Radicenter (manual fallback)
+
+# Primary deployment is now `npm run deploy` (scripts/deploy.sh) straight over
+# SSH from a developer machine. This workflow is kept as a fallback for
+# deploying when you are away from your usual machine.
+#
+# It is MANUAL ONLY — it no longer runs on push, so it cannot fail a commit.
+# To re-enable automatic deploys, restore the trigger below:
+#
+#   on:
+#     push:
+#       branches: [main]
+#
+# It also requires these repository secrets, which are not currently set:
+#   SSH_PRIVATE_KEY, SSH_HOST, SSH_USER, DEPLOY_PATH
+#   (optional: SSH_PORT, SSH_KNOWN_HOSTS)
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
     inputs:
       dry_run:

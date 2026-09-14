@@ -219,12 +219,85 @@ arriving, check `~/public_html/error_log` on the server.
 
 ## Deployment
 
-`.github/workflows/deploy.yml` runs on every push to `main`:
+Deploys run **directly over SSH** from your machine. One command builds and
+ships:
 
-`checkout → npm ci → npm run check → npm run build → verify output → rsync → smoke-test`
+```bash
+npm run deploy
+```
 
-The smoke test curls `/`, `/en/`, `/pl/` and `/privacy/` after deploying and
-fails the run on any non-200.
+| Command | Does |
+| --- | --- |
+| `npm run deploy` | Type-check, build, upload, swap, smoke-test |
+| `npm run deploy:dry` | Show exactly what would change — writes nothing |
+| `npm run deploy:rollback` | Restore the previous deploy |
+| `npm run deploy:backups` | List restore points on the server |
+
+Flags pass through the script directly:
+`bash scripts/deploy.sh --no-build` deploys the existing `dist/` without
+rebuilding; `--skip-smoke` skips the post-deploy HTTP checks.
+
+### How it works
+
+This machine has no `rsync` (Git Bash ships `ssh`, `scp` and `tar` only), but
+the server has rsync 3.1.3. So the script tars `dist/`, uploads it to a
+staging directory outside the web root, and has the **server** rsync staging →
+`public_html`.
+
+That matters: the naive approach — delete the document root, then extract —
+leaves the site returning 404s for the duration. Syncing from staging swaps
+the site in a single pass with no visible gap.
+
+```
+npm run check + build
+   └─ verify dist/ has index.html, en/, pl/, .htaccess, contact.php
+        └─ tar → scp → ~/.deploy/staging/
+             └─ guard: refuse to sync if staging has no index.html
+                  └─ back up current site → ~/.deploy/backups/<timestamp>.tar.gz
+                       └─ rsync -rlt --delete --chmod=D755,F644 staging/ → public_html/
+                            └─ prune to the last 5 backups, clean staging
+                                 └─ curl /, /en/, /pl/, /privacy/ — non-200 fails the run
+```
+
+### What is never deleted
+
+`--delete` makes the document root match `dist/` exactly, **except**
+`.well-known/`, which is excluded. That directory holds the ACME/AutoSSL
+challenge files — removing it breaks HTTPS certificate renewal.
+
+Anything else you place in `public_html` by hand **will be deleted** on the
+next deploy. Put it in `public/` in this repo instead.
+
+### Rollback
+
+Every deploy backs up the live site first, keeping the last five:
+
+```bash
+npm run deploy:backups    # 284K 20260914-101302.tar.gz
+npm run deploy:rollback   # restores the most recent
+```
+
+Change the retention count with `KRWOOD_KEEP_BACKUPS=10 npm run deploy`.
+
+### Configuration
+
+Defaults are at the top of `scripts/deploy.sh`, each overridable by an
+environment variable:
+
+| Variable | Default |
+| --- | --- |
+| `KRWOOD_SSH_HOST` | `krwood-server` (alias in `~/.ssh/config`) |
+| `KRWOOD_DOCROOT` | `/home/r319522/public_html` |
+| `KRWOOD_REMOTE_BASE` | `/home/r319522/.deploy` |
+| `KRWOOD_KEEP_BACKUPS` | `5` |
+
+### GitHub Actions
+
+`.github/workflows/deploy.yml` is now **manual-only** (`workflow_dispatch`).
+It no longer runs on push, so it cannot mark a commit as failed. It remains as
+a fallback for deploying away from your usual machine, and still needs the
+secrets listed below. To restore automatic deploys, re-add the `push` trigger
+documented in the file header.
 
 ### Required GitHub secrets
 
@@ -255,23 +328,15 @@ ssh-keygen -t ed25519 -C "github-actions-krwood" -f ~/.ssh/krwood_deploy -N ""
 ssh-copy-id -i ~/.ssh/krwood_deploy.pub r319522@krwood.ee
 ```
 
-Paste the contents of `~/.ssh/krwood_deploy` (the private half) into
-`SSH_PRIVATE_KEY`.
+A dedicated deploy key already exists at `~/.ssh/krwood_deploy` and its public
+half is installed in the server's `authorized_keys`. Paste the private half
+into `SSH_PRIVATE_KEY` if you want the fallback workflow working:
 
-### What rsync will not touch
+```powershell
+Get-Content ~/.ssh/krwood_deploy -Raw | Set-Clipboard
+```
 
-The deploy runs `rsync --delete`, so the document root is made to match `dist/`
-exactly — with these exclusions:
-
-| Excluded | Why |
-| --- | --- |
-| `.well-known/` | ACME / AutoSSL validation. **Deleting it breaks HTTPS renewal.** |
-| `.git/`, `cgi-bin/`, `error_log`, `.user.ini` | Server-managed, not build output |
-
-Anything else you place in `public_html` by hand **will be deleted** on the next
-deploy. Put it in `public/` in this repo instead.
-
-### Manual / dry run
-
-`Actions → Deploy to Radicenter → Run workflow` has a **dry run** toggle that
-passes `--dry-run` to rsync, listing what would change without writing anything.
+To run it: `Actions → Deploy to Radicenter (manual fallback) → Run workflow`.
+It has a **dry run** toggle that lists what would change without writing.
+Like the local script, its rsync excludes `.well-known/` — plus `.git/`,
+`cgi-bin/`, `error_log` and `.user.ini`.
