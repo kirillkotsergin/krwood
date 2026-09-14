@@ -23,21 +23,51 @@ npm run dev        # http://localhost:4321
 
 ---
 
-## Before you go live
+## Company data
 
-`src/config/site.ts` holds **placeholder** company data. Every one of these is
-referenced from that file alone, so changing it there updates the header,
-contact card, footer and the JSON-LD structured data at once:
+All company, contact and legal details live in **`src/config/site.ts`**, and
+nothing else hard-codes them. Editing that one file updates the contact
+section, the footer, the `tel:` / `mailto:` links and the Schema.org JSON-LD
+in `<head>` together, across all three locales.
 
-| Field | Current placeholder |
+| Field | Value |
 | --- | --- |
-| `phone` / `phoneHref` | `+372 5123 4567` |
-| `address` | `Tööstuse tee 5, 76401 Tallinn` |
-| `regCode` | `12345678` |
-| `social.*` | Bare `facebook.com` / `instagram.com` / `linkedin.com` roots |
+| `legalName` | KR-Wood OÜ |
+| `phone` / `phoneHref` | `+372 5020 078` / `+3725020078` |
+| `email` | krwood@krwood.ee |
+| `address` | Saha tee 18d, Loo, 74201, Harjumaa |
+| `registryCode` | 14459624 |
+| `vatNumber` | EE102060728 |
+| `openingHours` | Mon–Fri 09:00–17:00 |
 
-`email` is set to `info@krwood.ee` — confirm that mailbox exists in cPanel,
-because the contact form delivers there.
+Two fields are still unset and degrade gracefully:
+
+- **`social.*`** — empty strings. The footer's social row is hidden entirely
+  and `sameAs` is omitted from the JSON-LD, so no dead links ship. Fill in the
+  real profile URLs and both reappear automatically.
+- **`foundedYear`** — `null`, so the footer shows only the current year. Set it
+  to a number and the copyright renders as a range (`2018–2026`).
+
+`contact.php` delivers to `krwood@krwood.ee` and sends **from** the same
+address, so SPF/DMARC pass. Confirm that mailbox exists in cPanel.
+
+### Structured data
+
+`src/config/schema.ts` builds a `LocalBusiness` node (a subtype of
+`Organization`, so it satisfies both). It carries `legalName`, `vatID`,
+`taxID`, a `PostalAddress`, `openingHoursSpecification`, a `ContactPoint`, an
+`areaServed` list and a localised `hasOfferCatalog` for the 6 mm / 8 mm
+products. The `@id` is a stable `https://krwood.ee/#organization` so every
+page and locale references one entity.
+
+Validate after changes:
+[validator.schema.org](https://validator.schema.org/) ·
+[Rich Results Test](https://search.google.com/test/rich-results)
+
+Two optional properties are deliberately absent because the values aren't
+known: **`geo`** (latitude/longitude — wrong coordinates are worse than none)
+and **`priceRange`**. Google's Rich Results Test flags both as
+*recommended*, not errors.
 
 ### Hero image
 
@@ -128,7 +158,9 @@ src/
 │   ├── LandingPage.astro     Composes the five landing sections
 │   ├── PrivacyContent.astro  Shared privacy-policy body
 │   └── Logo.astro
-├── config/site.ts            ⚠️ Company + contact details (placeholders)
+├── config/
+│   ├── site.ts               Company, contact and legal details
+│   └── schema.ts             Schema.org LocalBusiness JSON-LD builder
 ├── i18n/{ui.ts,utils.ts}     Dictionary and helpers
 ├── layouts/Layout.astro      <head>, SEO, JSON-LD, scroll reveal, back-to-top
 ├── pages/                    index · en/ · pl/ · privacy · 404

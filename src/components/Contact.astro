@@ -1,11 +1,12 @@
 ---
 import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
-import { siteConfig, formattedAddress } from '../config/site';
+import { siteConfig, formatAddress, mapUrl } from '../config/site';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const privacyHref = localizePath('/privacy', lang);
+const postalAddress = formatAddress(t('contact.info.country'));
 
 const details = [
   {
@@ -13,26 +14,37 @@ const details = [
     label: t('contact.info.phone'),
     value: siteConfig.phone,
     href: `tel:${siteConfig.phoneHref}`,
+    external: false,
   },
   {
     icon: 'mail',
     label: t('contact.info.email'),
     value: siteConfig.email,
     href: `mailto:${siteConfig.email}`,
+    external: false,
   },
   {
     icon: 'pin',
     label: t('contact.info.address'),
-    value: formattedAddress,
-    href: `https://maps.google.com/?q=${encodeURIComponent(formattedAddress)}`,
+    value: postalAddress,
+    href: mapUrl,
+    external: true,
   },
   {
     icon: 'clock',
     label: t('contact.info.hours'),
     value: t('contact.info.hoursValue'),
     href: null,
+    external: false,
   },
 ] as const;
+
+/** Registration details, rendered as a description list under the contacts. */
+const legalDetails = [
+  { term: t('contact.info.company'), value: siteConfig.legalName },
+  { term: t('contact.info.regCode'), value: siteConfig.registryCode },
+  { term: t('contact.info.vat'), value: siteConfig.vatNumber },
+];
 ---
 
 <section id="contact" class="relative scroll-mt-20 overflow-hidden bg-white py-24 lg:py-32">
@@ -66,7 +78,8 @@ const details = [
 
         <h3 class="relative text-xl text-white">{t('contact.info.title')}</h3>
 
-        <ul class="relative mt-8 flex flex-col gap-7">
+        <address class="relative mt-8 block not-italic">
+          <ul class="flex flex-col gap-7">
           {
             details.map((detail) => (
               <li class="flex items-start gap-4">
@@ -141,9 +154,7 @@ const details = [
                   {detail.href ? (
                     <a
                       href={detail.href}
-                      {...(detail.icon === 'pin'
-                        ? { target: '_blank', rel: 'noopener noreferrer' }
-                        : {})}
+                      {...(detail.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                       class="mt-1 block break-words font-semibold text-white underline-offset-4 transition-colors duration-200 hover:text-wood-200 hover:underline"
                     >
                       {detail.value}
@@ -155,11 +166,20 @@ const details = [
               </li>
             ))
           }
-        </ul>
+          </ul>
+        </address>
 
-        <p class="relative mt-8 border-t border-white/15 pt-6 text-sm text-white/50">
-          {t('contact.info.regCode')}: <span class="font-semibold text-white/80">{siteConfig.regCode}</span>
-        </p>
+        <!-- Company registration details -->
+        <dl class="relative mt-8 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 border-t border-white/15 pt-6 text-sm">
+          {
+            legalDetails.map((item) => (
+              <>
+                <dt class="text-white/50">{item.term}</dt>
+                <dd class="text-right font-semibold text-white/90">{item.value}</dd>
+              </>
+            ))
+          }
+        </dl>
       </aside>
 
       <!-- Enquiry form -->

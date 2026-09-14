@@ -176,7 +176,10 @@ const et = {
   'contact.info.address': 'Aadress',
   'contact.info.hours': 'Lahtiolekuajad',
   'contact.info.hoursValue': 'E–R 9:00–17:00',
+  'contact.info.company': 'Ettevõte',
   'contact.info.regCode': 'Registrikood',
+  'contact.info.vat': 'KMKR number',
+  'contact.info.country': 'Eesti',
 
   // --- Footer --------------------------------------------------------------
   'footer.tagline':
@@ -366,7 +369,10 @@ const en: Dictionary = {
   'contact.info.address': 'Address',
   'contact.info.hours': 'Opening hours',
   'contact.info.hoursValue': 'Mon–Fri 9:00–17:00',
+  'contact.info.company': 'Company',
   'contact.info.regCode': 'Registry code',
+  'contact.info.vat': 'VAT number',
+  'contact.info.country': 'Estonia',
 
   'footer.tagline':
     'Premium wood pellets from Estonia. ENplus A1 quality, dependable delivery and honest pricing.',
@@ -544,7 +550,10 @@ const pl: Dictionary = {
   'contact.info.address': 'Adres',
   'contact.info.hours': 'Godziny otwarcia',
   'contact.info.hoursValue': 'Pn–Pt 9:00–17:00',
+  'contact.info.company': 'Firma',
   'contact.info.regCode': 'Numer rejestrowy',
+  'contact.info.vat': 'Numer VAT',
+  'contact.info.country': 'Estonia',
 
   'footer.tagline':
     'Pellet drzewny premium z Estonii. Jakość ENplus A1, niezawodna dostawa i uczciwe ceny.',

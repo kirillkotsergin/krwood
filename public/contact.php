@@ -16,14 +16,14 @@ declare(strict_types=1);
 // --------------------------------------------------------------------------
 
 /** Where enquiries are delivered. */
-const MAIL_TO = 'info@krwood.ee';
+const MAIL_TO = 'krwood@krwood.ee';
 
 /**
- * Envelope sender. MUST be an address on your own domain, otherwise SPF/DMARC
- * will reject the message. Do not put the visitor's address here — their
- * address goes into Reply-To instead.
+ * Envelope sender. MUST be a real mailbox on your own domain, otherwise
+ * SPF/DMARC will reject the message and bounces will go nowhere. Do not put
+ * the visitor's address here — that goes into Reply-To instead.
  */
-const MAIL_FROM = 'noreply@krwood.ee';
+const MAIL_FROM = 'krwood@krwood.ee';
 
 const MAIL_FROM_NAME = 'KR Wood website';
 

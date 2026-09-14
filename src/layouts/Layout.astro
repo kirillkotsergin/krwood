@@ -5,6 +5,7 @@ import '../styles/global.css';
 import { getLangFromUrl, useTranslations, getAlternateLinks, localizePath } from '../i18n/utils';
 import { languageTags, defaultLang } from '../i18n/ui';
 import { siteConfig } from '../config/site';
+import { buildLocalBusinessSchema } from '../config/schema';
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -24,38 +25,25 @@ const t = useTranslations(lang);
 const pageTitle = title ?? t('meta.title');
 const pageDescription = description ?? t('meta.description');
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).href;
-const alternates = getAlternateLinks(Astro.url, Astro.site);
-const ogImage = new URL('/images/og-image.svg', Astro.site ?? Astro.url.origin).href;
+const origin = Astro.site ?? new URL(Astro.url.origin);
 
-// Structured data — helps Google show the business correctly in search results.
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: siteConfig.name,
-  url: siteConfig.url,
+const canonical = new URL(Astro.url.pathname, origin).href;
+const alternates = getAlternateLinks(Astro.url, Astro.site);
+const ogImage = new URL('/images/og-image.svg', origin).href;
+
+// Schema.org LocalBusiness — see src/config/schema.ts
+const jsonLd = buildLocalBusinessSchema({
   description: pageDescription,
-  email: siteConfig.email,
-  telephone: siteConfig.phone,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: siteConfig.address.street,
-    postalCode: siteConfig.address.postalCode,
-    addressLocality: siteConfig.address.city,
-    addressRegion: siteConfig.address.region,
-    addressCountry: siteConfig.address.countryCode,
-  },
-  sameAs: [siteConfig.social.facebook, siteConfig.social.instagram, siteConfig.social.linkedin],
-  makesOffer: {
-    '@type': 'Offer',
-    itemOffered: {
-      '@type': 'Product',
-      name: 'ENplus A1 wood pellets',
-      description: pageDescription,
-      material: 'Softwood (pine, spruce)',
-    },
-  },
-};
+  pageUrl: canonical,
+  imageUrl: ogImage,
+  logoUrl: new URL('/favicon.svg', origin).href,
+  locale: languageTags[lang],
+  offerCatalogName: t('specs.eyebrow'),
+  products: [
+    { name: t('specs.d6.title'), description: t('specs.d6.desc') },
+    { name: t('specs.d8.title'), description: t('specs.d8.desc') },
+  ],
+});
 ---
 
 <!doctype html>
