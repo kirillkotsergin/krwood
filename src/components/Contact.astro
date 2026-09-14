@@ -1,6 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
 import { siteConfig, formatAddress, mapUrl } from '../config/site';
+import WhatsAppLink from './WhatsAppLink.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -15,6 +16,7 @@ const details = [
     value: siteConfig.phone,
     href: `tel:${siteConfig.phoneHref}`,
     external: false,
+    whatsapp: true,
   },
   {
     icon: 'mail',
@@ -22,6 +24,7 @@ const details = [
     value: siteConfig.email,
     href: `mailto:${siteConfig.email}`,
     external: false,
+    whatsapp: false,
   },
   {
     icon: 'pin',
@@ -29,6 +32,7 @@ const details = [
     value: postalAddress,
     href: mapUrl,
     external: true,
+    whatsapp: false,
   },
   {
     icon: 'clock',
@@ -36,6 +40,7 @@ const details = [
     value: t('contact.info.hoursValue'),
     href: null,
     external: false,
+    whatsapp: false,
   },
 ] as const;
 
@@ -152,13 +157,16 @@ const legalDetails = [
                 <div class="min-w-0">
                   <p class="text-xs font-bold uppercase tracking-wider text-white/50">{detail.label}</p>
                   {detail.href ? (
-                    <a
-                      href={detail.href}
-                      {...(detail.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                      class="mt-1 block break-words font-semibold text-white underline-offset-4 transition-colors duration-200 hover:text-wood-200 hover:underline"
-                    >
-                      {detail.value}
-                    </a>
+                    <div class="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                      <a
+                        href={detail.href}
+                        {...(detail.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                        class="break-words font-semibold text-white underline-offset-4 transition-colors duration-200 hover:text-wood-200 hover:underline"
+                      >
+                        {detail.value}
+                      </a>
+                      {detail.whatsapp && <WhatsAppLink />}
+                    </div>
                   ) : (
                     <p class="mt-1 font-semibold text-white">{detail.value}</p>
                   )}

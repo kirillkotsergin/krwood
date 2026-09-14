@@ -37,6 +37,10 @@
   --color-forest-900: #163d2d;
   --color-forest-950: #0a2219;
 
+  /* WhatsApp brand green — kept exact for instant recognition */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #1da851;
+
   /* Motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }

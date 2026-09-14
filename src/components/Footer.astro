@@ -3,6 +3,7 @@ import { getLangFromUrl, useTranslations, anchorLink, localizePath, routePath } 
 import { siteConfig, formatAddress, mapUrl, socialLinks } from '../config/site';
 import Logo from './Logo.astro';
 import LanguagePicker from './LanguagePicker.astro';
+import WhatsAppLink from './WhatsAppLink.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -134,13 +135,14 @@ const legalDetails = [
         <h2 class="text-sm font-bold uppercase tracking-wider text-white">{t('footer.contactTitle')}</h2>
         <address class="mt-5 block not-italic">
           <ul class="flex flex-col gap-3 text-[0.9375rem] text-stone-400">
-            <li>
+            <li class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
               <a
                 href={`tel:${siteConfig.phoneHref}`}
                 class="transition-colors duration-200 hover:text-wood-300"
               >
                 {siteConfig.phone}
               </a>
+              <WhatsAppLink size="sm" />
             </li>
             <li>
               <a

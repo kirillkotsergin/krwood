@@ -198,6 +198,9 @@ const et = {
   'contact.info.regCode': 'Registrikood',
   'contact.info.vat': 'KMKR number',
   'contact.info.country': 'Eesti',
+  'contact.whatsapp': 'Kirjuta WhatsAppis',
+  'contact.whatsappMessage':
+    'Tere! Sooviksin küsida pakkumist puidugraanulite kohta.',
 
   // --- Footer --------------------------------------------------------------
   'footer.tagline':
@@ -491,6 +494,9 @@ const en: Dictionary = {
   'contact.info.regCode': 'Registry code',
   'contact.info.vat': 'VAT number',
   'contact.info.country': 'Estonia',
+  'contact.whatsapp': 'Chat on WhatsApp',
+  'contact.whatsappMessage':
+    'Hello! I would like to request a quote for wood pellets.',
 
   'footer.tagline':
     'Premium wood pellets from Estonia. ENplus A1 quality, dependable delivery and honest pricing.',
@@ -772,6 +778,9 @@ const pl: Dictionary = {
   'contact.info.regCode': 'Numer rejestrowy',
   'contact.info.vat': 'Numer VAT',
   'contact.info.country': 'Estonia',
+  'contact.whatsapp': 'Napisz na WhatsAppie',
+  'contact.whatsappMessage':
+    'Dzień dobry! Chciałbym poprosić o ofertę na pellet drzewny.',
 
   'footer.tagline':
     'Pellet drzewny premium z Estonii. Jakość ENplus A1, niezawodna dostawa i uczciwe ceny.',

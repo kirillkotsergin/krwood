@@ -38,6 +38,13 @@ export interface SiteConfig {
   phone: string;
   /** E.164, digits only — used for tel: links and structured data. */
   phoneHref: string;
+  /**
+   * WhatsApp number in the format wa.me requires: international digits with
+   * no leading +, spaces or dashes. Defaults to the same line as `phone`.
+   * Set a different number if WhatsApp Business runs on its own line, or an
+   * empty string to hide every WhatsApp link on the site.
+   */
+  whatsapp: string;
   address: PostalAddressConfig;
   /** Estonian commercial register code (äriregistri kood). */
   registryCode: string;
@@ -75,6 +82,7 @@ export const siteConfig: SiteConfig = {
 
   phone: '+372 5020 078',
   phoneHref: '+3725020078',
+  whatsapp: '3725020078',
 
   address: {
     street: 'Saha tee 18d',
@@ -119,6 +127,16 @@ export const siteConfig: SiteConfig = {
 export function formatAddress(countryName: string): string {
   const { street, locality, postalCode } = siteConfig.address;
   return `${street}, ${locality}, ${postalCode}, ${countryName}`;
+}
+
+/**
+ * Builds a wa.me deep link, optionally pre-filling the visitor's first
+ * message. Returns an empty string when no WhatsApp number is configured.
+ */
+export function whatsappUrl(message?: string): string {
+  if (siteConfig.whatsapp.trim() === '') return '';
+  const base = `https://wa.me/${siteConfig.whatsapp}`;
+  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
 /** Google Maps deep link for the "Address" row and `hasMap` in JSON-LD. */
