@@ -1,0 +1,45 @@
+---
+/**
+ * Served by Apache via `ErrorDocument 404 /404.html` for any unknown path,
+ * so the locale cannot be derived from the URL. It defaults to Estonian and
+ * offers a route back into each language.
+ */
+import Layout from '../layouts/Layout.astro';
+import { languages, languageLabels, type Lang } from '../i18n/ui';
+import { localizePath } from '../i18n/utils';
+
+const entries = (Object.keys(languages) as Lang[]).map((code) => ({
+  code,
+  name: languages[code],
+  label: languageLabels[code],
+  href: localizePath('/', code),
+}));
+---
+
+<Layout title="404 — KR Wood" description="Lehekülge ei leitud / Page not found / Nie znaleziono strony">
+  <section class="flex min-h-[60svh] items-center bg-stone-50 py-24">
+    <div class="mx-auto max-w-2xl px-5 text-center sm:px-8">
+      <p class="text-7xl font-extrabold text-gradient-wood sm:text-8xl">404</p>
+
+      <h1 class="mt-6 text-3xl sm:text-4xl">Lehekülge ei leitud</h1>
+      <p class="mt-3 text-lg text-stone-600">Page not found · Nie znaleziono strony</p>
+
+      <ul class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        {
+          entries.map((entry) => (
+            <li>
+              <a
+                href={entry.href}
+                hreflang={entry.code}
+                class="inline-flex items-center gap-2 rounded-full bg-forest-800 px-6 py-3 text-sm font-bold text-white shadow-md shadow-forest-900/20 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:bg-forest-700 hover:shadow-lg active:translate-y-0"
+              >
+                <span class="text-xs uppercase tracking-wider text-wood-200">{entry.label}</span>
+                {entry.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,219 @@
+---
+import { getLangFromUrl, useTranslations, anchorLink } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+interface Product {
+  id: string;
+  title: string;
+  desc: string;
+  badge: string;
+  diameter: string;
+  featured: boolean;
+}
+
+const products: Product[] = [
+  {
+    id: 'pellet-6mm',
+    title: t('specs.d6.title'),
+    desc: t('specs.d6.desc'),
+    badge: t('specs.d6.badge'),
+    diameter: '6 mm',
+    featured: true,
+  },
+  {
+    id: 'pellet-8mm',
+    title: t('specs.d8.title'),
+    desc: t('specs.d8.desc'),
+    badge: t('specs.d8.badge'),
+    diameter: '8 mm',
+    featured: false,
+  },
+];
+
+/** Rows shared by both products, apart from the diameter. */
+const sharedRows = [
+  { label: t('specs.row.length'), value: t('specs.value.length') },
+  { label: t('specs.row.calorific'), value: t('specs.value.calorific') },
+  { label: t('specs.row.ash'), value: t('specs.value.ash') },
+  { label: t('specs.row.moisture'), value: t('specs.value.moisture') },
+  { label: t('specs.row.density'), value: t('specs.value.density') },
+  { label: t('specs.row.fines'), value: t('specs.value.fines') },
+  { label: t('specs.row.material'), value: t('specs.value.material') },
+];
+---
+
+<section id="specs" class="relative scroll-mt-20 overflow-hidden bg-white py-24 lg:py-32">
+  <!-- Faint grid texture -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.035]"
+    style="background-image:linear-gradient(to right,#1c5c41 1px,transparent 1px),linear-gradient(to bottom,#1c5c41 1px,transparent 1px);background-size:56px 56px"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <p
+        data-animate
+        class="inline-flex items-center gap-2 rounded-full bg-wood-100 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-wood-700"
+      >
+        <span class="size-1.5 rounded-full bg-wood-500"></span>
+        {t('specs.eyebrow')}
+      </p>
+      <h2 data-animate style="--animate-delay:60ms" class="mt-5 text-3xl sm:text-4xl lg:text-5xl">
+        {t('specs.title')}
+      </h2>
+      <p data-animate style="--animate-delay:120ms" class="mt-5 text-lg leading-relaxed text-stone-600">
+        {t('specs.subtitle')}
+      </p>
+    </div>
+
+    <!-- Product cards -->
+    <div class="mx-auto mt-16 grid max-w-5xl gap-8 lg:mt-20 lg:grid-cols-2">
+      {
+        products.map((product) => (
+          <article
+            id={product.id}
+            data-animate
+            data-animate-stagger
+            class={`relative flex flex-col overflow-hidden rounded-3xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-stone-900/[0.08] ${
+              product.featured
+                ? 'border-wood-300 ring-1 ring-wood-200'
+                : 'border-stone-200'
+            }`}
+          >
+            {/* Card header */}
+            <header
+              class={`relative px-7 pb-6 pt-7 ${
+                product.featured
+                  ? 'bg-gradient-to-br from-wood-50 to-wood-100/60'
+                  : 'bg-gradient-to-br from-stone-50 to-stone-100/60'
+              }`}
+            >
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex items-center gap-4">
+                  {/* Pellet glyph */}
+                  <span
+                    class={`grid size-14 shrink-0 place-items-center rounded-2xl ${
+                      product.featured
+                        ? 'bg-wood-600 text-white shadow-md shadow-wood-900/25'
+                        : 'bg-forest-700 text-white shadow-md shadow-forest-900/25'
+                    }`}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="size-7"
+                      aria-hidden="true"
+                    >
+                      <rect x="4" y="3.5" width="5" height="10" rx="2.5" opacity="0.95" />
+                      <rect x="11.5" y="7" width="5" height="13.5" rx="2.5" opacity="0.75" />
+                      <rect
+                        x="16"
+                        y="4"
+                        width="4.5"
+                        height="9"
+                        rx="2.25"
+                        opacity="0.55"
+                        transform="rotate(22 18.25 8.5)"
+                      />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3 class="text-2xl">{product.title}</h3>
+                    <p class="mt-1 text-sm font-semibold uppercase tracking-wider text-stone-500">
+                      ENplus® A1
+                    </p>
+                  </div>
+                </div>
+
+                <span
+                  class={`shrink-0 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${
+                    product.featured
+                      ? 'bg-wood-600 text-white'
+                      : 'bg-forest-700 text-white'
+                  }`}
+                >
+                  {product.badge}
+                </span>
+              </div>
+
+              <p class="mt-5 text-[0.9375rem] leading-relaxed text-stone-600">{product.desc}</p>
+            </header>
+
+            {/* Spec table */}
+            <div class="flex-1 px-7 py-6">
+              <table class="w-full border-collapse text-sm">
+                <caption class="sr-only">
+                  {product.title} — {t('specs.table.param')} / {t('specs.table.value')}
+                </caption>
+                <thead>
+                  <tr class="border-b border-stone-200">
+                    <th scope="col" class="pb-2 text-left text-xs font-bold uppercase tracking-wider text-stone-400">
+                      {t('specs.table.param')}
+                    </th>
+                    <th scope="col" class="pb-2 text-right text-xs font-bold uppercase tracking-wider text-stone-400">
+                      {t('specs.table.value')}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-stone-100">
+                    <th scope="row" class="py-3 text-left font-medium text-stone-600">
+                      {t('specs.row.diameter')}
+                    </th>
+                    <td
+                      class={`py-3 text-right font-bold ${
+                        product.featured ? 'text-wood-700' : 'text-forest-700'
+                      }`}
+                    >
+                      {product.diameter}
+                    </td>
+                  </tr>
+                  {sharedRows.map((row) => (
+                    <tr class="border-b border-stone-100 last:border-0">
+                      <th scope="row" class="py-3 text-left font-medium text-stone-600">
+                        {row.label}
+                      </th>
+                      <td class="py-3 text-right font-bold text-stone-900">{row.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Card footer CTA */}
+            <footer class="border-t border-stone-100 px-7 py-5">
+              <a
+                href={anchorLink('contact', lang)}
+                class={`group flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:scale-[1.02] active:scale-100 ${
+                  product.featured
+                    ? 'bg-wood-600 text-white shadow-md shadow-wood-900/20 hover:bg-wood-500 hover:shadow-lg'
+                    : 'bg-stone-100 text-forest-800 hover:bg-forest-700 hover:text-white hover:shadow-lg'
+                }`}
+              >
+                {t('packaging.cta')}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </footer>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

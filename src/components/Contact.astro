@@ -1,0 +1,474 @@
+---
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
+import { siteConfig, formattedAddress } from '../config/site';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const privacyHref = localizePath('/privacy', lang);
+
+const details = [
+  {
+    icon: 'phone',
+    label: t('contact.info.phone'),
+    value: siteConfig.phone,
+    href: `tel:${siteConfig.phoneHref}`,
+  },
+  {
+    icon: 'mail',
+    label: t('contact.info.email'),
+    value: siteConfig.email,
+    href: `mailto:${siteConfig.email}`,
+  },
+  {
+    icon: 'pin',
+    label: t('contact.info.address'),
+    value: formattedAddress,
+    href: `https://maps.google.com/?q=${encodeURIComponent(formattedAddress)}`,
+  },
+  {
+    icon: 'clock',
+    label: t('contact.info.hours'),
+    value: t('contact.info.hoursValue'),
+    href: null,
+  },
+] as const;
+---
+
+<section id="contact" class="relative scroll-mt-20 overflow-hidden bg-white py-24 lg:py-32">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <p
+        data-animate
+        class="inline-flex items-center gap-2 rounded-full bg-wood-100 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-wood-700"
+      >
+        <span class="size-1.5 rounded-full bg-wood-500"></span>
+        {t('contact.eyebrow')}
+      </p>
+      <h2 data-animate style="--animate-delay:60ms" class="mt-5 text-3xl sm:text-4xl lg:text-5xl">
+        {t('contact.title')}
+      </h2>
+      <p data-animate style="--animate-delay:120ms" class="mt-5 text-lg leading-relaxed text-stone-600">
+        {t('contact.subtitle')}
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-8 lg:mt-20 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-10">
+      <!-- Contact details card -->
+      <aside
+        data-animate
+        class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-forest-800 to-forest-950 p-8 text-white shadow-xl shadow-forest-950/20"
+      >
+        <!-- decorative blob -->
+        <span
+          class="pointer-events-none absolute -right-16 -top-16 size-48 rounded-full bg-wood-500/20 blur-2xl"
+          aria-hidden="true"></span>
+
+        <h3 class="relative text-xl text-white">{t('contact.info.title')}</h3>
+
+        <ul class="relative mt-8 flex flex-col gap-7">
+          {
+            details.map((detail) => (
+              <li class="flex items-start gap-4">
+                <span class="grid size-11 shrink-0 place-items-center rounded-xl bg-white/10 text-wood-200 ring-1 ring-inset ring-white/15">
+                  {detail.icon === 'phone' && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.75"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="size-5"
+                      aria-hidden="true"
+                    >
+                      <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z" />
+                    </svg>
+                  )}
+                  {detail.icon === 'mail' && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.75"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="size-5"
+                      aria-hidden="true"
+                    >
+                      <rect x="2" y="4" width="20" height="16" rx="2" />
+                      <path d="m2 6.5 10 6 10-6" />
+                    </svg>
+                  )}
+                  {detail.icon === 'pin' && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.75"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="size-5"
+                      aria-hidden="true"
+                    >
+                      <path d="M20 10c0 5.4-8 12-8 12s-8-6.6-8-12a8 8 0 0 1 16 0Z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                  )}
+                  {detail.icon === 'clock' && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.75"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="size-5"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 7v5l3.2 1.9" />
+                    </svg>
+                  )}
+                </span>
+
+                <div class="min-w-0">
+                  <p class="text-xs font-bold uppercase tracking-wider text-white/50">{detail.label}</p>
+                  {detail.href ? (
+                    <a
+                      href={detail.href}
+                      {...(detail.icon === 'pin'
+                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        : {})}
+                      class="mt-1 block break-words font-semibold text-white underline-offset-4 transition-colors duration-200 hover:text-wood-200 hover:underline"
+                    >
+                      {detail.value}
+                    </a>
+                  ) : (
+                    <p class="mt-1 font-semibold text-white">{detail.value}</p>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <p class="relative mt-8 border-t border-white/15 pt-6 text-sm text-white/50">
+          {t('contact.info.regCode')}: <span class="font-semibold text-white/80">{siteConfig.regCode}</span>
+        </p>
+      </aside>
+
+      <!-- Enquiry form -->
+      <div
+        data-animate
+        style="--animate-delay:100ms"
+        class="rounded-3xl border border-stone-200 bg-stone-50/60 p-8 shadow-sm lg:p-10"
+      >
+        <form
+          id="contact-form"
+          action="/contact.php"
+          method="post"
+          novalidate
+          data-msg-required={t('contact.form.errorRequired')}
+          data-msg-email={t('contact.form.errorEmail')}
+          class="flex flex-col gap-6"
+        >
+          <fieldset class="contents">
+            <legend class="sr-only">{t('contact.form.legend')}</legend>
+
+            <!-- Honeypot: hidden from humans, tempting to bots -->
+            <div class="absolute -left-[9999px] top-auto size-px overflow-hidden" aria-hidden="true">
+              <label for="website">Website</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+            <input type="hidden" name="lang" value={lang} />
+
+            <div class="grid gap-6 sm:grid-cols-2">
+              <!-- Name -->
+              <div class="flex flex-col gap-2">
+                <label for="name" class="text-sm font-bold text-stone-800">
+                  {t('contact.form.name')} <span class="text-wood-600" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  autocomplete="name"
+                  maxlength="120"
+                  placeholder={t('contact.form.namePlaceholder')}
+                  aria-describedby="name-error"
+                  class="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 placeholder:text-stone-400 transition-all duration-200 focus:border-wood-500 focus:outline-none focus:ring-4 focus:ring-wood-500/15 aria-[invalid=true]:border-red-500 aria-[invalid=true]:ring-red-500/15"
+                />
+                <p id="name-error" data-error-for="name" class="hidden text-sm font-medium text-red-600"></p>
+              </div>
+
+              <!-- Email -->
+              <div class="flex flex-col gap-2">
+                <label for="email" class="text-sm font-bold text-stone-800">
+                  {t('contact.form.email')} <span class="text-wood-600" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                  maxlength="180"
+                  placeholder={t('contact.form.emailPlaceholder')}
+                  aria-describedby="email-error"
+                  class="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 placeholder:text-stone-400 transition-all duration-200 focus:border-wood-500 focus:outline-none focus:ring-4 focus:ring-wood-500/15 aria-[invalid=true]:border-red-500 aria-[invalid=true]:ring-red-500/15"
+                />
+                <p id="email-error" data-error-for="email" class="hidden text-sm font-medium text-red-600"></p>
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="flex flex-col gap-2">
+              <label for="phone" class="text-sm font-bold text-stone-800">
+                {t('contact.form.phone')}
+                <span class="ml-1 text-xs font-medium normal-case text-stone-400">
+                  ({t('contact.form.optional')})
+                </span>
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                autocomplete="tel"
+                maxlength="40"
+                placeholder={t('contact.form.phonePlaceholder')}
+                class="w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 placeholder:text-stone-400 transition-all duration-200 focus:border-wood-500 focus:outline-none focus:ring-4 focus:ring-wood-500/15"
+              />
+            </div>
+
+            <!-- Message -->
+            <div class="flex flex-col gap-2">
+              <label for="message" class="text-sm font-bold text-stone-800">
+                {t('contact.form.message')} <span class="text-wood-600" aria-hidden="true">*</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows="5"
+                maxlength="4000"
+                placeholder={t('contact.form.messagePlaceholder')}
+                aria-describedby="message-error"
+                class="w-full resize-y rounded-xl border border-stone-300 bg-white px-4 py-3 text-stone-900 placeholder:text-stone-400 transition-all duration-200 focus:border-wood-500 focus:outline-none focus:ring-4 focus:ring-wood-500/15 aria-[invalid=true]:border-red-500 aria-[invalid=true]:ring-red-500/15"
+              ></textarea>
+              <p id="message-error" data-error-for="message" class="hidden text-sm font-medium text-red-600"></p>
+            </div>
+
+            <!-- Consent -->
+            <div class="flex flex-col gap-2">
+              <label for="consent" class="flex cursor-pointer items-start gap-3 text-sm text-stone-600">
+                <input
+                  type="checkbox"
+                  id="consent"
+                  name="consent"
+                  required
+                  value="1"
+                  aria-describedby="consent-error"
+                  class="mt-0.5 size-5 shrink-0 cursor-pointer rounded border-stone-300 text-wood-600 transition focus:ring-4 focus:ring-wood-500/20"
+                />
+                <span>
+                  {t('contact.form.consent')}
+                  <a
+                    href={privacyHref}
+                    class="ml-1 font-semibold text-forest-700 underline underline-offset-2 hover:text-wood-600"
+                  >
+                    {t('contact.form.privacyLink')}
+                  </a>
+                </span>
+              </label>
+              <p id="consent-error" data-error-for="consent" class="hidden text-sm font-medium text-red-600"></p>
+            </div>
+
+            <!-- Submit -->
+            <div class="flex flex-col gap-4">
+              <button
+                type="submit"
+                id="contact-submit"
+                data-label-idle={t('contact.form.submit')}
+                data-label-sending={t('contact.form.sending')}
+                class="group inline-flex items-center justify-center gap-2 rounded-full bg-wood-600 px-8 py-4 text-base font-bold text-white shadow-lg shadow-wood-900/25 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:bg-wood-500 hover:shadow-xl active:translate-y-0 active:scale-100 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:scale-100"
+              >
+                <span data-submit-label>{t('contact.form.submit')}</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-5 transition-transform duration-300 group-hover:translate-x-1 group-disabled:hidden"
+                  aria-hidden="true"
+                >
+                  <path d="m22 2-7 20-4-9-9-4 20-7Z"></path>
+                </svg>
+                <svg
+                  data-spinner
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  class="hidden size-5 animate-spin group-disabled:block"
+                  aria-hidden="true"
+                >
+                  <path d="M21 12a9 9 0 1 1-6.2-8.6"></path>
+                </svg>
+              </button>
+
+              <!-- Live region for submit feedback -->
+              <p
+                id="form-status"
+                role="status"
+                aria-live="polite"
+                data-success={t('contact.form.success')}
+                data-error={t('contact.form.error')}
+                class="hidden rounded-xl px-4 py-3 text-sm font-semibold data-[state=ok]:block data-[state=ok]:bg-forest-50 data-[state=ok]:text-forest-800 data-[state=ok]:ring-1 data-[state=ok]:ring-forest-200 data-[state=fail]:block data-[state=fail]:bg-red-50 data-[state=fail]:text-red-700 data-[state=fail]:ring-1 data-[state=fail]:ring-red-200"
+              >
+              </p>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const submit = document.getElementById('contact-submit') as HTMLButtonElement | null;
+  const status = document.getElementById('form-status');
+
+  if (form && submit && status) {
+    // Locale-specific validation copy is rendered onto the form by Astro.
+    const messages = {
+      required: form.dataset.msgRequired ?? 'This field is required',
+      email: form.dataset.msgEmail ?? 'Please enter a valid email address',
+    };
+
+    const submitLabel = submit.querySelector<HTMLElement>('[data-submit-label]');
+    const labelIdle = submit.dataset.labelIdle ?? 'Send';
+    const labelSending = submit.dataset.labelSending ?? 'Sending…';
+
+    const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    const showError = (field: HTMLElement, message: string) => {
+      field.setAttribute('aria-invalid', 'true');
+      const target = form.querySelector<HTMLElement>(`[data-error-for="${field.getAttribute('name')}"]`);
+      if (target) {
+        target.textContent = message;
+        target.classList.remove('hidden');
+      }
+    };
+
+    const clearError = (field: HTMLElement) => {
+      field.removeAttribute('aria-invalid');
+      const target = form.querySelector<HTMLElement>(`[data-error-for="${field.getAttribute('name')}"]`);
+      if (target) {
+        target.textContent = '';
+        target.classList.add('hidden');
+      }
+    };
+
+    const validate = (): boolean => {
+      const invalid: Array<HTMLInputElement | HTMLTextAreaElement> = [];
+
+      const check = (name: string, predicate: (value: string) => string | null) => {
+        const field = form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement | null;
+        if (!field) return;
+        const error = predicate(field.value.trim());
+        if (error === null) {
+          clearError(field);
+        } else {
+          showError(field, error);
+          invalid.push(field);
+        }
+      };
+
+      check('name', (value) => (value.length === 0 ? messages.required : null));
+      check('email', (value) => {
+        if (value.length === 0) return messages.required;
+        return EMAIL_RE.test(value) ? null : messages.email;
+      });
+      check('message', (value) => (value.length === 0 ? messages.required : null));
+
+      const consent = form.elements.namedItem('consent') as HTMLInputElement | null;
+      if (consent) {
+        if (consent.checked) {
+          clearError(consent);
+        } else {
+          showError(consent, messages.required);
+          invalid.push(consent);
+        }
+      }
+
+      invalid[0]?.focus();
+      return invalid.length === 0;
+    };
+
+    // Clear a field's error as soon as the visitor corrects it.
+    form.querySelectorAll<HTMLElement>('input[name], textarea[name]').forEach((field) => {
+      field.addEventListener('input', () => {
+        if (field.getAttribute('aria-invalid') === 'true') clearError(field);
+      });
+      field.addEventListener('change', () => {
+        if (field.getAttribute('aria-invalid') === 'true') clearError(field);
+      });
+    });
+
+    const setStatus = (state: 'ok' | 'fail' | null) => {
+      if (state === null) {
+        status.removeAttribute('data-state');
+        status.textContent = '';
+        return;
+      }
+      status.setAttribute('data-state', state);
+      status.textContent = (state === 'ok' ? status.dataset.success : status.dataset.error) ?? '';
+    };
+
+    const setBusy = (busy: boolean) => {
+      submit.disabled = busy;
+      if (submitLabel) submitLabel.textContent = busy ? labelSending : labelIdle;
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      setStatus(null);
+
+      if (!validate()) return;
+
+      setBusy(true);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+
+        if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
+
+        const result = (await response.json()) as { ok?: boolean };
+        if (result.ok !== true) throw new Error('Mail handler reported a failure');
+
+        setStatus('ok');
+        form.reset();
+      } catch {
+        setStatus('fail');
+      } finally {
+        setBusy(false);
+      }
+    });
+  }
+</script>

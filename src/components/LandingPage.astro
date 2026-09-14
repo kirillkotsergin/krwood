@@ -1,0 +1,20 @@
+---
+/**
+ * Shared body of the landing page.
+ *
+ * The three locale routes (/, /en/, /pl/) are thin wrappers around this
+ * component. Each section resolves its own language from `Astro.url`, so
+ * nothing needs to be threaded through as props.
+ */
+import Hero from './Hero.astro';
+import Features from './Features.astro';
+import Specs from './Specs.astro';
+import Packaging from './Packaging.astro';
+import Contact from './Contact.astro';
+---
+
+<Hero />
+<Features />
+<Specs />
+<Packaging />
+<Contact />

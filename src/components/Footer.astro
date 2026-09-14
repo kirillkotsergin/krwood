@@ -1,0 +1,189 @@
+---
+import { getLangFromUrl, useTranslations, anchorLink, localizePath } from '../i18n/utils';
+import { siteConfig, formattedAddress } from '../config/site';
+import Logo from './Logo.astro';
+import LanguagePicker from './LanguagePicker.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const currentYear = new Date().getFullYear();
+const copyrightRange =
+  currentYear > siteConfig.foundedYear ? `${siteConfig.foundedYear}–${currentYear}` : `${currentYear}`;
+
+const navLinks = [
+  { href: anchorLink('features', lang), label: t('nav.features') },
+  { href: anchorLink('specs', lang), label: t('nav.specs') },
+  { href: anchorLink('packaging', lang), label: t('nav.packaging') },
+  { href: anchorLink('contact', lang), label: t('nav.contact') },
+];
+
+const socials = [
+  { name: 'Facebook', href: siteConfig.social.facebook, icon: 'facebook' },
+  { name: 'Instagram', href: siteConfig.social.instagram, icon: 'instagram' },
+  { name: 'LinkedIn', href: siteConfig.social.linkedin, icon: 'linkedin' },
+] as const;
+---
+
+<footer class="relative overflow-hidden bg-forest-950 text-stone-300">
+  <!-- Top accent line -->
+  <div class="h-1 w-full bg-gradient-to-r from-wood-700 via-wood-500 to-forest-600" aria-hidden="true"></div>
+
+  <div class="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))]">
+      <!-- Brand -->
+      <div>
+        <a href={localizePath('/', lang)} aria-label={t('a11y.homepage')} class="inline-block">
+          <Logo variant="light" />
+        </a>
+        <p class="mt-5 max-w-sm text-[0.9375rem] leading-relaxed text-stone-400">
+          {t('footer.tagline')}
+        </p>
+
+        <div class="mt-7">
+          <p class="mb-3 text-xs font-bold uppercase tracking-wider text-stone-500">
+            {t('footer.socialTitle')}
+          </p>
+          <ul class="flex items-center gap-3">
+            {
+              socials.map((social) => (
+                <li>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                    class="grid size-10 place-items-center rounded-xl bg-white/5 text-stone-400 ring-1 ring-inset ring-white/10 transition-all duration-300 hover:scale-110 hover:bg-wood-600 hover:text-white hover:ring-wood-500"
+                  >
+                    {social.icon === 'facebook' && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="size-5"
+                        aria-hidden="true"
+                      >
+                        <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.45 2.91h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94Z" />
+                      </svg>
+                    )}
+                    {social.icon === 'instagram' && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.9"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="size-5"
+                        aria-hidden="true"
+                      >
+                        <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" />
+                        <circle cx="12" cy="12" r="4.2" />
+                        <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none" />
+                      </svg>
+                    )}
+                    {social.icon === 'linkedin' && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        class="size-5"
+                        aria-hidden="true"
+                      >
+                        <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13Zm1.78 13.02H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z" />
+                      </svg>
+                    )}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav aria-labelledby="footer-nav-title">
+        <h2 id="footer-nav-title" class="text-sm font-bold uppercase tracking-wider text-white">
+          {t('footer.navTitle')}
+        </h2>
+        <ul class="mt-5 flex flex-col gap-3">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-[0.9375rem] text-stone-400 transition-colors duration-200 hover:text-wood-300"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <!-- Contact -->
+      <div>
+        <h2 class="text-sm font-bold uppercase tracking-wider text-white">{t('footer.contactTitle')}</h2>
+        <ul class="mt-5 flex flex-col gap-3 text-[0.9375rem] text-stone-400">
+          <li>
+            <a
+              href={`tel:${siteConfig.phoneHref}`}
+              class="transition-colors duration-200 hover:text-wood-300"
+            >
+              {siteConfig.phone}
+            </a>
+          </li>
+          <li>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              class="break-all transition-colors duration-200 hover:text-wood-300"
+            >
+              {siteConfig.email}
+            </a>
+          </li>
+          <li class="leading-relaxed">{formattedAddress}</li>
+          <li class="text-stone-500">{t('contact.info.hoursValue')}</li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h2 class="text-sm font-bold uppercase tracking-wider text-white">{t('footer.legalTitle')}</h2>
+        <ul class="mt-5 flex flex-col gap-3 text-[0.9375rem]">
+          <li>
+            <a
+              href={localizePath('/privacy', lang)}
+              class="text-stone-400 transition-colors duration-200 hover:text-wood-300"
+            >
+              {t('footer.privacy')}
+            </a>
+          </li>
+          <li class="text-stone-500">
+            {t('contact.info.regCode')}: {siteConfig.regCode}
+          </li>
+        </ul>
+
+        <div class="mt-7">
+          <LanguagePicker variant="light" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div
+      class="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-stone-500 sm:flex-row"
+    >
+      <p>
+        © {copyrightRange} <span class="font-semibold text-stone-400">{siteConfig.domain}</span>. {
+          t('footer.rights')
+        }
+      </p>
+      <p class="flex items-center gap-2">
+        <span class="size-1.5 rounded-full bg-forest-500"></span>
+        ENplus® A1 certified wood pellets
+      </p>
+    </div>
+  </div>
+</footer>

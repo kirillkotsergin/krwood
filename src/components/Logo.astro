@@ -1,0 +1,39 @@
+---
+interface Props {
+  /** Extra classes for the wrapping element. */
+  class?: string;
+  /** Renders the wordmark in light colours for dark backgrounds. */
+  variant?: 'dark' | 'light';
+}
+
+const { class: className = '', variant = 'dark' } = Astro.props;
+
+const wordmark = variant === 'light' ? 'text-white' : 'text-stone-900';
+const suffix = variant === 'light' ? 'text-wood-300' : 'text-wood-600';
+---
+
+<span class={`inline-flex items-center gap-2.5 ${className}`}>
+  <span
+    class="grid size-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-forest-600 to-forest-800 shadow-sm shadow-forest-900/20 lg:size-10"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      class="size-5 lg:size-[1.375rem]"
+      aria-hidden="true"
+    >
+      {/* Stylised conifer */}
+      <path
+        d="M12 2.5 7.4 9.2h2.3L5.8 15.1h3.1L4.9 20.4h14.2l-4-5.3h3.1l-3.9-5.9h2.3L12 2.5Z"
+        fill="currentColor"
+        class="text-wood-200"
+      ></path>
+      <rect x="10.9" y="19.2" width="2.2" height="2.9" rx="0.7" fill="currentColor" class="text-wood-400"
+      ></rect>
+    </svg>
+  </span>
+  <span class={`text-lg font-extrabold tracking-tight lg:text-xl ${wordmark}`}>
+    KR<span class={suffix}>&nbsp;Wood</span>
+  </span>
+</span>

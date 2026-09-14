@@ -1,0 +1,160 @@
+@import 'tailwindcss';
+
+/* -------------------------------------------------------------------------- */
+/* Design tokens                                                              */
+/* -------------------------------------------------------------------------- */
+
+@theme {
+  /* Self-hosted Inter Variable (imported in Layout.astro — no Google Fonts CDN,
+     which keeps the site GDPR-clean for EU visitors). */
+  --font-sans:
+    'Inter Variable', 'Inter', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Warm wood tones — primary brand colour */
+  --color-wood-50: #fdf8f0;
+  --color-wood-100: #f9ecd6;
+  --color-wood-200: #f2d5a7;
+  --color-wood-300: #eab871;
+  --color-wood-400: #e39c45;
+  --color-wood-500: #d98127;
+  --color-wood-600: #c2661a;
+  --color-wood-700: #a14d18;
+  --color-wood-800: #833e1a;
+  --color-wood-900: #6c3418;
+  --color-wood-950: #3d1b0a;
+
+  /* Deep coniferous greens — accent colour */
+  --color-forest-50: #f0f9f4;
+  --color-forest-100: #dbf0e3;
+  --color-forest-200: #b9e1ca;
+  --color-forest-300: #8bcaa8;
+  --color-forest-400: #56ac81;
+  --color-forest-500: #329063;
+  --color-forest-600: #22734f;
+  --color-forest-700: #1c5c41;
+  --color-forest-800: #194a35;
+  --color-forest-900: #163d2d;
+  --color-forest-950: #0a2219;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Base                                                                       */
+/* -------------------------------------------------------------------------- */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Sticky header is 4rem tall (5rem on lg) — keep anchor targets clear of it. */
+  :target,
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+
+  @media (min-width: 1024px) {
+    [id] {
+      scroll-margin-top: 6rem;
+    }
+  }
+
+  body {
+    @apply bg-stone-50 text-stone-700 antialiased;
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-bold tracking-tight text-stone-900;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible, on-brand focus ring for keyboard users. */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-wood-600;
+  }
+
+  /* Respect the OS-level reduced-motion preference. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Scroll-reveal animation                                                    */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * The `.js` class is set on <html> by an inline script in <head>, so elements
+ * are only hidden when JavaScript can actually reveal them again. Without JS
+ * the content renders normally — important for crawlers and no-JS visitors.
+ */
+@layer components {
+  .js [data-animate] {
+    opacity: 0;
+    transform: translateY(1.75rem);
+    transition:
+      opacity 0.7s var(--ease-out-expo),
+      transform 0.7s var(--ease-out-expo);
+    transition-delay: var(--animate-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .js [data-animate].is-visible {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js [data-animate] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Utilities                                                                  */
+/* -------------------------------------------------------------------------- */
+
+/* Subtle wood-to-forest text gradient used on hero + section headings. */
+@utility text-gradient-wood {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-wood-300) 0%,
+    var(--color-wood-400) 45%,
+    var(--color-wood-200) 100%
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+/* Locks body scroll while the mobile menu is open. */
+@utility scroll-locked {
+  overflow: hidden;
+  touch-action: none;
+}

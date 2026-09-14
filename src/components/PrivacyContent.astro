@@ -1,0 +1,76 @@
+---
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/utils';
+import { siteConfig } from '../config/site';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+/** Keep this in step with substantive edits to the policy text. */
+const lastUpdated = '2026-09-14';
+
+const sections = [
+  { title: t('privacy.s1.title'), body: t('privacy.s1.body') },
+  { title: t('privacy.s2.title'), body: t('privacy.s2.body') },
+  { title: t('privacy.s3.title'), body: t('privacy.s3.body') },
+  { title: t('privacy.s4.title'), body: t('privacy.s4.body') },
+  { title: t('privacy.s5.title'), body: t('privacy.s5.body') },
+  { title: t('privacy.s6.title'), body: t('privacy.s6.body') },
+];
+---
+
+<article class="bg-stone-50 py-20 lg:py-28">
+  <div class="mx-auto max-w-3xl px-5 sm:px-8">
+    <a
+      href={localizePath('/', lang)}
+      class="group inline-flex items-center gap-2 text-sm font-semibold text-forest-700 transition-colors hover:text-wood-600"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="size-4 transition-transform duration-300 group-hover:-translate-x-1"
+        aria-hidden="true"
+      >
+        <path d="M19 12H5M11 18l-6-6 6-6"></path>
+      </svg>
+      {t('privacy.back')}
+    </a>
+
+    <h1 class="mt-8 text-4xl sm:text-5xl">{t('privacy.title')}</h1>
+
+    <p class="mt-4 text-sm font-medium text-stone-500">
+      {t('privacy.updated')}:
+      <time datetime={lastUpdated}>{lastUpdated}</time>
+    </p>
+
+    <p class="mt-8 text-lg leading-relaxed text-stone-600">{t('privacy.intro')}</p>
+
+    <div class="mt-12 flex flex-col gap-10">
+      {
+        sections.map((section) => (
+          <section>
+            <h2 class="text-xl sm:text-2xl">{section.title}</h2>
+            <p class="mt-3 leading-relaxed text-stone-600">{section.body}</p>
+          </section>
+        ))
+      }
+
+      <section>
+        <h2 class="text-xl sm:text-2xl">{t('privacy.s7.title')}</h2>
+        <p class="mt-3 leading-relaxed text-stone-600">
+          {t('privacy.s7.body')}
+          <a
+            href={`mailto:${siteConfig.email}`}
+            class="ml-1 font-semibold text-forest-700 underline underline-offset-2 transition-colors hover:text-wood-600"
+          >
+            {siteConfig.email}
+          </a>
+        </p>
+      </section>
+    </div>
+  </div>
+</article>

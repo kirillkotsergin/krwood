@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Coniferous forest silhouette">
+  <title>Coniferous forest</title>
+
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#061711"/>
+      <stop offset="38%" stop-color="#0c2a20"/>
+      <stop offset="72%" stop-color="#15402f"/>
+      <stop offset="100%" stop-color="#1d5540"/>
+    </linearGradient>
+
+    <radialGradient id="glow" cx="0.72" cy="0.28" r="0.62">
+      <stop offset="0%" stop-color="#7fc7a2" stop-opacity="0.30"/>
+      <stop offset="55%" stop-color="#3f8f69" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#0a2219" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="fogFar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9fd4ba" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#9fd4ba" stop-opacity="0.22"/>
+    </linearGradient>
+
+    <linearGradient id="fogMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#86c4a6" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#86c4a6" stop-opacity="0.16"/>
+    </linearGradient>
+
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b2419"/>
+      <stop offset="100%" stop-color="#050f0b"/>
+    </linearGradient>
+
+    <!-- A single conifer, reused across all depth layers -->
+    <symbol id="pine" viewBox="0 0 100 260">
+      <path d="M50 4 72 64H59l23 64H67l28 70H5l28-70H18l23-64H28Z" fill="currentColor"/>
+      <rect x="44" y="194" width="12" height="66" fill="currentColor"/>
+    </symbol>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <rect width="1920" height="1080" fill="url(#glow)"/>
+
+  <!-- ---------------- Far layer ---------------- -->
+  <g color="#4c9070" opacity="0.42">
+    <use href="#pine" x="-25" y="548" width="82" height="232"/>
+    <use href="#pine" x="62" y="560" width="76" height="214"/>
+    <use href="#pine" x="146" y="542" width="84" height="242"/>
+    <use href="#pine" x="238" y="566" width="72" height="206"/>
+    <use href="#pine" x="316" y="550" width="80" height="228"/>
+    <use href="#pine" x="404" y="538" width="86" height="248"/>
+    <use href="#pine" x="496" y="562" width="74" height="212"/>
+    <use href="#pine" x="576" y="546" width="82" height="236"/>
+    <use href="#pine" x="664" y="558" width="78" height="218"/>
+    <use href="#pine" x="748" y="540" width="85" height="245"/>
+    <use href="#pine" x="840" y="564" width="73" height="208"/>
+    <use href="#pine" x="918" y="548" width="81" height="234"/>
+    <use href="#pine" x="1006" y="556" width="77" height="220"/>
+    <use href="#pine" x="1090" y="538" width="86" height="250"/>
+    <use href="#pine" x="1182" y="562" width="74" height="210"/>
+    <use href="#pine" x="1262" y="546" width="83" height="238"/>
+    <use href="#pine" x="1352" y="558" width="76" height="216"/>
+    <use href="#pine" x="1434" y="542" width="84" height="244"/>
+    <use href="#pine" x="1524" y="564" width="72" height="206"/>
+    <use href="#pine" x="1602" y="550" width="82" height="232"/>
+    <use href="#pine" x="1690" y="540" width="85" height="246"/>
+    <use href="#pine" x="1782" y="560" width="75" height="214"/>
+    <use href="#pine" x="1862" y="548" width="82" height="234"/>
+  </g>
+
+  <rect x="0" y="640" width="1920" height="200" fill="url(#fogFar)"/>
+
+  <!-- ---------------- Mid layer ---------------- -->
+  <g color="#22523d" opacity="0.88">
+    <use href="#pine" x="-40" y="596" width="126" height="356"/>
+    <use href="#pine" x="104" y="614" width="114" height="322"/>
+    <use href="#pine" x="242" y="588" width="132" height="372"/>
+    <use href="#pine" x="378" y="618" width="110" height="314"/>
+    <use href="#pine" x="512" y="600" width="124" height="350"/>
+    <use href="#pine" x="652" y="584" width="134" height="380"/>
+    <use href="#pine" x="788" y="620" width="108" height="310"/>
+    <use href="#pine" x="922" y="594" width="128" height="362"/>
+    <use href="#pine" x="1062" y="610" width="116" height="328"/>
+    <use href="#pine" x="1196" y="586" width="133" height="376"/>
+    <use href="#pine" x="1336" y="616" width="112" height="318"/>
+    <use href="#pine" x="1472" y="598" width="126" height="354"/>
+    <use href="#pine" x="1606" y="588" width="131" height="370"/>
+    <use href="#pine" x="1746" y="618" width="110" height="314"/>
+    <use href="#pine" x="1866" y="600" width="124" height="350"/>
+  </g>
+
+  <rect x="0" y="740" width="1920" height="220" fill="url(#fogMid)"/>
+
+  <!-- ---------------- Near layer ---------------- -->
+  <g color="#0d2b1f">
+    <use href="#pine" x="-60" y="656" width="182" height="512"/>
+    <use href="#pine" x="152" y="690" width="164" height="462"/>
+    <use href="#pine" x="360" y="642" width="192" height="538"/>
+    <use href="#pine" x="556" y="700" width="158" height="448"/>
+    <use href="#pine" x="752" y="664" width="178" height="500"/>
+    <use href="#pine" x="972" y="636" width="196" height="548"/>
+    <use href="#pine" x="1176" y="696" width="160" height="452"/>
+    <use href="#pine" x="1374" y="652" width="186" height="522"/>
+    <use href="#pine" x="1584" y="688" width="166" height="466"/>
+    <use href="#pine" x="1792" y="646" width="190" height="532"/>
+  </g>
+
+  <!-- Forest floor -->
+  <rect x="0" y="1000" width="1920" height="80" fill="url(#ground)"/>
+</svg>

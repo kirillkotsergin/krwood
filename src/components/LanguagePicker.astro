@@ -1,0 +1,67 @@
+---
+import { getLangFromUrl, localizePath } from '../i18n/utils';
+import { languages, languageLabels, languageTags, type Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  /** Extra classes for the <nav> wrapper. */
+  class?: string;
+  /** `light` inverts the colours for use on dark backgrounds. */
+  variant?: 'dark' | 'light';
+}
+
+const { class: className = '', variant = 'dark' } = Astro.props;
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+
+// Keep the visitor on the same page when switching language:
+// /en/privacy/ -> /pl/privacy/
+const options = (Object.keys(languages) as Lang[]).map((code) => ({
+  code,
+  label: languageLabels[code],
+  name: languages[code],
+  tag: languageTags[code],
+  href: localizePath(Astro.url.pathname, code),
+  isActive: code === currentLang,
+}));
+
+const shell =
+  variant === 'light'
+    ? 'bg-white/10 ring-white/20'
+    : 'bg-stone-200/60 ring-stone-300/60';
+
+const activeItem =
+  variant === 'light'
+    ? 'bg-white text-forest-900 shadow-sm'
+    : 'bg-white text-forest-800 shadow-sm ring-1 ring-stone-300/70';
+
+const idleItem =
+  variant === 'light'
+    ? 'text-white/70 hover:text-white hover:bg-white/10'
+    : 'text-stone-500 hover:text-forest-800 hover:bg-white/70';
+---
+
+<nav aria-label={t('a11y.chooseLanguage')} class={className}>
+  <ul class={`flex items-center gap-0.5 rounded-full p-1 ring-1 ${shell}`}>
+    {
+      options.map((option) => (
+        <li>
+          <a
+            href={option.href}
+            hreflang={option.tag}
+            lang={option.tag}
+            aria-current={option.isActive ? 'true' : undefined}
+            title={option.name}
+            class={`block rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wide transition-all duration-200 ${
+              option.isActive ? activeItem : idleItem
+            }`}
+          >
+            {option.label}
+            <span class="sr-only"> — {option.name}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
