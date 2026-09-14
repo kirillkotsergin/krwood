@@ -20,11 +20,29 @@ export const languageLabels = {
   pl: 'PL',
 } as const;
 
-/** BCP 47 tags for <html lang> and hreflang alternates. */
+/**
+ * BCP 47 tags for <html lang> and hreflang alternates.
+ *
+ * Language-only, deliberately. Region subtags such as `et-EE` or `pl-PL`
+ * narrow targeting to users in that country, which would exclude Estonian
+ * and Polish speakers elsewhere in the EU — not what an exporter wants.
+ * These values must match the ones emitted in the sitemap; see the
+ * `serialize` hook in astro.config.ts.
+ */
 export const languageTags = {
-  et: 'et-EE',
+  et: 'et',
   en: 'en',
-  pl: 'pl-PL',
+  pl: 'pl',
+} as const;
+
+/**
+ * og:locale uses the language_TERRITORY convention rather than BCP 47,
+ * so it is kept separate from `languageTags`.
+ */
+export const ogLocales = {
+  et: 'et_EE',
+  en: 'en_GB',
+  pl: 'pl_PL',
 } as const;
 
 export const defaultLang = 'et' as const;
@@ -37,9 +55,9 @@ export type Lang = keyof typeof languages;
 
 const et = {
   // --- SEO / document meta -------------------------------------------------
-  'meta.title': 'KR Wood — Premium puidugraanulid | ENplus A1 pellet Eestist',
+  'meta.title': 'Premium puidugraanulid ENplus A1 | KR Wood Eesti',
   'meta.description':
-    'KR Wood pakub ENplus A1 sertifitseeritud puidugraanuleid 6 mm ja 8 mm. Kõrge kütteväärtus, madal tuhasisaldus, 100% looduslik okaspuit. Tarne üle Eesti ja Baltikumi.',
+    'ENplus A1 puidugraanulid 6 mm ja 8 mm. Kõrge kütteväärtus, madal tuhasisaldus, 100% looduslik okaspuit. Tarne üle Eesti ja Baltikumi.',
   'meta.ogAlt': 'KR Wood premium puidugraanulid',
 
   // --- Accessibility -------------------------------------------------------
@@ -227,7 +245,7 @@ const et = {
 
   'lignin.meta.title': 'Ligniini pelletid 8 mm | Big Bag 1000 kg | KR Wood',
   'lignin.meta.description':
-    'Ligniini pelletid 8 mm, tarnitakse 1000 kg suurkottides. Kõrge kütteväärtusega biokütus ja tööstuslik tooraine asfaldi, betooni, põllumajanduse ja keemiatööstuse jaoks.',
+    'Ligniini pelletid 8 mm, 1000 kg suurkottides. Kõrge kütteväärtusega biokütus ja tööstuslik tooraine asfaldi, betooni ja keemiatööstuse jaoks.',
   'lignin.meta.imageAlt': 'Ligniini pelletid 8 mm, valatuna 1000 kg suurkotist',
 
   'lignin.hero.badge': '8 mm · Big Bag 1000 kg',
@@ -337,9 +355,9 @@ type Dictionary = Record<TranslationKey, string>;
 /* -------------------------------------------------------------------------- */
 
 const en: Dictionary = {
-  'meta.title': 'KR Wood — Premium Wood Pellets | ENplus A1 Pellets from Estonia',
+  'meta.title': 'Premium Wood Pellets ENplus A1 | KR Wood Estonia',
   'meta.description':
-    'KR Wood supplies ENplus A1 certified wood pellets in 6 mm and 8 mm. High heat output, low ash content, 100% natural softwood. Delivery across Estonia, the Baltics and the EU.',
+    'ENplus A1 certified wood pellets, 6 mm and 8 mm. High heat output, low ash, 100% natural softwood. Delivery across Estonia, the Baltics and the EU.',
   'meta.ogAlt': 'KR Wood premium wood pellets',
 
   'a11y.skipToContent': 'Skip to main content',
@@ -517,7 +535,7 @@ const en: Dictionary = {
 
   'lignin.meta.title': 'Lignin Pellets 8 mm | 1000 kg Big Bags | KR Wood Estonia',
   'lignin.meta.description':
-    'Lignin pellets, 8 mm, supplied in 1000 kg big bags. High-calorific biofuel and industrial raw material for asphalt, concrete, agriculture and chemistry. EU-wide delivery.',
+    'Lignin pellets 8 mm in 1000 kg big bags. High-calorific biofuel and industrial raw material for asphalt, concrete, agriculture and chemistry. EU delivery.',
   'lignin.meta.imageAlt': 'Lignin pellets 8 mm poured from a 1000 kg big bag',
 
   'lignin.hero.badge': '8 mm · Big Bag 1000 kg',
@@ -618,9 +636,9 @@ const en: Dictionary = {
 /* -------------------------------------------------------------------------- */
 
 const pl: Dictionary = {
-  'meta.title': 'KR Wood — Pellet drzewny premium | Pellet ENplus A1 z Estonii',
+  'meta.title': 'Pellet drzewny premium ENplus A1 | KR Wood Estonia',
   'meta.description':
-    'KR Wood dostarcza pellet drzewny z certyfikatem ENplus A1 w średnicach 6 mm i 8 mm. Wysoka wartość opałowa, niska zawartość popiołu, 100% naturalne drewno iglaste. Dostawa na terenie Estonii, Bałtyki i UE.',
+    'Pellet drzewny ENplus A1, 6 mm i 8 mm. Wysoka wartość opałowa, niska zawartość popiołu, 100% naturalne drewno iglaste. Dostawa na terenie UE.',
   'meta.ogAlt': 'KR Wood pellet drzewny premium',
 
   'a11y.skipToContent': 'Przejdź do treści głównej',
@@ -798,7 +816,7 @@ const pl: Dictionary = {
 
   'lignin.meta.title': 'Pellet ligninowy 8 mm | Big Bag 1000 kg | KR Wood',
   'lignin.meta.description':
-    'Pellet ligninowy 8 mm w big bagach 1000 kg. Biopaliwo o wysokiej wartości opałowej i surowiec przemysłowy do asfaltu, betonu, rolnictwa i chemii. Dostawa na terenie UE.',
+    'Pellet ligninowy 8 mm w big bagach 1000 kg. Biopaliwo o wysokiej wartości opałowej i surowiec do asfaltu, betonu i chemii. Dostawa w UE.',
   'lignin.meta.imageAlt': 'Pellet ligninowy 8 mm wysypany z big baga 1000 kg',
 
   'lignin.hero.badge': '8 mm · Big Bag 1000 kg',

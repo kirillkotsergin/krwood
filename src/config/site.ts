@@ -43,6 +43,17 @@ export interface SiteConfig {
   registryCode: string;
   /** EU VAT identifier (KMKR number). */
   vatNumber: string;
+  /**
+   * Decimal coordinates of the yard. Recommended by Google for LocalBusiness
+   * results. Left null until the real values are known — a pin on the wrong
+   * building is worse than no pin.
+   */
+  geo: { latitude: number; longitude: number } | null;
+  /**
+   * Google's LocalBusiness guidance lists `priceRange` as recommended.
+   * Free text: '€€', 'Quote on request', etc. Empty string omits it.
+   */
+  priceRange: string;
   /** Year the company was founded, or null to show only the current year. */
   foundedYear: number | null;
   openingHours: OpeningHoursConfig;
@@ -75,6 +86,10 @@ export const siteConfig: SiteConfig = {
 
   registryCode: '14459624',
   vatNumber: 'EE102060728',
+
+  // TODO: fill in from Google Maps (right-click the yard -> copy coordinates).
+  geo: null,
+  priceRange: '',
 
   // Set this once you know it and the footer shows "2018–2026" instead of
   // just the current year.

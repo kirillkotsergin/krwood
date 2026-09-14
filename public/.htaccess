@@ -28,10 +28,18 @@ Options -Indexes
   RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
   # --- Legacy slug redirects ---------------------------------------------
-  # The Estonian lignin page briefly used the English slug. Anchored to the
-  # start of the path, so /en/lignin-pellets/ and /pl/lignin-pellets/ are
-  # left alone.
+  # The lignin pages briefly used the English slug in every language. Both
+  # rules are anchored, so /en/lignin-pellets/ (still the live English URL)
+  # is not caught by either.
   RewriteRule ^lignin-pellets/?$ /ligniin-pelletid/ [R=301,L]
+  RewriteRule ^pl/lignin-pellets/?$ /pl/pellet-ligninowy/ [R=301,L]
+
+  # Collapse the directory-index duplicate onto the canonical URL.
+  RewriteRule ^index\.html$ / [R=301,L]
+  RewriteRule ^(.+)/index\.html$ /$1/ [R=301,L]
+
+  # Crawlers and audit tools probe /sitemap.xml; ours is a sitemap index.
+  RewriteRule ^sitemap\.xml$ /sitemap-index.xml [R=301,L]
 </IfModule>
 
 # --------------------------------------------------------------------------

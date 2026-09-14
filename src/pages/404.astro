@@ -16,7 +16,11 @@ const entries = (Object.keys(languages) as Lang[]).map((code) => ({
 }));
 ---
 
-<Layout title="404 — KR Wood" description="Lehekülge ei leitud / Page not found / Nie znaleziono strony">
+<Layout
+  title="404 — KR Wood"
+  description="Lehekülge ei leitud / Page not found / Nie znaleziono strony"
+  noindex
+>
   <section class="flex min-h-[60svh] items-center bg-stone-50 py-24">
     <div class="mx-auto max-w-2xl px-5 text-center sm:px-8">
       <p class="text-7xl font-extrabold text-gradient-wood sm:text-8xl">404</p>

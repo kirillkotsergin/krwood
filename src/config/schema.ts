@@ -136,7 +136,18 @@ export function buildLocalBusinessSchema(options: SchemaOptions): Record<string,
       })),
     },
 
-    // Only emit `sameAs` once real profile URLs exist in site.ts.
+    // Recommended fields are emitted only when the data is actually known —
+    // an empty or invented value is worse than an absent one.
+    ...(siteConfig.geo !== null
+      ? {
+          geo: {
+            '@type': 'GeoCoordinates',
+            latitude: siteConfig.geo.latitude,
+            longitude: siteConfig.geo.longitude,
+          },
+        }
+      : {}),
+    ...(siteConfig.priceRange !== '' ? { priceRange: siteConfig.priceRange } : {}),
     ...(socialLinks.length > 0 ? { sameAs: socialLinks.map((link) => link.url) } : {}),
   };
 }

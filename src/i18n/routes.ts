@@ -28,7 +28,7 @@ export const routes = {
   ligninPellets: {
     et: 'ligniin-pelletid',
     en: 'lignin-pellets',
-    pl: 'lignin-pellets',
+    pl: 'pellet-ligninowy',
   },
 } as const satisfies Record<string, Record<Lang, string>>;
 

@@ -3,7 +3,7 @@ import '@fontsource-variable/inter';
 import '../styles/global.css';
 
 import { getLangFromUrl, useTranslations, getAlternateLinks, localizePath } from '../i18n/utils';
-import { languageTags, defaultLang } from '../i18n/ui';
+import { languageTags, ogLocales, defaultLang } from '../i18n/ui';
 import { siteConfig } from '../config/site';
 import { buildLocalBusinessSchema } from '../config/schema';
 
@@ -15,9 +15,15 @@ interface Props {
   title?: string;
   /** Overrides the default localized meta description. */
   description?: string;
+  /**
+   * Keeps the page out of the index. Also suppresses the canonical and
+   * hreflang tags, which would otherwise advertise URLs that do not exist
+   * (as on the 404 page).
+   */
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -28,8 +34,10 @@ const pageDescription = description ?? t('meta.description');
 const origin = Astro.site ?? new URL(Astro.url.origin);
 
 const canonical = new URL(Astro.url.pathname, origin).href;
-const alternates = getAlternateLinks(Astro.url, Astro.site);
-const ogImage = new URL('/images/og-image.svg', origin).href;
+const alternates = noindex ? [] : getAlternateLinks(Astro.url, Astro.site);
+
+// Raster, not SVG: Facebook, LinkedIn and X do not render SVG link previews.
+const ogImage = new URL('/images/og-image.png', origin).href;
 
 // Schema.org LocalBusiness — see src/config/schema.ts
 const jsonLd = buildLocalBusinessSchema({
@@ -53,25 +61,34 @@ const jsonLd = buildLocalBusinessSchema({
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
+    {/* Google Search Console ownership verification */}
+    <meta name="google-site-verification" content="Vxg-ROlV1TliHv_OC5o838l4AVfnBvbvkgvtX0h5YjY" />
+
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
-    <link rel="canonical" href={canonical} />
+
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {!noindex && <link rel="canonical" href={canonical} />}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="theme-color" content="#1c5c41" />
 
-    {/* Locale alternates */}
+    {/* Locale alternates — omitted on noindex pages */}
     {
       alternates.map((alt) => (
         <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
       ))
     }
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href={new URL(localizePath(Astro.url.pathname, defaultLang), Astro.site ?? Astro.url.origin).href}
-    />
+    {
+      !noindex && (
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href={new URL(localizePath(Astro.url.pathname, defaultLang), origin).href}
+        />
+      )
+    }
 
     {/* Open Graph / Twitter */}
     <meta property="og:type" content="website" />
@@ -79,8 +96,11 @@ const jsonLd = buildLocalBusinessSchema({
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content={languageTags[lang].replace('-', '_')} />
+    <meta property="og:locale" content={ogLocales[lang]} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:alt" content={t('meta.ogAlt')} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />

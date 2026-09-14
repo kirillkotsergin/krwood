@@ -51,6 +51,34 @@ Two fields are still unset and degrade gracefully:
 `contact.php` delivers to `krwood@krwood.ee` and sends **from** the same
 address, so SPF/DMARC pass. Confirm that mailbox exists in cPanel.
 
+## SEO
+
+Verified in the build output and live:
+
+| | |
+| --- | --- |
+| hreflang | `et` / `en` / `pl` + `x-default`, language-only (no region subtags, which would exclude speakers outside that country). Identical in the HTML and the sitemap |
+| Canonicals | Self-referencing on all 9 indexable pages |
+| Titles | ≤60 chars, keyword-first, unique |
+| Descriptions | ≤158 chars, unique |
+| Headings | Exactly one H1 per page, no skipped levels |
+| `404.html` | `noindex, follow`, no canonical, no hreflang, excluded from the sitemap |
+| Sitemap | `/sitemap-index.xml`, `lastmod` on every URL, `/sitemap.xml` 301s to it |
+| Social | `og:image` is a **1200×630 PNG** — SVG is not rendered by Facebook, LinkedIn or X |
+| Google verification | `google-site-verification` meta tag in `src/layouts/Layout.astro` |
+
+### ⚠️ Analytics will be blocked by the CSP
+
+`public/.htaccess` sets `script-src 'self' 'unsafe-inline'` and
+`default-src 'self'`. Adding GA4, GTM or Plausible today would load **nothing
+and report nothing, with no visible error**. To add analytics you must widen
+both `script-src` (the vendor's script host) and `connect-src` (its beacon
+endpoint).
+
+For the same reason, **the gtag.js verification method for Search Console
+will not work** — use the meta tag already in place, a DNS TXT record, or the
+HTML file method.
+
 ### Structured data
 
 `src/config/schema.ts` builds a `LocalBusiness` node (a subtype of
@@ -93,14 +121,34 @@ previews.
 
 ## Localisation
 
-| Locale | Route | Notes |
-| --- | --- | --- |
-| Estonian (`et`) | `/`, `/privacy/` | Default — served at the root, no `/et/` prefix |
-| English (`en`) | `/en/`, `/en/privacy/` | |
-| Polish (`pl`) | `/pl/`, `/pl/privacy/` | |
+| Locale | Routes |
+| --- | --- |
+| Estonian (`et`) | `/` · `/ligniin-pelletid/` · `/privacy/` — default, no `/et/` prefix |
+| English (`en`) | `/en/` · `/en/lignin-pellets/` · `/en/privacy/` |
+| Polish (`pl`) | `/pl/` · `/pl/pellet-ligninowy/` · `/pl/privacy/` |
 
-Routing is configured by the `i18n` block in `astro.config.mjs`
+Routing is configured by the `i18n` block in `astro.config.ts`
 (`prefixDefaultLocale: false`).
+
+### Translated slugs
+
+Slugs differ per locale. `src/i18n/routes.ts` is the single declaration of
+that mapping:
+
+```ts
+ligninPellets: { et: 'ligniin-pelletid', en: 'lignin-pellets', pl: 'pellet-ligninowy' }
+```
+
+Three things read from it — `localizePath()` and `routePath()` for links and
+hreflang in the HTML, and the sitemap `serialize()` hook in `astro.config.ts`.
+Because all three share one source, the sitemap and the markup cannot
+disagree.
+
+**Adding a translated slug:** edit the table, rename the file in `src/pages/`
+to match, and add a 301 from the old path in `public/.htaccess`. If you rename
+a page file without updating the table, the build prints
+`[sitemap] /path is not in src/i18n/routes.ts` rather than shipping a page
+with no hreflang.
 
 ### How the dictionary is typed
 
