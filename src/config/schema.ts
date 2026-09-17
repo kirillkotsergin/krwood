@@ -17,9 +17,16 @@ import {
   pricing,
   PRICE_CURRENCY,
   PRICE_UNIT_CODE,
+  PRICES_INCLUDE_VAT,
   PRODUCT_IDS,
   type ProductKey,
 } from './pricing';
+import {
+  averageRating,
+  reviewsFor,
+  REVIEW_BEST_RATING,
+  REVIEW_WORST_RATING,
+} from './reviews';
 
 /** A stable, locale-independent node id so all pages reference one entity. */
 export const ORGANIZATION_ID = `${siteConfig.url}/#organization`;
@@ -64,6 +71,9 @@ export function buildOffer(key: ProductKey, url: string): Record<string, unknown
       '@type': 'UnitPriceSpecification',
       price: amount,
       priceCurrency: PRICE_CURRENCY,
+      // The published amounts include Estonian VAT; saying so removes the
+      // ambiguity a bare figure leaves.
+      valueAddedTaxIncluded: PRICES_INCLUDE_VAT,
       referenceQuantity: {
         '@type': 'QuantitativeValue',
         value: 1,
@@ -83,6 +93,46 @@ export function buildOffer(key: ProductKey, url: string): Record<string, unknown
   };
 }
 
+/**
+ * `review` and `aggregateRating` for a product — or nothing at all.
+ *
+ * Search Console lists both as missing, but they are warnings: `offers` alone
+ * satisfies `Product`. They are emitted only from real reviews in
+ * `src/config/reviews.ts`, which is empty by design — an `aggregateRating`
+ * with nothing behind it is invalid markup and a policy violation. See the
+ * note at the top of that file.
+ */
+export function buildReviewNodes(key: ProductKey): Record<string, unknown> {
+  const own = reviewsFor(key);
+  const average = averageRating(key);
+
+  if (own.length === 0 || average === null) return {};
+
+  return {
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: average,
+      reviewCount: own.length,
+      ratingCount: own.length,
+      bestRating: REVIEW_BEST_RATING,
+      worstRating: REVIEW_WORST_RATING,
+    },
+
+    review: own.map((review) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: review.author },
+      datePublished: review.datePublished,
+      reviewBody: review.body,
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: review.rating,
+        bestRating: REVIEW_BEST_RATING,
+        worstRating: REVIEW_WORST_RATING,
+      },
+    })),
+  };
+}
+
 /** A `Product` node carrying its own priced offer. */
 export function buildProduct(product: SchemaProduct): Record<string, unknown> {
   return {
@@ -94,6 +144,7 @@ export function buildProduct(product: SchemaProduct): Record<string, unknown> {
     brand: { '@id': ORGANIZATION_ID },
     offers: buildOffer(product.key, product.url),
     ...(product.material !== undefined ? { material: product.material } : {}),
+    ...buildReviewNodes(product.key),
   };
 }
 

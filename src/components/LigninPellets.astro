@@ -9,7 +9,7 @@
 import { getLangFromUrl, useTranslations, anchorLink, localizePath } from '../i18n/utils';
 import { languageTags } from '../i18n/ui';
 import { siteConfig } from '../config/site';
-import { ORGANIZATION_ID, buildOffer } from '../config/schema';
+import { ORGANIZATION_ID, buildOffer, buildReviewNodes } from '../config/schema';
 import { PRODUCT_IDS } from '../config/pricing';
 import PriceTag from './PriceTag.astro';
 
@@ -141,6 +141,8 @@ const productSchema = {
   })),
   // Carries `price` and `priceCurrency` — see buildOffer in src/config/schema.ts.
   offers: buildOffer('ligninPellets', pageUrl),
+  // Emits nothing while there are no real reviews; see src/config/reviews.ts.
+  ...buildReviewNodes('ligninPellets'),
 };
 
 const breadcrumbSchema = {

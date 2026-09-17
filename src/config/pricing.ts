@@ -23,8 +23,19 @@ export const PRICE_CURRENCY = 'EUR';
  */
 export const PRICE_UNIT_CODE = 'TNE';
 
+/**
+ * Estonian standard VAT (käibemaks), as a percentage. 24% since 1 July 2025.
+ *
+ * Every amount in `pricing` below is **VAT-inclusive**, which is stated to
+ * the visitor next to the price and to consumers of the structured data as
+ * `priceSpecification.valueAddedTaxIncluded`. Leaving that unsaid on a
+ * published price is what makes it ambiguous, so both must always agree.
+ */
+export const VAT_PERCENT = 24;
+export const PRICES_INCLUDE_VAT = true;
+
 export interface ProductPricing {
-  /** Price in whole euros, per `PRICE_UNIT_CODE`. */
+  /** Price in whole euros, per `PRICE_UNIT_CODE`, including VAT. */
   amount: number;
   /**
    * Smallest order, in tonnes, this price is valid for — emitted as

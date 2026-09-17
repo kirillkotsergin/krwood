@@ -76,10 +76,34 @@ minimum as `eligibleQuantity.minValue`. Change an amount in
 `src/config/pricing.ts` and the product cards, the lignin page and all the
 structured data follow.
 
-Two things are deliberately **not** stated: whether the price includes VAT
-(no wording is safe to invent on a price — add a `price.vat*` key if you want
-it shown), and `priceValidUntil` in the JSON-LD, which Google lists as
-recommended but which is worse than absent once it goes stale.
+**Prices include 24% Estonian VAT** (käibemaks, the standard rate since
+1 July 2025). That is stated next to every price and mirrored in the
+structured data as `priceSpecification.valueAddedTaxIncluded`, so the page
+and the markup cannot say different things. Both come from `VAT_PERCENT` and
+`PRICES_INCLUDE_VAT` in `src/config/pricing.ts`.
+
+`priceValidUntil` is deliberately absent from the JSON-LD: Google lists it as
+recommended, but a stale date is worse than none.
+
+### Reviews and ratings
+
+Search Console also reports *Missing field `review`* and *Missing field
+`aggregateRating`*. **These are warnings, not errors** — a `Product` needs
+`offers` OR `review` OR `aggregateRating`, and `offers` is present, so the
+pages are processed and indexed regardless.
+
+They must not be cleared by inventing reviews. Google requires review
+snippets to come from genuine, independently collected reviews; fabricated
+ones are structured-data spam, and the penalty is a manual action that
+removes *all* rich results for the site. Publishing fake consumer reviews is
+also an unfair commercial practice under the EU Omnibus Directive as
+implemented in Estonian law.
+
+`src/config/reviews.ts` therefore holds the wiring and **no data**. It emits
+nothing while the list is empty; add a real review and both `review` and
+`aggregateRating` (averaged from the real entries) appear automatically.
+`npm run check:pricing` fails if an `aggregateRating` ever claims more
+ratings than there are reviews to back it.
 
 ### Adding a priced product
 
@@ -119,6 +143,31 @@ Verified in the build output and live:
 | Sitemap | `/sitemap-index.xml`, `lastmod` on every URL, `/sitemap.xml` 301s to it |
 | Social | `og:image` is a **1200×630 PNG** — SVG is not rendered by Facebook, LinkedIn or X |
 | Google verification | `google-site-verification` meta tag in `src/layouts/Layout.astro` |
+
+### ⚠️ The host blocks four AI crawlers, above this account
+
+`public/robots.txt` allows every crawler, but Radicenter's server-level bot
+filter returns **HTTP 403** to `GPTBot`, `ClaudeBot`, `CCBot` and
+`meta-externalagent` — on every path, `robots.txt` and the sitemap included.
+Nothing in this repo causes it: there is no parent `.htaccess` and no
+user-agent rule anywhere in the account. Same IP, different user agent gives
+200 or 403, so the filter matches on the user-agent string alone.
+
+A 403 on `/robots.txt` is the damaging part — a crawler that cannot read
+`robots.txt` generally treats the whole site as disallowed. **Only the host
+can lift this**; the `Allow` rules in `robots.txt` cannot override it.
+
+Re-test after raising it with Radicenter support:
+
+```bash
+for ua in GPTBot ClaudeBot CCBot meta-externalagent PerplexityBot Googlebot; do
+  printf '%-22s %s\n' "$ua" \
+    "$(curl -sS -o /dev/null -w '%{http_code}' -A "$ua" https://krwood.ee/)"
+done
+```
+
+`OAI-SearchBot`, `ChatGPT-User`, `PerplexityBot`, `Google-Extended`,
+`Applebot-Extended`, `Googlebot` and `Bingbot` are all served 200 today.
 
 ### ⚠️ Analytics will be blocked by the CSP
 

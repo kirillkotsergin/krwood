@@ -45,6 +45,12 @@ const ALL_PAGES = [
 const PRICE_LABELS = ['Hind', 'Price', 'Cena'];
 const PRICE_UNITS = ['tonni kohta', 'per tonne', 'za tonę'];
 
+/** "24%" in any of the three phrasings, without pinning the wording. */
+const VAT_PATTERN = /\b24\s*%/;
+
+/** The 24-tonne minimum order, as distinct from the 24% VAT rate. */
+const MIN_ORDER_PATTERN = /\b24\b(?!\s*%)/;
+
 const problems = [];
 const fail = (page, message) => problems.push(`${page}: ${message}`);
 
@@ -91,9 +97,45 @@ for (const page of ALL_PAGES) {
     if (offer.priceCurrency !== 'EUR') {
       fail(page, `"${product.name}" priceCurrency is ${JSON.stringify(offer.priceCurrency)}`);
     }
+
+    // The nested priceSpecification must carry the currency too, and must
+    // state the VAT position — a bare figure is ambiguous.
+    const spec = offer.priceSpecification;
+    if (!spec) {
+      fail(page, `"${product.name}" offer has no priceSpecification`);
+    } else {
+      if (spec.priceCurrency !== 'EUR') {
+        fail(page, `"${product.name}" priceSpecification.priceCurrency is ${JSON.stringify(spec.priceCurrency)}`);
+      }
+      if (typeof spec.valueAddedTaxIncluded !== 'boolean') {
+        fail(page, `"${product.name}" priceSpecification does not state valueAddedTaxIncluded`);
+      }
+    }
+
+    // Ratings are legitimate only when backed by reviews in the same node.
+    // This catches an aggregateRating invented by hand as much as a bug.
+    const rating = product.aggregateRating;
+    if (rating) {
+      const count = rating.reviewCount ?? rating.ratingCount;
+      const reviews = Array.isArray(product.review) ? product.review : product.review ? [product.review] : [];
+
+      if (typeof rating.ratingValue !== 'number') {
+        fail(page, `"${product.name}" aggregateRating has no numeric ratingValue`);
+      }
+      if (typeof count !== 'number' || count < 1) {
+        fail(page, `"${product.name}" aggregateRating has no usable reviewCount/ratingCount`);
+      }
+      if (reviews.length !== count) {
+        fail(page, `"${product.name}" claims ${count} rating(s) but carries ${reviews.length} review(s)`);
+      }
+    }
   }
 
-  console.log(`  ${page} — ${products.length} Product node(s), all priced`);
+  const rated = products.filter((p) => p.aggregateRating).length;
+  console.log(
+    `  ${page} — ${products.length} Product node(s), all priced, VAT stated` +
+      (rated > 0 ? `, ${rated} with a backed rating` : ''),
+  );
 }
 
 /* ------------------------------------------------------------------ */
@@ -122,9 +164,12 @@ for (const [page, expected] of Object.entries(PRICED_PAGES)) {
   runs.forEach((run, i) => {
     if (!PRICE_LABELS.includes(run)) return;
 
+    // PriceTag renders: label, amount, unit, VAT note, then the wholesale
+    // note where the price has a minimum order.
     const amount = runs[i + 1] ?? '';
     const unit = runs[i + 2] ?? '';
-    const next = runs[i + 3] ?? '';
+    const vat = runs[i + 3] ?? '';
+    const wholesale = runs[i + 4] ?? '';
 
     // '€400' in English, '400 €' (non-breaking space) in Estonian and Polish.
     if (!new RegExp(`^(€\\d+|\\d+${NBSP}€)$`).test(amount)) {
@@ -133,8 +178,17 @@ for (const [page, expected] of Object.entries(PRICED_PAGES)) {
     if (!PRICE_UNITS.includes(unit)) {
       fail(page, `price not followed by a unit: ${JSON.stringify(unit)}`);
     }
+    // Matched on the rate rather than the wording, which differs per locale.
+    if (!VAT_PATTERN.test(vat)) {
+      fail(page, `price not followed by a VAT statement: ${JSON.stringify(vat)}`);
+    }
 
-    found.push({ amount, unit, note: /\b24\b/.test(next) ? next : null });
+    found.push({
+      amount,
+      unit,
+      vat,
+      note: MIN_ORDER_PATTERN.test(wholesale) ? wholesale : null,
+    });
   });
 
   if (found.length !== expected) {
@@ -143,7 +197,7 @@ for (const [page, expected] of Object.entries(PRICED_PAGES)) {
 
   console.log(`  ${page} — ${found.length}/${expected} price(s)`);
   for (const price of found) {
-    console.log(`      ${price.amount.replaceAll(NBSP, ' ')} ${price.unit}`);
+    console.log(`      ${price.amount.replaceAll(NBSP, ' ')} ${price.unit} — ${price.vat}`);
     if (price.note) console.log(`      note: ${price.note}`);
   }
 }

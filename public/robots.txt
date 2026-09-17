@@ -1,5 +1,62 @@
+# krwood.ee — everything is open to crawlers except the form handler.
+#
+# NOTE: GPTBot, ClaudeBot, CCBot and meta-externalagent are currently served
+# HTTP 403 by Radicenter's server-level bot filter, above this account. These
+# Allow rules cannot override that — it needs a support request to the host.
+# Re-test with:  curl -A "GPTBot/1.2" -o /dev/null -w '%{http_code}\n' https://krwood.ee/
+
 User-agent: *
 Allow: /
+
+# contact.php is a POST endpoint that returns JSON, not a page worth indexing.
 Disallow: /contact.php
+
+# --- Search engines -------------------------------------------------------
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# --- AI and LLM crawlers --------------------------------------------------
+# Named explicitly so the intent is on the record: these are welcome, and a
+# later blanket Disallow cannot be added by accident without editing these.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google-Extended governs Gemini training and grounding only. It has no
+# effect on Search indexing, which Googlebot above covers.
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: CCBot
+Allow: /
 
 Sitemap: https://krwood.ee/sitemap-index.xml

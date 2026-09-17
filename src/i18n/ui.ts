@@ -145,6 +145,7 @@ const et = {
   // the minimum order quantity from that file.
   'price.label': 'Hind',
   'price.perTon': 'tonni kohta',
+  'price.vatIncluded': 'Sisaldab {vat}% käibemaksu',
   'price.wholesaleNote': 'Hulgihind kehtib tellimustele alates {min} tonnist',
 
   // --- Packaging -----------------------------------------------------------
@@ -447,6 +448,7 @@ const en: Dictionary = {
 
   'price.label': 'Price',
   'price.perTon': 'per tonne',
+  'price.vatIncluded': 'Includes {vat}% VAT',
   'price.wholesaleNote': 'Wholesale price valid for orders from {min} tonnes',
 
   'packaging.eyebrow': 'Packaging',
@@ -735,6 +737,7 @@ const pl: Dictionary = {
 
   'price.label': 'Cena',
   'price.perTon': 'za tonę',
+  'price.vatIncluded': 'Zawiera {vat}% VAT',
   'price.wholesaleNote': 'Cena hurtowa obowiązuje przy zamówieniach od {min} ton',
 
   'packaging.eyebrow': 'Opakowania',

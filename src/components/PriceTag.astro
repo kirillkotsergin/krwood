@@ -10,7 +10,13 @@
 import type { HTMLAttributes } from 'astro/types';
 
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import { pricing, formatPrice, type ProductKey } from '../config/pricing';
+import {
+  pricing,
+  formatPrice,
+  PRICES_INCLUDE_VAT,
+  VAT_PERCENT,
+  type ProductKey,
+} from '../config/pricing';
 
 /**
  * Extends the div attributes so callers can pass `data-animate`, `style` and
@@ -37,6 +43,12 @@ const t = useTranslations(lang);
 
 const { amount, minOrderTons } = pricing[product];
 const price = formatPrice(amount, lang);
+
+// Stated next to every price, and mirrored by `valueAddedTaxIncluded` in the
+// structured data — a published figure with no VAT wording is ambiguous.
+const vatNote = PRICES_INCLUDE_VAT
+  ? t('price.vatIncluded').replace('{vat}', String(VAT_PERCENT))
+  : null;
 
 const wholesaleNote =
   minOrderTons === null
@@ -71,6 +83,8 @@ const radius = size === 'lg' ? 'rounded-3xl' : 'rounded-2xl';
     </span>
     <span class="text-sm font-semibold text-stone-500">{t('price.perTon')}</span>
   </p>
+
+  {vatNote && <p class="mt-2 text-[0.8125rem] font-medium text-stone-500">{vatNote}</p>}
 
   {
     wholesaleNote && (
