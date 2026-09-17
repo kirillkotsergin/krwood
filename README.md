@@ -144,30 +144,44 @@ Verified in the build output and live:
 | Social | `og:image` is a **1200×630 PNG** — SVG is not rendered by Facebook, LinkedIn or X |
 | Google verification | `google-site-verification` meta tag in `src/layouts/Layout.astro` |
 
-### ⚠️ The host blocks four AI crawlers, above this account
+### The host's AI-crawler block, and the override for it
 
-`public/robots.txt` allows every crawler, but Radicenter's server-level bot
-filter returns **HTTP 403** to `GPTBot`, `ClaudeBot`, `CCBot` and
-`meta-externalagent` — on every path, `robots.txt` and the sitemap included.
-Nothing in this repo causes it: there is no parent `.htaccess` and no
-user-agent rule anywhere in the account. Same IP, different user agent gives
-200 or 403, so the filter matches on the user-agent string alone.
+Radicenter applies a **server-level Apache authorisation rule** that returns
+403 to a curated list of AI crawlers: case-insensitive substring matches on
+`gptbot`, `claudebot`, `ccbot`, `meta-externalagent` and `bytespider`, on
+every path — `robots.txt` and the sitemap included. That last part is what
+made it harmful: a crawler that cannot read `robots.txt` generally treats the
+whole site as disallowed, so those agents were not crawling the site at all.
 
-A 403 on `/robots.txt` is the damaging part — a crawler that cannot read
-`robots.txt` generally treats the whole site as disallowed. **Only the host
-can lift this**; the `Allow` rules in `robots.txt` cannot override it.
+**It is not ModSecurity.** Disabling ModSecurity in cPanel left the 403s
+completely unchanged. The rule is an authorisation directive, which is how it
+was identified — a directory-level `Require` overrides it, and a ModSecurity
+block could not be. `public/.htaccess` therefore opens the top of the
+document root with:
 
-Re-test after raising it with Radicenter support:
+```apache
+<RequireAny>
+  Require all granted
+</RequireAny>
+```
+
+The two `Require all denied` blocks at the foot of that file are in
+`<FilesMatch>` context, which is more specific, so dotfiles and source maps
+stay protected. **Re-test both after touching the authorisation rules:**
 
 ```bash
-for ua in GPTBot ClaudeBot CCBot meta-externalagent PerplexityBot Googlebot; do
+# All of these must be 200
+for ua in GPTBot ClaudeBot CCBot meta-externalagent Bytespider Googlebot; do
   printf '%-22s %s\n' "$ua" \
     "$(curl -sS -o /dev/null -w '%{http_code}' -A "$ua" https://krwood.ee/)"
 done
-```
 
-`OAI-SearchBot`, `ChatGPT-User`, `PerplexityBot`, `Google-Extended`,
-`Applebot-Extended`, `Googlebot` and `Bingbot` are all served 200 today.
+# All of these must stay 403
+for p in .htaccess .gitignore images/ _astro/nonexistent.css.map; do
+  printf '%-34s %s\n' "/$p" \
+    "$(curl -sS -o /dev/null -w '%{http_code}' "https://krwood.ee/$p")"
+done
+```
 
 ### ⚠️ Analytics will be blocked by the CSP
 
