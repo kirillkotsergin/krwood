@@ -9,10 +9,12 @@
 
 import {
   ui,
+  uiMarket,
   defaultLang,
   languages,
   languageTags,
   type Lang,
+  type MarketKey,
   type TranslationKey,
 } from './ui';
 import { routes, findRouteKey, type RouteKey } from './routes';
@@ -43,6 +45,19 @@ export function getLangFromUrl(url: URL): Lang {
 export function useTranslations(lang: Lang) {
   return function t(key: TranslationKey): string {
     return ui[lang][key];
+  };
+}
+
+/**
+ * Lookup for market-specific copy — see `uiMarket` in ./ui.ts.
+ *
+ * Returns `undefined` when this locale has no copy for the key, which is not
+ * an error: it is how a component decides not to render a market-specific
+ * section at all, rather than rendering it empty.
+ */
+export function useMarketCopy(lang: Lang) {
+  return function m(key: MarketKey): string | undefined {
+    return uiMarket[lang]?.[key];
   };
 }
 
@@ -121,4 +136,4 @@ export function getAlternateLinks(url: URL, site: URL | undefined): AlternateLin
 }
 
 export { defaultLang, languages, languageTags, routes, findRouteKey };
-export type { Lang, TranslationKey, RouteKey };
+export type { Lang, TranslationKey, MarketKey, RouteKey };

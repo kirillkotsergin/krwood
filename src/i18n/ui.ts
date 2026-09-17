@@ -843,17 +843,17 @@ const pl: Dictionary = {
   // --- Lignin pellets landing page ----------------------------------------
   'nav.lignin': 'Pellet ligninowy',
 
-  'lignin.meta.title': 'Pellet ligninowy 8 mm | Big Bag 1000 kg | KR Wood',
+  'lignin.meta.title': 'Pellet ligninowy 8 mm hurt | Big Bag 1000 kg | KR Wood',
   'lignin.meta.description':
-    'Pellet ligninowy 8 mm w big bagach 1000 kg. Biopaliwo o wysokiej wartości opałowej i surowiec do asfaltu, betonu i chemii. Dostawa w UE.',
+    'Pellet ligninowy 8 mm w big bagach 1000 kg — hurt prosto od producenta z Estonii. Pełne tiry 24 t, import pelletu z dostawą na terenie całej Polski.',
   'lignin.meta.imageAlt':
     'Kopiec pelletu ligninowego 8 mm na ciemnym drewnianym blacie, obok szklany słoiczek z próbką',
 
-  'lignin.hero.badge': '8 mm · Big Bag 1000 kg',
+  'lignin.hero.badge': '8 mm · Big Bag 1000 kg · hurt',
   'lignin.hero.title': 'Pellet ligninowy',
-  'lignin.hero.titleAccent': 'Paliwo o wysokiej energetyczności i surowiec przemysłowy',
+  'lignin.hero.titleAccent': 'Biopaliwo i surowiec przemysłowy — hurt prosto od producenta z Estonii',
   'lignin.hero.lead':
-    'Lignina to naturalny polimer, który nadaje drewnu wytrzymałość — i jedna z najbardziej energetycznych frakcji biomasy. Sprasowana w pellet 8 mm i dostarczana w big bagach 1000 kg spala się goręcej niż zwykły pellet drzewny i znajduje zastosowanie w wielu branżach daleko poza kotłownią.',
+    'Lignina to naturalny polimer, który nadaje drewnu wytrzymałość — i jedna z najbardziej energetycznych frakcji biomasy. Sprasowana w pellet 8 mm i dostarczana w big bagach 1000 kg spala się goręcej niż zwykły pellet drzewny i znajduje zastosowanie w wielu branżach daleko poza kotłownią. Sprzedajemy wyłącznie w hurcie: pełnymi tirami po 24 tony, prosto od producenta z Estonii.',
   'lignin.hero.ctaPrimary': 'Zapytaj o ofertę',
   'lignin.hero.ctaSecondary': 'Zobacz dane techniczne',
 
@@ -886,7 +886,7 @@ const pl: Dictionary = {
 
   'lignin.specs.title': 'Dane techniczne',
   'lignin.specs.subtitle':
-    'Dostarczamy w jednym standardowym formacie. Do każdej dostawy dostępny jest pełny certyfikat analizy.',
+    'Dostarczamy w jednym standardowym formacie — big bag 1000 kg, w hurcie od pełnego tira 24 t. Do każdej dostawy dostępny jest pełny certyfikat analizy.',
   'lignin.row.packaging': 'Opakowanie',
   'lignin.row.origin': 'Surowiec',
   'lignin.value.diameter': '8 mm',
@@ -936,12 +936,64 @@ const pl: Dictionary = {
   'lignin.apps.eco.i1':
     'Usuwanie wycieków ropy — lignina działa jako sorbent hydrofobowy, wiążąc węglowodory na wodzie i w glebie',
 
-  'lignin.cta.title': 'Potrzebujesz pelletu ligninowego w dużych ilościach?',
+  'lignin.cta.title': 'Potrzebujesz pelletu ligninowego w hurcie?',
   'lignin.cta.text':
-    'Podaj roczny tonaż, miejsce dostawy i planowane zastosowanie, a przyślemy ofertę wraz z certyfikatem analizy.',
+    'Podaj roczny tonaż, miejsce dostawy w Polsce i planowane zastosowanie, a przyślemy ofertę hurtową wraz z certyfikatem analizy. Wysyłamy prosto od producenta z Estonii, pełnymi tirami po 24 t.',
   'lignin.cta.button': 'Zapytaj o ofertę',
 };
 
 /* -------------------------------------------------------------------------- */
 
 export const ui: Record<Lang, Dictionary> = { et, en, pl };
+
+/* -------------------------------------------------------------------------- */
+/* Market-specific copy                                                      */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Copy that deliberately exists in one market only.
+ *
+ * The three dictionaries above are exhaustive on purpose — a key missing from
+ * one of them is a bug, and `npm run check` catches it. This layer is the
+ * opposite: the keys here are *expected* to be absent from most locales,
+ * because the section they drive is written for a single market. Translating
+ * it would mean shipping copy nobody reads, and an empty stub would render a
+ * blank section.
+ *
+ * A component looks a key up and renders its section only if something comes
+ * back, so the section appears wherever its copy exists and nowhere else.
+ * Opening another market is then a change to this data, not to any component.
+ *
+ * Do not move general copy in here to dodge translating it.
+ */
+const plOnly = {
+  // Wholesale and delivery — Polish buyers search transactional terms
+  // (hurt, tir 24 t, import) that the other two markets do not.
+  'lignin.trade.eyebrow': 'Hurt i dostawa',
+  'lignin.trade.title': 'Pellet ligninowy hurtowo — prosto od producenta',
+  'lignin.trade.lead':
+    'Dla odbiorców przemysłowych jesteśmy producentem i hurtownią pelletu jednocześnie — towar jedzie z naszego zakładu pod Tallinnem, nie od pośrednika. Kupujesz w cenie hurtowej, z jednym punktem kontaktu na całe zamówienie.',
+
+  'lignin.trade.i1.title': 'Pełne tiry 24 t',
+  'lignin.trade.i1.text':
+    'Podstawowa jednostka sprzedaży to pełna naczepa big bagów 1000 kg, czyli pellet 24t. Przy takim wolumenie koszt transportu na tonę jest najniższy.',
+
+  'lignin.trade.i2.title': 'Dostawa na terenie całej Polski',
+  'lignin.trade.i2.text':
+    'Transport organizujemy sami — pellet z dostawą pod wskazany adres zakładu lub bazy magazynowej, w dowolnym regionie kraju.',
+
+  'lignin.trade.i3.title': 'Import pelletu z Estonii bez odprawy',
+  'lignin.trade.i3.text':
+    'Estonia i Polska należą do jednolitego rynku UE, więc import pelletu nie wymaga cła ani odprawy celnej. Zasady rozliczenia VAT przy zakupie firmowym potwierdzamy w ofercie.',
+
+  'lignin.trade.i4.title': 'Szukasz pelletu drzewnego?',
+  'lignin.trade.i4.text':
+    'Jako producent pelletu drzewnego oferujemy również pellet ENplus® A1 w średnicach 6 i 8 mm: pellet na palecie (65 worków po 15 kg, 975 kg na palecie) albo w big bagach 1000 kg. Cała paleta pelletu i pełne tiry dostępne z tego samego zakładu.',
+} as const;
+
+export type MarketKey = keyof typeof plOnly;
+
+/** Per-locale market copy. Every entry is optional, by design. */
+export const uiMarket: Partial<Record<Lang, Partial<Record<MarketKey, string>>>> = {
+  pl: plOnly,
+};
