@@ -22,6 +22,10 @@ npm run dev        # http://localhost:4321
 | `npm run check` | Type-check `.astro` + `.ts`, **and verify no translation key is missing** |
 | `npm run check:pricing` | Verify every built page prices every product, in the JSON-LD and on the page. Needs a build first |
 
+`check:pricing` takes an optional directory, so the deployed site can be held
+to the same assertions after downloading it:
+`npm run check:pricing -- ./downloaded-site`
+
 ---
 
 ## Company data
