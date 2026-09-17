@@ -257,7 +257,8 @@ const et = {
   'lignin.meta.title': 'Ligniini pelletid 8 mm | Big Bag 1000 kg | KR Wood',
   'lignin.meta.description':
     'Ligniini pelletid 8 mm, 1000 kg suurkottides. Kõrge kütteväärtusega biokütus ja tööstuslik tooraine asfaldi, betooni ja keemiatööstuse jaoks.',
-  'lignin.meta.imageAlt': 'Ligniini pelletid 8 mm, valatuna 1000 kg suurkotist',
+  'lignin.meta.imageAlt':
+    'Ligniini pelletid 8 mm hunnikus tumedal puitpinnal, kõrval klaasist näidisepurk',
 
   'lignin.hero.badge': '8 mm · Big Bag 1000 kg',
   'lignin.hero.title': 'Ligniini pelletid',
@@ -555,7 +556,8 @@ const en: Dictionary = {
   'lignin.meta.title': 'Lignin Pellets 8 mm | 1000 kg Big Bags | KR Wood Estonia',
   'lignin.meta.description':
     'Lignin pellets 8 mm in 1000 kg big bags. High-calorific biofuel and industrial raw material for asphalt, concrete, agriculture and chemistry. EU delivery.',
-  'lignin.meta.imageAlt': 'Lignin pellets 8 mm poured from a 1000 kg big bag',
+  'lignin.meta.imageAlt':
+    'A heap of 8 mm lignin pellets on a dark wooden surface, with a glass sample jar beside it',
 
   'lignin.hero.badge': '8 mm · Big Bag 1000 kg',
   'lignin.hero.title': 'Lignin Pellets',
@@ -844,7 +846,8 @@ const pl: Dictionary = {
   'lignin.meta.title': 'Pellet ligninowy 8 mm | Big Bag 1000 kg | KR Wood',
   'lignin.meta.description':
     'Pellet ligninowy 8 mm w big bagach 1000 kg. Biopaliwo o wysokiej wartości opałowej i surowiec do asfaltu, betonu i chemii. Dostawa w UE.',
-  'lignin.meta.imageAlt': 'Pellet ligninowy 8 mm wysypany z big baga 1000 kg',
+  'lignin.meta.imageAlt':
+    'Kopiec pelletu ligninowego 8 mm na ciemnym drewnianym blacie, obok szklany słoiczek z próbką',
 
   'lignin.hero.badge': '8 mm · Big Bag 1000 kg',
   'lignin.hero.title': 'Pellet ligninowy',
