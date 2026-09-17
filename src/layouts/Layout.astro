@@ -148,8 +148,6 @@ const jsonLd = buildLocalBusinessSchema({
     <script is:inline>
       document.documentElement.classList.add('js');
     </script>
-
-    <Analytics />
   </head>
 
   <body class="min-h-screen bg-stone-50">
@@ -241,5 +239,8 @@ const jsonLd = buildLocalBusinessSchema({
         });
       }
     </script>
+
+    {/* Cloudflare Web Analytics — last in <body>, per Cloudflare's snippet. */}
+    <Analytics />
   </body>
 </html>

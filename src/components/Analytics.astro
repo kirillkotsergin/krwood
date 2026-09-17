@@ -6,8 +6,11 @@
  * the site ships no third-party request by default.
  *
  * `is:inline` keeps Astro from bundling and rewriting the tag — the beacon has
- * to stay an external script with its `data-cf-beacon` attribute intact, and
- * `defer` keeps it off the critical path.
+ * to stay an external script with its `data-cf-beacon` attribute intact.
+ *
+ * `type="module"` and the placement at the end of <body> are both what
+ * Cloudflare's own snippet specifies. Module scripts are deferred by default,
+ * so this stays off the critical path without needing `defer`.
  */
 import { analytics, analyticsEnabled } from '../config/analytics';
 
@@ -18,6 +21,11 @@ const beacon = JSON.stringify({ token: analytics.cloudflareToken });
 
 {
   analyticsEnabled && (
-    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={beacon} />
+    <script
+      is:inline
+      type="module"
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={beacon}
+    />
   )
 }

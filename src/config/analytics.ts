@@ -40,8 +40,7 @@ export interface AnalyticsConfig {
 }
 
 export const analytics: AnalyticsConfig = {
-  // TODO: paste the token from the Cloudflare dashboard, then redeploy.
-  cloudflareToken: '',
+  cloudflareToken: '21a6945b1bab48718737c823eff90a10',
 };
 
 /**
