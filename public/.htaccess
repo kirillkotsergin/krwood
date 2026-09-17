@@ -122,6 +122,27 @@ ErrorDocument 404 /404.html
 
   # Do not leak the PHP version.
   Header unset X-Powered-By
+
+  # ---- Dynamic endpoints must never be cached ---------------------------
+  # contact.php and counter.php both send `Cache-Control: no-store`
+  # themselves, but mod_expires has no override for a PHP response and so
+  # ExpiresDefault adds a second, 30-day Cache-Control alongside it. Two
+  # conflicting values are ambiguous — a proxy that honours the wrong one
+  # would freeze the visit counts and could replay a form response. `set`
+  # replaces every existing instance, leaving exactly one correct header.
+  <FilesMatch "\.php$">
+    Header always set Cache-Control "no-store, max-age=0"
+    Header always unset Expires
+    Header always unset Pragma
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  # Belt and braces: stop mod_expires generating the header in the first
+  # place, so the directive above has nothing to clean up.
+  <FilesMatch "\.php$">
+    ExpiresActive Off
+  </FilesMatch>
 </IfModule>
 
 # --------------------------------------------------------------------------
