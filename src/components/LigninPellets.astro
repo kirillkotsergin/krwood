@@ -13,13 +13,25 @@ import { ORGANIZATION_ID, buildOffer, buildReviewNodes } from '../config/schema'
 import { PRODUCT_IDS } from '../config/pricing';
 import PriceTag from './PriceTag.astro';
 
+/*
+ * Imported rather than referenced from public/, so Astro emits it under
+ * /_astro/ with a content hash in the name. The URL then changes whenever
+ * the file does, which is what makes the year-long `immutable` cache in
+ * public/.htaccess safe — a replaced photo is a new URL, so no visitor is
+ * ever served a stale one. A file sitting in public/ keeps its name forever
+ * and cannot be cache-busted at all.
+ *
+ * The import also carries the real pixel dimensions, so the width and height
+ * below cannot drift from the file the way hand-typed ones did.
+ */
+import ligninPhoto from '../assets/lignin-pellets.webp';
+
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const origin = Astro.site ?? new URL(Astro.url.origin);
 const pageUrl = new URL(Astro.url.pathname, origin).href;
-const imagePath = '/images/lignin-pellets.webp';
-const imageUrl = new URL(imagePath, origin).href;
+const imageUrl = new URL(ligninPhoto.src, origin).href;
 
 const contactHref = anchorLink('contact', lang);
 
@@ -255,10 +267,10 @@ const breadcrumbSchema = {
       <!-- Product photo -->
       <figure data-animate style="--animate-delay:200ms" class="relative">
         <img
-          src={imagePath}
+          src={ligninPhoto.src}
           alt={t('lignin.meta.imageAlt')}
-          width="1600"
-          height="1160"
+          width={ligninPhoto.width}
+          height={ligninPhoto.height}
           loading="eager"
           decoding="async"
           class="w-full rounded-3xl object-cover shadow-2xl shadow-black/40 ring-1 ring-white/10"

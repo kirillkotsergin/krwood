@@ -83,9 +83,26 @@ ErrorDocument 404 /404.html
 </IfModule>
 
 <IfModule mod_headers.c>
-  # Hashed build assets never change under the same name.
-  <FilesMatch "\.(css|js|woff2?|svg|avif|webp|png|jpe?g)$">
-    Header set Cache-Control "public, max-age=31536000, immutable"
+  # Astro fingerprints everything under /_astro/, so those names change on
+  # every content change and may be cached forever.
+  #
+  # This MUST stay scoped to that directory. Matching on file extension
+  # instead also catches the hand-placed files in public/, whose names never
+  # change — `immutable` then tells browsers never to revalidate them, and a
+  # replaced image stays invisible to anyone who loaded the old one until the
+  # cache expires a year later. Prefer importing an image from src/assets/
+  # (see src/components/LigninPellets.astro) over adding one to public/.
+  # SetEnvIf rather than <If>, which needs Apache 2.4 — a syntax the server
+  # rejects takes the whole site down with a 500, and mod_setenvif is
+  # available everywhere.
+  SetEnvIf Request_URI "^/_astro/" FINGERPRINTED_ASSET
+  Header set Cache-Control "public, max-age=31536000, immutable" env=FINGERPRINTED_ASSET
+
+  # Stable-URL assets in public/: cached, but revalidated so a replacement
+  # goes live within the day. Apache's ETag and Last-Modified make the
+  # revalidation a cheap 304 in the normal case.
+  <FilesMatch "\.(css|js|woff2?|svg|avif|webp|png|jpe?g|ico)$">
+    Header set Cache-Control "public, max-age=86400, stale-while-revalidate=604800" env=!FINGERPRINTED_ASSET
   </FilesMatch>
 
   # HTML and the sitemap must revalidate on every request.
