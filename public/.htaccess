@@ -10,6 +10,31 @@ DirectoryIndex index.html index.php
 Options -Indexes
 
 # --------------------------------------------------------------------------
+# Override the host's AI-crawler user-agent block
+# --------------------------------------------------------------------------
+# Radicenter applies a server-level authorisation rule that returns 403 to a
+# curated list of AI crawlers — case-insensitive substring matches on gptbot,
+# claudebot, ccbot, meta-externalagent and bytespider — on every path,
+# including /robots.txt and the sitemap. That last part is the damaging bit: a
+# crawler that cannot read robots.txt generally treats the whole site as
+# disallowed, so those agents never crawl at all.
+#
+# It is not ModSecurity. Disabling ModSecurity in cPanel left the 403s
+# completely unchanged, and a ModSecurity block could not be overridden by an
+# authorisation directive. This one can be, which is what identifies it: a
+# directory-level `Require` replaces the inherited server-level one.
+#
+# Verified in an isolated subdirectory before being applied here.
+#
+# The two `Require all denied` blocks at the foot of this file are in
+# <FilesMatch> context, which is more specific than this directory-level
+# grant, so dotfiles and source maps stay protected. Both are re-tested after
+# every deploy — do not remove this comment without re-checking them.
+<RequireAny>
+  Require all granted
+</RequireAny>
+
+# --------------------------------------------------------------------------
 # Canonical host + HTTPS
 # --------------------------------------------------------------------------
 <IfModule mod_rewrite.c>
