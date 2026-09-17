@@ -1,11 +1,15 @@
 ---
 import { getLangFromUrl, useTranslations, anchorLink } from '../i18n/utils';
+import type { ProductKey } from '../config/pricing';
+import PriceTag from './PriceTag.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 interface Product {
   id: string;
+  /** Which entry in src/config/pricing.ts prices this card. */
+  priceKey: ProductKey;
   title: string;
   desc: string;
   badge: string;
@@ -16,6 +20,7 @@ interface Product {
 const products: Product[] = [
   {
     id: 'pellet-6mm',
+    priceKey: 'pellet6mm',
     title: t('specs.d6.title'),
     desc: t('specs.d6.desc'),
     badge: t('specs.d6.badge'),
@@ -24,6 +29,7 @@ const products: Product[] = [
   },
   {
     id: 'pellet-8mm',
+    priceKey: 'pellet8mm',
     title: t('specs.d8.title'),
     desc: t('specs.d8.desc'),
     badge: t('specs.d8.badge'),
@@ -185,8 +191,13 @@ const sharedRows = [
               </table>
             </div>
 
+            {/* Price */}
+            <div class="px-7 pb-2">
+              <PriceTag product={product.priceKey} tone={product.featured ? 'wood' : 'forest'} />
+            </div>
+
             {/* Card footer CTA */}
-            <footer class="border-t border-stone-100 px-7 py-5">
+            <footer class="px-7 pb-6 pt-4">
               <a
                 href={anchorLink('contact', lang)}
                 class={`group flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:scale-[1.02] active:scale-100 ${

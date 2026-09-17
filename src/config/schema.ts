@@ -13,13 +13,88 @@
  */
 
 import { siteConfig, mapUrl, socialLinks } from './site';
+import {
+  pricing,
+  PRICE_CURRENCY,
+  PRICE_UNIT_CODE,
+  PRODUCT_IDS,
+  type ProductKey,
+} from './pricing';
 
 /** A stable, locale-independent node id so all pages reference one entity. */
 export const ORGANIZATION_ID = `${siteConfig.url}/#organization`;
 
 export interface SchemaProduct {
+  /** Which entry in `src/config/pricing.ts` prices this product. */
+  key: ProductKey;
   name: string;
   description: string;
+  /** Absolute URL where this product can be enquired about. */
+  url: string;
+  /** Raw material, localised. Omitted from the node when not given. */
+  material?: string;
+}
+
+/**
+ * Builds a priced `Offer`.
+ *
+ * Google Search Console reports "Missing field 'offers'" for a Product with
+ * no offer and "Missing field 'price'" for an offer with no amount, so both
+ * `price` and `priceCurrency` are always emitted. `price` is a bare number —
+ * a currency symbol inside the value is itself an error.
+ *
+ * The price is per tonne, which `priceSpecification.referenceQuantity`
+ * states explicitly; `eligibleQuantity` carries the minimum order the price
+ * is valid for, where there is one.
+ */
+export function buildOffer(key: ProductKey, url: string): Record<string, unknown> {
+  const { amount, minOrderTons } = pricing[key];
+
+  return {
+    '@type': 'Offer',
+    price: amount,
+    priceCurrency: PRICE_CURRENCY,
+    availability: 'https://schema.org/InStock',
+    itemCondition: 'https://schema.org/NewCondition',
+    businessFunction: 'https://purl.org/goodrelations/v1#Sell',
+    seller: { '@id': ORGANIZATION_ID },
+    url,
+
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: amount,
+      priceCurrency: PRICE_CURRENCY,
+      referenceQuantity: {
+        '@type': 'QuantitativeValue',
+        value: 1,
+        unitCode: PRICE_UNIT_CODE,
+      },
+    },
+
+    ...(minOrderTons !== null
+      ? {
+          eligibleQuantity: {
+            '@type': 'QuantitativeValue',
+            minValue: minOrderTons,
+            unitCode: PRICE_UNIT_CODE,
+          },
+        }
+      : {}),
+  };
+}
+
+/** A `Product` node carrying its own priced offer. */
+export function buildProduct(product: SchemaProduct): Record<string, unknown> {
+  return {
+    '@type': 'Product',
+    '@id': PRODUCT_IDS[product.key],
+    name: product.name,
+    description: product.description,
+    url: product.url,
+    brand: { '@id': ORGANIZATION_ID },
+    offers: buildOffer(product.key, product.url),
+    ...(product.material !== undefined ? { material: product.material } : {}),
+  };
 }
 
 export interface SchemaOptions {
@@ -121,18 +196,15 @@ export function buildLocalBusinessSchema(options: SchemaOptions): Record<string,
     ],
 
     // --- Products ---------------------------------------------------------
+    // Every catalogue entry is a priced Offer wrapping a Product that carries
+    // its own priced Offer, so neither node is ever missing `offers` or
+    // `price` however a consumer walks the graph.
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: options.offerCatalogName,
       itemListElement: options.products.map((product) => ({
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Product',
-          name: product.name,
-          description: product.description,
-          material: 'Softwood (pine, spruce)',
-          brand: { '@id': ORGANIZATION_ID },
-        },
+        ...buildOffer(product.key, product.url),
+        itemOffered: buildProduct(product),
       })),
     },
 

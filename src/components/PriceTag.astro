@@ -1,0 +1,96 @@
+---
+/**
+ * Price block, shared by the landing-page product cards and the lignin
+ * pellets page so every price on the site is laid out identically.
+ *
+ * The amount, the unit and the minimum order quantity all come from
+ * `src/config/pricing.ts` — the same file the Schema.org `Offer` is built
+ * from, so the visible price and the structured data cannot disagree.
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { pricing, formatPrice, type ProductKey } from '../config/pricing';
+
+/**
+ * Extends the div attributes so callers can pass `data-animate`, `style` and
+ * the like straight through to the outer element.
+ */
+interface Props extends HTMLAttributes<'div'> {
+  product: ProductKey;
+  /** Accent colour, matched to the card this sits in. */
+  tone?: 'wood' | 'forest';
+  /** Renders the amount one step larger, for use as a section centrepiece. */
+  size?: 'md' | 'lg';
+}
+
+const {
+  product,
+  tone = 'wood',
+  size = 'md',
+  class: className = '',
+  ...rest
+} = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { amount, minOrderTons } = pricing[product];
+const price = formatPrice(amount, lang);
+
+const wholesaleNote =
+  minOrderTons === null
+    ? null
+    : t('price.wholesaleNote').replace('{min}', String(minOrderTons));
+
+const surface =
+  tone === 'wood'
+    ? 'border-wood-200/80 from-wood-50 to-wood-100/40'
+    : 'border-forest-200/80 from-forest-50 to-forest-100/40';
+
+const accent = tone === 'wood' ? 'text-wood-700' : 'text-forest-700';
+
+// `lg` sits beside the full-width spec table on the lignin page, so it takes
+// that table's corner radius; `md` nests inside a product card and takes one
+// step less, as nested corners should.
+const amountSize = size === 'lg' ? 'text-4xl sm:text-5xl' : 'text-[2rem] sm:text-4xl';
+const radius = size === 'lg' ? 'rounded-3xl' : 'rounded-2xl';
+---
+
+<div
+  {...rest}
+  class={`border bg-gradient-to-br p-5 sm:p-6 ${radius} ${surface} ${className}`}
+>
+  <p class="text-[0.6875rem] font-bold uppercase tracking-[0.12em] text-stone-500">
+    {t('price.label')}
+  </p>
+
+  <p class="mt-1.5 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+    <span class={`font-extrabold leading-none tracking-tight ${amountSize} ${accent}`}>
+      {price}
+    </span>
+    <span class="text-sm font-semibold text-stone-500">{t('price.perTon')}</span>
+  </p>
+
+  {
+    wholesaleNote && (
+      <p class="mt-4 flex items-start gap-2.5 border-t border-stone-900/[0.07] pt-3.5 text-[0.8125rem] font-medium leading-snug text-stone-600">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class={`mt-px size-4 shrink-0 ${accent}`}
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="9.25" />
+          <path d="M12 16.5v-5M12 7.75h.01" />
+        </svg>
+        {wholesaleNote}
+      </p>
+    )
+  }
+</div>

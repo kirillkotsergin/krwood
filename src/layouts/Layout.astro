@@ -2,7 +2,13 @@
 import '@fontsource-variable/inter';
 import '../styles/global.css';
 
-import { getLangFromUrl, useTranslations, getAlternateLinks, localizePath } from '../i18n/utils';
+import {
+  getLangFromUrl,
+  useTranslations,
+  getAlternateLinks,
+  localizePath,
+  routePath,
+} from '../i18n/utils';
 import { languageTags, ogLocales, defaultLang } from '../i18n/ui';
 import { siteConfig } from '../config/site';
 import { buildLocalBusinessSchema } from '../config/schema';
@@ -39,6 +45,12 @@ const alternates = noindex ? [] : getAlternateLinks(Astro.url, Astro.site);
 // Raster, not SVG: Facebook, LinkedIn and X do not render SVG link previews.
 const ogImage = new URL('/images/og-image.png', origin).href;
 
+// Where each product can be enquired about, in the visitor's locale. The two
+// pellet diameters live in the landing page's product cards; lignin has a
+// page of its own, with a per-locale slug.
+const landingUrl = new URL(localizePath('/', lang), origin).href;
+const ligninUrl = new URL(routePath('ligninPellets', lang), origin).href;
+
 // Schema.org LocalBusiness — see src/config/schema.ts
 const jsonLd = buildLocalBusinessSchema({
   description: pageDescription,
@@ -48,8 +60,27 @@ const jsonLd = buildLocalBusinessSchema({
   locale: languageTags[lang],
   offerCatalogName: t('specs.eyebrow'),
   products: [
-    { name: t('specs.d6.title'), description: t('specs.d6.desc') },
-    { name: t('specs.d8.title'), description: t('specs.d8.desc') },
+    {
+      key: 'pellet6mm',
+      name: t('specs.d6.title'),
+      description: t('specs.d6.desc'),
+      url: `${landingUrl}#pellet-6mm`,
+      material: t('specs.value.material'),
+    },
+    {
+      key: 'pellet8mm',
+      name: t('specs.d8.title'),
+      description: t('specs.d8.desc'),
+      url: `${landingUrl}#pellet-8mm`,
+      material: t('specs.value.material'),
+    },
+    {
+      key: 'ligninPellets',
+      name: t('lignin.hero.title'),
+      description: t('lignin.meta.description'),
+      url: ligninUrl,
+      material: t('lignin.value.origin'),
+    },
   ],
 });
 ---

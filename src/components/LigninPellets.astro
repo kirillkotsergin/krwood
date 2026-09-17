@@ -9,7 +9,9 @@
 import { getLangFromUrl, useTranslations, anchorLink, localizePath } from '../i18n/utils';
 import { languageTags } from '../i18n/ui';
 import { siteConfig } from '../config/site';
-import { ORGANIZATION_ID } from '../config/schema';
+import { ORGANIZATION_ID, buildOffer } from '../config/schema';
+import { PRODUCT_IDS } from '../config/pricing';
+import PriceTag from './PriceTag.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -120,7 +122,9 @@ const applications: Application[] = [
 const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  '@id': `${pageUrl}#product`,
+  // The same stable id the business's offer catalogue uses, so this page and
+  // the catalogue describe one product rather than two.
+  '@id': PRODUCT_IDS.ligninPellets,
   name: t('lignin.hero.title'),
   description: t('lignin.meta.description'),
   image: imageUrl,
@@ -135,14 +139,8 @@ const productSchema = {
     name: row.label,
     value: row.value,
   })),
-  offers: {
-    '@type': 'Offer',
-    availability: 'https://schema.org/InStock',
-    seller: { '@id': ORGANIZATION_ID },
-    url: pageUrl,
-    // Price is quoted per enquiry; no priceSpecification is published.
-    businessFunction: 'https://purl.org/goodrelations/v1#Sell',
-  },
+  // Carries `price` and `priceCurrency` — see buildOffer in src/config/schema.ts.
+  offers: buildOffer('ligninPellets', pageUrl),
 };
 
 const breadcrumbSchema = {
@@ -351,10 +349,18 @@ const breadcrumbSchema = {
         {t('lignin.specs.subtitle')}
       </p>
 
+      <PriceTag
+        product="ligninPellets"
+        size="lg"
+        class="mt-10"
+        data-animate
+        style="--animate-delay:100ms"
+      />
+
       <div
         data-animate
-        style="--animate-delay:120ms"
-        class="mt-10 overflow-hidden rounded-3xl border border-stone-200 shadow-sm"
+        style="--animate-delay:160ms"
+        class="mt-6 overflow-hidden rounded-3xl border border-stone-200 shadow-sm"
       >
         <table class="w-full border-collapse text-left">
           <caption class="sr-only">{t('lignin.specs.title')}</caption>

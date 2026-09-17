@@ -140,6 +140,13 @@ const et = {
   'specs.value.density': '≥ 650 kg/m³',
   'specs.value.fines': '≤ 1 %',
 
+  // --- Pricing -------------------------------------------------------------
+  // Amounts live in src/config/pricing.ts, not here. `{min}` is replaced with
+  // the minimum order quantity from that file.
+  'price.label': 'Hind',
+  'price.perTon': 'tonni kohta',
+  'price.wholesaleNote': 'Hulgihind kehtib tellimustele alates {min} tonnist',
+
   // --- Packaging -----------------------------------------------------------
   'packaging.eyebrow': 'Pakendid',
   'packaging.title': 'Pakendid ja tarne',
@@ -438,6 +445,10 @@ const en: Dictionary = {
   'specs.value.density': '≥ 650 kg/m³',
   'specs.value.fines': '≤ 1 %',
 
+  'price.label': 'Price',
+  'price.perTon': 'per tonne',
+  'price.wholesaleNote': 'Wholesale price valid for orders from {min} tonnes',
+
   'packaging.eyebrow': 'Packaging',
   'packaging.title': 'Packaging and delivery',
   'packaging.subtitle':
@@ -721,6 +732,10 @@ const pl: Dictionary = {
   'specs.value.moisture': '≤ 8 %',
   'specs.value.density': '≥ 650 kg/m³',
   'specs.value.fines': '≤ 1 %',
+
+  'price.label': 'Cena',
+  'price.perTon': 'za tonę',
+  'price.wholesaleNote': 'Cena hurtowa obowiązuje przy zamówieniach od {min} ton',
 
   'packaging.eyebrow': 'Opakowania',
   'packaging.title': 'Opakowania i dostawa',

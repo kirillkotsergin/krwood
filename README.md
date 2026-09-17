@@ -20,6 +20,7 @@ npm run dev        # http://localhost:4321
 | `npm run build` | Static build into `dist/` |
 | `npm run preview` | Serve `dist/` locally, exactly as it will be deployed |
 | `npm run check` | Type-check `.astro` + `.ts`, **and verify no translation key is missing** |
+| `npm run check:pricing` | Verify every built page prices every product, in the JSON-LD and on the page. Needs a build first |
 
 ---
 
@@ -50,6 +51,54 @@ Two fields are still unset and degrade gracefully:
 
 `contact.php` delivers to `krwood@krwood.ee` and sends **from** the same
 address, so SPF/DMARC pass. Confirm that mailbox exists in cPanel.
+
+---
+
+## Pricing
+
+All prices live in **`src/config/pricing.ts`**. Both the price a visitor sees
+and the Schema.org `Offer` in the JSON-LD are built from that one file, so the
+visible price and the structured data cannot drift apart.
+
+| Product | Price | Minimum order |
+| --- | --- | --- |
+| Graanulid 6 mm | €400 / t | 24 t — a full truck load |
+| Graanulid 8 mm | €400 / t | — |
+| Ligniini pelletid | €390 / t | — |
+
+**Prices are per metric tonne.** That unit is emitted as
+`priceSpecification.referenceQuantity` with `unitCode: TNE`, and the 6 mm
+minimum as `eligibleQuantity.minValue`. Change an amount in
+`src/config/pricing.ts` and the product cards, the lignin page and all the
+structured data follow.
+
+Two things are deliberately **not** stated: whether the price includes VAT
+(no wording is safe to invent on a price — add a `price.vat*` key if you want
+it shown), and `priceValidUntil` in the JSON-LD, which Google lists as
+recommended but which is worse than absent once it goes stale.
+
+### Adding a priced product
+
+1. Add an entry to `pricing` and to `PRODUCT_IDS` in `src/config/pricing.ts`.
+2. Add it to the `products` array in `src/layouts/Layout.astro`, so it joins
+   the business's `hasOfferCatalog`.
+3. Render `<PriceTag product="yourKey" />` wherever the product is shown.
+4. `npm run build && npm run check:pricing`.
+
+### `PriceTag.astro`
+
+One component renders every price on the site, so they all look alike:
+
+| Prop | |
+| --- | --- |
+| `product` | Which `pricing` entry to show. Type-checked against `ProductKey` |
+| `tone` | `wood` (default) or `forest` — matched to the card it sits in |
+| `size` | `md` (default) nests inside a card; `lg` stands alone as a section centrepiece |
+
+It also forwards `data-animate`, `style` and other div attributes, so it
+participates in the scroll-reveal like any other element.
+
+---
 
 ## SEO
 
@@ -84,13 +133,32 @@ HTML file method.
 `src/config/schema.ts` builds a `LocalBusiness` node (a subtype of
 `Organization`, so it satisfies both). It carries `legalName`, `vatID`,
 `taxID`, a `PostalAddress`, `openingHoursSpecification`, a `ContactPoint`, an
-`areaServed` list and a localised `hasOfferCatalog` for the 6 mm / 8 mm
-products. The `@id` is a stable `https://krwood.ee/#organization` so every
-page and locale references one entity.
+`areaServed` list and a localised `hasOfferCatalog` for all three products.
+The `@id` is a stable `https://krwood.ee/#organization` so every page and
+locale references one entity.
 
 Validate after changes:
 [validator.schema.org](https://validator.schema.org/) ·
 [Rich Results Test](https://search.google.com/test/rich-results)
+
+#### Products carry their own priced offer
+
+Search Console reports two errors on a product with no price —
+*Missing field `offers`* and *Missing field `price`*. Both are avoided by
+construction:
+
+- Every catalogue entry is a **priced `Offer`** whose `itemOffered` is a
+  `Product` that **also** carries its own priced `Offer`. Neither node is
+  missing `offers` or `price` however a consumer walks the graph.
+- `price` is emitted as a bare number with a separate `priceCurrency: EUR`.
+  A currency symbol inside the value is itself an error.
+- Product `@id`s are stable and locale-independent
+  (`https://krwood.ee/#product-pellet-6mm`, …). The lignin page's own
+  `Product` node reuses the same `@id` as its catalogue entry, so the two
+  describe **one** product rather than two competing ones.
+
+`npm run check:pricing` walks every built page and fails if any `Product`
+node anywhere in the graph is missing an offer, a numeric price or `EUR`.
 
 Two optional properties are deliberately absent because the values aren't
 known: **`geo`** (latitude/longitude — wrong coordinates are worse than none)
@@ -109,13 +177,6 @@ The hero currently uses a generated SVG forest illustration at
 ```
 
 The dark gradient overlay, text colours and contrast all keep working unchanged.
-
-### Social preview image
-
-`public/images/og-image.svg` is referenced as the Open Graph image. **Facebook,
-LinkedIn and X do not render SVG previews** — export a 1200×630 PNG or JPG and
-point `ogImage` in `src/layouts/Layout.astro` at it before you rely on link
-previews.
 
 ---
 
