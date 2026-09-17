@@ -1,0 +1,110 @@
+---
+/**
+ * Visit counter for the footer.
+ *
+ * Counts come from `public/counter.php` on this same origin — see the notes at
+ * the top of that file for why a third-party counter service would be blocked
+ * by the site's Content Security Policy.
+ *
+ * Starts hidden and is revealed only once real numbers arrive, so a visitor
+ * never sees a placeholder or a flash of zeroes, and nothing shifts if the
+ * request fails or JavaScript is off. Being the last element in the footer,
+ * revealing it pushes nothing else around.
+ */
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { languageTags } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<p
+  id="visit-counter"
+  data-locale={languageTags[lang]}
+  hidden
+  class="mt-6 text-center text-xs text-stone-600"
+>
+  <span>
+    {t('footer.visitsTotal')}
+    <span data-visits-total class="font-semibold text-stone-500 tabular-nums">0</span>
+  </span>
+  <span aria-hidden="true" class="mx-2 text-stone-700">·</span>
+  <span>
+    {t('footer.visitsToday')}
+    <span data-visits-today class="font-semibold text-stone-500 tabular-nums">0</span>
+  </span>
+</p>
+
+<script>
+  const counter = document.getElementById('visit-counter');
+
+  if (counter) {
+    const totalEl = counter.querySelector<HTMLElement>('[data-visits-total]');
+    const todayEl = counter.querySelector<HTMLElement>('[data-visits-today]');
+
+    // Thousands separators in the visitor's own convention: 12 345 in
+    // Estonian and Polish, 12,345 in English.
+    const format = new Intl.NumberFormat(counter.dataset.locale || 'et');
+
+    /*
+     * POST counts the visit, GET only reads it. One POST per browser session
+     * keeps a visit from being counted again on every page, and sessionStorage
+     * rather than a cookie means nothing is stored that needs consent and
+     * nothing persists after the tab closes. counter.php applies its own
+     * server-side window as well, so a visitor clearing storage mid-visit is
+     * still not counted twice.
+     */
+    const SESSION_KEY = 'krwood:counted';
+
+    let counted = false;
+    try {
+      counted = sessionStorage.getItem(SESSION_KEY) === '1';
+    } catch {
+      // Storage can be unavailable in private modes; fall back to counting.
+    }
+
+    const show = (total: number, today: number) => {
+      if (totalEl) totalEl.textContent = format.format(total);
+      if (todayEl) todayEl.textContent = format.format(today);
+      counter.hidden = false;
+    };
+
+    const load = async () => {
+      const response = await fetch('/counter.php', {
+        method: counted ? 'GET' : 'POST',
+        headers: { Accept: 'application/json' },
+        // Nothing to send, but a body makes the POST explicit to any proxy.
+        body: counted ? null : new URLSearchParams(),
+        cache: 'no-store',
+        keepalive: true,
+      });
+
+      if (!response.ok) throw new Error(`counter responded ${response.status}`);
+
+      const data = await response.json();
+      if (data?.ok !== true) throw new Error('counter reported a failure');
+
+      if (!counted) {
+        try {
+          sessionStorage.setItem(SESSION_KEY, '1');
+        } catch {
+          // Not fatal — the server-side window still deduplicates.
+        }
+      }
+
+      show(Number(data.total) || 0, Number(data.today) || 0);
+    };
+
+    // Left until the page has settled: the counter is decoration at the very
+    // bottom and must not compete with the content for bandwidth.
+    const start = () => {
+      load().catch(() => {
+        // Leave the element hidden. A counter that cannot load is not worth
+        // showing a visitor an error over.
+      });
+    };
+
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
+  }
+</script>

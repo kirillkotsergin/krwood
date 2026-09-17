@@ -218,6 +218,8 @@ const et = {
   'footer.legalTitle': 'Õiguslik teave',
   'footer.privacy': 'Privaatsuspoliitika',
   'footer.rights': 'Kõik õigused kaitstud.',
+  'footer.visitsTotal': 'Külastusi kokku',
+  'footer.visitsToday': 'Täna',
   'footer.socialTitle': 'Jälgi meid',
 
   // --- Privacy policy page -------------------------------------------------
@@ -519,6 +521,8 @@ const en: Dictionary = {
   'footer.legalTitle': 'Legal',
   'footer.privacy': 'Privacy policy',
   'footer.rights': 'All rights reserved.',
+  'footer.visitsTotal': 'Total visits',
+  'footer.visitsToday': 'Today',
   'footer.socialTitle': 'Follow us',
 
   'privacy.meta.title': 'Privacy Policy | KR Wood',
@@ -809,6 +813,8 @@ const pl: Dictionary = {
   'footer.legalTitle': 'Informacje prawne',
   'footer.privacy': 'Polityka prywatności',
   'footer.rights': 'Wszelkie prawa zastrzeżone.',
+  'footer.visitsTotal': 'Wszystkich wizyt',
+  'footer.visitsToday': 'Dziś',
   'footer.socialTitle': 'Obserwuj nas',
 
   'privacy.meta.title': 'Polityka prywatności | KR Wood',

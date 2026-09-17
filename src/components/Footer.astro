@@ -4,6 +4,7 @@ import { siteConfig, formatAddress, mapUrl, socialLinks } from '../config/site';
 import Logo from './Logo.astro';
 import LanguagePicker from './LanguagePicker.astro';
 import WhatsAppLink from './WhatsAppLink.astro';
+import VisitCounter from './VisitCounter.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -213,5 +214,7 @@ const legalDetails = [
         ENplus® A1 certified wood pellets
       </p>
     </div>
+
+    <VisitCounter />
   </div>
 </footer>

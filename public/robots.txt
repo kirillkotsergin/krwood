@@ -8,8 +8,10 @@
 User-agent: *
 Allow: /
 
-# contact.php is a POST endpoint that returns JSON, not a page worth indexing.
+# Both PHP endpoints return JSON, not pages worth indexing. counter.php only
+# counts on POST, so a crawler could not inflate the figures anyway.
 Disallow: /contact.php
+Disallow: /counter.php
 
 # --- Search engines -------------------------------------------------------
 User-agent: Googlebot

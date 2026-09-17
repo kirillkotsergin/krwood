@@ -379,6 +379,75 @@ arriving, check `~/public_html/error_log` on the server.
 
 ---
 
+## Visit counter
+
+The footer shows total visits and visits today, served by
+**`public/counter.php`** — the second dynamic endpoint alongside the contact
+form. `src/components/VisitCounter.astro` renders it.
+
+### Why not a third-party counter service
+
+`public/.htaccess` sets `default-src 'self'` and does not override
+`connect-src`, so a `fetch` to CountAPI, Firebase, a Cloudflare Worker on
+another domain or any other origin is **blocked by the CSP — silently, with no
+visible error**, exactly as described under Analytics above. A same-origin
+endpoint needs no CSP change, no third-party account that can lapse, and keeps
+the data on your own server.
+
+### ⚠️ The data file must stay outside the document root
+
+Counts live in **`/home/r319522/var/krwood/visits.json`**, one level above
+`public_html`. That is not a style choice: `scripts/deploy.sh` syncs `dist/`
+over the document root with `rsync --delete`, excluding only `.well-known/`.
+A counter file inside `public_html` would be **deleted on every deploy**,
+resetting the counts each time the site is published.
+
+The path is derived from `DOCUMENT_ROOT`, so no username is hardcoded.
+Override it with `KRWOOD_COUNTER_DIR` if the layout changes.
+
+| | |
+| --- | --- |
+| `GET /counter.php` | Read the counts, change nothing |
+| `POST /counter.php` | Count this visit if it is new, then read the counts |
+
+Only `POST` increments, so a crawler or a prefetch issuing `GET` cannot
+inflate the figures. Known bot user agents are never counted, and
+`robots.txt` disallows the endpoint.
+
+### What counts as a visit
+
+One visit per browser session, not per page view. The client `POST`s once and
+then records a `sessionStorage` flag — not a cookie, so nothing persists after
+the tab closes. `counter.php` applies its own 30-minute per-visitor window as
+well, so clearing storage mid-visit does not double-count.
+
+Concurrent writes are serialised with `flock`. Verified: 40 simultaneous
+visits produce a total of exactly 40, with no lost updates. A new day resets
+the daily figure and never the total; "today" rolls over at midnight
+`Europe/Tallinn`.
+
+### Privacy
+
+`visits.json` holds **two integers and a date** — no IP address, user agent,
+page, referrer or identifier of any kind, and no cookie is set. Repeat visits
+are recognised through a temporary marker file whose *filename* is a salted
+SHA-256 hash; the salt rotates daily, markers expire after 30 minutes, and the
+address itself is never written anywhere. Nothing stored is personal data, so
+the counter needs no consent banner and no privacy-policy change.
+
+### Resetting or seeding the counts
+
+```bash
+ssh krwood-server 'cat /home/r319522/var/krwood/visits.json'
+ssh krwood-server 'echo "{\"total\":0,\"today\":0,\"date\":\"\"}" > /home/r319522/var/krwood/visits.json'
+```
+
+If the counter stops appearing, the element stays hidden by design rather than
+showing a visitor an error. Check `~/public_html/error_log` for
+`krwood.ee counter:` lines.
+
+---
+
 ## Deployment
 
 Deploys run **directly over SSH** from your machine. One command builds and
