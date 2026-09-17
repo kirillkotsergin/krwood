@@ -142,8 +142,24 @@ ErrorDocument 404 /404.html
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), interest-cohort=()"
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" "expr=%{HTTPS} == 'on'"
 
-  # The site loads no third-party resources, so the policy can stay tight.
-  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
+  # ---- Content Security Policy ------------------------------------------
+  # Tight by default: everything is served from this origin. The only
+  # exception is Cloudflare Web Analytics, which needs two hosts named
+  # explicitly, because `default-src 'self'` would otherwise block it
+  # SILENTLY — no console error, no data, no clue why.
+  #
+  #   script-src   static.cloudflareinsights.com   serves beacon.min.js
+  #   connect-src  cloudflareinsights.com          receives POST /cdn-cgi/rum
+  #
+  # `connect-src` must be listed in full once it is declared: it stops
+  # inheriting from default-src, so dropping 'self' here would break the
+  # footer visit counter's fetch to /counter.php. Both hosts also appear in
+  # ANALYTICS_CSP_HOSTS in src/config/analytics.ts — keep them in step.
+  #
+  # Adding a different analytics vendor means widening BOTH directives; its
+  # script host alone is not enough, because the beacon endpoint is usually
+  # on another hostname.
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; font-src 'self'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
 
   # Do not leak the PHP version.
   Header unset X-Powered-By

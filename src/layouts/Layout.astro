@@ -15,6 +15,7 @@ import { buildLocalBusinessSchema } from '../config/schema';
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
 
 interface Props {
   /** Overrides the default localized <title>. */
@@ -147,6 +148,8 @@ const jsonLd = buildLocalBusinessSchema({
     <script is:inline>
       document.documentElement.classList.add('js');
     </script>
+
+    <Analytics />
   </head>
 
   <body class="min-h-screen bg-stone-50">

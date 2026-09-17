@@ -243,8 +243,13 @@ const et = {
   'privacy.s4.body':
     'Säilitame päringute andmeid kuni 24 kuud viimasest kontaktist, misjärel need kustutatakse. Raamatupidamisdokumente säilitame seaduses ettenähtud tähtaja jooksul.',
   'privacy.s5.title': 'Küpsised',
+  // Shown when no third-party analytics is enabled.
   'privacy.s5.body':
-    'See veebisait on staatiline ega kasuta jälgimisküpsiseid ega kolmandate osapoolte analüütikat. Kirjatüübid on serveeritud meie enda serverist, mistõttu Teie andmeid välistele teenustele ei edastata.',
+    'See veebisait on staatiline ega kasuta jälgimisküpsiseid ega kolmandate osapoolte analüütikat. Kirjatüübid on serveeritud meie enda serverist, mistõttu Teie andmeid välistele teenustele ei edastata. Jaluses olev külastusloendur töötab meie enda serveris ja salvestab ainult koondarvud; sama külastuse kahekordse loendamise vältimiseks kasutab see Teie brauseri sessioonimälu ega salvesta isikuandmeid.',
+  // Shown instead of the above as soon as a token is set in src/config/analytics.ts.
+  'privacy.s5.titleAnalytics': 'Küpsised ja analüütika',
+  'privacy.s5.bodyAnalytics':
+    'See veebisait ei kasuta jälgimisküpsiseid. Külastajate arvu mõõtmiseks kasutame Cloudflare Web Analyticsit, mis ei sea küpsiseid, ei koosta külastajaprofiile ega jälgi Teid teistel veebisaitidel — kogutakse üksnes koondnäitajaid, näiteks lehevaatamiste arv ja ligikaudne asukoht riigi täpsusega. Volitatud töötleja on Cloudflare, Inc. (USA). Kirjatüübid on serveeritud meie enda serverist. Jaluses olev külastusloendur töötab meie enda serveris ja salvestab ainult koondarvud.',
   'privacy.s6.title': 'Teie õigused',
   'privacy.s6.body':
     'Teil on õigus nõuda ligipääsu oma andmetele, nende parandamist või kustutamist, samuti töötlemise piiramist ja andmete ülekandmist. Nende õiguste kasutamiseks võtke meiega ühendust alltoodud e-posti aadressil.',
@@ -546,7 +551,10 @@ const en: Dictionary = {
     'We retain enquiry data for up to 24 months from the last contact, after which it is deleted. Accounting records are retained for the period prescribed by law.',
   'privacy.s5.title': 'Cookies',
   'privacy.s5.body':
-    'This website is static and uses no tracking cookies or third-party analytics. Fonts are served from our own server, so none of your data is transmitted to external services.',
+    'This website is static and uses no tracking cookies or third-party analytics. Fonts are served from our own server, so none of your data is transmitted to external services. The visit counter in the footer runs on our own server and stores only aggregate totals; it uses your browser’s session storage to avoid counting the same visit twice and stores no personal data.',
+  'privacy.s5.titleAnalytics': 'Cookies and analytics',
+  'privacy.s5.bodyAnalytics':
+    'This website uses no tracking cookies. To measure visitor numbers we use Cloudflare Web Analytics, which sets no cookies, builds no visitor profiles and does not follow you across other websites — only aggregate figures such as page views and approximate country-level location are collected. The processor is Cloudflare, Inc. (USA). Fonts are served from our own server. The visit counter in the footer runs on our own server and stores only aggregate totals.',
   'privacy.s6.title': 'Your rights',
   'privacy.s6.body':
     'You have the right to request access to your data, its correction or erasure, as well as restriction of processing and data portability. To exercise these rights, contact us at the email address below.',
@@ -838,7 +846,10 @@ const pl: Dictionary = {
     'Dane z zapytań przechowujemy do 24 miesięcy od ostatniego kontaktu, po czym są usuwane. Dokumenty księgowe przechowujemy przez okres wymagany przepisami prawa.',
   'privacy.s5.title': 'Pliki cookie',
   'privacy.s5.body':
-    'Ta strona jest statyczna i nie używa plików cookie śledzących ani analityki podmiotów trzecich. Czcionki są serwowane z naszego własnego serwera, więc żadne Twoje dane nie są przekazywane do usług zewnętrznych.',
+    'Ta strona jest statyczna i nie używa plików cookie śledzących ani analityki podmiotów trzecich. Czcionki są serwowane z naszego własnego serwera, więc żadne Twoje dane nie są przekazywane do usług zewnętrznych. Licznik odwiedzin w stopce działa na naszym serwerze i przechowuje wyłącznie sumy zbiorcze; korzysta z pamięci sesji przeglądarki, aby nie liczyć tej samej wizyty dwukrotnie, i nie zapisuje żadnych danych osobowych.',
+  'privacy.s5.titleAnalytics': 'Pliki cookie i analityka',
+  'privacy.s5.bodyAnalytics':
+    'Ta strona nie używa plików cookie śledzących. Do pomiaru liczby odwiedzin korzystamy z Cloudflare Web Analytics, które nie ustawia plików cookie, nie tworzy profili użytkowników i nie śledzi Cię na innych stronach — zbierane są wyłącznie dane zbiorcze, takie jak liczba odsłon i przybliżona lokalizacja na poziomie kraju. Podmiotem przetwarzającym jest Cloudflare, Inc. (USA). Czcionki są serwowane z naszego własnego serwera. Licznik odwiedzin w stopce działa na naszym serwerze i przechowuje wyłącznie sumy zbiorcze.',
   'privacy.s6.title': 'Twoje prawa',
   'privacy.s6.body':
     'Masz prawo żądać dostępu do swoich danych, ich sprostowania lub usunięcia, a także ograniczenia przetwarzania i przeniesienia danych. Aby skorzystać z tych praw, skontaktuj się z nami pod adresem e-mail podanym poniżej.',

@@ -1,0 +1,23 @@
+---
+/**
+ * Cloudflare Web Analytics beacon.
+ *
+ * Emits nothing at all until a token is set in `src/config/analytics.ts`, so
+ * the site ships no third-party request by default.
+ *
+ * `is:inline` keeps Astro from bundling and rewriting the tag — the beacon has
+ * to stay an external script with its `data-cf-beacon` attribute intact, and
+ * `defer` keeps it off the critical path.
+ */
+import { analytics, analyticsEnabled } from '../config/analytics';
+
+// JSON.stringify rather than string interpolation: the attribute value is
+// JSON, and a token containing a quote would otherwise break out of it.
+const beacon = JSON.stringify({ token: analytics.cloudflareToken });
+---
+
+{
+  analyticsEnabled && (
+    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={beacon} />
+  )
+}

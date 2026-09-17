@@ -183,17 +183,62 @@ for p in .htaccess .gitignore images/ _astro/nonexistent.css.map; do
 done
 ```
 
-### ⚠️ Analytics will be blocked by the CSP
+### Analytics
 
-`public/.htaccess` sets `script-src 'self' 'unsafe-inline'` and
-`default-src 'self'`. Adding GA4, GTM or Plausible today would load **nothing
-and report nothing, with no visible error**. To add analytics you must widen
-both `script-src` (the vendor's script host) and `connect-src` (its beacon
-endpoint).
+**Cloudflare Web Analytics**, wired up but **not yet switched on** — it needs
+a site token. Cookieless and aggregate-only, so no consent banner is legally
+required, which is why it was chosen over GA4.
 
-For the same reason, **the gtag.js verification method for Search Console
+#### Switching it on
+
+1. Cloudflare dashboard → *Analytics & Logs* → *Web Analytics* → *Add a site*
+   → `krwood.ee`. The snippet it shows contains
+   `data-cf-beacon='{"token": "..."}'` — copy that 32-character token. The
+   site does **not** need its DNS moved to Cloudflare.
+2. Paste it into `cloudflareToken` in **`src/config/analytics.ts`**.
+3. `npm run deploy`.
+
+That is the whole change. The CSP already names the two Cloudflare hosts, so
+there is nothing else to widen.
+
+#### The CSP trap this avoids
+
+`public/.htaccess` sets `default-src 'self'`. A beacon from another origin is
+blocked **silently — no console error, no data, no clue why**. Any analytics
+vendor needs *two* directives widened, and the second is the one people miss:
+
+| | |
+| --- | --- |
+| `script-src` | the vendor's **script** host — `static.cloudflareinsights.com` |
+| `connect-src` | the vendor's **beacon** host — `cloudflareinsights.com` |
+
+They are usually different hostnames. Both are already in the policy.
+
+Note that `connect-src` must list `'self'` explicitly now that it is
+declared — it no longer inherits from `default-src`, and dropping `'self'`
+would break the footer visit counter's fetch to `/counter.php`.
+
+For the same CSP reason, **the gtag.js verification method for Search Console
 will not work** — use the meta tag already in place, a DNS TXT record, or the
 HTML file method.
+
+#### The privacy policy follows the switch automatically
+
+`privacy.s5` has two variants, and `PrivacyContent.astro` picks between them
+on `analyticsEnabled`:
+
+| Token | Section shown |
+| --- | --- |
+| empty | *Cookies* — "uses no tracking cookies or third-party analytics" |
+| set | *Cookies and analytics* — names Cloudflare, Inc. as the processor |
+
+This is deliberate. Stating that the site uses no third-party analytics while
+a beacon loads would be a false statement in a legal notice, and stating the
+opposite while the token is empty would over-disclose. Both the beacon and
+the policy read the same flag, so neither can happen.
+
+**Have the wording reviewed before relying on it** — it is accurate as to what
+the site does, but it is not legal advice.
 
 ### Structured data
 
