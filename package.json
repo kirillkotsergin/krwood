@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "check:pricing": "node scripts/check-pricing.mjs",
+    "check:sitemap": "node scripts/check-sitemap.mjs",
     "astro": "astro",
     "deploy": "bash scripts/deploy.sh",
     "deploy:dry": "bash scripts/deploy.sh --dry-run",
