@@ -29,6 +29,13 @@ function stripLocale(pathname: string): string {
 export default defineConfig({
   site: SITE,
 
+  // Matches `build.format: 'directory'` below and Apache's canonical trailing
+  // slash, so the dev server 404s on a slashless link instead of silently
+  // accepting one that production answers with a 301. Parity only -- a static
+  // build emits no redirects from this setting, so it is not what fixes a
+  // Search Console redirect report.
+  trailingSlash: 'always',
+
   // Estonian is the default locale and is served from the root (no /et/ prefix).
   // English -> /en/, Polish -> /pl/
   i18n: {

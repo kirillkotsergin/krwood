@@ -8,10 +8,22 @@
 User-agent: *
 Allow: /
 
-# Both PHP endpoints return JSON, not pages worth indexing. counter.php only
-# counts on POST, so a crawler could not inflate the figures anyway.
-Disallow: /contact.php
-Disallow: /counter.php
+# contact.php and counter.php return JSON, not pages worth indexing, but they
+# are deliberately NOT disallowed here.
+#
+# A `Disallow` in this group is invisible to any crawler that matches one of
+# the more specific groups below: the Robots Exclusion Protocol picks exactly
+# one group per crawler and never merges them. Googlebot matches its own
+# `User-agent: Googlebot` group, which carries no Disallow at all, so it never
+# saw the rule -- which is how /counter.php ended up "Crawled - currently not
+# indexed" in Search Console.
+#
+# They send `X-Robots-Tag: noindex` from .htaccess instead. That is stronger
+# than a Disallow (which cannot stop a URL being indexed from an inbound link)
+# and it only works while robots.txt stays out of the way: a blocked URL is
+# never fetched, so the header is never read.
+#
+# Do not re-add a Disallow for either path.
 
 # --- Search engines -------------------------------------------------------
 User-agent: Googlebot
