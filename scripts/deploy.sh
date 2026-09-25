@@ -439,4 +439,15 @@ if [ "$DO_SMOKE" -eq 1 ]; then
   fi
 fi
 
+# ---------------------------------------------------------------------------
+# Tell search engines the site changed (IndexNow: Bing and others)
+#
+# Only after the checks pass, so a broken deploy is never announced. A
+# failure here is a warning, not a failed deploy: the site is already live.
+# ---------------------------------------------------------------------------
+
+step "Notifying IndexNow"
+node "$PROJECT_ROOT/scripts/indexnow.mjs" 2>&1 | sed 's/^/    /' \
+  || warn "IndexNow submission failed; the deploy itself is fine. Retry with: node scripts/indexnow.mjs"
+
 printf '\n%sDeployed.%s %s is live.\n' "$C_OK" "$C_OFF" "$SITE_URL"
