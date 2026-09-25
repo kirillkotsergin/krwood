@@ -1,9 +1,11 @@
-# krwood.ee — everything is open to crawlers except the form handler.
+# krwood.ee — everything is open to crawlers.
 #
-# NOTE: GPTBot, ClaudeBot, CCBot and meta-externalagent are currently served
-# HTTP 403 by Radicenter's server-level bot filter, above this account. These
-# Allow rules cannot override that — it needs a support request to the host.
+# Radicenter's server-level bot filter used to answer GPTBot, ClaudeBot, CCBot
+# and meta-externalagent with HTTP 403. The directory-level `Require all
+# granted` in .htaccess overrides it; all four got 200 on 2026-09-25.
 # Re-test with:  curl -A "GPTBot/1.2" -o /dev/null -w '%{http_code}\n' https://krwood.ee/
+#
+# A plain-text summary for AI assistants is at https://krwood.ee/llms.txt
 
 User-agent: *
 Allow: /
