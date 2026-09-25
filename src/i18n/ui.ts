@@ -154,6 +154,8 @@ const et = {
   'price.label': 'Hind',
   'price.perTon': 'tonni kohta',
   'price.vatIncluded': 'Sisaldab {vat}% käibemaksu',
+  // Shown only in the export locales (NET_PRICE_LOCALES); required here by type.
+  'price.netLabel': 'ilma käibemaksuta',
   'price.wholesaleNote': 'Hulgihind kehtib tellimustele alates {min} tonnist',
 
   // --- Packaging -----------------------------------------------------------
@@ -523,6 +525,7 @@ const en: Dictionary = {
   'price.label': 'Price',
   'price.perTon': 'per tonne',
   'price.vatIncluded': 'Includes {vat}% Estonian VAT',
+  'price.netLabel': 'excl. VAT',
   'price.wholesaleNote': 'Wholesale price valid for orders from {min} tonnes',
 
   'packaging.eyebrow': 'Packaging',
@@ -871,6 +874,7 @@ const pl: Dictionary = {
   'price.perTon': 'za tonę',
   // "estońskiego" on purpose: Polish VAT is 23%, and a bare 24% reads as a typo.
   'price.vatIncluded': 'Zawiera {vat}% estońskiego VAT',
+  'price.netLabel': 'netto (bez VAT)',
   'price.wholesaleNote': 'Cena hurtowa obowiązuje przy zamówieniach od {min} ton',
 
   'packaging.eyebrow': 'Opakowania',
@@ -1222,6 +1226,7 @@ const it: Dictionary = {
   // "estone" on purpose: Italian IVA is 22%, and a bare 24% reads as a typo.
   // English and Polish name the Estonian rate the same way.
   'price.vatIncluded': 'IVA estone al {vat}% inclusa',
+  'price.netLabel': 'IVA esclusa',
   'price.wholesaleNote': 'Prezzo all’ingrosso valido per ordini a partire da {min} tonnellate',
 
   'packaging.eyebrow': 'Confezioni',

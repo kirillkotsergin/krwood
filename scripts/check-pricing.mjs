@@ -48,6 +48,15 @@ const ALL_PAGES = [
 const PRICE_LABELS = ['Hind', 'Price', 'Cena', 'Prezzo'];
 const PRICE_UNITS = ['tonni kohta', 'per tonne', 'za tonę', 'a tonnellata'];
 
+/**
+ * Pages that also show the net price — NET_PRICE_LOCALES in
+ * src/config/pricing.ts. The Estonian root has no prefix and shows none.
+ */
+const NET_PRICE_PREFIXES = ['en/', 'pl/', 'it/'];
+
+/** Estonian VAT, as VAT_PERCENT in src/config/pricing.ts. */
+const VAT_RATE = 24;
+
 /** "24%" in any locale's phrasing, without pinning the wording. */
 const VAT_PATTERN = /\b24\s*%/;
 
@@ -167,12 +176,25 @@ for (const [page, expected] of Object.entries(PRICED_PAGES)) {
   runs.forEach((run, i) => {
     if (!PRICE_LABELS.includes(run)) return;
 
-    // PriceTag renders: label, amount, unit, VAT note, then the wholesale
-    // note where the price has a minimum order.
+    // PriceTag renders: label, amount, unit, the net price on export pages,
+    // the VAT note, then the wholesale note where the price has a minimum.
     const amount = runs[i + 1] ?? '';
     const unit = runs[i + 2] ?? '';
-    const vat = runs[i + 3] ?? '';
-    const wholesale = runs[i + 4] ?? '';
+    const isExport = NET_PRICE_PREFIXES.some((prefix) => page.startsWith(prefix));
+    const net = isExport ? (runs[i + 3] ?? '') : null;
+    const offset = isExport ? 1 : 0;
+    const vat = runs[i + 3 + offset] ?? '';
+    const wholesale = runs[i + 4 + offset] ?? '';
+
+    // The net price must be exactly gross / (1 + VAT), to the cent.
+    if (net !== null) {
+      const gross = Number(amount.replace(/[^\d]/g, ''));
+      const shown = Number((net.match(/\d+[.,]\d{2}/)?.[0] ?? '').replace(',', '.'));
+      const want = Math.round((gross / (1 + VAT_RATE / 100)) * 100) / 100;
+      if (shown !== want) {
+        fail(page, `net price ${JSON.stringify(net)} should be ${want.toFixed(2)} for a gross ${gross}`);
+      }
+    }
 
     // '€400' in English, '400 €' (non-breaking space) in every other locale.
     if (!new RegExp(`^(€\\d+|\\d+${NBSP}€)$`).test(amount)) {
@@ -189,6 +211,7 @@ for (const [page, expected] of Object.entries(PRICED_PAGES)) {
     found.push({
       amount,
       unit,
+      net,
       vat,
       note: MIN_ORDER_PATTERN.test(wholesale) ? wholesale : null,
     });
@@ -200,7 +223,8 @@ for (const [page, expected] of Object.entries(PRICED_PAGES)) {
 
   console.log(`  ${page} — ${found.length}/${expected} price(s)`);
   for (const price of found) {
-    console.log(`      ${price.amount.replaceAll(NBSP, ' ')} ${price.unit} — ${price.vat}`);
+    const net = price.net ? ` (${price.net.replaceAll(NBSP, ' ')})` : '';
+    console.log(`      ${price.amount.replaceAll(NBSP, ' ')} ${price.unit}${net} — ${price.vat}`);
     if (price.note) console.log(`      note: ${price.note}`);
   }
 }

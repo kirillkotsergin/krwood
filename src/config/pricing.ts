@@ -86,3 +86,36 @@ export function formatPrice(amount: number, lang: Lang): string {
 export function vatSentence(t: (key: TranslationKey) => string): string {
   return PRICES_INCLUDE_VAT ? `${t('price.vatIncluded').replace('{vat}', String(VAT_PERCENT))}.` : '';
 }
+
+/**
+ * Locales that show the price excluding VAT beneath the gross price: the
+ * export markets, whose business buyers compare prices net. Estonian keeps
+ * the gross price alone.
+ */
+export const NET_PRICE_LOCALES: readonly Lang[] = ['en', 'pl', 'it'];
+
+/** Whether this locale shows a net price at all. Never, if prices exclude VAT already. */
+export function showsNetPrice(lang: Lang): boolean {
+  return PRICES_INCLUDE_VAT && NET_PRICE_LOCALES.includes(lang);
+}
+
+/**
+ * The amount excluding VAT, rounded to the cent: gross / (1 + VAT).
+ *
+ *   netAmount(400) -> 322.58
+ *   netAmount(390) -> 314.52   (314.516…, rounded half up)
+ */
+export function netAmount(gross: number): number {
+  return Math.round((gross / (1 + VAT_PERCENT / 100)) * 100) / 100;
+}
+
+/**
+ * Like formatPrice, with cents and the locale's decimal separator.
+ *
+ *   formatPriceWithCents(322.58, 'en') -> '€322.58'
+ *   formatPriceWithCents(322.58, 'pl') -> '322,58 €'   (non-breaking space)
+ */
+export function formatPriceWithCents(amount: number, lang: Lang): string {
+  const fixed = amount.toFixed(2);
+  return lang === 'en' ? `€${fixed}` : `${fixed.replace('.', ',')} €`;
+}

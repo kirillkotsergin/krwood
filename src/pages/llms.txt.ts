@@ -12,7 +12,16 @@ import type { APIRoute } from 'astro';
 import { useTranslations, routePath, anchorLink } from '../i18n/utils';
 import { languages, defaultLang, type Lang } from '../i18n/ui';
 import { siteConfig, formatAddress } from '../config/site';
-import { pricing, formatPrice, PRICES_INCLUDE_VAT, VAT_PERCENT, type ProductKey } from '../config/pricing';
+import {
+  pricing,
+  formatPrice,
+  formatPriceWithCents,
+  netAmount,
+  showsNetPrice,
+  PRICES_INCLUDE_VAT,
+  VAT_PERCENT,
+  type ProductKey,
+} from '../config/pricing';
 import {
   pelletSpecRows,
   pelletPackagingRow,
@@ -30,7 +39,8 @@ function priceLine(key: ProductKey): string {
   const { amount, minOrderTons } = pricing[key];
   const vat = PRICES_INCLUDE_VAT ? `, including ${VAT_PERCENT}% Estonian VAT` : ', excluding VAT';
   const min = minOrderTons === null ? '' : ` (wholesale price, for orders from ${minOrderTons} tonnes)`;
-  return `- Price: ${formatPrice(amount, 'en')} per tonne${vat}${min}`;
+  const net = showsNetPrice('en') ? `; ${formatPriceWithCents(netAmount(amount), 'en')} per tonne excluding VAT` : '';
+  return `- Price: ${formatPrice(amount, 'en')} per tonne${vat}${min}${net}`;
 }
 
 const diameter = (value: string): SpecRow => ({ label: t('specs.row.diameter'), value });

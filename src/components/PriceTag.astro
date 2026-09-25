@@ -13,6 +13,9 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import {
   pricing,
   formatPrice,
+  formatPriceWithCents,
+  netAmount,
+  showsNetPrice,
   PRICES_INCLUDE_VAT,
   VAT_PERCENT,
   type ProductKey,
@@ -50,6 +53,13 @@ const vatNote = PRICES_INCLUDE_VAT
   ? t('price.vatIncluded').replace('{vat}', String(VAT_PERCENT))
   : null;
 
+// Export locales also show the price without VAT, for business buyers who
+// compare net. One text run, e.g. "€322.58 excl. VAT", computed from the
+// gross amount so the two can never disagree.
+const netNote = showsNetPrice(lang)
+  ? `${formatPriceWithCents(netAmount(amount), lang)} ${t('price.netLabel')}`
+  : null;
+
 const wholesaleNote =
   minOrderTons === null
     ? null
@@ -83,6 +93,8 @@ const radius = size === 'lg' ? 'rounded-3xl' : 'rounded-2xl';
     </span>
     <span class="text-sm font-semibold text-stone-500">{t('price.perTon')}</span>
   </p>
+
+  {netNote && <p class="mt-1.5 text-sm font-semibold text-stone-500">{netNote}</p>}
 
   {vatNote && <p class="mt-2 text-[0.8125rem] font-medium text-stone-500">{vatNote}</p>}
 
