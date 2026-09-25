@@ -27,6 +27,7 @@ import {
   REVIEW_BEST_RATING,
   REVIEW_WORST_RATING,
 } from './reviews';
+import { PELLET_CERTIFICATION, type SpecRow } from './specs';
 
 /** A stable, locale-independent node id so all pages reference one entity. */
 export const ORGANIZATION_ID = `${siteConfig.url}/#organization`;
@@ -40,6 +41,38 @@ export interface SchemaProduct {
   url: string;
   /** Raw material, localised. Omitted from the node when not given. */
   material?: string;
+  /**
+   * Localised spec rows — the same ones the visible tables render, from
+   * src/config/specs.ts — emitted as `additionalProperty`.
+   */
+  properties?: SpecRow[];
+  /** Set for products certified ENplus A1; emitted as `hasCertification`. */
+  enplusCertified?: boolean;
+}
+
+/** Spec rows as Schema.org `PropertyValue` nodes. */
+export function buildAdditionalProperties(rows: SpecRow[]): Record<string, unknown>[] {
+  return rows.map((row) => ({
+    '@type': 'PropertyValue',
+    name: row.label,
+    value: row.value,
+  }));
+}
+
+/**
+ * The ENplus A1 certification as a Schema.org `Certification`, the type
+ * Google reads from `Product.hasCertification`.
+ */
+export function buildPelletCertification(): Record<string, unknown> {
+  return {
+    '@type': 'Certification',
+    name: PELLET_CERTIFICATION.name,
+    issuedBy: {
+      '@type': 'Organization',
+      name: PELLET_CERTIFICATION.issuedBy,
+      url: PELLET_CERTIFICATION.issuedByUrl,
+    },
+  };
 }
 
 /**
@@ -144,6 +177,10 @@ export function buildProduct(product: SchemaProduct): Record<string, unknown> {
     brand: { '@id': ORGANIZATION_ID },
     offers: buildOffer(product.key, product.url),
     ...(product.material !== undefined ? { material: product.material } : {}),
+    ...(product.properties !== undefined
+      ? { additionalProperty: buildAdditionalProperties(product.properties) }
+      : {}),
+    ...(product.enplusCertified ? { hasCertification: buildPelletCertification() } : {}),
     ...buildReviewNodes(product.key),
   };
 }

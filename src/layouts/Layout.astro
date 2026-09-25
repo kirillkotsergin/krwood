@@ -12,6 +12,7 @@ import {
 import { languageTags, ogLocales, defaultLang } from '../i18n/ui';
 import { siteConfig } from '../config/site';
 import { buildLocalBusinessSchema } from '../config/schema';
+import { pelletSpecRows, pelletPackagingRow, ligninSpecRows } from '../config/specs';
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -52,6 +53,15 @@ const ogImage = new URL('/images/og-image.png', origin).href;
 const landingUrl = new URL(localizePath('/', lang), origin).href;
 const ligninUrl = new URL(routePath('ligninPellets', lang), origin).href;
 
+// Spec rows for `additionalProperty` — the same rows the visible tables show,
+// with the diameter first and, for the wood pellets, both packaging formats.
+const diameterRow = (value: string) => ({ label: t('specs.row.diameter'), value });
+const pelletProperties = (diameter: string) => [
+  diameterRow(diameter),
+  pelletPackagingRow(t),
+  ...pelletSpecRows(t),
+];
+
 // Schema.org LocalBusiness — see src/config/schema.ts
 const jsonLd = buildLocalBusinessSchema({
   description: pageDescription,
@@ -67,6 +77,8 @@ const jsonLd = buildLocalBusinessSchema({
       description: t('specs.d6.desc'),
       url: `${landingUrl}#pellet-6mm`,
       material: t('specs.value.material'),
+      properties: pelletProperties('6 mm'),
+      enplusCertified: true,
     },
     {
       key: 'pellet8mm',
@@ -74,6 +86,8 @@ const jsonLd = buildLocalBusinessSchema({
       description: t('specs.d8.desc'),
       url: `${landingUrl}#pellet-8mm`,
       material: t('specs.value.material'),
+      properties: pelletProperties('8 mm'),
+      enplusCertified: true,
     },
     {
       key: 'ligninPellets',
@@ -81,6 +95,8 @@ const jsonLd = buildLocalBusinessSchema({
       description: t('lignin.meta.description'),
       url: ligninUrl,
       material: t('lignin.value.origin'),
+      // Not ENplus certified — no hasCertification.
+      properties: [diameterRow(t('lignin.value.diameter')), ...ligninSpecRows(t)],
     },
   ],
 });
