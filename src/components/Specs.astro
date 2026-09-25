@@ -6,40 +6,33 @@ import PriceTag from './PriceTag.astro';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+interface SpecRow {
+  label: string;
+  value: string;
+}
+
 interface Product {
   id: string;
   /** Which entry in src/config/pricing.ts prices this card. */
   priceKey: ProductKey;
   title: string;
+  /** Line under the title — the certification, where the product has one. */
+  grade: string;
   desc: string;
   badge: string;
+  /**
+   * Set for a badge too long to share the title row: it then sits on a line
+   * of its own under the title instead of in the top corner.
+   */
+  wideBadge?: boolean;
   diameter: string;
+  /** Rows after the diameter, which is always first and accented. */
+  rows: SpecRow[];
   featured: boolean;
 }
 
-const products: Product[] = [
-  {
-    id: 'pellet-6mm',
-    priceKey: 'pellet6mm',
-    title: t('specs.d6.title'),
-    desc: t('specs.d6.desc'),
-    badge: t('specs.d6.badge'),
-    diameter: '6 mm',
-    featured: true,
-  },
-  {
-    id: 'pellet-8mm',
-    priceKey: 'pellet8mm',
-    title: t('specs.d8.title'),
-    desc: t('specs.d8.desc'),
-    badge: t('specs.d8.badge'),
-    diameter: '8 mm',
-    featured: false,
-  },
-];
-
-/** Rows shared by both products, apart from the diameter. */
-const sharedRows = [
+/** Rows shared by both wood pellet diameters. */
+const pelletRows: SpecRow[] = [
   { label: t('specs.row.length'), value: t('specs.value.length') },
   { label: t('specs.row.calorific'), value: t('specs.value.calorific') },
   { label: t('specs.row.ash'), value: t('specs.value.ash') },
@@ -48,6 +41,67 @@ const sharedRows = [
   { label: t('specs.row.fines'), value: t('specs.value.fines') },
   { label: t('specs.row.material'), value: t('specs.value.material') },
 ];
+
+/** Same figures, in the same order, as the table on the lignin page. */
+const ligninRows: SpecRow[] = [
+  { label: t('lignin.row.packaging'), value: t('lignin.value.packaging') },
+  { label: t('specs.row.length'), value: t('lignin.value.length') },
+  { label: t('specs.row.calorific'), value: t('lignin.value.calorific') },
+  { label: t('specs.row.moisture'), value: t('lignin.value.moisture') },
+  { label: t('specs.row.ash'), value: t('lignin.value.ash') },
+  { label: t('specs.row.density'), value: t('lignin.value.density') },
+  { label: t('lignin.row.origin'), value: t('lignin.value.origin') },
+];
+
+const products: Product[] = [
+  {
+    id: 'pellet-6mm',
+    priceKey: 'pellet6mm',
+    title: t('specs.d6.title'),
+    grade: 'ENplus® A1',
+    desc: t('specs.d6.desc'),
+    badge: t('specs.d6.badge'),
+    diameter: '6 mm',
+    rows: pelletRows,
+    featured: true,
+  },
+  {
+    id: 'pellet-8mm',
+    priceKey: 'pellet8mm',
+    title: t('specs.d8.title'),
+    grade: 'ENplus® A1',
+    desc: t('specs.d8.desc'),
+    badge: t('specs.d8.badge'),
+    diameter: '8 mm',
+    rows: pelletRows,
+    featured: false,
+  },
+  {
+    id: 'lignin-pellets',
+    priceKey: 'ligninPellets',
+    title: t('specs.lignin.title'),
+    // Not ENplus certified, so the line carries the format instead.
+    grade: t('lignin.value.packaging'),
+    desc: t('specs.lignin.desc'),
+    badge: t('specs.lignin.badge'),
+    wideBadge: true,
+    diameter: t('lignin.value.diameter'),
+    rows: ligninRows,
+    featured: false,
+  },
+];
+
+const badgeClass = (product: Product) =>
+  `rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${
+    product.featured ? 'bg-wood-600 text-white' : 'bg-forest-700 text-white'
+  }`;
+
+/**
+ * On an odd count, the last card is centred under the two-column row (lg).
+ * From xl all three cards share one row, so it drops back into the grid.
+ */
+const isLoneLast = (index: number) =>
+  products.length % 2 === 1 && index === products.length - 1;
 ---
 
 <section id="specs" class="relative scroll-mt-20 overflow-hidden bg-white py-24 lg:py-32">
@@ -77,9 +131,9 @@ const sharedRows = [
     </div>
 
     <!-- Product cards -->
-    <div class="mx-auto mt-16 grid max-w-5xl gap-8 lg:mt-20 lg:grid-cols-2">
+    <div class="mx-auto mt-16 grid max-w-5xl gap-8 lg:mt-20 lg:grid-cols-2 xl:max-w-none xl:grid-cols-3 xl:gap-6">
       {
-        products.map((product) => (
+        products.map((product, index) => (
           <article
             id={product.id}
             data-animate
@@ -88,21 +142,21 @@ const sharedRows = [
               product.featured
                 ? 'border-wood-300 ring-1 ring-wood-200'
                 : 'border-stone-200'
-            }`}
+            } ${isLoneLast(index) ? 'lg:col-span-2 lg:mx-auto lg:w-[calc(50%-1rem)] xl:col-span-1 xl:mx-0 xl:w-auto' : ''}`}
           >
             {/* Card header */}
             <header
-              class={`relative px-7 pb-6 pt-7 ${
+              class={`relative px-7 pb-6 pt-7 xl:px-6 xl:pb-5 xl:pt-6 ${
                 product.featured
                   ? 'bg-gradient-to-br from-wood-50 to-wood-100/60'
                   : 'bg-gradient-to-br from-stone-50 to-stone-100/60'
               }`}
             >
-              <div class="flex items-start justify-between gap-4">
-                <div class="flex items-center gap-4">
+              <div class="flex items-start justify-between gap-4 xl:gap-3">
+                <div class="flex items-center gap-4 xl:gap-3">
                   {/* Pellet glyph */}
                   <span
-                    class={`grid size-14 shrink-0 place-items-center rounded-2xl ${
+                    class={`grid size-14 shrink-0 place-items-center rounded-2xl xl:size-12 ${
                       product.featured
                         ? 'bg-wood-600 text-white shadow-md shadow-wood-900/25'
                         : 'bg-forest-700 text-white shadow-md shadow-forest-900/25'
@@ -112,7 +166,7 @@ const sharedRows = [
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      class="size-7"
+                      class="size-7 xl:size-6"
                       aria-hidden="true"
                     >
                       <rect x="4" y="3.5" width="5" height="10" rx="2.5" opacity="0.95" />
@@ -129,30 +183,31 @@ const sharedRows = [
                     </svg>
                   </span>
                   <div>
-                    <h3 class="text-2xl">{product.title}</h3>
-                    <p class="mt-1 text-sm font-semibold uppercase tracking-wider text-stone-500">
-                      ENplus® A1
+                    <h3 class="text-2xl xl:text-xl">{product.title}</h3>
+                    <p class="mt-1 text-sm font-semibold uppercase tracking-wider text-stone-500 xl:text-xs">
+                      {product.grade}
                     </p>
                   </div>
                 </div>
 
-                <span
-                  class={`shrink-0 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider ${
-                    product.featured
-                      ? 'bg-wood-600 text-white'
-                      : 'bg-forest-700 text-white'
-                  }`}
-                >
-                  {product.badge}
-                </span>
+                {!product.wideBadge && (
+                  <span class={`shrink-0 xl:hidden ${badgeClass(product)}`}>{product.badge}</span>
+                )}
               </div>
 
-              <p class="mt-5 text-[0.9375rem] leading-relaxed text-stone-600">{product.desc}</p>
+              {/* In the three-column row (xl) no card has room for a corner badge. */}
+              <span
+                class={`mt-5 xl:mt-4 xl:inline-block ${product.wideBadge ? 'inline-block xl:tracking-normal' : 'hidden'} ${badgeClass(product)}`}
+              >
+                {product.badge}
+              </span>
+
+              <p class="mt-5 text-[0.9375rem] leading-relaxed text-stone-600 xl:mt-4 xl:text-sm">{product.desc}</p>
             </header>
 
             {/* Spec table */}
-            <div class="flex-1 px-7 py-6">
-              <table class="w-full border-collapse text-sm">
+            <div class="flex-1 px-7 py-6 xl:px-6 xl:py-5">
+              <table class="w-full border-collapse text-sm xl:text-[0.8125rem]">
                 <caption class="sr-only">
                   {product.title} — {t('specs.table.param')} / {t('specs.table.value')}
                 </caption>
@@ -168,23 +223,23 @@ const sharedRows = [
                 </thead>
                 <tbody>
                   <tr class="border-b border-stone-100">
-                    <th scope="row" class="py-3 text-left font-medium text-stone-600">
+                    <th scope="row" class="py-3 text-left font-medium text-stone-600 xl:py-2.5">
                       {t('specs.row.diameter')}
                     </th>
                     <td
-                      class={`py-3 text-right font-bold ${
+                      class={`py-3 text-right font-bold xl:py-2.5 ${
                         product.featured ? 'text-wood-700' : 'text-forest-700'
                       }`}
                     >
                       {product.diameter}
                     </td>
                   </tr>
-                  {sharedRows.map((row) => (
+                  {product.rows.map((row) => (
                     <tr class="border-b border-stone-100 last:border-0">
-                      <th scope="row" class="py-3 text-left font-medium text-stone-600">
+                      <th scope="row" class="py-3 text-left font-medium text-stone-600 xl:py-2.5">
                         {row.label}
                       </th>
-                      <td class="py-3 text-right font-bold text-stone-900">{row.value}</td>
+                      <td class="py-3 text-right font-bold text-stone-900 xl:py-2.5">{row.value}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -192,12 +247,12 @@ const sharedRows = [
             </div>
 
             {/* Price */}
-            <div class="px-7 pb-2">
+            <div class="px-7 pb-2 xl:px-6">
               <PriceTag product={product.priceKey} tone={product.featured ? 'wood' : 'forest'} />
             </div>
 
             {/* Card footer CTA */}
-            <footer class="px-7 pb-6 pt-4">
+            <footer class="px-7 pb-6 pt-4 xl:px-6 xl:pb-5">
               <a
                 href={anchorLink('contact', lang)}
                 class={`group flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:scale-[1.02] active:scale-100 ${

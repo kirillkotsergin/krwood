@@ -122,6 +122,10 @@ const et = {
   'specs.d8.title': 'Graanulid 8 mm',
   'specs.d8.desc': 'Sobib suurematele katlamajadele, tööstuslikele põletitele ja mahukale tarbimisele.',
   'specs.d8.badge': 'Tööstuslik',
+  'specs.lignin.title': 'Ligniini pelletid 8 mm',
+  'specs.lignin.desc':
+    'Ligniin on looduslik polümeer, mis annab puidule tugevuse — ja üks energiarikkamaid biomassi fraktsioone. 8 mm pelletiks pressitult ja 1000 kg suurkottides tarnituna põleb see kuumemalt kui tavalised puidugraanulid ning leiab kasutust paljudes tööstusharudes.',
+  'specs.lignin.badge': 'Energiarikas kütus ja tööstuslik tooraine',
   'specs.table.param': 'Parameeter',
   'specs.table.value': 'Väärtus',
   'specs.row.diameter': 'Läbimõõt',
@@ -436,6 +440,10 @@ const en: Dictionary = {
   'specs.d8.title': '8 mm pellets',
   'specs.d8.desc': 'Suited to larger boiler houses, industrial burners and high-volume consumption.',
   'specs.d8.badge': 'Industrial',
+  'specs.lignin.title': 'Lignin pellets 8 mm',
+  'specs.lignin.desc':
+    'Lignin is the natural polymer that gives wood its strength — and one of the most energy-dense fractions of biomass. Pressed into 8 mm pellets and supplied in 1000 kg big bags, it burns hotter than conventional wood pellets and is used across a wide range of industries.',
+  'specs.lignin.badge': 'Energy-dense fuel and feedstock',
   'specs.table.param': 'Parameter',
   'specs.table.value': 'Value',
   'specs.row.diameter': 'Diameter',
@@ -731,6 +739,10 @@ const pl: Dictionary = {
   'specs.d8.title': 'Pellet 8 mm',
   'specs.d8.desc': 'Przeznaczony do większych kotłowni, palników przemysłowych i dużego zużycia.',
   'specs.d8.badge': 'Przemysłowy',
+  'specs.lignin.title': 'Pellet ligninowy 8 mm',
+  'specs.lignin.desc':
+    'Lignina to naturalny polimer, który nadaje drewnu wytrzymałość — i jedna z najbardziej energetycznych frakcji biomasy. Sprasowana w pellet 8 mm i dostarczana w big bagach 1000 kg spala się goręcej niż zwykły pellet drzewny i znajduje zastosowanie w wielu branżach.',
+  'specs.lignin.badge': 'Biopaliwo i surowiec przemysłowy',
   'specs.table.param': 'Parametr',
   'specs.table.value': 'Wartość',
   'specs.row.diameter': 'Średnica',

@@ -25,9 +25,9 @@ const NBSP = ' ';
 
 /** Pages that must carry a visible price, and how many. */
 const PRICED_PAGES = {
-  'index.html': 2,
-  'en/index.html': 2,
-  'pl/index.html': 2,
+  'index.html': 3,
+  'en/index.html': 3,
+  'pl/index.html': 3,
   'ligniin-pelletid/index.html': 1,
   'en/lignin-pellets/index.html': 1,
   'pl/pellet-ligninowy/index.html': 1,
