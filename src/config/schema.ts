@@ -49,6 +49,11 @@ export interface SchemaProduct {
   properties?: SpecRow[];
   /** Set for products certified ENplus A1; emitted as `hasCertification`. */
   enplusCertified?: boolean;
+  /**
+   * Absolute URL of a photo of the product itself. Omitted rather than
+   * filled with a banner: Google wants the product, not a graphic about it.
+   */
+  image?: string;
 }
 
 /** Spec rows as Schema.org `PropertyValue` nodes. */
@@ -175,6 +180,7 @@ export function buildProduct(product: SchemaProduct): Record<string, unknown> {
     name: product.name,
     description: product.description,
     url: product.url,
+    ...(product.image !== undefined ? { image: product.image } : {}),
     brand: { '@id': ORGANIZATION_ID },
     offers: buildOffer(product.key, product.url),
     ...(product.material !== undefined ? { material: product.material } : {}),

@@ -11,7 +11,7 @@
  * wholesale threshold on the 6 mm pellet refers to.
  */
 
-import type { Lang } from '../i18n/ui';
+import type { Lang, TranslationKey } from '../i18n/ui';
 import { siteConfig } from './site';
 
 /** ISO 4217. Emitted as `priceCurrency` in every Offer. */
@@ -76,4 +76,13 @@ export const PRODUCT_IDS: Record<ProductKey, string> = {
  */
 export function formatPrice(amount: number, lang: Lang): string {
   return lang === 'en' ? `€${amount}` : `${amount} €`;
+}
+
+/**
+ * The VAT position as a sentence for running text, e.g. an FAQ answer:
+ * "Includes 24% Estonian VAT." Empty when prices exclude VAT, so a caller
+ * never states an inclusion that is not true.
+ */
+export function vatSentence(t: (key: TranslationKey) => string): string {
+  return PRICES_INCLUDE_VAT ? `${t('price.vatIncluded').replace('{vat}', String(VAT_PERCENT))}.` : '';
 }

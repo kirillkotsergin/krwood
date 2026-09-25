@@ -1,0 +1,98 @@
+---
+/**
+ * FAQ section with matching FAQPage JSON-LD, shared by the landing page and
+ * the lignin pellets page.
+ *
+ * Questions are written as direct answers so search and AI engines can quote
+ * them. The markup mirrors the visible text word for word, as Google
+ * requires. FAQ rich results are shown only for government and health sites,
+ * so the JSON-LD is not for a snippet: it hands Bing and AI engines the
+ * question/answer pairs directly.
+ *
+ * Callers pass answers with every figure already filled in (see
+ * `fillPlaceholders` in src/i18n/utils.ts), so an answer cannot contradict
+ * the price block or spec table on the same page.
+ */
+import { getLangFromUrl } from '../i18n/utils';
+import { languageTags } from '../i18n/ui';
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  /** Section id, also used for the JSON-LD @id fragment. */
+  id: string;
+  eyebrow: string;
+  title: string;
+  items: FaqItem[];
+  /** Background and padding for the <section>. */
+  class?: string;
+}
+
+const { id, eyebrow, title, items, class: sectionClass = 'bg-white py-24 lg:py-32' } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const origin = Astro.site ?? new URL(Astro.url.origin);
+const pageUrl = new URL(Astro.url.pathname, origin).href;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#${id}`,
+  inLanguage: languageTags[lang],
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+---
+
+<section id={id} class={`scroll-mt-20 ${sectionClass}`}>
+  <div class="mx-auto max-w-3xl px-5 sm:px-8">
+    <p
+      data-animate
+      class="inline-flex items-center gap-2 rounded-full bg-forest-100 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-forest-700"
+    >
+      <span class="size-1.5 rounded-full bg-forest-500"></span>
+      {eyebrow}
+    </p>
+    <h2 data-animate style="--animate-delay:60ms" class="mt-5 text-3xl sm:text-4xl lg:text-5xl">
+      {title}
+    </h2>
+
+    <div class="mt-10 flex flex-col gap-3">
+      {
+        items.map((item) => (
+          <details
+            data-animate
+            data-animate-stagger
+            class="group rounded-2xl border border-stone-200 bg-white shadow-sm transition-colors duration-300 open:border-wood-200 open:bg-wood-50/40"
+          >
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 [&::-webkit-details-marker]:hidden">
+              <h3 class="text-lg font-bold text-stone-900">{item.question}</h3>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="size-5 shrink-0 text-wood-600 transition-transform duration-300 group-open:rotate-180"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </summary>
+            <p class="px-6 pb-6 text-[0.9375rem] leading-relaxed text-stone-600">{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

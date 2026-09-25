@@ -2,9 +2,9 @@
 /**
  * Lignin pellets product landing page.
  *
- * All copy comes from `src/i18n/ui.ts` under the `lignin.*` keys, so the
- * Estonian, English and Polish versions of this page stay in sync and a
- * missing translation fails `npm run check`.
+ * All copy comes from `src/i18n/ui.ts` under the `lignin.*` keys, so every
+ * language version of this page stays in sync and a missing translation
+ * fails `npm run check`.
  */
 import {
   getLangFromUrl,
@@ -12,6 +12,7 @@ import {
   useMarketCopy,
   anchorLink,
   localizePath,
+  fillPlaceholders,
 } from '../i18n/utils';
 import { languageTags } from '../i18n/ui';
 import { siteConfig } from '../config/site';
@@ -21,15 +22,10 @@ import {
   buildReviewNodes,
   buildAdditionalProperties,
 } from '../config/schema';
-import {
-  PRODUCT_IDS,
-  pricing,
-  formatPrice,
-  PRICES_INCLUDE_VAT,
-  VAT_PERCENT,
-} from '../config/pricing';
+import { PRODUCT_IDS, pricing, formatPrice, vatSentence } from '../config/pricing';
 import { ligninSpecRows } from '../config/specs';
 import PriceTag from './PriceTag.astro';
+import Faq from './Faq.astro';
 
 /*
  * Imported rather than referenced from public/, so Astro emits it under
@@ -88,27 +84,17 @@ const specRows = [
   ...ligninSpecRows(t).map((row, index) => ({ ...row, highlight: index === 0 })),
 ];
 
-/*
- * FAQ — written as direct answers, so search and AI engines can quote them.
- * Figures are filled in from the spec values and src/config/pricing.ts
- * rather than typed into the copy, so an answer can never contradict the
- * table or the price block beside it.
- */
-const vatNote = PRICES_INCLUDE_VAT
-  ? `${t('price.vatIncluded').replace('{vat}', String(VAT_PERCENT))}.`
-  : '';
-
-const fillFaq = (text: string) =>
-  text
-    .replace('{price}', formatPrice(pricing.ligninPellets.amount, lang))
-    .replace('{perTon}', t('price.perTon'))
-    .replace('{vatNote}', vatNote)
-    .replace('{calorific}', t('lignin.value.calorific'))
-    .replace('{pelletCalorific}', t('specs.value.calorific'))
-    .replace('{ash}', t('lignin.value.ash'))
-    .replace('{pelletAsh}', t('specs.value.ash'))
-    .replace(/\s+/g, ' ')
-    .trim();
+/* FAQ — figures come from the spec values and src/config/pricing.ts. */
+const faqValues = {
+  price: formatPrice(pricing.ligninPellets.amount, lang),
+  perTon: t('price.perTon'),
+  vatNote: vatSentence(t),
+  calorific: t('lignin.value.calorific'),
+  pelletCalorific: t('specs.value.calorific'),
+  ash: t('lignin.value.ash'),
+  pelletAsh: t('specs.value.ash'),
+};
+const fillFaq = (text: string) => fillPlaceholders(text, faqValues);
 
 const faq = [
   { question: t('lignin.faq.q1'), answer: fillFaq(t('lignin.faq.a1')) },
@@ -237,23 +223,6 @@ const breadcrumbSchema = {
       item: pageUrl,
     },
   ],
-};
-
-/*
- * Mirrors the visible FAQ word for word, as Google requires. FAQ rich results
- * are shown today only for government and health sites, so this is not for
- * a snippet: it hands Bing and AI engines the question/answer pairs directly.
- */
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  '@id': `${pageUrl}#faq`,
-  inLanguage: languageTags[lang],
-  mainEntity: faq.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: { '@type': 'Answer', text: item.answer },
-  })),
 };
 ---
 
@@ -676,50 +645,13 @@ const faqSchema = {
 
   <!-- ==================== FAQ ==================== -->
   <!-- No bottom padding: the closing CTA below opens with its own. -->
-  <section id="lignin-faq" class="scroll-mt-20 bg-white pt-24 lg:pt-32">
-    <div class="mx-auto max-w-3xl px-5 sm:px-8">
-      <p
-        data-animate
-        class="inline-flex items-center gap-2 rounded-full bg-forest-100 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-forest-700"
-      >
-        <span class="size-1.5 rounded-full bg-forest-500"></span>
-        {t('lignin.faq.eyebrow')}
-      </p>
-      <h2 data-animate style="--animate-delay:60ms" class="mt-5 text-3xl sm:text-4xl lg:text-5xl">
-        {t('lignin.faq.title')}
-      </h2>
-
-      <div class="mt-10 flex flex-col gap-3">
-        {
-          faq.map((item) => (
-            <details
-              data-animate
-              data-animate-stagger
-              class="group rounded-2xl border border-stone-200 bg-white shadow-sm transition-colors duration-300 open:border-wood-200 open:bg-wood-50/40"
-            >
-              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 [&::-webkit-details-marker]:hidden">
-                <h3 class="text-lg font-bold text-stone-900">{item.question}</h3>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="size-5 shrink-0 text-wood-600 transition-transform duration-300 group-open:rotate-180"
-                  aria-hidden="true"
-                >
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
-              </summary>
-              <p class="px-6 pb-6 text-[0.9375rem] leading-relaxed text-stone-600">{item.answer}</p>
-            </details>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <Faq
+    id="lignin-faq"
+    eyebrow={t('lignin.faq.eyebrow')}
+    title={t('lignin.faq.title')}
+    items={faq}
+    class="bg-white pt-24 lg:pt-32"
+  />
 
   <!-- ==================== Closing CTA ==================== -->
   <section class="bg-white py-20 lg:py-28">
@@ -762,4 +694,3 @@ const faqSchema = {
 
 <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
 <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-<script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

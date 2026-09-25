@@ -142,7 +142,10 @@ Verified in the build output and live:
 | `404.html` | `noindex, follow`, no canonical, no hreflang, excluded from the sitemap |
 | Sitemap | `/sitemap-index.xml`, `lastmod` on every URL, `/sitemap.xml` 301s to it |
 | Social | `og:image` is a **1200×630 PNG** — SVG is not rendered by Facebook, LinkedIn or X |
-| Google verification | `google-site-verification` meta tag in `src/layouts/Layout.astro` |
+| Search engine verification | `google-site-verification` and Bing's `msvalidate.01` meta tags in `src/layouts/Layout.astro` |
+| FAQ | Wood pellets on the landing page, lignin on its own page, each with `FAQPage` JSON-LD mirroring the visible text. Shared `src/components/Faq.astro`; prices and specs are filled in from config |
+| `/llms.txt` | Plain-text summary for AI assistants, generated at build time by `src/pages/llms.txt.ts` from the same translations and config as the pages |
+| IndexNow | `scripts/indexnow.mjs` submits every sitemap URL after each successful deploy (Bing, which also feeds ChatGPT search). The key file `public/<key>.txt` must stay in place |
 
 ### The host's AI-crawler block, and the override for it
 

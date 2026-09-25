@@ -63,6 +63,23 @@ export function useMarketCopy(lang: Lang) {
 }
 
 /**
+ * Replaces `{name}` placeholders in translated copy with live values, then
+ * tidies the whitespace an empty value leaves behind.
+ *
+ *   fillPlaceholders('Costs {price}. {vatNote} Ask us.', { price: '€390', vatNote: '' })
+ *     -> 'Costs €390. Ask us.'
+ *
+ * Figures come from config rather than being typed into the copy, so a
+ * sentence can never contradict the price block or spec table beside it.
+ */
+export function fillPlaceholders(text: string, values: Record<string, string>): string {
+  return text
+    .replace(/\{(\w+)\}/g, (match, name: string) => values[name] ?? match)
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
  * Strips any locale prefix from a pathname.
  *   '/en/privacy/' -> '/privacy'
  *   '/'            -> '/'

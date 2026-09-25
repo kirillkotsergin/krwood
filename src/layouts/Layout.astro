@@ -13,6 +13,9 @@ import { languageTags, ogLocales, defaultLang } from '../i18n/ui';
 import { siteConfig } from '../config/site';
 import { buildLocalBusinessSchema } from '../config/schema';
 import { pelletSpecRows, pelletPackagingRow, ligninSpecRows } from '../config/specs';
+// The same hashed asset the lignin page shows. There is no photo of the wood
+// pellets yet; add one to src/assets/ and pass it below the same way.
+import ligninPhoto from '../assets/lignin-pellets.webp';
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -97,6 +100,7 @@ const jsonLd = buildLocalBusinessSchema({
       material: t('lignin.value.origin'),
       // Not ENplus certified — no hasCertification.
       properties: [diameterRow(t('lignin.value.diameter')), ...ligninSpecRows(t)],
+      image: new URL(ligninPhoto.src, origin).href,
     },
   ],
 });

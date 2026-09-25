@@ -1,0 +1,45 @@
+---
+/**
+ * Wood pellet FAQ on the landing page. Answers restate what the page already
+ * says; prices and spec values are filled in from config — see
+ * `fillPlaceholders` — so they cannot drift from the cards above.
+ */
+import { getLangFromUrl, useTranslations, fillPlaceholders } from '../i18n/utils';
+import { pricing, formatPrice, vatSentence } from '../config/pricing';
+import Faq from './Faq.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// faq.a3 quotes the 6 mm wholesale minimum. Loud rather than wrong: if that
+// minimum is ever removed from pricing.ts, the build stops here until the
+// copy is changed to match.
+const min6 = pricing.pellet6mm.minOrderTons;
+if (min6 === null) {
+  throw new Error('faq.a3 quotes a minimum order for 6 mm pellets, but pricing.ts has none. Update the copy in src/i18n/ui.ts.');
+}
+
+const values = {
+  price6: formatPrice(pricing.pellet6mm.amount, lang),
+  price8: formatPrice(pricing.pellet8mm.amount, lang),
+  perTon: t('price.perTon'),
+  min: String(min6),
+  vatNote: vatSentence(t),
+  calorific: t('specs.value.calorific'),
+  ash: t('specs.value.ash'),
+  moisture: t('specs.value.moisture'),
+};
+const fill = (text: string) => fillPlaceholders(text, values);
+
+const items = [
+  { question: t('faq.q1'), answer: fill(t('faq.a1')) },
+  { question: t('faq.q2'), answer: fill(t('faq.a2')) },
+  { question: t('faq.q3'), answer: fill(t('faq.a3')) },
+  { question: t('faq.q4'), answer: fill(t('faq.a4')) },
+  { question: t('faq.q5'), answer: fill(t('faq.a5')) },
+  { question: t('faq.q6'), answer: fill(t('faq.a6')) },
+  { question: t('faq.q7'), answer: fill(t('faq.a7')) },
+];
+---
+
+<Faq id="faq" eyebrow={t('faq.eyebrow')} title={t('faq.title')} items={items} class="bg-stone-50 py-24 lg:py-32" />

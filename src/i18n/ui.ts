@@ -119,7 +119,7 @@ const et = {
   'specs.eyebrow': 'Tooted',
   'specs.title': 'Graanulid ja tehnilised näitajad',
   'specs.subtitle':
-    'Kaks läbimõõtu, üks kvaliteedistandard. Valige süsteem, mis sobib Teie katlaga — tehnilised näitajad on mõlemal tootel ENplus A1 tasemel.',
+    'ENplus A1 puidugraanulid kahes läbimõõdus, 6 mm ja 8 mm, ning tööstuslikuks kasutuseks mõeldud 8 mm ligniini pelletid. Valige toode vastavalt oma katlale ja kasutusotstarbele.',
   'specs.d6.title': 'Graanulid 6 mm',
   'specs.d6.desc': 'Universaalne valik kodukateldele, pelletikaminatele ja väiksematele süsteemidele.',
   'specs.d6.badge': 'Populaarseim',
@@ -180,6 +180,34 @@ const et = {
   'packaging.delivery.spec2': 'Baltikum ja EL',
   'packaging.delivery.spec3': 'Täisautokoormused 24 t',
   'packaging.cta': 'Küsi hinnapakkumist',
+
+  // --- Wood pellet FAQ (landing page) --------------------------------------
+  // {price6}, {price8}, {perTon}, {min}, {vatNote} and the spec placeholders
+  // are filled in by LandingFaq.astro from src/config/pricing.ts and the
+  // values above.
+  'faq.eyebrow': 'KKK',
+  'faq.title': 'Korduma kippuvad küsimused puidugraanulite kohta',
+  'faq.q1': 'Kas valida 6 mm või 8 mm graanulid?',
+  'faq.a1':
+    'Mõlemad on sama ENplus A1 kvaliteediga: kütteväärtus {calorific}, tuhasisaldus {ash} ja niiskusesisaldus {moisture}. Erinevus on läbimõõdus. 6 mm graanulid on universaalne valik kodukateldele, pelletikaminatele ja väiksematele süsteemidele, 8 mm graanulid sobivad suurematele katlamajadele, tööstuslikele põletitele ja mahukale tarbimisele. Kahtluse korral kontrollige, millist läbimõõtu Teie katla tootja soovitab.',
+  'faq.q2': 'Mida tähendab ENplus A1?',
+  'faq.a2':
+    'ENplus on Euroopa puidugraanulite kvaliteedisertifikaat ja A1 on selle kõrgeim kvaliteediklass. See tähendab ühtlast läbimõõtu, kõrget tihedust, madalat tuhasisaldust ja minimaalset peenosakeste sisaldust — graanulid põlevad puhtalt ning katel ja korsten püsivad puhtana.',
+  'faq.q3': 'Mis on puidugraanulite hind?',
+  'faq.a3':
+    '6 mm ENplus A1 puidugraanulid maksavad {price6} {perTon} (hulgihind tellimustele alates {min} tonnist) ja 8 mm graanulid {price8} {perTon}. {vatNote} Täpse pakkumise saamiseks andke teada soovitud kogus, pakend ja tarneaadress.',
+  'faq.q4': 'Kas osta 15 kg kotid või Big Bag?',
+  'faq.a4':
+    '15 kg kotid tarnitakse alustel: 65 kotti, kokku 975 kg alusel, termokile all ja ilmastikukindlalt. Neid on mugav käsitseda ja ladustada, mistõttu sobivad need ideaalselt eramajadele. 1000 kg Big Bag on tõstesangade ja põhjaluugiga suurkott ning parim valik suurema koguse soodsaks ladustamiseks.',
+  'faq.q5': 'Kuidas puidugraanuleid hoida?',
+  'faq.a5':
+    'Hoidke graanuleid kuivas: niiskus kahjustab graanuleid ja vähendab nende kütteväärtust. Meie alused on kile all ja ilmastikukindlad, kuid avatud kotte ja Big Bage tasub hoida siseruumis või katuse all.',
+  'faq.q6': 'Kuhu te puidugraanuleid tarnite?',
+  'faq.a6':
+    'Toimetame graanulid kohale üle Eesti ja Baltikumis. Ekspordime ka konteinerite ja täisautokoormustega (24 t) mujale Euroopasse.',
+  'faq.q7': 'Kas graanulid sisaldavad lisaaineid?',
+  'faq.a7':
+    'Ei. Graanulid pressitakse värskest okaspuidu saepurust (mänd, kuusk) ilma liimide, sideainete ja keemiliste lisaaineteta — see on 100% looduslik ja taastuv kütus.',
 
   // --- Contact -------------------------------------------------------------
   'contact.eyebrow': 'Kontakt',
@@ -463,7 +491,7 @@ const en: Dictionary = {
   'specs.eyebrow': 'Products',
   'specs.title': 'Pellets and technical specifications',
   'specs.subtitle':
-    'Two diameters, one quality standard. Choose the format that suits your boiler — both products meet ENplus A1 specifications.',
+    'ENplus A1 wood pellets in two diameters, 6 mm and 8 mm, plus 8 mm lignin pellets for industrial use. Choose the product that suits your boiler and your application.',
   'specs.d6.title': '6 mm pellets',
   'specs.d6.desc': 'The universal choice for domestic boilers, pellet stoves and smaller systems.',
   'specs.d6.badge': 'Most popular',
@@ -520,6 +548,30 @@ const en: Dictionary = {
   'packaging.delivery.spec2': 'Baltics and EU',
   'packaging.delivery.spec3': 'Full truckloads, 24 t',
   'packaging.cta': 'Request a price quote',
+
+  'faq.eyebrow': 'FAQ',
+  'faq.title': 'Frequently asked questions about wood pellets',
+  'faq.q1': 'Should I choose 6 mm or 8 mm pellets?',
+  'faq.a1':
+    'Both are the same ENplus A1 quality: a calorific value of {calorific}, ash content of {ash} and moisture content of {moisture}. The difference is the diameter. 6 mm pellets are the universal choice for domestic boilers, pellet stoves and smaller systems; 8 mm pellets suit larger boiler houses, industrial burners and high-volume consumption. If in doubt, check which diameter your boiler manufacturer recommends.',
+  'faq.q2': 'What does ENplus A1 mean?',
+  'faq.a2':
+    'ENplus is the European quality certification for wood pellets, and A1 is its highest quality class. It means a consistent diameter, high density, low ash and minimal fines — pellets that burn cleanly and keep the boiler and chimney clean.',
+  'faq.q3': 'How much do wood pellets cost?',
+  'faq.a3':
+    'ENplus A1 wood pellets cost {price6} {perTon} in 6 mm (wholesale price, for orders from {min} tonnes) and {price8} {perTon} in 8 mm. {vatNote} For an exact quote, tell us the quantity, the packaging and the delivery address.',
+  'faq.q4': 'Should I buy 15 kg bags or a Big Bag?',
+  'faq.a4':
+    '15 kg bags come on pallets: 65 bags, 975 kg per pallet, shrink-wrapped and weatherproof. They are easy to handle and store, which makes them ideal for private households. The 1000 kg Big Bag has lifting loops and a bottom discharge spout, and is the most economical way to store larger volumes.',
+  'faq.q5': 'How should wood pellets be stored?',
+  'faq.a5':
+    'Keep pellets dry: moisture damages pellets and lowers their calorific value. Our pallets are shrink-wrapped and weatherproof, but opened bags and Big Bags are best kept indoors or under a roof.',
+  'faq.q6': 'Where do you deliver wood pellets?',
+  'faq.a6':
+    'We deliver throughout Estonia and the Baltics, and export by container and full truckload (24 t) across Europe.',
+  'faq.q7': 'Do the pellets contain additives?',
+  'faq.a7':
+    'No. The pellets are pressed from fresh softwood sawdust (pine, spruce) with no glues, binding agents or chemical additives — a 100% natural, renewable fuel.',
 
   'contact.eyebrow': 'Contact',
   'contact.title': 'Request a personal quote',
@@ -786,7 +838,7 @@ const pl: Dictionary = {
   'specs.eyebrow': 'Produkty',
   'specs.title': 'Pellet i dane techniczne',
   'specs.subtitle':
-    'Dwie średnice, jeden standard jakości. Wybierz format odpowiedni dla swojego kotła — oba produkty spełniają wymagania ENplus A1.',
+    'Pellet drzewny ENplus A1 w dwóch średnicach, 6 mm i 8 mm, oraz pellet ligninowy 8 mm do zastosowań przemysłowych. Wybierz produkt dopasowany do swojego kotła i zastosowania.',
   'specs.d6.title': 'Pellet 6 mm',
   'specs.d6.desc': 'Uniwersalny wybór do kotłów domowych, kominków na pellet i mniejszych instalacji.',
   'specs.d6.badge': 'Najpopularniejszy',
@@ -844,6 +896,30 @@ const pl: Dictionary = {
   'packaging.delivery.spec2': 'Kraje bałtyckie i UE',
   'packaging.delivery.spec3': 'Pełne ładunki 24 t',
   'packaging.cta': 'Zapytaj o wycenę',
+
+  'faq.eyebrow': 'FAQ',
+  'faq.title': 'Najczęściej zadawane pytania o pellet drzewny',
+  'faq.q1': 'Pellet 6 mm czy 8 mm?',
+  'faq.a1':
+    'Oba mają tę samą jakość ENplus A1: wartość opałową {calorific}, zawartość popiołu {ash} i wilgotność {moisture}. Różnią się średnicą. Pellet 6 mm to uniwersalny wybór do kotłów domowych, kominków na pellet i mniejszych instalacji, a pellet 8 mm jest przeznaczony do większych kotłowni, palników przemysłowych i dużego zużycia. W razie wątpliwości sprawdź, jaką średnicę zaleca producent Twojego kotła.',
+  'faq.q2': 'Co oznacza ENplus A1?',
+  'faq.a2':
+    'ENplus to europejski certyfikat jakości pelletu drzewnego, a A1 to jego najwyższa klasa jakości. Oznacza stałą średnicę, wysoką gęstość, niską zawartość popiołu i minimalną ilość frakcji drobnych — pellet spala się czysto, a kocioł i komin pozostają czyste.',
+  'faq.q3': 'Ile kosztuje pellet drzewny?',
+  'faq.a3':
+    'Pellet drzewny ENplus A1 kosztuje {price6} {perTon} w średnicy 6 mm (cena hurtowa przy zamówieniach od {min} ton) i {price8} {perTon} w średnicy 8 mm. {vatNote} Aby otrzymać dokładną ofertę, podaj ilość, opakowanie i adres dostawy.',
+  'faq.q4': 'Worki 15 kg czy big bag?',
+  'faq.a4':
+    'Worki 15 kg dostarczamy na paletach: 65 worków, 975 kg na palecie, zabezpieczonych folią termokurczliwą i odpornych na warunki atmosferyczne. Są łatwe w transporcie i przechowywaniu, dlatego idealnie sprawdzają się w gospodarstwach domowych. Big bag 1000 kg ma uchwyty do podnoszenia i wysyp dolny — to najbardziej ekonomiczny sposób magazynowania większych ilości.',
+  'faq.q5': 'Jak przechowywać pellet drzewny?',
+  'faq.a5':
+    'Pellet trzeba chronić przed wilgocią: wilgoć niszczy pellet i obniża jego wartość opałową. Nasze palety są foliowane i odporne na warunki atmosferyczne, ale otwarte worki i big bagi najlepiej trzymać w pomieszczeniu lub pod dachem.',
+  'faq.q6': 'Dokąd dostarczacie pellet drzewny?',
+  'faq.a6':
+    'Dostarczamy na terenie całej Estonii i krajów bałtyckich, a w kontenerach i pełnymi ładunkami (24 t) eksportujemy do całej Europy.',
+  'faq.q7': 'Czy pellet zawiera dodatki?',
+  'faq.a7':
+    'Nie. Pellet jest prasowany ze świeżych trocin drewna iglastego (sosna, świerk), bez klejów, środków wiążących i dodatków chemicznych — to w 100% naturalne, odnawialne paliwo.',
 
   'contact.eyebrow': 'Kontakt',
   'contact.title': 'Zapytaj o indywidualną ofertę',
@@ -1112,7 +1188,7 @@ const it: Dictionary = {
   'specs.eyebrow': 'Prodotti',
   'specs.title': 'Pellet e caratteristiche tecniche',
   'specs.subtitle':
-    'Due diametri, un unico standard di qualità. Scegli il formato adatto alla tua stufa o caldaia: entrambi i prodotti rispettano i requisiti ENplus A1.',
+    'Pellet di legno ENplus A1 in due diametri, 6 mm e 8 mm, e pellet di lignina da 8 mm per uso industriale. Scegli il prodotto adatto alla tua stufa o caldaia e al tuo impiego.',
   'specs.d6.title': 'Pellet 6 mm',
   'specs.d6.desc': 'La scelta universale per caldaie domestiche, stufe a pellet e piccoli impianti.',
   'specs.d6.badge': 'Il più richiesto',
@@ -1171,6 +1247,30 @@ const it: Dictionary = {
   'packaging.delivery.spec2': 'Estonia, Paesi baltici e UE',
   'packaging.delivery.spec3': 'Bilico completo da 24 t',
   'packaging.cta': 'Richiedi un preventivo',
+
+  'faq.eyebrow': 'FAQ',
+  'faq.title': 'Domande frequenti sul pellet di legno',
+  'faq.q1': 'Meglio il pellet da 6 mm o da 8 mm?',
+  'faq.a1':
+    'Entrambi hanno la stessa qualità ENplus A1: potere calorifico {calorific}, ceneri {ash} e umidità {moisture}. Cambia il diametro. Il pellet da 6 mm è la scelta universale per caldaie domestiche, stufe a pellet e piccoli impianti; quello da 8 mm è ideale per grandi centrali termiche, bruciatori industriali e consumi elevati. Nel dubbio, verifica il diametro consigliato dal produttore della tua stufa o caldaia.',
+  'faq.q2': 'Che cosa significa ENplus A1?',
+  'faq.a2':
+    'ENplus è la certificazione europea di qualità del pellet di legno e A1 è la sua classe più alta. Significa diametro uniforme, alta densità, basso contenuto di ceneri e minimo contenuto di fini: un pellet che brucia in modo pulito e mantiene puliti stufa, caldaia e canna fumaria.',
+  'faq.q3': 'Quanto costa il pellet di legno?',
+  'faq.a3':
+    'Il pellet di legno ENplus A1 da 6 mm costa {price6} {perTon} (prezzo all’ingrosso per ordini a partire da {min} tonnellate), quello da 8 mm {price8} {perTon}. {vatNote} Per un preventivo preciso, indicaci quantità, confezione e indirizzo di consegna.',
+  'faq.q4': 'Meglio i sacchi da 15 kg o il big bag?',
+  'faq.a4':
+    'I sacchi da 15 kg sono forniti su bancale: 65 sacchi, 975 kg per bancale, cellofanati e protetti dalle intemperie. Facili da movimentare e da stoccare, sono ideali per l’uso domestico. Il big bag da 1000 kg ha maniglie di sollevamento e scarico dal fondo: è la soluzione più conveniente per stoccare grandi quantità.',
+  'faq.q5': 'Come si conserva il pellet di legno?',
+  'faq.a5':
+    'Il pellet va tenuto all’asciutto: l’umidità lo danneggia e ne riduce il potere calorifico. I nostri bancali sono cellofanati e protetti dalle intemperie, ma i sacchi aperti e i big bag vanno conservati al chiuso o sotto una tettoia.',
+  'faq.q6': 'Dove consegnate il pellet di legno?',
+  'faq.a6':
+    'Consegniamo in Italia, in container e a carico completo (24 t), così come in Estonia, nei Paesi baltici e nel resto d’Europa.',
+  'faq.q7': 'Il pellet contiene additivi?',
+  'faq.a7':
+    'No. Il pellet è prodotto con segatura fresca di conifera (pino, abete rosso), senza colle, leganti o additivi chimici: un combustibile naturale al 100% e rinnovabile.',
 
   'contact.eyebrow': 'Contatti',
   'contact.title': 'Richiedi un preventivo personalizzato',
