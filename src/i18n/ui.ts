@@ -494,7 +494,7 @@ const en: Dictionary = {
 
   'price.label': 'Price',
   'price.perTon': 'per tonne',
-  'price.vatIncluded': 'Includes {vat}% VAT',
+  'price.vatIncluded': 'Includes {vat}% Estonian VAT',
   'price.wholesaleNote': 'Wholesale price valid for orders from {min} tonnes',
 
   'packaging.eyebrow': 'Packaging',
@@ -817,7 +817,8 @@ const pl: Dictionary = {
 
   'price.label': 'Cena',
   'price.perTon': 'za tonę',
-  'price.vatIncluded': 'Zawiera {vat}% VAT',
+  // "estońskiego" on purpose: Polish VAT is 23%, and a bare 24% reads as a typo.
+  'price.vatIncluded': 'Zawiera {vat}% estońskiego VAT',
   'price.wholesaleNote': 'Cena hurtowa obowiązuje przy zamówieniach od {min} ton',
 
   'packaging.eyebrow': 'Opakowania',
@@ -1058,7 +1059,7 @@ const pl: Dictionary = {
 const it: Dictionary = {
   'meta.title': 'Pellet di legno ENplus A1 da 6 e 8 mm | KR Wood Estonia',
   'meta.description':
-    'Pellet di legno certificato ENplus A1 da 6 mm e 8 mm. Alto potere calorifico, basso contenuto di ceneri, 100% conifera naturale. Esportazione in tutta l’UE.',
+    'Pellet di legno certificato ENplus A1 da 6 mm e 8 mm. Alto potere calorifico, basso contenuto di ceneri, 100% conifera naturale. Consegna in Italia.',
   'meta.ogAlt': 'Pellet di legno premium KR Wood',
 
   'a11y.skipToContent': 'Vai al contenuto principale',
@@ -1142,7 +1143,9 @@ const it: Dictionary = {
 
   'price.label': 'Prezzo',
   'price.perTon': 'a tonnellata',
-  'price.vatIncluded': 'IVA {vat}% inclusa',
+  // "estone" on purpose: Italian IVA is 22%, and a bare 24% reads as a typo.
+  // English and Polish name the Estonian rate the same way.
+  'price.vatIncluded': 'IVA estone al {vat}% inclusa',
   'price.wholesaleNote': 'Prezzo all’ingrosso valido per ordini a partire da {min} tonnellate',
 
   'packaging.eyebrow': 'Confezioni',
@@ -1161,11 +1164,11 @@ const it: Dictionary = {
   'packaging.bigbag.spec1': 'Sacco da 1000 kg',
   'packaging.bigbag.spec2': 'Maniglie di sollevamento',
   'packaging.bigbag.spec3': 'Scarico dal fondo',
-  'packaging.delivery.title': 'Consegna ed esportazione',
+  'packaging.delivery.title': 'Consegna in Italia e in Europa',
   'packaging.delivery.desc':
-    'Consegna in tutta l’Estonia e nei Paesi baltici. Esportiamo inoltre in container e con carichi completi in tutta Europa.',
-  'packaging.delivery.spec1': 'Consegna in tutta l’Estonia',
-  'packaging.delivery.spec2': 'Paesi baltici e UE',
+    'Consegniamo in Italia, in container e con carichi completi, così come in Estonia, nei Paesi baltici e nel resto d’Europa.',
+  'packaging.delivery.spec1': 'Consegna in Italia',
+  'packaging.delivery.spec2': 'Estonia, Paesi baltici e UE',
   'packaging.delivery.spec3': 'Carichi completi da 24 t',
   'packaging.cta': 'Richiedi un preventivo',
 
@@ -1254,7 +1257,7 @@ const it: Dictionary = {
 
   'lignin.meta.title': 'Pellet di lignina 8 mm | Big Bag da 1000 kg | KR Wood',
   'lignin.meta.description':
-    'Pellet di lignina da 8 mm in big bag da 1000 kg: biocombustibile ad alto potere calorifico e materia prima per asfalti, calcestruzzo, agricoltura e chimica.',
+    'Pellet di lignina 8 mm in big bag da 1000 kg, con consegna in Italia: biocombustibile ad alto potere calorifico e materia prima per asfalti e calcestruzzo.',
   'lignin.meta.imageAlt':
     'Mucchio di pellet di lignina da 8 mm su un piano di legno scuro, accanto a un barattolo di vetro con un campione',
 
@@ -1363,7 +1366,7 @@ const it: Dictionary = {
     'Aggiunta al bitume e all’asfalto, la lignina prolunga la vita utile delle pavimentazioni stradali e rallenta l’invecchiamento del bitume. Nel calcestruzzo i lignosolfonati agiscono da fluidificanti. Dalla lignina si ricavano inoltre enterosorbenti per il bestiame, ammendanti, vanillina, resine, fibra di carbonio e carbone attivo; si impiega anche nei fluidi di perforazione, nelle sabbie da fonderia e nella bonifica degli sversamenti di petrolio.',
   'lignin.faq.q5': 'Come viene consegnato il pellet di lignina?',
   'lignin.faq.a5':
-    'Il pellet di lignina è fornito in big bag da 1000 kg con maniglie di sollevamento, che si movimentano con carrello elevatore o sollevatore telescopico. Consegniamo in tutta l’Estonia e nei Paesi baltici ed esportiamo con carichi completi in tutta Europa.',
+    'Il pellet di lignina è fornito in big bag da 1000 kg con maniglie di sollevamento, che si movimentano con carrello elevatore o sollevatore telescopico. Consegniamo in Italia, così come in Estonia, nei Paesi baltici e nel resto d’Europa.',
   'lignin.faq.q6': 'Quanto costa il pellet di lignina?',
   'lignin.faq.a6':
     'Il pellet di lignina costa {price} {perTon}. {vatNote} Per un preventivo preciso, indicaci la quantità desiderata e l’indirizzo di consegna.',

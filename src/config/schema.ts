@@ -278,10 +278,14 @@ export function buildLocalBusinessSchema(options: SchemaOptions): Record<string,
       },
     ],
 
+    // Countries the site explicitly promises delivery to, plus the EU as a
+    // whole. Poland and Italy each have a localised page that says so.
     areaServed: [
       { '@type': 'Country', name: 'Estonia' },
       { '@type': 'Country', name: 'Latvia' },
       { '@type': 'Country', name: 'Lithuania' },
+      { '@type': 'Country', name: 'Poland' },
+      { '@type': 'Country', name: 'Italy' },
       { '@type': 'Place', name: 'European Union' },
     ],
 
