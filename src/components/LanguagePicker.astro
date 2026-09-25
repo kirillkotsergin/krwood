@@ -8,9 +8,14 @@ interface Props {
   class?: string;
   /** `light` inverts the colours for use on dark backgrounds. */
   variant?: 'dark' | 'light';
+  /**
+   * Tighter padding, for the phone header bar. Four languages, the logo and
+   * the menu button only fit a 360px screen with the pills this size.
+   */
+  compact?: boolean;
 }
 
-const { class: className = '', variant = 'dark' } = Astro.props;
+const { class: className = '', variant = 'dark', compact = false } = Astro.props;
 
 const currentLang = getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
@@ -43,7 +48,7 @@ const idleItem =
 ---
 
 <nav aria-label={t('a11y.chooseLanguage')} class={className}>
-  <ul class={`flex items-center gap-0.5 rounded-full p-1 ring-1 ${shell}`}>
+  <ul class={`flex items-center gap-0.5 rounded-full ring-1 ${compact ? 'p-0.5' : 'p-1'} ${shell}`}>
     {
       options.map((option) => (
         <li>
@@ -53,7 +58,7 @@ const idleItem =
             lang={option.tag}
             aria-current={option.isActive ? 'true' : undefined}
             title={option.name}
-            class={`block rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wide transition-all duration-200 ${
+            class={`block rounded-full py-1 text-xs font-bold uppercase tracking-wide transition-all duration-200 ${compact ? 'px-2' : 'px-2.5'} ${
               option.isActive ? activeItem : idleItem
             }`}
           >

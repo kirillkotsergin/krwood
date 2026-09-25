@@ -4,9 +4,11 @@ interface Props {
   class?: string;
   /** Renders the wordmark in light colours for dark backgrounds. */
   variant?: 'dark' | 'light';
+  /** Extra classes for the "KR Wood" text, e.g. to hide it on the narrowest screens. */
+  wordmarkClass?: string;
 }
 
-const { class: className = '', variant = 'dark' } = Astro.props;
+const { class: className = '', variant = 'dark', wordmarkClass = '' } = Astro.props;
 
 const wordmark = variant === 'light' ? 'text-white' : 'text-stone-900';
 const suffix = variant === 'light' ? 'text-wood-300' : 'text-wood-600';
@@ -33,7 +35,7 @@ const suffix = variant === 'light' ? 'text-wood-300' : 'text-wood-600';
       ></rect>
     </svg>
   </span>
-  <span class={`text-lg font-extrabold tracking-tight lg:text-xl ${wordmark}`}>
+  <span class={`text-lg font-extrabold tracking-tight lg:text-xl ${wordmark} ${wordmarkClass}`}>
     KR<span class={suffix}>&nbsp;Wood</span>
   </span>
 </span>
