@@ -55,6 +55,17 @@
     -webkit-text-size-adjust: 100%;
   }
 
+  /*
+   * Safety net against sideways scrolling on phones: an oversized decorative
+   * element can never widen the page. `clip` rather than `hidden`, because
+   * `hidden` on body turns it into a scroll container of its own, which
+   * breaks position: sticky and scroll anchoring on iOS.
+   */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   /* Sticky header is 4rem tall (5rem on lg) — keep anchor targets clear of it. */
   :target,
   [id] {
