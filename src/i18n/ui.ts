@@ -358,6 +358,32 @@ const et = {
   'lignin.apps.eco.i1':
     'Naftareostuse likvideerimine — ligniin toimib hüdrofoobse sorbendina, sidudes süsivesinikke nii vees kui pinnases',
 
+  // {price}, {perTon}, {vatNote} and the spec placeholders are filled in by
+  // LigninPellets.astro from src/config/pricing.ts and the values above.
+  'lignin.faq.eyebrow': 'KKK',
+  'lignin.faq.title': 'Korduma kippuvad küsimused',
+  'lignin.faq.q1': 'Mis on ligniini pelletid?',
+  'lignin.faq.a1':
+    'Ligniini pelletid on 8 mm läbimõõduga pelletid, mis on pressitud ligniinist — looduslikust polümeerist, mis seob puidukiud omavahel ja annab puidule jäikuse. Ligniin eraldatakse tselluloositööstuse ja biorafineerimise kõrvalsaadusena ning see sisaldab kilogrammi kohta rohkem energiat kui teda ümbritsev tselluloos.',
+  'lignin.faq.q2': 'Mille poolest erinevad ligniini pelletid tavalistest puidugraanulitest?',
+  'lignin.faq.a2':
+    'Ligniini pelletite kütteväärtus on {calorific}, ENplus A1 puidugraanulitel {pelletCalorific}, seega annab iga tonn rohkem soojust. Tuhasisaldus on seevastu kõrgem: ligniini pelletitel {ash}, puidugraanulitel {pelletAsh}. Ligniini pelleteid tarnitakse ainult 1000 kg suurkottides ning neid kasutatakse lisaks kütusele ka tööstusliku toorainena.',
+  'lignin.faq.q3': 'Kellele ligniini pelletid sobivad?',
+  'lignin.faq.a3':
+    'Eelkõige tööstuslikele katlamajadele ja koostootmisjaamadele, kes soovivad tonni kohta suuremat energiatihedust. Toorainena kasutavad ligniini ka asfaldi- ja betoonitootjad, keemia- ja biorafineerimisettevõtted ning põllumajandus- ja söödatootjad.',
+  'lignin.faq.q4': 'Milleks kasutatakse ligniini peale kütmise?',
+  'lignin.faq.a4':
+    'Bituumenile ja asfaldile lisatuna pikendab ligniin teekatte eluiga ja aeglustab bituumeni vananemist. Lignosulfonaadid toimivad betoonis plastifikaatorina. Ligniinist valmistatakse ka loomadele mõeldud enterosorbente, mullaparandajaid, vanilliini, vaike, süsinikkiudu ja aktiivsütt; seda kasutatakse puurimisvedelikes, valuvormisegudes ja naftareostuse likvideerimisel.',
+  'lignin.faq.q5': 'Kuidas ligniini pelleteid tarnitakse?',
+  'lignin.faq.a5':
+    'Ligniini pelleteid tarnitakse 1000 kg suurkottides (Big Bag), millel on tõstesangad — neid liigutatakse tõstuki või teleskooplaaduriga. Toimetame kauba kohale üle Eesti ja Baltikumi ning ekspordime täisautokoormustega ka mujale Euroopasse.',
+  'lignin.faq.q6': 'Kui palju ligniini pelletid maksavad?',
+  'lignin.faq.a6':
+    'Ligniini pelletite hind on {price} {perTon}. {vatNote} Täpse pakkumise saamiseks andke teada soovitud kogus ja tarneaadress.',
+  'lignin.faq.q7': 'Kas tarnega on kaasas analüüsisertifikaat?',
+  'lignin.faq.a7':
+    'Jah. Tehnilises tabelis toodud väärtused on selle klassi tüüpilised näitajad; täpsed andmed kinnitatakse iga partii kohta kaasasolevas analüüsisertifikaadis.',
+
   'lignin.cta.title': 'Vajate ligniini pelleteid suuremas koguses?',
   'lignin.cta.text':
     'Andke teada aastane kogus, tarnekoht ja kavandatav kasutusala ning saadame pakkumise koos analüüsisertifikaadiga.',
@@ -666,6 +692,30 @@ const en: Dictionary = {
   'lignin.apps.eco.i1':
     'Oil spill cleanup — lignin acts as a hydrophobic sorbent, binding hydrocarbons on water and in soil',
 
+  'lignin.faq.eyebrow': 'FAQ',
+  'lignin.faq.title': 'Frequently asked questions',
+  'lignin.faq.q1': 'What are lignin pellets?',
+  'lignin.faq.a1':
+    'Lignin pellets are 8 mm pellets pressed from lignin — the natural polymer that binds wood fibres together and makes wood rigid. Lignin is recovered as a by-product of pulp and biorefinery processes, and it carries more energy per kilogram than the cellulose around it.',
+  'lignin.faq.q2': 'How do lignin pellets differ from standard wood pellets?',
+  'lignin.faq.a2':
+    'Lignin pellets have a calorific value of {calorific}, against {pelletCalorific} for ENplus A1 wood pellets, so every tonne delivers more heat. Their ash content is higher, however: {ash} for lignin pellets, {pelletAsh} for wood pellets. Lignin pellets are supplied in 1000 kg big bags only, and are used as an industrial raw material as well as a fuel.',
+  'lignin.faq.q3': 'Who are lignin pellets for?',
+  'lignin.faq.a3':
+    'Mainly industrial boiler houses and CHP plants looking for more energy per tonne. As a raw material, lignin is also used by asphalt and concrete producers, chemical and biorefinery operations, and agricultural and feed manufacturers.',
+  'lignin.faq.q4': 'What is lignin used for besides heating?',
+  'lignin.faq.a4':
+    'Added to bitumen and asphalt, lignin extends the service life of road surfaces and slows the age-hardening of bitumen. Lignosulfonates act as plasticisers in concrete. Lignin is also made into enterosorbents for livestock, soil improvers, vanillin, resins, carbon fibre and activated carbon, and it is used in drilling fluids, foundry moulding sands and oil spill cleanup.',
+  'lignin.faq.q5': 'How are lignin pellets delivered?',
+  'lignin.faq.a5':
+    'Lignin pellets are supplied in 1000 kg big bags with lifting loops, which move by forklift or telehandler. We deliver throughout Estonia and the Baltics, and export by full truckload across Europe.',
+  'lignin.faq.q6': 'How much do lignin pellets cost?',
+  'lignin.faq.a6':
+    'Lignin pellets cost {price} {perTon}. {vatNote} For an exact quote, tell us the quantity you need and the delivery address.',
+  'lignin.faq.q7': 'Does each delivery come with a certificate of analysis?',
+  'lignin.faq.a7':
+    'Yes. The figures in the specification table are typical for this grade; the exact values for each batch are confirmed on the certificate of analysis that accompanies it.',
+
   'lignin.cta.title': 'Need lignin pellets in volume?',
   'lignin.cta.text':
     'Tell us your annual tonnage, delivery point and intended application, and we will come back with a quote and a certificate of analysis.',
@@ -964,6 +1014,30 @@ const pl: Dictionary = {
   'lignin.apps.eco.title': 'Ekologia i usuwanie skażeń',
   'lignin.apps.eco.i1':
     'Usuwanie wycieków ropy — lignina działa jako sorbent hydrofobowy, wiążąc węglowodory na wodzie i w glebie',
+
+  'lignin.faq.eyebrow': 'FAQ',
+  'lignin.faq.title': 'Najczęściej zadawane pytania',
+  'lignin.faq.q1': 'Czym jest pellet ligninowy?',
+  'lignin.faq.a1':
+    'Pellet ligninowy to pellet o średnicy 8 mm sprasowany z ligniny — naturalnego polimeru, który spaja włókna drewna i nadaje mu sztywność. Lignina jest pozyskiwana jako produkt uboczny przemysłu celulozowego i biorafinerii i zawiera więcej energii w kilogramie niż otaczająca ją celuloza.',
+  'lignin.faq.q2': 'Czym pellet ligninowy różni się od zwykłego pelletu drzewnego?',
+  'lignin.faq.a2':
+    'Wartość opałowa pelletu ligninowego wynosi {calorific}, a pelletu drzewnego ENplus A1 {pelletCalorific}, więc każda tona daje więcej ciepła. Zawartość popiołu jest natomiast wyższa: {ash} w pellecie ligninowym wobec {pelletAsh} w pellecie drzewnym. Pellet ligninowy dostarczamy wyłącznie w big bagach 1000 kg i służy on nie tylko jako paliwo, ale też jako surowiec przemysłowy.',
+  'lignin.faq.q3': 'Dla kogo jest pellet ligninowy?',
+  'lignin.faq.a3':
+    'Przede wszystkim dla przemysłowych kotłowni i elektrociepłowni, które szukają większej gęstości energii na tonę. Jako surowiec ligninę wykorzystują też wytwórnie mas bitumicznych, producenci betonu, zakłady chemiczne i biorafinerie oraz producenci rolni i paszowi.',
+  'lignin.faq.q4': 'Do czego oprócz ogrzewania wykorzystuje się ligninę?',
+  'lignin.faq.a4':
+    'Dodawana do bitumu i asfaltu lignina wydłuża żywotność nawierzchni drogowych i spowalnia starzenie się bitumu. Lignosulfoniany działają w betonie jako plastyfikatory. Z ligniny wytwarza się także enterosorbenty dla zwierząt, polepszacze gleby, wanilinę, żywice, włókno węglowe i węgiel aktywny; stosuje się ją również w płuczkach wiertniczych, masach formierskich i przy usuwaniu wycieków ropy.',
+  'lignin.faq.q5': 'Jak dostarczany jest pellet ligninowy?',
+  'lignin.faq.a5':
+    'Pellet ligninowy dostarczamy w big bagach 1000 kg z uchwytami do podnoszenia, które przenosi się wózkiem widłowym lub ładowarką teleskopową. Sprzedajemy w hurcie, pełnymi tirami po 24 t, z dostawą pod wskazany adres w dowolnym regionie Polski.',
+  'lignin.faq.q6': 'Ile kosztuje pellet ligninowy?',
+  'lignin.faq.a6':
+    'Cena pelletu ligninowego wynosi {price} {perTon}. {vatNote} Aby otrzymać dokładną ofertę, podaj potrzebną ilość i adres dostawy.',
+  'lignin.faq.q7': 'Czy do dostawy dołączany jest certyfikat analizy?',
+  'lignin.faq.a7':
+    'Tak. Wartości w tabeli danych technicznych są typowe dla tej klasy; dokładne dane dla każdej partii potwierdza dołączony do niej certyfikat analizy.',
 
   'lignin.cta.title': 'Potrzebujesz pelletu ligninowego w hurcie?',
   'lignin.cta.text':

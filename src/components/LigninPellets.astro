@@ -15,8 +15,20 @@ import {
 } from '../i18n/utils';
 import { languageTags } from '../i18n/ui';
 import { siteConfig } from '../config/site';
-import { ORGANIZATION_ID, buildOffer, buildReviewNodes } from '../config/schema';
-import { PRODUCT_IDS } from '../config/pricing';
+import {
+  ORGANIZATION_ID,
+  buildOffer,
+  buildReviewNodes,
+  buildAdditionalProperties,
+} from '../config/schema';
+import {
+  PRODUCT_IDS,
+  pricing,
+  formatPrice,
+  PRICES_INCLUDE_VAT,
+  VAT_PERCENT,
+} from '../config/pricing';
+import { ligninSpecRows } from '../config/specs';
 import PriceTag from './PriceTag.astro';
 
 /*
@@ -66,16 +78,46 @@ const audience = [
   t('lignin.audience.a4'),
 ];
 
-/** 8 mm and Big Bag 1000 kg are the two confirmed figures; see specs note. */
+/**
+ * 8 mm and Big Bag 1000 kg are the two confirmed figures; see specs note.
+ * The rows after the diameter are shared with the landing-page card and the
+ * JSON-LD — see src/config/specs.ts. Packaging comes first of those.
+ */
 const specRows = [
   { label: t('specs.row.diameter'), value: t('lignin.value.diameter'), highlight: true },
-  { label: t('lignin.row.packaging'), value: t('lignin.value.packaging'), highlight: true },
-  { label: t('specs.row.length'), value: t('lignin.value.length'), highlight: false },
-  { label: t('specs.row.calorific'), value: t('lignin.value.calorific'), highlight: false },
-  { label: t('specs.row.moisture'), value: t('lignin.value.moisture'), highlight: false },
-  { label: t('specs.row.ash'), value: t('lignin.value.ash'), highlight: false },
-  { label: t('specs.row.density'), value: t('lignin.value.density'), highlight: false },
-  { label: t('lignin.row.origin'), value: t('lignin.value.origin'), highlight: false },
+  ...ligninSpecRows(t).map((row, index) => ({ ...row, highlight: index === 0 })),
+];
+
+/*
+ * FAQ — written as direct answers, so search and AI engines can quote them.
+ * Figures are filled in from the spec values and src/config/pricing.ts
+ * rather than typed into the copy, so an answer can never contradict the
+ * table or the price block beside it.
+ */
+const vatNote = PRICES_INCLUDE_VAT
+  ? `${t('price.vatIncluded').replace('{vat}', String(VAT_PERCENT))}.`
+  : '';
+
+const fillFaq = (text: string) =>
+  text
+    .replace('{price}', formatPrice(pricing.ligninPellets.amount, lang))
+    .replace('{perTon}', t('price.perTon'))
+    .replace('{vatNote}', vatNote)
+    .replace('{calorific}', t('lignin.value.calorific'))
+    .replace('{pelletCalorific}', t('specs.value.calorific'))
+    .replace('{ash}', t('lignin.value.ash'))
+    .replace('{pelletAsh}', t('specs.value.ash'))
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const faq = [
+  { question: t('lignin.faq.q1'), answer: fillFaq(t('lignin.faq.a1')) },
+  { question: t('lignin.faq.q2'), answer: fillFaq(t('lignin.faq.a2')) },
+  { question: t('lignin.faq.q3'), answer: fillFaq(t('lignin.faq.a3')) },
+  { question: t('lignin.faq.q4'), answer: fillFaq(t('lignin.faq.a4')) },
+  { question: t('lignin.faq.q5'), answer: fillFaq(t('lignin.faq.a5')) },
+  { question: t('lignin.faq.q6'), answer: fillFaq(t('lignin.faq.a6')) },
+  { question: t('lignin.faq.q7'), answer: fillFaq(t('lignin.faq.a7')) },
 ];
 
 /*
@@ -171,11 +213,7 @@ const productSchema = {
   inLanguage: languageTags[lang],
   brand: { '@id': ORGANIZATION_ID },
   manufacturer: { '@id': ORGANIZATION_ID },
-  additionalProperty: specRows.map((row) => ({
-    '@type': 'PropertyValue',
-    name: row.label,
-    value: row.value,
-  })),
+  additionalProperty: buildAdditionalProperties(specRows),
   // Carries `price` and `priceCurrency` — see buildOffer in src/config/schema.ts.
   offers: buildOffer('ligninPellets', pageUrl),
   // Emits nothing while there are no real reviews; see src/config/reviews.ts.
@@ -199,6 +237,23 @@ const breadcrumbSchema = {
       item: pageUrl,
     },
   ],
+};
+
+/*
+ * Mirrors the visible FAQ word for word, as Google requires. FAQ rich results
+ * are shown today only for government and health sites, so this is not for
+ * a snippet: it hands Bing and AI engines the question/answer pairs directly.
+ */
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${pageUrl}#faq`,
+  inLanguage: languageTags[lang],
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
 };
 ---
 
@@ -619,6 +674,53 @@ const breadcrumbSchema = {
     </div>
   </section>
 
+  <!-- ==================== FAQ ==================== -->
+  <!-- No bottom padding: the closing CTA below opens with its own. -->
+  <section id="lignin-faq" class="scroll-mt-20 bg-white pt-24 lg:pt-32">
+    <div class="mx-auto max-w-3xl px-5 sm:px-8">
+      <p
+        data-animate
+        class="inline-flex items-center gap-2 rounded-full bg-forest-100 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-forest-700"
+      >
+        <span class="size-1.5 rounded-full bg-forest-500"></span>
+        {t('lignin.faq.eyebrow')}
+      </p>
+      <h2 data-animate style="--animate-delay:60ms" class="mt-5 text-3xl sm:text-4xl lg:text-5xl">
+        {t('lignin.faq.title')}
+      </h2>
+
+      <div class="mt-10 flex flex-col gap-3">
+        {
+          faq.map((item) => (
+            <details
+              data-animate
+              data-animate-stagger
+              class="group rounded-2xl border border-stone-200 bg-white shadow-sm transition-colors duration-300 open:border-wood-200 open:bg-wood-50/40"
+            >
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 [&::-webkit-details-marker]:hidden">
+                <h3 class="text-lg font-bold text-stone-900">{item.question}</h3>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="size-5 shrink-0 text-wood-600 transition-transform duration-300 group-open:rotate-180"
+                  aria-hidden="true"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </summary>
+              <p class="px-6 pb-6 text-[0.9375rem] leading-relaxed text-stone-600">{item.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- ==================== Closing CTA ==================== -->
   <section class="bg-white py-20 lg:py-28">
     <div class="mx-auto max-w-4xl px-5 sm:px-8">
@@ -660,3 +762,4 @@ const breadcrumbSchema = {
 
 <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
 <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
