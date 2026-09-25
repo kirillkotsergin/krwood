@@ -57,14 +57,14 @@ KEEP_BACKUPS="${KRWOOD_KEEP_BACKUPS:-5}"
 PROTECTED=('.well-known')
 
 # Files that must exist in dist/ or the deploy aborts.
-REQUIRED=('index.html' 'en/index.html' 'pl/index.html' '.htaccess' 'contact.php' 'counter.php')
+REQUIRED=('index.html' 'en/index.html' 'pl/index.html' 'it/index.html' '.htaccess' 'contact.php' 'counter.php')
 
 SITE_URL='https://krwood.ee'
 
 # Public URLs that must return 200 after deploying.
 SMOKE_PATHS=(
-  '/' '/en/' '/pl/'
-  '/ligniin-pelletid/' '/en/lignin-pellets/' '/pl/pellet-ligninowy/'
+  '/' '/en/' '/pl/' '/it/'
+  '/ligniin-pelletid/' '/en/lignin-pellets/' '/pl/pellet-ligninowy/' '/it/pellet-di-lignina/'
   '/privacy/'
 )
 

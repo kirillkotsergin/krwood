@@ -144,7 +144,10 @@ if (has_header_injection($name) || has_header_injection($email) || has_header_in
     respond(false, 400, 'invalid_input');
 }
 
-$allowedLangs = ['et', 'en', 'pl'];
+// Keep in step with `languages` in src/i18n/ui.ts. An unknown value falls
+// back to 'et', so a language missing here is mislabelled in the enquiry
+// email rather than rejected.
+$allowedLangs = ['et', 'en', 'pl', 'it'];
 if (!in_array($lang, $allowedLangs, true)) {
     $lang = 'et';
 }

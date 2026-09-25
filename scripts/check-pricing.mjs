@@ -28,9 +28,11 @@ const PRICED_PAGES = {
   'index.html': 3,
   'en/index.html': 3,
   'pl/index.html': 3,
+  'it/index.html': 3,
   'ligniin-pelletid/index.html': 1,
   'en/lignin-pellets/index.html': 1,
   'pl/pellet-ligninowy/index.html': 1,
+  'it/pellet-di-lignina/index.html': 1,
 };
 
 /** Every page, including those that only carry the business's offer catalogue. */
@@ -39,13 +41,14 @@ const ALL_PAGES = [
   'privacy/index.html',
   'en/privacy/index.html',
   'pl/privacy/index.html',
+  'it/privacy/index.html',
   '404.html',
 ];
 
-const PRICE_LABELS = ['Hind', 'Price', 'Cena'];
-const PRICE_UNITS = ['tonni kohta', 'per tonne', 'za tonę'];
+const PRICE_LABELS = ['Hind', 'Price', 'Cena', 'Prezzo'];
+const PRICE_UNITS = ['tonni kohta', 'per tonne', 'za tonę', 'a tonnellata'];
 
-/** "24%" in any of the three phrasings, without pinning the wording. */
+/** "24%" in any locale's phrasing, without pinning the wording. */
 const VAT_PATTERN = /\b24\s*%/;
 
 /** The 24-tonne minimum order, as distinct from the 24% VAT rate. */
@@ -171,7 +174,7 @@ for (const [page, expected] of Object.entries(PRICED_PAGES)) {
     const vat = runs[i + 3] ?? '';
     const wholesale = runs[i + 4] ?? '';
 
-    // '€400' in English, '400 €' (non-breaking space) in Estonian and Polish.
+    // '€400' in English, '400 €' (non-breaking space) in every other locale.
     if (!new RegExp(`^(€\\d+|\\d+${NBSP}€)$`).test(amount)) {
       fail(page, `price label not followed by an amount: ${JSON.stringify(amount)}`);
     }
@@ -210,4 +213,4 @@ if (problems.length > 0) {
   process.exit(1);
 }
 
-console.log('\nAll products priced in both the JSON-LD and the page, in all three locales.');
+console.log('\nAll products priced in both the JSON-LD and the page, in every locale.');

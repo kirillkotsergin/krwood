@@ -1,10 +1,11 @@
 /**
  * i18n helpers for krwood.ee
  *
- * Routing contract (mirrors `i18n` in astro.config.mjs):
+ * Routing contract (mirrors `i18n` in astro.config.ts):
  *   et -> /            (default locale, no prefix)
  *   en -> /en/
  *   pl -> /pl/
+ *   it -> /it/
  */
 
 import {

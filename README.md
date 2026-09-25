@@ -134,8 +134,8 @@ Verified in the build output and live:
 
 | | |
 | --- | --- |
-| hreflang | `et` / `en` / `pl` + `x-default`, language-only (no region subtags, which would exclude speakers outside that country). Identical in the HTML and the sitemap |
-| Canonicals | Self-referencing on all 9 indexable pages |
+| hreflang | `et` / `en` / `pl` / `it` + `x-default`, language-only (no region subtags, which would exclude speakers outside that country). Identical in the HTML and the sitemap |
+| Canonicals | Self-referencing on all 12 indexable pages |
 | Titles | ≤60 chars, keyword-first, unique |
 | Descriptions | ≤158 chars, unique |
 | Headings | Exactly one H1 per page, no skipped levels |
@@ -299,9 +299,11 @@ The dark gradient overlay, text colours and contrast all keep working unchanged.
 | Estonian (`et`) | `/` · `/ligniin-pelletid/` · `/privacy/` — default, no `/et/` prefix |
 | English (`en`) | `/en/` · `/en/lignin-pellets/` · `/en/privacy/` |
 | Polish (`pl`) | `/pl/` · `/pl/pellet-ligninowy/` · `/pl/privacy/` |
+| Italian (`it`) | `/it/` · `/it/pellet-di-lignina/` · `/it/privacy/` |
 
 Routing is configured by the `i18n` block in `astro.config.ts`
-(`prefixDefaultLocale: false`).
+(`prefixDefaultLocale: false`), whose locale list is read from `languages` in
+`src/i18n/ui.ts`.
 
 ### Translated slugs
 
@@ -309,7 +311,7 @@ Slugs differ per locale. `src/i18n/routes.ts` is the single declaration of
 that mapping:
 
 ```ts
-ligninPellets: { et: 'ligniin-pelletid', en: 'lignin-pellets', pl: 'pellet-ligninowy' }
+ligninPellets: { et: 'ligniin-pelletid', en: 'lignin-pellets', pl: 'pellet-ligninowy', it: 'pellet-di-lignina' }
 ```
 
 Three things read from it — `localizePath()` and `routePath()` for links and
@@ -335,17 +337,37 @@ type Dictionary = Record<TranslationKey, string>;
 
 const en: Dictionary = { /* must implement every key */ };
 const pl: Dictionary = { /* must implement every key */ };
+const it: Dictionary = { /* must implement every key */ };
 ```
 
-Miss a key in `en` or `pl` and `npm run check` fails — which also fails CI,
-so an untranslated string can never reach production.
+Miss a key in `en`, `pl` or `it` and `npm run check` fails — which also fails
+CI, so an untranslated string can never reach production.
 
 ### Adding a string
 
 1. Add the key to `et` in `src/i18n/ui.ts`.
-2. `npm run check` — TypeScript now reports it missing from `en` and `pl`.
-3. Fill both in.
+2. `npm run check` — TypeScript now reports it missing from `en`, `pl` and `it`.
+3. Fill them in.
 4. Use it: `const t = useTranslations(getLangFromUrl(Astro.url)); t('your.key')`
+
+### Adding a language
+
+The switcher, hreflang, the sitemap, the Astro routing and the JSON-LD all
+follow `src/i18n/ui.ts`, and TypeScript enforces the dictionary and the slugs.
+What it cannot see is the handful of lists outside the build:
+
+1. `src/i18n/ui.ts` — the code in `languages`, `languageLabels`,
+   `languageTags` and `ogLocales`, a full dictionary, and the `ui` export.
+2. `src/i18n/routes.ts` — a slug for every route (the type check insists).
+3. `src/pages/<code>/` — `index.astro`, `privacy.astro` and the lignin page,
+   named after its slug. Copy the Italian ones; they are three-line wrappers.
+4. `public/contact.php` — `$allowedLangs`, or enquiries are labelled `ET`.
+5. `scripts/deploy.sh` — `REQUIRED` and `SMOKE_PATHS`.
+6. `scripts/check-pricing.mjs` — `PRICED_PAGES`, `ALL_PAGES`, and the new
+   words for "Price" and "per tonne" in `PRICE_LABELS` / `PRICE_UNITS`.
+7. `src/pages/404.astro` — the "page not found" line is written out by hand.
+8. Check the header at 360px and 1024px. Each language adds a pill to the
+   switcher, and both widths had almost no room left at four.
 
 ### Helpers (`src/i18n/utils.ts`)
 
@@ -375,7 +397,7 @@ src/
 │   ├── Packaging.astro       15 kg pallets · Big Bag · delivery
 │   ├── Contact.astro         Validated form + contact details
 │   ├── Footer.astro          Nav, contact, legal, social
-│   ├── LanguagePicker.astro  EE | EN | PL, highlights the active locale
+│   ├── LanguagePicker.astro  EE | EN | PL | IT, highlights the active locale
 │   ├── LandingPage.astro     Composes the five landing sections
 │   ├── PrivacyContent.astro  Shared privacy-policy body
 │   └── Logo.astro
@@ -384,7 +406,7 @@ src/
 │   └── schema.ts             Schema.org LocalBusiness JSON-LD builder
 ├── i18n/{ui.ts,utils.ts}     Dictionary and helpers
 ├── layouts/Layout.astro      <head>, SEO, JSON-LD, scroll reveal, back-to-top
-├── pages/                    index · en/ · pl/ · privacy · 404
+├── pages/                    index · en/ · pl/ · it/ · privacy · 404
 └── styles/global.css         Tailwind theme tokens + base styles
 
 public/                       Copied verbatim into dist/
@@ -540,13 +562,13 @@ the site in a single pass with no visible gap.
 
 ```
 npm run check + build
-   └─ verify dist/ has index.html, en/, pl/, .htaccess, contact.php
+   └─ verify dist/ has index.html, en/, pl/, it/, .htaccess, contact.php
         └─ tar → scp → ~/.deploy/staging/
              └─ guard: refuse to sync if staging has no index.html
                   └─ back up current site → ~/.deploy/backups/<timestamp>.tar.gz
                        └─ rsync -rlt --delete --chmod=D755,F644 staging/ → public_html/
                             └─ prune to the last 5 backups, clean staging
-                                 └─ curl /, /en/, /pl/, /privacy/ — non-200 fails the run
+                                 └─ curl every locale's home and lignin page, /privacy/ — non-200 fails the run
 ```
 
 ### What is never deleted

@@ -37,10 +37,12 @@ export default defineConfig({
   trailingSlash: 'always',
 
   // Estonian is the default locale and is served from the root (no /et/ prefix).
-  // English -> /en/, Polish -> /pl/
+  // English -> /en/, Polish -> /pl/, Italian -> /it/
+  // Both values come from src/i18n/ui.ts, so adding a language there is the
+  // whole change — the routing and the sitemap below follow it.
   i18n: {
-    defaultLocale: 'et',
-    locales: ['et', 'en', 'pl'],
+    defaultLocale: defaultLang,
+    locales: LOCALES,
     routing: {
       prefixDefaultLocale: false,
     },

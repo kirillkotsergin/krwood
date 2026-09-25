@@ -70,6 +70,7 @@ jobs:
           test -f dist/index.html          || { echo "::error::dist/index.html missing"; exit 1; }
           test -f dist/en/index.html       || { echo "::error::dist/en/index.html missing"; exit 1; }
           test -f dist/pl/index.html       || { echo "::error::dist/pl/index.html missing"; exit 1; }
+          test -f dist/it/index.html       || { echo "::error::dist/it/index.html missing"; exit 1; }
           test -f dist/contact.php         || { echo "::error::dist/contact.php missing"; exit 1; }
           test -f dist/.htaccess           || { echo "::error::dist/.htaccess missing"; exit 1; }
           echo "Build output verified. Size: $(du -sh dist | cut -f1)"
@@ -129,7 +130,7 @@ jobs:
           set -euo pipefail
           failed=0
 
-          for path in "/" "/en/" "/pl/" "/privacy/"; do
+          for path in "/" "/en/" "/pl/" "/it/" "/privacy/"; do
             code=$(curl -sS -o /dev/null -w '%{http_code}' -L --max-time 25 "https://krwood.ee${path}")
             if [ "$code" = "200" ]; then
               echo "OK   ${path} -> ${code}"

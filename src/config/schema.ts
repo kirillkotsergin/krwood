@@ -28,6 +28,7 @@ import {
   REVIEW_WORST_RATING,
 } from './reviews';
 import { PELLET_CERTIFICATION, type SpecRow } from './specs';
+import { languageTags } from '../i18n/ui';
 
 /** A stable, locale-independent node id so all pages reference one entity. */
 export const ORGANIZATION_ID = `${siteConfig.url}/#organization`;
@@ -234,7 +235,8 @@ export function buildLocalBusinessSchema(options: SchemaOptions): Record<string,
         contactType: 'sales',
         telephone: siteConfig.phoneHref,
         email: siteConfig.email,
-        availableLanguage: ['et', 'en', 'pl'],
+        // Every language the site is published in — see src/i18n/ui.ts.
+        availableLanguage: Object.values(languageTags),
       },
     ],
 

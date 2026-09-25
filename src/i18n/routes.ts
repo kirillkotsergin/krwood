@@ -19,16 +19,19 @@ export const routes = {
     et: '',
     en: '',
     pl: '',
+    it: '',
   },
   privacy: {
     et: 'privacy',
     en: 'privacy',
     pl: 'privacy',
+    it: 'privacy',
   },
   ligninPellets: {
     et: 'ligniin-pelletid',
     en: 'lignin-pellets',
     pl: 'pellet-ligninowy',
+    it: 'pellet-di-lignina',
   },
 } as const satisfies Record<string, Record<Lang, string>>;
 

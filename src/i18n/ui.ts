@@ -2,7 +2,7 @@
  * Centralised translation dictionary for krwood.ee
  *
  * Estonian (`et`) is the single source of truth: its keys define the
- * `TranslationKey` union, and the `en` / `pl` dictionaries are typed as
+ * `TranslationKey` union, and the `en` / `pl` / `it` dictionaries are typed as
  * `Dictionary`. If a translation is missing or misspelled in any language,
  * `npm run check` fails at build time instead of silently rendering a raw key.
  */
@@ -11,13 +11,15 @@ export const languages = {
   et: 'Eesti',
   en: 'English',
   pl: 'Polski',
+  it: 'Italiano',
 } as const;
 
-/** Short labels used by the header language switcher (EE | EN | PL). */
+/** Short labels used by the header language switcher (EE | EN | PL | IT). */
 export const languageLabels = {
   et: 'EE',
   en: 'EN',
   pl: 'PL',
+  it: 'IT',
 } as const;
 
 /**
@@ -33,6 +35,7 @@ export const languageTags = {
   et: 'et',
   en: 'en',
   pl: 'pl',
+  it: 'it',
 } as const;
 
 /**
@@ -43,6 +46,7 @@ export const ogLocales = {
   et: 'et_EE',
   en: 'en_GB',
   pl: 'pl_PL',
+  it: 'it_IT',
 } as const;
 
 export const defaultLang = 'et' as const;
@@ -1046,8 +1050,336 @@ const pl: Dictionary = {
 };
 
 /* -------------------------------------------------------------------------- */
+/* Italian — /it/                                                             */
+/* -------------------------------------------------------------------------- */
 
-export const ui: Record<Lang, Dictionary> = { et, en, pl };
+// Informal "tu" throughout, as is standard for Italian B2B and retail sites.
+// Typographic apostrophes (’) keep the single-quoted strings unescaped.
+const it: Dictionary = {
+  'meta.title': 'Pellet di legno ENplus A1 da 6 e 8 mm | KR Wood Estonia',
+  'meta.description':
+    'Pellet di legno certificato ENplus A1 da 6 mm e 8 mm. Alto potere calorifico, basso contenuto di ceneri, 100% conifera naturale. Esportazione in tutta l’UE.',
+  'meta.ogAlt': 'Pellet di legno premium KR Wood',
+
+  'a11y.skipToContent': 'Vai al contenuto principale',
+  'a11y.openMenu': 'Apri il menu',
+  'a11y.closeMenu': 'Chiudi il menu',
+  'a11y.chooseLanguage': 'Scegli la lingua',
+  'a11y.backToTop': 'Torna su',
+  'a11y.homepage': 'KR Wood — home page',
+
+  'nav.features': 'Vantaggi',
+  'nav.specs': 'Prodotti',
+  'nav.packaging': 'Confezioni',
+  'nav.contact': 'Contatti',
+  'nav.cta': 'Richiedi preventivo',
+
+  'hero.badge': 'Certificato ENplus® A1',
+  'hero.title': 'Pellet di legno premium',
+  'hero.titleAccent': 'Per il calore della tua casa',
+  'hero.subtitle':
+    '100% legno di conifera naturale, senza colle né additivi chimici. Alto potere calorifico, basso contenuto di ceneri e qualità costante: un calore che fa bene al portafoglio e all’ambiente.',
+  'hero.ctaPrimary': 'Ordina ora',
+  'hero.ctaSecondary': 'Scopri i prodotti',
+  'hero.stat1Value': '4,9+',
+  'hero.stat1Unit': 'kWh/kg',
+  'hero.stat1Label': 'Potere calorifico',
+  'hero.stat2Value': '< 0,5',
+  'hero.stat2Unit': '%',
+  'hero.stat2Label': 'Ceneri',
+  'hero.stat3Value': '< 8',
+  'hero.stat3Unit': '%',
+  'hero.stat3Label': 'Umidità',
+
+  'features.eyebrow': 'Perché KR Wood',
+  'features.title': 'Calore pulito su cui puoi contare',
+  'features.subtitle':
+    'Il nostro pellet nasce da segatura fresca di conifera, pressata senza leganti aggiunti. Ogni lotto è sottoposto a controllo qualità, perché la tua caldaia funzioni senza intoppi per tutta la stagione di riscaldamento.',
+  'features.heat.title': 'Alto potere calorifico',
+  'features.heat.text':
+    'Oltre 4,9 kWh/kg: più calore da ogni sacco e consumi sensibilmente più bassi per tutta la stagione.',
+  'features.ash.title': 'Basso contenuto di ceneri',
+  'features.ash.text':
+    'Meno dello 0,5% di ceneri: caldaia e canna fumaria restano pulite, mentre manutenzione e rimozione della cenere si riducono al minimo.',
+  'features.eco.title': '100% ecologico',
+  'features.eco.text':
+    'Solo legno puro: niente colle, coloranti o additivi chimici. Un combustibile neutro in termini di CO₂ e completamente rinnovabile.',
+  'features.quality.title': 'Qualità ENplus® A1',
+  'features.quality.text':
+    'Ogni lotto rispetta i rigorosi requisiti dello standard europeo: diametro uniforme, alta densità e un contenuto minimo di polveri.',
+
+  'specs.eyebrow': 'Prodotti',
+  'specs.title': 'Pellet e caratteristiche tecniche',
+  'specs.subtitle':
+    'Due diametri, un unico standard di qualità. Scegli il formato adatto alla tua caldaia: entrambi i prodotti rispettano i requisiti ENplus A1.',
+  'specs.d6.title': 'Pellet 6 mm',
+  'specs.d6.desc': 'La scelta universale per caldaie domestiche, stufe a pellet e piccoli impianti.',
+  'specs.d6.badge': 'Il più richiesto',
+  'specs.d8.title': 'Pellet 8 mm',
+  'specs.d8.desc': 'Ideale per grandi centrali termiche, bruciatori industriali e consumi elevati.',
+  'specs.d8.badge': 'Industriale',
+  'specs.lignin.title': 'Pellet di lignina 8 mm',
+  'specs.lignin.desc':
+    'La lignina è il polimero naturale che conferisce resistenza al legno, nonché una delle frazioni più energetiche della biomassa. Pressata in pellet da 8 mm e fornita in big bag da 1000 kg, sviluppa più calore del normale pellet di legno e trova impiego in numerosi settori industriali.',
+  'specs.lignin.badge': 'Combustibile ad alta resa e materia prima',
+  'specs.table.param': 'Parametro',
+  'specs.table.value': 'Valore',
+  'specs.row.diameter': 'Diametro',
+  'specs.row.length': 'Lunghezza',
+  'specs.row.calorific': 'Potere calorifico',
+  'specs.row.ash': 'Ceneri',
+  'specs.row.moisture': 'Umidità',
+  'specs.row.density': 'Densità apparente',
+  'specs.row.fines': 'Frazione fine',
+  'specs.row.material': 'Materia prima',
+  'specs.value.material': 'Legno di conifera (pino, abete rosso)',
+  'specs.value.length': '10–40 mm',
+  'specs.value.calorific': '≥ 4,9 kWh/kg',
+  'specs.value.ash': '≤ 0,5 %',
+  'specs.value.moisture': '≤ 8 %',
+  'specs.value.density': '≥ 650 kg/m³',
+  'specs.value.fines': '≤ 1 %',
+
+  'price.label': 'Prezzo',
+  'price.perTon': 'a tonnellata',
+  'price.vatIncluded': 'IVA {vat}% inclusa',
+  'price.wholesaleNote': 'Prezzo all’ingrosso valido per ordini a partire da {min} tonnellate',
+
+  'packaging.eyebrow': 'Confezioni',
+  'packaging.title': 'Confezioni e consegna',
+  'packaging.subtitle':
+    'Scegli la confezione più adatta ai tuoi spazi di stoccaggio. Tutti i bancali sono cellofanati e protetti dalle intemperie.',
+  'packaging.bags.title': 'Sacchi da 15 kg su bancale',
+  'packaging.bags.desc':
+    '65 sacchi per bancale, 975 kg in totale. Facili da movimentare e da stoccare: ideali per l’uso domestico.',
+  'packaging.bags.spec1': '65 sacchi × 15 kg',
+  'packaging.bags.spec2': '975 kg per bancale',
+  'packaging.bags.spec3': 'Protezione con film termoretraibile',
+  'packaging.bigbag.title': 'Big Bag da 1000 kg',
+  'packaging.bigbag.desc':
+    'Big bag con maniglie di sollevamento e scarico dal fondo. La soluzione più conveniente per stoccare grandi quantità.',
+  'packaging.bigbag.spec1': 'Sacco da 1000 kg',
+  'packaging.bigbag.spec2': 'Maniglie di sollevamento',
+  'packaging.bigbag.spec3': 'Scarico dal fondo',
+  'packaging.delivery.title': 'Consegna ed esportazione',
+  'packaging.delivery.desc':
+    'Consegna in tutta l’Estonia e nei Paesi baltici. Esportiamo inoltre in container e con carichi completi in tutta Europa.',
+  'packaging.delivery.spec1': 'Consegna in tutta l’Estonia',
+  'packaging.delivery.spec2': 'Paesi baltici e UE',
+  'packaging.delivery.spec3': 'Carichi completi da 24 t',
+  'packaging.cta': 'Richiedi un preventivo',
+
+  'contact.eyebrow': 'Contatti',
+  'contact.title': 'Richiedi un preventivo personalizzato',
+  'contact.subtitle':
+    'Indicaci la quantità desiderata e l’indirizzo di consegna: ti invieremo un preventivo entro un giorno lavorativo.',
+  'contact.form.legend': 'Modulo di richiesta',
+  'contact.form.name': 'Nome',
+  'contact.form.namePlaceholder': 'Il tuo nome o la ragione sociale',
+  'contact.form.email': 'E-mail',
+  'contact.form.emailPlaceholder': 'nome@esempio.it',
+  'contact.form.phone': 'Telefono',
+  'contact.form.phonePlaceholder': '+39 312 345 6789',
+  'contact.form.message': 'Messaggio',
+  'contact.form.messagePlaceholder':
+    'Quantità desiderata, confezione (sacchi da 15 kg / Big Bag) e indirizzo di consegna…',
+  'contact.form.optional': 'facoltativo',
+  'contact.form.submit': 'Invia richiesta',
+  'contact.form.sending': 'Invio in corso…',
+  'contact.form.success': 'Grazie! La tua richiesta è stata inviata. Ti risponderemo entro un giorno lavorativo.',
+  'contact.form.error': 'Invio non riuscito. Riprova oppure chiamaci direttamente.',
+  'contact.form.errorRequired': 'Campo obbligatorio',
+  'contact.form.errorEmail': 'Inserisci un indirizzo e-mail valido',
+  'contact.form.consent': 'Acconsento al trattamento dei miei dati personali per la gestione della mia richiesta.',
+  'contact.form.privacyLink': 'Informativa sulla privacy',
+  'contact.info.title': 'Recapiti',
+  'contact.info.phone': 'Telefono',
+  'contact.info.email': 'E-mail',
+  'contact.info.address': 'Indirizzo',
+  'contact.info.hours': 'Orari di apertura',
+  'contact.info.hoursValue': 'Lun–Ven 9:00–17:00',
+  'contact.info.company': 'Azienda',
+  'contact.info.regCode': 'Numero di registro',
+  'contact.info.vat': 'Partita IVA',
+  'contact.info.country': 'Estonia',
+  'contact.whatsapp': 'Scrivici su WhatsApp',
+  'contact.whatsappMessage':
+    'Buongiorno! Vorrei richiedere un preventivo per il pellet di legno.',
+
+  'footer.tagline':
+    'Pellet di legno premium dall’Estonia. Qualità ENplus A1, consegne affidabili e prezzi trasparenti.',
+  'footer.navTitle': 'Navigazione',
+  'footer.contactTitle': 'Contatti',
+  'footer.legalTitle': 'Note legali',
+  'footer.privacy': 'Informativa sulla privacy',
+  'footer.rights': 'Tutti i diritti riservati.',
+  'footer.visitsTotal': 'Visite totali',
+  'footer.visitsToday': 'Oggi',
+  'footer.socialTitle': 'Seguici',
+
+  'privacy.meta.title': 'Informativa sulla privacy | KR Wood',
+  'privacy.meta.description':
+    'Informativa sulla privacy di KR Wood: come raccogliamo, utilizziamo e proteggiamo i tuoi dati personali ai sensi del GDPR.',
+  'privacy.title': 'Informativa sulla privacy',
+  'privacy.updated': 'Ultimo aggiornamento',
+  'privacy.intro':
+    'KR Wood rispetta la tua privacy e tratta i dati personali in conformità al Regolamento generale sulla protezione dei dati dell’Unione europea (GDPR). La presente informativa spiega quali dati raccogliamo e come li utilizziamo.',
+  'privacy.s1.title': 'Quali dati raccogliamo',
+  'privacy.s1.body':
+    'Quando compili il modulo di contatto raccogliamo nome, indirizzo e-mail, numero di telefono e testo del messaggio. Fornisci questi dati volontariamente, al momento dell’invio della richiesta.',
+  'privacy.s2.title': 'Come utilizziamo i dati',
+  'privacy.s2.body':
+    'Utilizziamo i tuoi dati esclusivamente per rispondere alla tua richiesta, preparare un preventivo ed evadere l’eventuale ordine. Non utilizziamo i tuoi dati a fini di marketing senza uno specifico consenso.',
+  'privacy.s3.title': 'Comunicazione dei dati',
+  'privacy.s3.body':
+    'Non vendiamo né cediamo a terzi i tuoi dati personali. I dati possono essere comunicati esclusivamente ai partner logistici, per evadere un ordine, o alle autorità, quando previsto dalla legge.',
+  'privacy.s4.title': 'Conservazione dei dati',
+  'privacy.s4.body':
+    'Conserviamo i dati delle richieste per un massimo di 24 mesi dall’ultimo contatto, dopodiché vengono cancellati. I documenti contabili sono conservati per il periodo previsto dalla legge.',
+  'privacy.s5.title': 'Cookie',
+  'privacy.s5.body':
+    'Questo sito è statico e non utilizza cookie di tracciamento né strumenti di analisi di terze parti. I font sono ospitati sul nostro server, perciò nessun tuo dato viene trasmesso a servizi esterni. Il contatore delle visite nel piè di pagina funziona sul nostro server e memorizza solo totali aggregati; per non conteggiare due volte la stessa visita utilizza la memoria di sessione del browser e non registra alcun dato personale.',
+  'privacy.s5.titleAnalytics': 'Cookie e statistiche',
+  'privacy.s5.bodyAnalytics':
+    'Questo sito non utilizza cookie di tracciamento. Per misurare il numero di visitatori utilizziamo Cloudflare Web Analytics, che non imposta cookie, non crea profili dei visitatori e non ti segue su altri siti: vengono raccolti solo dati aggregati, come il numero di pagine visualizzate e la posizione approssimativa a livello di Paese. Il responsabile del trattamento è Cloudflare, Inc. (USA). I font sono ospitati sul nostro server. Il contatore delle visite nel piè di pagina funziona sul nostro server e memorizza solo totali aggregati.',
+  'privacy.s6.title': 'I tuoi diritti',
+  'privacy.s6.body':
+    'Hai il diritto di chiedere l’accesso ai tuoi dati, la loro rettifica o cancellazione, nonché la limitazione del trattamento e la portabilità dei dati. Per esercitare questi diritti, scrivici all’indirizzo e-mail indicato qui sotto.',
+  'privacy.s7.title': 'Contatti',
+  'privacy.s7.body': 'Per qualsiasi domanda relativa alla privacy, scrivici all’indirizzo:',
+  'privacy.back': 'Torna alla home page',
+
+  // --- Lignin pellets landing page ----------------------------------------
+  'nav.lignin': 'Pellet di lignina',
+
+  'lignin.meta.title': 'Pellet di lignina 8 mm | Big Bag da 1000 kg | KR Wood',
+  'lignin.meta.description':
+    'Pellet di lignina da 8 mm in big bag da 1000 kg: biocombustibile ad alto potere calorifico e materia prima per asfalti, calcestruzzo, agricoltura e chimica.',
+  'lignin.meta.imageAlt':
+    'Mucchio di pellet di lignina da 8 mm su un piano di legno scuro, accanto a un barattolo di vetro con un campione',
+
+  'lignin.hero.badge': '8 mm · Big Bag 1000 kg',
+  'lignin.hero.title': 'Pellet di lignina',
+  'lignin.hero.titleAccent': 'Combustibile ad alta densità energetica e materia prima industriale',
+  'lignin.hero.lead':
+    'La lignina è il polimero naturale che conferisce resistenza al legno, nonché una delle frazioni più energetiche della biomassa. Pressata in pellet da 8 mm e fornita in big bag da 1000 kg, sviluppa più calore del normale pellet di legno e alimenta numerosi settori industriali, ben oltre il locale caldaia.',
+  'lignin.hero.ctaPrimary': 'Richiedi un preventivo',
+  'lignin.hero.ctaSecondary': 'Vedi i dati tecnici',
+
+  'lignin.overview.eyebrow': 'Il prodotto',
+  'lignin.overview.title': 'Che cos’è il pellet di lignina',
+  'lignin.overview.p1':
+    'Dopo la cellulosa, la lignina è il polimero organico più diffuso sulla Terra: lega tra loro le fibre vegetali e rende rigido il legno. Isolata come sottoprodotto dell’industria della cellulosa e delle bioraffinerie, ha un contenuto energetico nettamente superiore a quello della cellulosa che la circonda, ed è proprio questo a renderla preziosa come combustibile.',
+  'lignin.overview.p2':
+    'Forse usi già la lignina senza saperlo. Nella produzione del normale pellet di legno la lignina funge spesso da legante naturale al posto dell’amido: calore e pressione ammorbidiscono la lignina contenuta nel legno stesso, che poi si indurisce e tiene insieme ogni pellet, senza bisogno di colle sintetiche. Questo prodotto concentra la stessa sostanza in un pellet a sé.',
+
+  'lignin.benefits.title': 'Vantaggi principali',
+  'lignin.benefits.b1.title': 'Potere calorifico più elevato',
+  'lignin.benefits.b1.text':
+    'La lignina contiene più energia per chilogrammo rispetto alla cellulosa: ogni tonnellata sviluppa quindi più calore del normale pellet di legno.',
+  'lignin.benefits.b2.title': 'Logistica pronta per grandi volumi',
+  'lignin.benefits.b2.text':
+    'I big bag da 1000 kg con maniglie di sollevamento si movimentano con carrello elevatore o sollevatore telescopico: nessun sacco da spostare a mano e nessun bancale da smontare.',
+  'lignin.benefits.b3.title': 'Materiale a doppio impiego',
+  'lignin.benefits.b3.text':
+    'Lo stesso prodotto funge sia da biocombustibile solido sia da materia prima per l’edilizia, l’industria chimica e l’agricoltura.',
+  'lignin.benefits.b4.title': 'Sottoprodotto rinnovabile',
+  'lignin.benefits.b4.text':
+    'La lignina si recupera da flussi industriali già esistenti, non da legno coltivato a scopo energetico: nessuna pressione aggiuntiva sulle foreste.',
+
+  'lignin.audience.title': 'A chi si rivolge',
+  'lignin.audience.a1':
+    'Centrali termiche industriali e impianti di cogenerazione che cercano una maggiore densità energetica per tonnellata',
+  'lignin.audience.a2':
+    'Impianti di asfalto e produttori di calcestruzzo che impiegano la lignina come modificante o fluidificante',
+  'lignin.audience.a3': 'Aziende chimiche e bioraffinerie che si approvvigionano di lignina come materia prima',
+  'lignin.audience.a4': 'Produttori agricoli e mangimistici che realizzano adsorbenti e ammendanti del suolo',
+
+  'lignin.specs.title': 'Dati tecnici',
+  'lignin.specs.subtitle':
+    'Forniamo un unico formato standard. Con ogni consegna è disponibile un certificato di analisi completo.',
+  'lignin.row.packaging': 'Confezione',
+  'lignin.row.origin': 'Materia prima',
+  'lignin.value.diameter': '8 mm',
+  'lignin.value.length': '10–40 mm',
+  'lignin.value.packaging': 'Big Bag da 1000 kg',
+  'lignin.value.calorific': '≥ 5,0 kWh/kg',
+  'lignin.value.moisture': '≤ 10 %',
+  'lignin.value.ash': '≤ 3 %',
+  'lignin.value.density': '≥ 600 kg/m³',
+  'lignin.value.origin': 'Lignina di origine legnosa',
+  'lignin.specs.note':
+    'I valori sono quelli tipici di questa classe. I dati esatti di ogni lotto sono confermati nel certificato di analisi che lo accompagna.',
+
+  'lignin.apps.eyebrow': 'Oltre il riscaldamento',
+  'lignin.apps.title': 'Applicazioni industriali alternative della lignina',
+  'lignin.apps.subtitle':
+    'La lignina è un materiale piattaforma: la sua struttura fenolica, il potere legante e l’idrofobicità la rendono utile ben oltre il settore energetico.',
+
+  'lignin.apps.roads.title': 'Costruzioni stradali, asfalto e bitume',
+  'lignin.apps.roads.lead':
+    'L’impiego della lignina in più rapida crescita. Aggiunta al bitume e alle pavimentazioni stradali, sostituisce in parte il legante di origine petrolifera con un’alternativa di origine biologica e agisce da antiossidante.',
+  'lignin.apps.roads.i1': 'Aumenta la durabilità e la vita utile delle pavimentazioni stradali',
+  'lignin.apps.roads.i2': 'Protegge dalla fessurazione e rallenta l’invecchiamento del bitume',
+  'lignin.apps.roads.i3': 'Migliora la resistenza agli sbalzi di temperatura e agli stress termici',
+
+  'lignin.apps.concrete.title': 'Calcestruzzo e materiali da costruzione',
+  'lignin.apps.concrete.i1': 'I lignosolfonati agiscono da fluidificanti e aumentano la resistenza del calcestruzzo',
+  'lignin.apps.concrete.i2': 'Riduce il fabbisogno d’acqua dell’impasto, preservandone la lavorabilità',
+  'lignin.apps.concrete.i3': 'Impiegata come legante nella produzione di pannelli e compositi',
+
+  'lignin.apps.agri.title': 'Agricoltura e zootecnia',
+  'lignin.apps.agri.i1': 'Enterosorbenti per il bestiame: assorbono ed eliminano le micotossine dai mangimi',
+  'lignin.apps.agri.i2': 'Fertilizzanti e ammendanti: migliorano struttura, aerazione e ritenzione idrica del suolo',
+  'lignin.apps.agri.i3': 'Agrochimica: disperdente nelle formulazioni di agrofarmaci',
+
+  'lignin.apps.chem.title': 'Industria chimica',
+  'lignin.apps.chem.i1': 'Produzione di vanillina',
+  'lignin.apps.chem.i2': 'Plastiche e resine, in sostituzione del fenolo tossico',
+  'lignin.apps.chem.i3': 'Precursore della fibra di carbonio',
+  'lignin.apps.chem.i4': 'Carbone attivo',
+
+  'lignin.apps.oil.title': 'Industria petrolifera e metallurgia',
+  'lignin.apps.oil.i1': 'Additivo per fluidi di perforazione',
+  'lignin.apps.oil.i2': 'Legante nelle sabbie da fonderia',
+
+  'lignin.apps.eco.title': 'Ecologia e bonifiche',
+  'lignin.apps.eco.i1':
+    'Bonifica degli sversamenti di petrolio: la lignina agisce da assorbente idrofobo e trattiene gli idrocarburi in acqua e nel suolo',
+
+  'lignin.faq.eyebrow': 'FAQ',
+  'lignin.faq.title': 'Domande frequenti',
+  'lignin.faq.q1': 'Che cos’è il pellet di lignina?',
+  'lignin.faq.a1':
+    'Il pellet di lignina è un pellet da 8 mm di diametro ottenuto pressando la lignina, il polimero naturale che lega tra loro le fibre del legno e lo rende rigido. La lignina si recupera come sottoprodotto dell’industria della cellulosa e delle bioraffinerie e contiene più energia per chilogrammo della cellulosa che la circonda.',
+  'lignin.faq.q2': 'Che differenza c’è tra il pellet di lignina e il normale pellet di legno?',
+  'lignin.faq.a2':
+    'Il pellet di lignina ha un potere calorifico di {calorific} (pellet di legno ENplus A1: {pelletCalorific}), quindi ogni tonnellata sviluppa più calore. Il contenuto di ceneri è però più elevato: {ash} contro {pelletAsh} del pellet di legno. Il pellet di lignina è fornito esclusivamente in big bag da 1000 kg e si utilizza non solo come combustibile, ma anche come materia prima industriale.',
+  'lignin.faq.q3': 'A chi è adatto il pellet di lignina?',
+  'lignin.faq.a3':
+    'Soprattutto alle centrali termiche industriali e agli impianti di cogenerazione che cercano più energia per tonnellata. Come materia prima, la lignina è utilizzata anche da produttori di asfalto e calcestruzzo, aziende chimiche e bioraffinerie, nonché da produttori agricoli e mangimistici.',
+  'lignin.faq.q4': 'A che cosa serve la lignina, oltre al riscaldamento?',
+  'lignin.faq.a4':
+    'Aggiunta al bitume e all’asfalto, la lignina prolunga la vita utile delle pavimentazioni stradali e rallenta l’invecchiamento del bitume. Nel calcestruzzo i lignosolfonati agiscono da fluidificanti. Dalla lignina si ricavano inoltre enterosorbenti per il bestiame, ammendanti, vanillina, resine, fibra di carbonio e carbone attivo; si impiega anche nei fluidi di perforazione, nelle sabbie da fonderia e nella bonifica degli sversamenti di petrolio.',
+  'lignin.faq.q5': 'Come viene consegnato il pellet di lignina?',
+  'lignin.faq.a5':
+    'Il pellet di lignina è fornito in big bag da 1000 kg con maniglie di sollevamento, che si movimentano con carrello elevatore o sollevatore telescopico. Consegniamo in tutta l’Estonia e nei Paesi baltici ed esportiamo con carichi completi in tutta Europa.',
+  'lignin.faq.q6': 'Quanto costa il pellet di lignina?',
+  'lignin.faq.a6':
+    'Il pellet di lignina costa {price} {perTon}. {vatNote} Per un preventivo preciso, indicaci la quantità desiderata e l’indirizzo di consegna.',
+  'lignin.faq.q7': 'Ogni consegna è accompagnata da un certificato di analisi?',
+  'lignin.faq.a7':
+    'Sì. I valori riportati nella tabella dei dati tecnici sono quelli tipici di questa classe; i dati esatti di ogni lotto sono confermati nel certificato di analisi che lo accompagna.',
+
+  'lignin.cta.title': 'Hai bisogno di grandi quantità di pellet di lignina?',
+  'lignin.cta.text':
+    'Indicaci il fabbisogno annuo in tonnellate, il luogo di consegna e l’impiego previsto: ti invieremo un preventivo insieme al certificato di analisi.',
+  'lignin.cta.button': 'Richiedi un preventivo',
+};
+
+/* -------------------------------------------------------------------------- */
+
+export const ui: Record<Lang, Dictionary> = { et, en, pl, it };
 
 /* -------------------------------------------------------------------------- */
 /* Market-specific copy                                                      */

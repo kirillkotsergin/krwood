@@ -1,0 +1,12 @@
+---
+// Italian privacy policy — /it/privacy/
+import Layout from '../../layouts/Layout.astro';
+import PrivacyContent from '../../components/PrivacyContent.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<Layout title={t('privacy.meta.title')} description={t('privacy.meta.description')}>
+  <PrivacyContent />
+</Layout>
