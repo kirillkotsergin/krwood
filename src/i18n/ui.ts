@@ -1095,13 +1095,13 @@ const it: Dictionary = {
   'features.eyebrow': 'Perché KR Wood',
   'features.title': 'Calore pulito su cui puoi contare',
   'features.subtitle':
-    'Il nostro pellet nasce da segatura fresca di conifera, pressata senza leganti aggiunti. Ogni lotto è sottoposto a controllo qualità, perché la tua caldaia funzioni senza intoppi per tutta la stagione di riscaldamento.',
+    'Il nostro pellet nasce da segatura fresca di conifera, pressata senza leganti aggiunti. Ogni lotto è sottoposto a controllo qualità, perché la tua stufa o caldaia funzioni senza intoppi per tutta la stagione di riscaldamento.',
   'features.heat.title': 'Alto potere calorifico',
   'features.heat.text':
     'Oltre 4,9 kWh/kg: più calore da ogni sacco e consumi sensibilmente più bassi per tutta la stagione.',
   'features.ash.title': 'Basso contenuto di ceneri',
   'features.ash.text':
-    'Meno dello 0,5% di ceneri: caldaia e canna fumaria restano pulite, mentre manutenzione e rimozione della cenere si riducono al minimo.',
+    'Meno dello 0,5% di ceneri: stufa, caldaia e canna fumaria restano pulite, con manutenzione e rimozione della cenere ridotte al minimo.',
   'features.eco.title': '100% ecologico',
   'features.eco.text':
     'Solo legno puro: niente colle, coloranti o additivi chimici. Un combustibile neutro in termini di CO₂ e completamente rinnovabile.',
@@ -1112,7 +1112,7 @@ const it: Dictionary = {
   'specs.eyebrow': 'Prodotti',
   'specs.title': 'Pellet e caratteristiche tecniche',
   'specs.subtitle':
-    'Due diametri, un unico standard di qualità. Scegli il formato adatto alla tua caldaia: entrambi i prodotti rispettano i requisiti ENplus A1.',
+    'Due diametri, un unico standard di qualità. Scegli il formato adatto alla tua stufa o caldaia: entrambi i prodotti rispettano i requisiti ENplus A1.',
   'specs.d6.title': 'Pellet 6 mm',
   'specs.d6.desc': 'La scelta universale per caldaie domestiche, stufe a pellet e piccoli impianti.',
   'specs.d6.badge': 'Il più richiesto',
@@ -1131,7 +1131,7 @@ const it: Dictionary = {
   'specs.row.ash': 'Ceneri',
   'specs.row.moisture': 'Umidità',
   'specs.row.density': 'Densità apparente',
-  'specs.row.fines': 'Frazione fine',
+  'specs.row.fines': 'Fini',
   'specs.row.material': 'Materia prima',
   'specs.value.material': 'Legno di conifera (pino, abete rosso)',
   'specs.value.length': '10–40 mm',
@@ -1166,10 +1166,10 @@ const it: Dictionary = {
   'packaging.bigbag.spec3': 'Scarico dal fondo',
   'packaging.delivery.title': 'Consegna in Italia e in Europa',
   'packaging.delivery.desc':
-    'Consegniamo in Italia, in container e con carichi completi, così come in Estonia, nei Paesi baltici e nel resto d’Europa.',
+    'Consegniamo in Italia, in container e a carico completo, così come in Estonia, nei Paesi baltici e nel resto d’Europa.',
   'packaging.delivery.spec1': 'Consegna in Italia',
   'packaging.delivery.spec2': 'Estonia, Paesi baltici e UE',
-  'packaging.delivery.spec3': 'Carichi completi da 24 t',
+  'packaging.delivery.spec3': 'Bilico completo da 24 t',
   'packaging.cta': 'Richiedi un preventivo',
 
   'contact.eyebrow': 'Contatti',
@@ -1202,7 +1202,7 @@ const it: Dictionary = {
   'contact.info.hours': 'Orari di apertura',
   'contact.info.hoursValue': 'Lun–Ven 9:00–17:00',
   'contact.info.company': 'Azienda',
-  'contact.info.regCode': 'Numero di registro',
+  'contact.info.regCode': 'Registro imprese',
   'contact.info.vat': 'Partita IVA',
   'contact.info.country': 'Estonia',
   'contact.whatsapp': 'Scrivici su WhatsApp',
@@ -1229,7 +1229,7 @@ const it: Dictionary = {
     'KR Wood rispetta la tua privacy e tratta i dati personali in conformità al Regolamento generale sulla protezione dei dati dell’Unione europea (GDPR). La presente informativa spiega quali dati raccogliamo e come li utilizziamo.',
   'privacy.s1.title': 'Quali dati raccogliamo',
   'privacy.s1.body':
-    'Quando compili il modulo di contatto raccogliamo nome, indirizzo e-mail, numero di telefono e testo del messaggio. Fornisci questi dati volontariamente, al momento dell’invio della richiesta.',
+    'Quando compili il modulo di contatto, raccogliamo nome, indirizzo e-mail, numero di telefono e testo del messaggio. Ci fornisci questi dati volontariamente al momento dell’invio della richiesta.',
   'privacy.s2.title': 'Come utilizziamo i dati',
   'privacy.s2.body':
     'Utilizziamo i tuoi dati esclusivamente per rispondere alla tua richiesta, preparare un preventivo ed evadere l’eventuale ordine. Non utilizziamo i tuoi dati a fini di marketing senza uno specifico consenso.',
@@ -1241,7 +1241,7 @@ const it: Dictionary = {
     'Conserviamo i dati delle richieste per un massimo di 24 mesi dall’ultimo contatto, dopodiché vengono cancellati. I documenti contabili sono conservati per il periodo previsto dalla legge.',
   'privacy.s5.title': 'Cookie',
   'privacy.s5.body':
-    'Questo sito è statico e non utilizza cookie di tracciamento né strumenti di analisi di terze parti. I font sono ospitati sul nostro server, perciò nessun tuo dato viene trasmesso a servizi esterni. Il contatore delle visite nel piè di pagina funziona sul nostro server e memorizza solo totali aggregati; per non conteggiare due volte la stessa visita utilizza la memoria di sessione del browser e non registra alcun dato personale.',
+    'Questo sito è statico e non utilizza cookie di tracciamento né strumenti di analisi di terze parti. I font sono ospitati sul nostro server, perciò nessuno dei tuoi dati viene trasmesso a servizi esterni. Il contatore delle visite nel piè di pagina funziona sul nostro server e memorizza solo totali aggregati; per non conteggiare due volte la stessa visita utilizza la memoria di sessione del browser e non registra alcun dato personale.',
   'privacy.s5.titleAnalytics': 'Cookie e statistiche',
   'privacy.s5.bodyAnalytics':
     'Questo sito non utilizza cookie di tracciamento. Per misurare il numero di visitatori utilizziamo Cloudflare Web Analytics, che non imposta cookie, non crea profili dei visitatori e non ti segue su altri siti: vengono raccolti solo dati aggregati, come il numero di pagine visualizzate e la posizione approssimativa a livello di Paese. Il responsabile del trattamento è Cloudflare, Inc. (USA). I font sono ospitati sul nostro server. Il contatore delle visite nel piè di pagina funziona sul nostro server e memorizza solo totali aggregati.',
@@ -1288,7 +1288,7 @@ const it: Dictionary = {
     'Lo stesso prodotto funge sia da biocombustibile solido sia da materia prima per l’edilizia, l’industria chimica e l’agricoltura.',
   'lignin.benefits.b4.title': 'Sottoprodotto rinnovabile',
   'lignin.benefits.b4.text':
-    'La lignina si recupera da flussi industriali già esistenti, non da legno coltivato a scopo energetico: nessuna pressione aggiuntiva sulle foreste.',
+    'La lignina si recupera da processi industriali già esistenti, non da legno coltivato a scopo energetico: nessuna pressione aggiuntiva sulle foreste.',
 
   'lignin.audience.title': 'A chi si rivolge',
   'lignin.audience.a1':
@@ -1296,7 +1296,7 @@ const it: Dictionary = {
   'lignin.audience.a2':
     'Impianti di asfalto e produttori di calcestruzzo che impiegano la lignina come modificante o fluidificante',
   'lignin.audience.a3': 'Aziende chimiche e bioraffinerie che si approvvigionano di lignina come materia prima',
-  'lignin.audience.a4': 'Produttori agricoli e mangimistici che realizzano adsorbenti e ammendanti del suolo',
+  'lignin.audience.a4': 'Aziende agroindustriali e mangimistiche che realizzano adsorbenti e ammendanti del suolo',
 
   'lignin.specs.title': 'Dati tecnici',
   'lignin.specs.subtitle':
@@ -1328,11 +1328,11 @@ const it: Dictionary = {
 
   'lignin.apps.concrete.title': 'Calcestruzzo e materiali da costruzione',
   'lignin.apps.concrete.i1': 'I lignosolfonati agiscono da fluidificanti e aumentano la resistenza del calcestruzzo',
-  'lignin.apps.concrete.i2': 'Riduce il fabbisogno d’acqua dell’impasto, preservandone la lavorabilità',
+  'lignin.apps.concrete.i2': 'Riduce l’acqua d’impasto a parità di lavorabilità',
   'lignin.apps.concrete.i3': 'Impiegata come legante nella produzione di pannelli e compositi',
 
   'lignin.apps.agri.title': 'Agricoltura e zootecnia',
-  'lignin.apps.agri.i1': 'Enterosorbenti per il bestiame: assorbono ed eliminano le micotossine dai mangimi',
+  'lignin.apps.agri.i1': 'Adsorbenti per il bestiame: trattengono ed eliminano le micotossine presenti nei mangimi',
   'lignin.apps.agri.i2': 'Fertilizzanti e ammendanti: migliorano struttura, aerazione e ritenzione idrica del suolo',
   'lignin.apps.agri.i3': 'Agrochimica: disperdente nelle formulazioni di agrofarmaci',
 
@@ -1360,13 +1360,13 @@ const it: Dictionary = {
     'Il pellet di lignina ha un potere calorifico di {calorific} (pellet di legno ENplus A1: {pelletCalorific}), quindi ogni tonnellata sviluppa più calore. Il contenuto di ceneri è però più elevato: {ash} contro {pelletAsh} del pellet di legno. Il pellet di lignina è fornito esclusivamente in big bag da 1000 kg e si utilizza non solo come combustibile, ma anche come materia prima industriale.',
   'lignin.faq.q3': 'A chi è adatto il pellet di lignina?',
   'lignin.faq.a3':
-    'Soprattutto alle centrali termiche industriali e agli impianti di cogenerazione che cercano più energia per tonnellata. Come materia prima, la lignina è utilizzata anche da produttori di asfalto e calcestruzzo, aziende chimiche e bioraffinerie, nonché da produttori agricoli e mangimistici.',
+    'Soprattutto alle centrali termiche industriali e agli impianti di cogenerazione che cercano più energia per tonnellata. Come materia prima, la lignina è utilizzata anche da produttori di asfalto e calcestruzzo, aziende chimiche e bioraffinerie, nonché da aziende agroindustriali e mangimistiche.',
   'lignin.faq.q4': 'A che cosa serve la lignina, oltre al riscaldamento?',
   'lignin.faq.a4':
-    'Aggiunta al bitume e all’asfalto, la lignina prolunga la vita utile delle pavimentazioni stradali e rallenta l’invecchiamento del bitume. Nel calcestruzzo i lignosolfonati agiscono da fluidificanti. Dalla lignina si ricavano inoltre enterosorbenti per il bestiame, ammendanti, vanillina, resine, fibra di carbonio e carbone attivo; si impiega anche nei fluidi di perforazione, nelle sabbie da fonderia e nella bonifica degli sversamenti di petrolio.',
+    'Aggiunta al bitume e all’asfalto, la lignina prolunga la vita utile delle pavimentazioni stradali e rallenta l’invecchiamento del bitume. Nel calcestruzzo i lignosolfonati agiscono da fluidificanti. Dalla lignina si ricavano inoltre adsorbenti per mangimi, ammendanti, vanillina, resine, fibra di carbonio e carbone attivo; si impiega anche nei fluidi di perforazione, nelle sabbie da fonderia e nella bonifica degli sversamenti di petrolio.',
   'lignin.faq.q5': 'Come viene consegnato il pellet di lignina?',
   'lignin.faq.a5':
-    'Il pellet di lignina è fornito in big bag da 1000 kg con maniglie di sollevamento, che si movimentano con carrello elevatore o sollevatore telescopico. Consegniamo in Italia, così come in Estonia, nei Paesi baltici e nel resto d’Europa.',
+    'Il pellet di lignina è fornito in big bag da 1000 kg, che grazie alle maniglie di sollevamento si movimentano con carrello elevatore o sollevatore telescopico. Consegniamo in Italia, così come in Estonia, nei Paesi baltici e nel resto d’Europa.',
   'lignin.faq.q6': 'Quanto costa il pellet di lignina?',
   'lignin.faq.a6':
     'Il pellet di lignina costa {price} {perTon}. {vatNote} Per un preventivo preciso, indicaci la quantità desiderata e l’indirizzo di consegna.',
