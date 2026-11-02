@@ -460,11 +460,11 @@ const et = {
   'peat.row.pallet': 'Alus',
   'peat.value.material': 'Freesturvas',
   'peat.value.form': 'Pressitud brikett, sideaineteta',
-  'peat.value.calorific': '≈ 4,2 kWh/kg',
-  'peat.value.moisture': '≤ 20 %',
+  'peat.value.calorific': '≈ 4,2 kWh/kg',
+  'peat.value.moisture': '≤ 20 %',
   'peat.value.burn': 'kuni ~8 h',
-  'peat.value.packaging': '84 pakki, kokku umbes 960 kg',
-  'peat.value.palletWeight': '≈ 960 kg',
+  'peat.value.packaging': '84 pakki, kokku 1000 kg',
+  'peat.value.palletWeight': '1000 kg',
   'peat.fact.pallet': '84 pakki alusel',
   'peat.value.gas': '9,3 kWh/m³',
   'peat.value.equiv': '450–500 m³',
@@ -532,6 +532,46 @@ const et = {
   'peat.specs.note':
     'Kütteväärtus ja niiskus on turbabriketi võrdlusväärtused Eesti hoonete energiatõhususe arvutusmetoodikast. Põlemisaeg sõltub ahjust ja tõmbest.',
 
+  // What to do with the ash. {calcium} and {ph} come from src/config/peatAsh.ts.
+  // Safety: fire services advise a lidded metal bin outdoors, as embers in ash
+  // stay hot for days. Garden use follows the wood-ash guidance (not on
+  // acid-loving plants, potatoes or soil at pH 7+); peat ash holds less
+  // potassium than wood ash (Luke, Finland), which the analysis confirms.
+  'peat.ash.eyebrow': 'Pärast põlemist',
+  'peat.ash.title': 'Mida teha tuhaga?',
+  'peat.ash.lead':
+    'Turbabrikett jätab tuhka rohkem kui puidugraanulid, nii et sellega tasub arvestada. Jahtunud tuhk on kaltsiumirikas ja tugevalt aluseline — aias toimib see eelkõige lubjana, mõõdukalt kasutades ka väetisena.',
+  'peat.ash.s1.title': 'Laske tuhal ohutult jahtuda',
+  'peat.ash.s1.text':
+    'Koguge tuhk kaanega metallnõusse ja viige see õue mittepõlevale pinnale, seintest ja puuriidast eemale. Tuhk võib hõõguda veel mitu päeva — ärge pange seda plastnõusse, prügikotti ega paberi sekka enne, kui see on täiesti külm.',
+  'peat.ash.s2.title': 'Kasutage aias',
+  'peat.ash.s2.text':
+    'Puistake jahtunud tuhka õhukese kihina happelisele mullale — murule, viljapuude alla, kapsapeenrale ja lillepeenardesse — või lisage seda õhukeste kihtidena komposti. Parim aeg on kevad. Kuni kasutamiseni hoidke tuhka kuivas: vihm uhub toitained välja. Tuhk on söövitav, seega kandke kindaid ja ärge puistake seda tuulega.',
+  'peat.ash.s3.title': 'Kuhu mitte panna',
+  'peat.ash.s3.text':
+    'Mitte happelist mulda armastavate taimede alla (mustikad, jõhvikad, rododendronid, kanarbik), mitte kartulipeenrale enne istutamist — see soodustab kärntõbe — ega mullale, mille pH on juba 7 või kõrgem. Ärge segage tuhka värske sõnniku ega lämmastikväetistega ning ärge kasutage seda üldse, kui koldes on põletatud kivisütt, värvitud puitu, plasti või läikivat paberit.',
+  'peat.ash.s4.title': 'Mis üle jääb',
+  'peat.ash.s4.text':
+    'Talvel sobib külm tuhk ka libedale teele libisemise vastu. Kasutamata jäänud tuha andke ära oma omavalitsuse jäätmekäitluse reeglite järgi.',
+  'peat.ash.table.title': 'Tuha koostis',
+  'peat.ash.table.lead':
+    'Tootja laborianalüüs turbabriketi põletamisel tekkinud tuha kohta. Silma paistavad kaltsium ({calcium}) ja kõrge pH ({ph}); kaaliumi ja lämmastikku on vähe.',
+  'peat.ash.table.note': 'Väärtused on tootja andmed ja võivad partiiti erineda.',
+  'peat.ash.row.ash': 'Tuhasisaldus',
+  'peat.ash.row.organic': 'Orgaaniline aine',
+  'peat.ash.row.carbon': 'Üldsüsinik (C)',
+  'peat.ash.row.nitrogen': 'Üldlämmastik (N)',
+  'peat.ash.row.phosphorus': 'Üldfosfor (P₂O₅)',
+  'peat.ash.row.potassium': 'Üldkaalium (K₂O)',
+  'peat.ash.row.calcium': 'Kaltsium (Ca)',
+  'peat.ash.row.magnesium': 'Magneesium (Mg)',
+  'peat.ash.row.copper': 'Vask (Cu)',
+  'peat.ash.row.zinc': 'Tsink (Zn)',
+  'peat.ash.row.cobalt': 'Koobalt (Co)',
+  'peat.ash.row.nickel': 'Nikkel (Ni)',
+  'peat.ash.row.manganese': 'Mangaan (Mn)',
+  'peat.ash.row.ph': 'pH',
+
   'peat.faq.eyebrow': 'KKK',
   'peat.faq.title': 'Korduma kippuvad küsimused',
   'peat.faq.q1': 'Mis on turbabrikett?',
@@ -549,9 +589,9 @@ const et = {
   'peat.faq.q5': 'Kui palju turbabrikett maksab?',
   'peat.faq.a5':
     'Hind on päringu alusel: see sõltub kogusest ja tarneaadressist. Saatke meile päring või kirjutage WhatsAppis ning saadame pakkumise. Turbabrikett on laos.',
-  'peat.faq.q6': 'Mida teha turbabriketi tuhaga?',
+  'peat.faq.q6': 'Kas turbabriketi tuhka võib aias kasutada?',
   'peat.faq.a6':
-    'Turbabriketi tuhk on mineraalirikas ja aluseline. Jahtunult võib seda õhukese kihina laotada peenardele ja murule väetise ja mullaparandajana, kui koos brikettidega pole põletatud midagi muud. Tuhka tekib rohkem kui puidugraanulitest, seega tuleb tuhasahtlit sagedamini tühjendada.',
+    'Jah, mõõdukalt. Tuhk on kaltsiumirikas ({calcium}) ja tugevalt aluseline (pH {ph}), nii et aias toimib see eelkõige lubjana; kaaliumi ja lämmastikku on selles vähe. Puistake jahtunud tuhka õhukese kihina happelisele mullale, kuid mitte happelist mulda armastavate taimede ega kartulite alla. Tuhka tekib rohkem kui puidugraanulitest, seega tuleb tuhasahtlit sagedamini tühjendada.',
   'peat.faq.q7': 'Kuidas turbabriketti hoiustada?',
   'peat.faq.a7':
     'Hoidke brikette kuivas ja katuse all, maapinnast eemal — näiteks alusel või riiulil kuuris või katlaruumis. Niiskust imanud brikett annab vähem soojust ja võib mureneda.',
@@ -951,11 +991,11 @@ const en: Dictionary = {
   'peat.row.pallet': 'Pallet',
   'peat.value.material': 'Milled peat',
   'peat.value.form': 'Pressed briquette, no binders',
-  'peat.value.calorific': '≈ 4.2 kWh/kg',
-  'peat.value.moisture': '≤ 20 %',
+  'peat.value.calorific': '≈ 4.2 kWh/kg',
+  'peat.value.moisture': '≤ 20 %',
   'peat.value.burn': 'up to ~8 h',
-  'peat.value.packaging': '84 packs, about 960 kg in total',
-  'peat.value.palletWeight': '≈ 960 kg',
+  'peat.value.packaging': '84 packs, 1000 kg in total',
+  'peat.value.palletWeight': '1000 kg',
   'peat.fact.pallet': '84 packs per pallet',
   'peat.value.gas': '9.3 kWh/m³',
   'peat.value.equiv': '450–500 m³',
@@ -1022,6 +1062,41 @@ const en: Dictionary = {
   'peat.specs.note':
     'Calorific value and moisture are reference values for peat briquettes from the Estonian methodology for calculating the energy performance of buildings. Burn time depends on the stove and the draught.',
 
+  'peat.ash.eyebrow': 'After the fire',
+  'peat.ash.title': 'What to do with the ash',
+  'peat.ash.lead':
+    'Peat briquettes leave more ash than wood pellets, so it pays to have a plan for it. Once cold, the ash is rich in calcium and strongly alkaline: in the garden it works mainly like lime, and in moderation as a fertiliser.',
+  'peat.ash.s1.title': 'Let it cool safely',
+  'peat.ash.s1.text':
+    'Collect the ash in a metal container with a lid and take it outside onto a non-combustible surface, away from walls and the woodpile. Ash can stay hot for several days — keep it out of plastic bins, bin bags and paper until it is completely cold.',
+  'peat.ash.s2.title': 'Use it in the garden',
+  'peat.ash.s2.text':
+    'Spread the cold ash thinly on acidic soil — lawns, under fruit trees, cabbage and flower beds — or add it to the compost in thin layers. Spring is the best time. Keep the ash dry until you use it: rain washes the nutrients out. It is caustic, so wear gloves and do not spread it in the wind.',
+  'peat.ash.s3.title': 'Where not to use it',
+  'peat.ash.s3.text':
+    'Not around acid-loving plants (blueberries, cranberries, rhododendrons, heather), not on a potato bed before planting — it encourages scab — and not on soil whose pH is already 7 or higher. Do not mix it with fresh manure or nitrogen fertilisers, and do not use it at all if coal, painted wood, plastic or glossy paper was burnt in the firebox.',
+  'peat.ash.s4.title': 'Whatever is left over',
+  'peat.ash.s4.text':
+    'In winter, cold ash also works as grit on icy paths. Whatever you do not use, dispose of according to your municipality’s waste rules.',
+  'peat.ash.table.title': 'What the ash contains',
+  'peat.ash.table.lead':
+    'The manufacturer’s laboratory analysis of ash from burnt peat briquettes. Calcium ({calcium}) and the high pH ({ph}) stand out; there is little potassium or nitrogen.',
+  'peat.ash.table.note': 'Figures are the manufacturer’s and may vary from batch to batch.',
+  'peat.ash.row.ash': 'Ash content',
+  'peat.ash.row.organic': 'Organic matter',
+  'peat.ash.row.carbon': 'Total carbon (C)',
+  'peat.ash.row.nitrogen': 'Total nitrogen (N)',
+  'peat.ash.row.phosphorus': 'Total phosphorus (P₂O₅)',
+  'peat.ash.row.potassium': 'Total potassium (K₂O)',
+  'peat.ash.row.calcium': 'Calcium (Ca)',
+  'peat.ash.row.magnesium': 'Magnesium (Mg)',
+  'peat.ash.row.copper': 'Copper (Cu)',
+  'peat.ash.row.zinc': 'Zinc (Zn)',
+  'peat.ash.row.cobalt': 'Cobalt (Co)',
+  'peat.ash.row.nickel': 'Nickel (Ni)',
+  'peat.ash.row.manganese': 'Manganese (Mn)',
+  'peat.ash.row.ph': 'pH',
+
   'peat.faq.eyebrow': 'FAQ',
   'peat.faq.title': 'Frequently asked questions',
   'peat.faq.q1': 'What is a peat briquette?',
@@ -1039,9 +1114,9 @@ const en: Dictionary = {
   'peat.faq.q5': 'How much do peat briquettes cost?',
   'peat.faq.a5':
     'The price is on request: it depends on the quantity and the delivery address. Send us an enquiry or a WhatsApp message and we will reply with a quote. Peat briquettes are in stock.',
-  'peat.faq.q6': 'What can I do with the ash?',
+  'peat.faq.q6': 'Can peat briquette ash be used in the garden?',
   'peat.faq.a6':
-    'Peat briquette ash is mineral-rich and alkaline. Once cold, it can be spread thinly on beds and lawns as a fertiliser and soil improver, provided nothing else was burnt with the briquettes. There is more of it than with wood pellets, so the ash pan needs emptying more often.',
+    'Yes, in moderation. The ash is rich in calcium ({calcium}) and strongly alkaline (pH {ph}), so in the garden it works mainly like lime; it holds little potassium or nitrogen. Spread cold ash thinly on acidic soil, but not under acid-loving plants or on potato beds. There is more of it than with wood pellets, so the ash pan needs emptying more often.',
   'peat.faq.q7': 'How should peat briquettes be stored?',
   'peat.faq.a7':
     'Keep them dry, under cover and off the ground — on a pallet or a shelf in a shed or boiler room. Briquettes that take on moisture give less heat and can crumble.',
@@ -1432,11 +1507,11 @@ const pl: Dictionary = {
   'peat.row.pallet': 'Paleta',
   'peat.value.material': 'Torf frezowy',
   'peat.value.form': 'Prasowany brykiet bez lepiszczy',
-  'peat.value.calorific': '≈ 4,2 kWh/kg',
-  'peat.value.moisture': '≤ 20 %',
+  'peat.value.calorific': '≈ 4,2 kWh/kg',
+  'peat.value.moisture': '≤ 20 %',
   'peat.value.burn': 'do ~8 h',
-  'peat.value.packaging': '84 opakowania, łącznie ok. 960 kg',
-  'peat.value.palletWeight': '≈ 960 kg',
+  'peat.value.packaging': '84 opakowania, łącznie 1000 kg',
+  'peat.value.palletWeight': '1000 kg',
   'peat.fact.pallet': '84 opakowania na palecie',
   'peat.value.gas': '9,3 kWh/m³',
   'peat.value.equiv': '450–500 m³',
@@ -1504,6 +1579,41 @@ const pl: Dictionary = {
   'peat.specs.note':
     'Wartość opałowa i wilgotność to wartości referencyjne dla brykietu torfowego z estońskiej metodyki obliczania charakterystyki energetycznej budynków. Czas palenia zależy od pieca i ciągu.',
 
+  'peat.ash.eyebrow': 'Po spaleniu',
+  'peat.ash.title': 'Co zrobić z popiołem?',
+  'peat.ash.lead':
+    'Brykiet torfowy zostawia więcej popiołu niż pellet drzewny, więc warto mieć na niego plan. Wystygnięty popiół jest bogaty w wapń i silnie zasadowy: w ogrodzie działa przede wszystkim jak wapno, a stosowany z umiarem — także jak nawóz.',
+  'peat.ash.s1.title': 'Pozwól mu bezpiecznie wystygnąć',
+  'peat.ash.s1.text':
+    'Zbieraj popiół do metalowego pojemnika z pokrywą i wynoś go na zewnątrz, na niepalne podłoże, z dala od ścian i drewna opałowego. Popiół może być gorący jeszcze przez kilka dni — dopóki całkiem nie wystygnie, nie wsypuj go do plastikowego kosza, worka na śmieci ani do papieru.',
+  'peat.ash.s2.title': 'Wykorzystaj w ogrodzie',
+  'peat.ash.s2.text':
+    'Rozsypuj wystygnięty popiół cienką warstwą na kwaśnej glebie — na trawniku, pod drzewami owocowymi, na grządkach z kapustą i na rabatach — albo dodawaj go cienkimi warstwami do kompostu. Najlepsza pora to wiosna. Do czasu użycia przechowuj popiół w suchym miejscu: deszcz wypłukuje z niego składniki. Popiół jest żrący, więc używaj rękawic i nie rozsypuj go na wietrze.',
+  'peat.ash.s3.title': 'Gdzie go nie stosować',
+  'peat.ash.s3.text':
+    'Nie pod rośliny lubiące kwaśną glebę (borówki, żurawiny, różaneczniki, wrzosy), nie na grządkę ziemniaków przed sadzeniem — sprzyja to parchowi — i nie na glebę, której pH wynosi już 7 lub więcej. Nie mieszaj popiołu ze świeżym obornikiem ani z nawozami azotowymi i nie używaj go wcale, jeśli w palenisku spalano węgiel, malowane drewno, plastik lub kolorowy papier.',
+  'peat.ash.s4.title': 'Co zostanie',
+  'peat.ash.s4.text':
+    'Zimą zimny popiół sprawdza się też jako posypka na oblodzone ścieżki. To, czego nie wykorzystasz, wyrzuć zgodnie z zasadami gospodarki odpadami w twojej gminie.',
+  'peat.ash.table.title': 'Skład popiołu',
+  'peat.ash.table.lead':
+    'Analiza laboratoryjna producenta dla popiołu ze spalonego brykietu torfowego. Wyróżniają się wapń ({calcium}) i wysokie pH ({ph}); potasu i azotu jest niewiele.',
+  'peat.ash.table.note': 'Wartości podaje producent; mogą się różnić w zależności od partii.',
+  'peat.ash.row.ash': 'Zawartość popiołu',
+  'peat.ash.row.organic': 'Substancja organiczna',
+  'peat.ash.row.carbon': 'Węgiel ogółem (C)',
+  'peat.ash.row.nitrogen': 'Azot ogółem (N)',
+  'peat.ash.row.phosphorus': 'Fosfor ogółem (P₂O₅)',
+  'peat.ash.row.potassium': 'Potas ogółem (K₂O)',
+  'peat.ash.row.calcium': 'Wapń (Ca)',
+  'peat.ash.row.magnesium': 'Magnez (Mg)',
+  'peat.ash.row.copper': 'Miedź (Cu)',
+  'peat.ash.row.zinc': 'Cynk (Zn)',
+  'peat.ash.row.cobalt': 'Kobalt (Co)',
+  'peat.ash.row.nickel': 'Nikiel (Ni)',
+  'peat.ash.row.manganese': 'Mangan (Mn)',
+  'peat.ash.row.ph': 'pH',
+
   'peat.faq.eyebrow': 'FAQ',
   'peat.faq.title': 'Najczęściej zadawane pytania',
   'peat.faq.q1': 'Czym jest brykiet torfowy?',
@@ -1521,9 +1631,9 @@ const pl: Dictionary = {
   'peat.faq.q5': 'Ile kosztuje brykiet torfowy?',
   'peat.faq.a5':
     'Cena jest na zapytanie: zależy od ilości i adresu dostawy. Wyślij nam zapytanie lub wiadomość na WhatsAppie, a odpowiemy ofertą. Brykiet torfowy jest dostępny od ręki.',
-  'peat.faq.q6': 'Co zrobić z popiołem?',
+  'peat.faq.q6': 'Czy popiół z brykietu torfowego można stosować w ogrodzie?',
   'peat.faq.a6':
-    'Popiół z brykietu torfowego jest bogaty w minerały i ma odczyn zasadowy. Po wystygnięciu można go rozsypywać cienką warstwą na grządkach i trawniku jako nawóz i środek poprawiający glebę, o ile razem z brykietem nie spalano niczego innego. Popiołu jest więcej niż z pelletu drzewnego, więc popielnik trzeba częściej opróżniać.',
+    'Tak, z umiarem. Popiół jest bogaty w wapń ({calcium}) i silnie zasadowy (pH {ph}), więc w ogrodzie działa przede wszystkim jak wapno; potasu i azotu zawiera niewiele. Rozsypuj zimny popiół cienką warstwą na kwaśnej glebie, ale nie pod rośliny lubiące kwaśne podłoże i nie na grządki ziemniaków. Popiołu jest więcej niż z pelletu drzewnego, więc popielnik trzeba częściej opróżniać.',
   'peat.faq.q7': 'Jak przechowywać brykiet torfowy?',
   'peat.faq.a7':
     'W suchym miejscu, pod dachem i nie bezpośrednio na ziemi — na palecie lub regale w szopie albo w kotłowni. Brykiet, który nasiąknie wilgocią, daje mniej ciepła i może się kruszyć.',
@@ -1921,11 +2031,11 @@ const it: Dictionary = {
   'peat.row.pallet': 'Bancale',
   'peat.value.material': 'Torba fresata',
   'peat.value.form': 'Bricchetto pressato, senza leganti',
-  'peat.value.calorific': '≈ 4,2 kWh/kg',
-  'peat.value.moisture': '≤ 20 %',
+  'peat.value.calorific': '≈ 4,2 kWh/kg',
+  'peat.value.moisture': '≤ 20 %',
   'peat.value.burn': 'fino a ~8 h',
-  'peat.value.packaging': '84 confezioni, circa 960 kg in totale',
-  'peat.value.palletWeight': '≈ 960 kg',
+  'peat.value.packaging': '84 confezioni, 1000 kg in totale',
+  'peat.value.palletWeight': '1000 kg',
   'peat.fact.pallet': '84 confezioni per bancale',
   'peat.value.gas': '9,3 kWh/m³',
   'peat.value.equiv': '450–500 m³',
@@ -1993,6 +2103,41 @@ const it: Dictionary = {
   'peat.specs.note':
     'Potere calorifico e umidità sono valori di riferimento per i bricchetti di torba, tratti dalla metodologia estone per il calcolo della prestazione energetica degli edifici. La durata di combustione dipende dalla stufa e dal tiraggio.',
 
+  'peat.ash.eyebrow': 'Dopo la combustione',
+  'peat.ash.title': 'Cosa fare con la cenere?',
+  'peat.ash.lead':
+    'I bricchetti di torba lasciano più cenere del pellet di legno, quindi conviene sapere cosa farne. Una volta fredda, la cenere è ricca di calcio e fortemente alcalina: in giardino agisce soprattutto come la calce e, con moderazione, anche come fertilizzante.',
+  'peat.ash.s1.title': 'Lasciala raffreddare in sicurezza',
+  'peat.ash.s1.text':
+    'Raccogli la cenere in un contenitore di metallo con coperchio e portala all’aperto, su una superficie non infiammabile, lontano da pareti e cataste di legna. La cenere può restare calda per diversi giorni: finché non è completamente fredda, non metterla in bidoni di plastica, sacchetti o insieme alla carta.',
+  'peat.ash.s2.title': 'Usala in giardino',
+  'peat.ash.s2.text':
+    'Spargi la cenere fredda in uno strato sottile sui terreni acidi — prato, sotto gli alberi da frutto, aiuole di cavoli e di fiori — oppure aggiungila al compost a strati sottili. Il momento migliore è la primavera. Fino all’uso tienila all’asciutto: la pioggia ne dilava i nutrienti. È caustica, quindi usa i guanti e non spargerla quando c’è vento.',
+  'peat.ash.s3.title': 'Dove non usarla',
+  'peat.ash.s3.text':
+    'Non intorno alle piante acidofile (mirtilli, mirtilli rossi, rododendri, erica), non sull’aiuola delle patate prima di piantarle, perché favorisce la scabbia, e non su terreni con pH già pari o superiore a 7. Non mescolarla con letame fresco o concimi azotati e non usarla affatto se nel focolare sono stati bruciati carbone, legno verniciato, plastica o carta patinata.',
+  'peat.ash.s4.title': 'Quello che avanza',
+  'peat.ash.s4.text':
+    'D’inverno la cenere fredda funziona anche come antiscivolo sui vialetti ghiacciati. Quella che non usi smaltiscila secondo le regole di raccolta del tuo comune.',
+  'peat.ash.table.title': 'Composizione della cenere',
+  'peat.ash.table.lead':
+    'Analisi di laboratorio del produttore sulla cenere dei bricchetti di torba bruciati. Spiccano il calcio ({calcium}) e il pH elevato ({ph}); potassio e azoto sono scarsi.',
+  'peat.ash.table.note': 'Valori forniti dal produttore; possono variare da lotto a lotto.',
+  'peat.ash.row.ash': 'Contenuto di ceneri',
+  'peat.ash.row.organic': 'Sostanza organica',
+  'peat.ash.row.carbon': 'Carbonio totale (C)',
+  'peat.ash.row.nitrogen': 'Azoto totale (N)',
+  'peat.ash.row.phosphorus': 'Fosforo totale (P₂O₅)',
+  'peat.ash.row.potassium': 'Potassio totale (K₂O)',
+  'peat.ash.row.calcium': 'Calcio (Ca)',
+  'peat.ash.row.magnesium': 'Magnesio (Mg)',
+  'peat.ash.row.copper': 'Rame (Cu)',
+  'peat.ash.row.zinc': 'Zinco (Zn)',
+  'peat.ash.row.cobalt': 'Cobalto (Co)',
+  'peat.ash.row.nickel': 'Nichel (Ni)',
+  'peat.ash.row.manganese': 'Manganese (Mn)',
+  'peat.ash.row.ph': 'pH',
+
   'peat.faq.eyebrow': 'FAQ',
   'peat.faq.title': 'Domande frequenti',
   'peat.faq.q1': 'Che cos’è il bricchetto di torba?',
@@ -2010,9 +2155,9 @@ const it: Dictionary = {
   'peat.faq.q5': 'Quanto costano i bricchetti di torba?',
   'peat.faq.a5':
     'Il prezzo è su richiesta: dipende dalla quantità e dall’indirizzo di consegna. Inviaci una richiesta o un messaggio su WhatsApp e ti risponderemo con un preventivo. I bricchetti di torba sono disponibili a magazzino.',
-  'peat.faq.q6': 'Cosa fare con la cenere?',
+  'peat.faq.q6': 'La cenere dei bricchetti di torba si può usare in giardino?',
   'peat.faq.a6':
-    'La cenere dei bricchetti di torba è ricca di minerali e alcalina. Una volta fredda, si può spargere in uno strato sottile su aiuole e prato come fertilizzante e ammendante, purché insieme ai bricchetti non sia stato bruciato nient’altro. È più abbondante di quella del pellet di legno, quindi il cassetto della cenere va svuotato più spesso.',
+    'Sì, con moderazione. La cenere è ricca di calcio ({calcium}) e fortemente alcalina (pH {ph}), quindi in giardino agisce soprattutto come la calce; contiene poco potassio e poco azoto. Spargi la cenere fredda in uno strato sottile sui terreni acidi, ma non sotto le piante acidofile né sulle aiuole di patate. È più abbondante di quella del pellet di legno, quindi il cassetto della cenere va svuotato più spesso.',
   'peat.faq.q7': 'Come conservare i bricchetti di torba?',
   'peat.faq.a7':
     'All’asciutto, al coperto e sollevati da terra, per esempio su un bancale o uno scaffale in una rimessa o nel locale caldaia. I bricchetti che assorbono umidità rendono meno calore e possono sbriciolarsi.',

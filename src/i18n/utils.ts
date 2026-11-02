@@ -71,11 +71,15 @@ export function useMarketCopy(lang: Lang) {
  *
  * Figures come from config rather than being typed into the copy, so a
  * sentence can never contradict the price block or spec table beside it.
+ *
+ * Non-breaking spaces survive the tidy-up: values such as '390 €' and
+ * '17,6 %' carry one so the number never wraps away from its unit, and `\s`
+ * alone would turn it back into an ordinary space.
  */
 export function fillPlaceholders(text: string, values: Record<string, string>): string {
   return text
     .replace(/\{(\w+)\}/g, (match, name: string) => values[name] ?? match)
-    .replace(/\s+/g, ' ')
+    .replace(/[^\S ]+/g, ' ')
     .trim();
 }
 

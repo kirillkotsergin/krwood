@@ -29,6 +29,7 @@ import {
   PELLET_CERTIFICATION,
   type SpecRow,
 } from '../config/specs';
+import { peatAsh, formatAshValue } from '../config/peatAsh';
 
 const t = useTranslations('en');
 
@@ -116,6 +117,7 @@ ${list([
 - Price: ${t('peat.price.value').toLowerCase()}. ${t('peat.price.note')}
 - Availability: ${t('peat.stock').toLowerCase()}
 - ${t('peat.specs.note')}
+- Ash: ${t('peat.ash.lead')} Manufacturer’s analysis: ${peatAsh.map((row) => `${t(row.label)} ${formatAshValue(row, 'en')}`).join('; ')}.
 - Details: ${abs(routePath('peatBriquettes', 'en'))}
 
 ## Packaging and delivery
