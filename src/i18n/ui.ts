@@ -426,13 +426,14 @@ const et = {
   // --- Peat briquettes landing page ----------------------------------------
   // Price on request: no amount in src/config/pricing.ts, so no Product node
   // either — see the comment above the JSON-LD in PeatBriquettes.astro.
-  // {calorific}, {moisture}, {gas}, {equiv}, {burn} and {pelletAsh} are
-  // filled in by PeatBriquettes.astro from the values below and the pellet
-  // specs, so an answer cannot contradict the spec table.
+  // {calorific}, {moisture}, {gas}, {equiv}, {burn}, {woodCalorific}, {packaging},
+  // {calcium} and {ph} are filled in by PeatBriquettes.astro from the values
+  // below and src/config/peatAsh.ts, so an answer cannot contradict the tables.
   //
   // Reference figures (net calorific value), Estonian methodology for the
   // energy performance of buildings, annex 4 "Kütuste tarbimisaine alumised
-  // kütteväärtused": peat briquettes (moisture ≤ 20 %) 4.2 kWh/kg, natural
+  // kütteväärtused": peat briquettes (moisture ≤ 20 %) 4.2 kWh/kg, wood
+  // briquettes (moisture ≤ 12 %) 4.6 kWh/kg — the FAQ compares the two — natural
   // gas 9.3 kWh/m³ — https://www.riigiteataja.ee/aktilisa/1181/0201/2001/MKM_m63_lisa4.pdf
   // 1 t = 4,200 kWh ≈ 450 m³ of gas; drier briquettes reach the 500 m³ that
   // manufacturers quote. "Up to ~8 h" is the manufacturers' burn time.
@@ -463,6 +464,7 @@ const et = {
   'peat.value.calorific': '≈ 4,2 kWh/kg',
   'peat.value.moisture': '≤ 20 %',
   'peat.value.burn': 'kuni ~8 h',
+  'peat.value.woodCalorific': '≈ 4,6 kWh/kg',
   'peat.value.packaging': '84 pakki, kokku 1000 kg',
   'peat.value.palletWeight': '1000 kg',
   'peat.fact.pallet': '84 pakki alusel',
@@ -583,9 +585,9 @@ const et = {
   'peat.faq.q3': 'Kas turbabriketti saab põletada pelletikatlas?',
   'peat.faq.a3':
     'Ei. Pelletipõleti söödab kütust automaatselt ja vajab kindla suurusega pelleteid. Turbabrikett on mõeldud käsitsi köetavatele ahjudele, pliitidele, suletud kaminasüdamikele ja tahkekütusekateldele. Pelletikatla jaoks valige meie ENplus A1 puidugraanulid.',
-  'peat.faq.q4': 'Turbabrikett või puidugraanulid — kumb valida?',
+  'peat.faq.q4': 'Turbabrikett või puitbrikett — kumb valida?',
   'peat.faq.a4':
-    'See sõltub küttekoldest. Puidugraanulid on mõeldud automaatsetele pelletikateldele ja -põletitele ning neist jääb väga vähe tuhka ({pelletAsh}). Turbabrikett sobib käsitsi köetavatele ahjudele ja tahkekütusekateldele, kus selle eelis on pikk ja ühtlane põlemine; tuhka jääb sellest märgatavalt rohkem kui graanulitest.',
+    'Mõlemad sobivad käsitsi köetavatele ahjudele ja tahkekütusekateldele. Puitbrikett annab kilogrammi kohta veidi rohkem soojust ({woodCalorific}, turbabrikett {calorific}), põleb kuumema ja kiirema leegiga ning sellest jääb vähe tuhka. Turbabrikett hõõgub kauem ja ühtlasemalt, nii et see sobib eriti ööseks; tuhka jääb sellest märgatavalt rohkem. Paljud kombineerivad: puitbrikett kiireks soojenemiseks, turbabrikett pika ja ühtlase soojuse hoidmiseks.',
   'peat.faq.q5': 'Kui palju turbabrikett maksab?',
   'peat.faq.a5':
     'Hind on päringu alusel: see sõltub kogusest ja tarneaadressist. Saatke meile päring või kirjutage WhatsAppis ning saadame pakkumise. Turbabrikett on laos.',
@@ -994,6 +996,7 @@ const en: Dictionary = {
   'peat.value.calorific': '≈ 4.2 kWh/kg',
   'peat.value.moisture': '≤ 20 %',
   'peat.value.burn': 'up to ~8 h',
+  'peat.value.woodCalorific': '≈ 4.6 kWh/kg',
   'peat.value.packaging': '84 packs, 1000 kg in total',
   'peat.value.palletWeight': '1000 kg',
   'peat.fact.pallet': '84 packs per pallet',
@@ -1108,9 +1111,9 @@ const en: Dictionary = {
   'peat.faq.q3': 'Can I burn peat briquettes in a pellet boiler?',
   'peat.faq.a3':
     'No. A pellet burner feeds fuel automatically and needs pellets of a fixed size. Peat briquettes are for manually loaded stoves, cookers, closed fireplace inserts and solid-fuel boilers. For a pellet boiler, choose our ENplus A1 wood pellets.',
-  'peat.faq.q4': 'Peat briquettes or wood pellets — which should I choose?',
+  'peat.faq.q4': 'Peat briquettes or wood briquettes — which should I choose?',
   'peat.faq.a4':
-    'It depends on the heater. Wood pellets are made for automatic pellet boilers and burners and leave very little ash ({pelletAsh}). Peat briquettes suit manually loaded stoves and solid-fuel boilers, where their long, even burn is the advantage; they leave noticeably more ash than pellets.',
+    'Both suit manually loaded stoves and solid-fuel boilers. Wood briquettes give a little more heat per kilogram ({woodCalorific}, against {calorific} for peat), burn hotter and faster with a livelier flame, and leave little ash. Peat briquettes smoulder longer and more evenly, which makes them the better choice for the night, but they leave noticeably more ash. Many people combine the two: wood briquettes to heat up quickly, peat briquettes to hold the heat for hours.',
   'peat.faq.q5': 'How much do peat briquettes cost?',
   'peat.faq.a5':
     'The price is on request: it depends on the quantity and the delivery address. Send us an enquiry or a WhatsApp message and we will reply with a quote. Peat briquettes are in stock.',
@@ -1510,6 +1513,7 @@ const pl: Dictionary = {
   'peat.value.calorific': '≈ 4,2 kWh/kg',
   'peat.value.moisture': '≤ 20 %',
   'peat.value.burn': 'do ~8 h',
+  'peat.value.woodCalorific': '≈ 4,6 kWh/kg',
   'peat.value.packaging': '84 opakowania, łącznie 1000 kg',
   'peat.value.palletWeight': '1000 kg',
   'peat.fact.pallet': '84 opakowania na palecie',
@@ -1625,9 +1629,9 @@ const pl: Dictionary = {
   'peat.faq.q3': 'Czy brykiet torfowy można spalać w kotle na pellet?',
   'peat.faq.a3':
     'Nie. Palnik pelletowy podaje paliwo automatycznie i wymaga granulatu o określonej wielkości. Brykiet torfowy jest przeznaczony do ręcznie ładowanych pieców, kuchni węglowych, zamkniętych wkładów kominkowych i kotłów na paliwo stałe. Do kotła na pellet wybierz nasz pellet drzewny ENplus A1.',
-  'peat.faq.q4': 'Brykiet torfowy czy pellet drzewny — co wybrać?',
+  'peat.faq.q4': 'Brykiet torfowy czy brykiet drzewny — co wybrać?',
   'peat.faq.a4':
-    'To zależy od urządzenia grzewczego. Pellet drzewny jest przeznaczony do automatycznych kotłów i palników pelletowych i zostawia bardzo mało popiołu ({pelletAsh}). Brykiet torfowy sprawdza się w ręcznie ładowanych piecach i kotłach na paliwo stałe, gdzie jego zaletą jest długie, równe spalanie; popiołu zostaje z niego wyraźnie więcej niż z pelletu.',
+    'Oba nadają się do ręcznie ładowanych pieców i kotłów na paliwo stałe. Brykiet drzewny daje nieco więcej ciepła z kilograma ({woodCalorific} wobec {calorific} dla torfowego), pali się goręcej i szybciej, żywszym płomieniem, i zostawia mało popiołu. Brykiet torfowy tli się dłużej i równiej, dlatego lepiej sprawdza się na noc, ale popiołu zostaje z niego wyraźnie więcej. Wiele osób łączy oba: drzewny, by szybko nagrzać dom, torfowy, by utrzymać ciepło przez wiele godzin.',
   'peat.faq.q5': 'Ile kosztuje brykiet torfowy?',
   'peat.faq.a5':
     'Cena jest na zapytanie: zależy od ilości i adresu dostawy. Wyślij nam zapytanie lub wiadomość na WhatsAppie, a odpowiemy ofertą. Brykiet torfowy jest dostępny od ręki.',
@@ -2034,6 +2038,7 @@ const it: Dictionary = {
   'peat.value.calorific': '≈ 4,2 kWh/kg',
   'peat.value.moisture': '≤ 20 %',
   'peat.value.burn': 'fino a ~8 h',
+  'peat.value.woodCalorific': '≈ 4,6 kWh/kg',
   'peat.value.packaging': '84 confezioni, 1000 kg in totale',
   'peat.value.palletWeight': '1000 kg',
   'peat.fact.pallet': '84 confezioni per bancale',
@@ -2149,9 +2154,9 @@ const it: Dictionary = {
   'peat.faq.q3': 'Si possono bruciare i bricchetti di torba in una caldaia a pellet?',
   'peat.faq.a3':
     'No. Il bruciatore a pellet alimenta il combustibile in automatico e richiede pellet di dimensioni definite. I bricchetti di torba sono pensati per stufe, cucine a legna, inserti per camino chiusi e caldaie a combustibile solido caricate a mano. Per una caldaia a pellet scegli il nostro pellet di legno ENplus A1.',
-  'peat.faq.q4': 'Bricchetti di torba o pellet di legno: cosa scegliere?',
+  'peat.faq.q4': 'Bricchetti di torba o bricchetti di legno: cosa scegliere?',
   'peat.faq.a4':
-    'Dipende dall’apparecchio. Il pellet di legno è fatto per caldaie e bruciatori a pellet automatici e lascia pochissima cenere ({pelletAsh}). I bricchetti di torba sono adatti a stufe e caldaie a combustibile solido caricate a mano, dove il loro vantaggio è la combustione lunga e regolare; lasciano però sensibilmente più cenere del pellet.',
+    'Entrambi sono adatti a stufe e caldaie a combustibile solido caricate a mano. I bricchetti di legno danno un po’ più di calore per chilogrammo ({woodCalorific}, contro {calorific} della torba), bruciano più caldi e più in fretta, con una fiamma più viva, e lasciano poca cenere. I bricchetti di torba ardono più a lungo e in modo più uniforme, quindi sono la scelta migliore per la notte, ma lasciano sensibilmente più cenere. Molti li combinano: legno per scaldare in fretta, torba per mantenere il calore per ore.',
   'peat.faq.q5': 'Quanto costano i bricchetti di torba?',
   'peat.faq.a5':
     'Il prezzo è su richiesta: dipende dalla quantità e dall’indirizzo di consegna. Inviaci una richiesta o un messaggio su WhatsApp e ti risponderemo con un preventivo. I bricchetti di torba sono disponibili a magazzino.',

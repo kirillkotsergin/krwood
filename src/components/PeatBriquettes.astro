@@ -48,8 +48,9 @@ const figures = {
   // From the manufacturer's ash analysis — see src/config/peatAsh.ts.
   calcium: ashValue('peat.ash.row.calcium', lang),
   ph: ashValue('peat.ash.row.ph', lang),
-  // The wood pellets' own spec, for the "briquettes or pellets" answer.
-  pelletAsh: t('specs.value.ash'),
+  // Wood briquettes, for the "peat or wood briquettes" answer — the same
+  // Estonian reference table as the peat figure.
+  woodCalorific: t('peat.value.woodCalorific'),
 };
 const fill = (text: string) => fillPlaceholders(text, figures);
 
