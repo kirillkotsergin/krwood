@@ -542,7 +542,7 @@ const et = {
   'peat.ash.eyebrow': 'Pärast põlemist',
   'peat.ash.title': 'Mida teha tuhaga?',
   'peat.ash.lead':
-    'Turbabrikett jätab tuhka rohkem kui puidugraanulid, nii et sellega tasub arvestada. Jahtunud tuhk on kaltsiumirikas ja tugevalt aluseline — aias toimib see eelkõige lubjana, mõõdukalt kasutades ka väetisena.',
+    'Turbabrikett jätab tuhka rohkem kui puitbrikett, nii et sellega tasub arvestada. Jahtunud tuhk on kaltsiumirikas ja tugevalt aluseline — aias toimib see eelkõige lubjana, mõõdukalt kasutades ka väetisena.',
   'peat.ash.s1.title': 'Laske tuhal ohutult jahtuda',
   'peat.ash.s1.text':
     'Koguge tuhk kaanega metallnõusse ja viige see õue mittepõlevale pinnale, seintest ja puuriidast eemale. Tuhk võib hõõguda veel mitu päeva — ärge pange seda plastnõusse, prügikotti ega paberi sekka enne, kui see on täiesti külm.',
@@ -593,7 +593,7 @@ const et = {
     'Hind on päringu alusel: see sõltub kogusest ja tarneaadressist. Saatke meile päring või kirjutage WhatsAppis ning saadame pakkumise. Turbabrikett on laos.',
   'peat.faq.q6': 'Kas turbabriketi tuhka võib aias kasutada?',
   'peat.faq.a6':
-    'Jah, mõõdukalt. Tuhk on kaltsiumirikas ({calcium}) ja tugevalt aluseline (pH {ph}), nii et aias toimib see eelkõige lubjana; kaaliumi ja lämmastikku on selles vähe. Puistake jahtunud tuhka õhukese kihina happelisele mullale, kuid mitte happelist mulda armastavate taimede ega kartulite alla. Tuhka tekib rohkem kui puidugraanulitest, seega tuleb tuhasahtlit sagedamini tühjendada.',
+    'Jah, mõõdukalt. Tuhk on kaltsiumirikas ({calcium}) ja tugevalt aluseline (pH {ph}), nii et aias toimib see eelkõige lubjana; kaaliumi ja lämmastikku on selles vähe. Puistake jahtunud tuhka õhukese kihina happelisele mullale, kuid mitte happelist mulda armastavate taimede ega kartulite alla. Tuhka tekib rohkem kui puitbrikettidest, seega tuleb tuhasahtlit sagedamini tühjendada.',
   'peat.faq.q7': 'Kuidas turbabriketti hoiustada?',
   'peat.faq.a7':
     'Hoidke brikette kuivas ja katuse all, maapinnast eemal — näiteks alusel või riiulil kuuris või katlaruumis. Niiskust imanud brikett annab vähem soojust ja võib mureneda.',
@@ -1068,7 +1068,7 @@ const en: Dictionary = {
   'peat.ash.eyebrow': 'After the fire',
   'peat.ash.title': 'What to do with the ash',
   'peat.ash.lead':
-    'Peat briquettes leave more ash than wood pellets, so it pays to have a plan for it. Once cold, the ash is rich in calcium and strongly alkaline: in the garden it works mainly like lime, and in moderation as a fertiliser.',
+    'Peat briquettes leave more ash than wood briquettes, so it pays to have a plan for it. Once cold, the ash is rich in calcium and strongly alkaline: in the garden it works mainly like lime, and in moderation as a fertiliser.',
   'peat.ash.s1.title': 'Let it cool safely',
   'peat.ash.s1.text':
     'Collect the ash in a metal container with a lid and take it outside onto a non-combustible surface, away from walls and the woodpile. Ash can stay hot for several days — keep it out of plastic bins, bin bags and paper until it is completely cold.',
@@ -1119,7 +1119,7 @@ const en: Dictionary = {
     'The price is on request: it depends on the quantity and the delivery address. Send us an enquiry or a WhatsApp message and we will reply with a quote. Peat briquettes are in stock.',
   'peat.faq.q6': 'Can peat briquette ash be used in the garden?',
   'peat.faq.a6':
-    'Yes, in moderation. The ash is rich in calcium ({calcium}) and strongly alkaline (pH {ph}), so in the garden it works mainly like lime; it holds little potassium or nitrogen. Spread cold ash thinly on acidic soil, but not under acid-loving plants or on potato beds. There is more of it than with wood pellets, so the ash pan needs emptying more often.',
+    'Yes, in moderation. The ash is rich in calcium ({calcium}) and strongly alkaline (pH {ph}), so in the garden it works mainly like lime; it holds little potassium or nitrogen. Spread cold ash thinly on acidic soil, but not under acid-loving plants or on potato beds. There is more of it than with wood briquettes, so the ash pan needs emptying more often.',
   'peat.faq.q7': 'How should peat briquettes be stored?',
   'peat.faq.a7':
     'Keep them dry, under cover and off the ground — on a pallet or a shelf in a shed or boiler room. Briquettes that take on moisture give less heat and can crumble.',
@@ -1586,7 +1586,7 @@ const pl: Dictionary = {
   'peat.ash.eyebrow': 'Po spaleniu',
   'peat.ash.title': 'Co zrobić z popiołem?',
   'peat.ash.lead':
-    'Brykiet torfowy zostawia więcej popiołu niż pellet drzewny, więc warto mieć na niego plan. Wystygnięty popiół jest bogaty w wapń i silnie zasadowy: w ogrodzie działa przede wszystkim jak wapno, a stosowany z umiarem — także jak nawóz.',
+    'Brykiet torfowy zostawia więcej popiołu niż brykiet drzewny, więc warto mieć na niego plan. Wystygnięty popiół jest bogaty w wapń i silnie zasadowy: w ogrodzie działa przede wszystkim jak wapno, a stosowany z umiarem — także jak nawóz.',
   'peat.ash.s1.title': 'Pozwól mu bezpiecznie wystygnąć',
   'peat.ash.s1.text':
     'Zbieraj popiół do metalowego pojemnika z pokrywą i wynoś go na zewnątrz, na niepalne podłoże, z dala od ścian i drewna opałowego. Popiół może być gorący jeszcze przez kilka dni — dopóki całkiem nie wystygnie, nie wsypuj go do plastikowego kosza, worka na śmieci ani do papieru.',
@@ -1637,7 +1637,7 @@ const pl: Dictionary = {
     'Cena jest na zapytanie: zależy od ilości i adresu dostawy. Wyślij nam zapytanie lub wiadomość na WhatsAppie, a odpowiemy ofertą. Brykiet torfowy jest dostępny od ręki.',
   'peat.faq.q6': 'Czy popiół z brykietu torfowego można stosować w ogrodzie?',
   'peat.faq.a6':
-    'Tak, z umiarem. Popiół jest bogaty w wapń ({calcium}) i silnie zasadowy (pH {ph}), więc w ogrodzie działa przede wszystkim jak wapno; potasu i azotu zawiera niewiele. Rozsypuj zimny popiół cienką warstwą na kwaśnej glebie, ale nie pod rośliny lubiące kwaśne podłoże i nie na grządki ziemniaków. Popiołu jest więcej niż z pelletu drzewnego, więc popielnik trzeba częściej opróżniać.',
+    'Tak, z umiarem. Popiół jest bogaty w wapń ({calcium}) i silnie zasadowy (pH {ph}), więc w ogrodzie działa przede wszystkim jak wapno; potasu i azotu zawiera niewiele. Rozsypuj zimny popiół cienką warstwą na kwaśnej glebie, ale nie pod rośliny lubiące kwaśne podłoże i nie na grządki ziemniaków. Popiołu jest więcej niż z brykietu drzewnego, więc popielnik trzeba częściej opróżniać.',
   'peat.faq.q7': 'Jak przechowywać brykiet torfowy?',
   'peat.faq.a7':
     'W suchym miejscu, pod dachem i nie bezpośrednio na ziemi — na palecie lub regale w szopie albo w kotłowni. Brykiet, który nasiąknie wilgocią, daje mniej ciepła i może się kruszyć.',
@@ -2111,7 +2111,7 @@ const it: Dictionary = {
   'peat.ash.eyebrow': 'Dopo la combustione',
   'peat.ash.title': 'Cosa fare con la cenere?',
   'peat.ash.lead':
-    'I bricchetti di torba lasciano più cenere del pellet di legno, quindi conviene sapere cosa farne. Una volta fredda, la cenere è ricca di calcio e fortemente alcalina: in giardino agisce soprattutto come la calce e, con moderazione, anche come fertilizzante.',
+    'I bricchetti di torba lasciano più cenere dei bricchetti di legno, quindi conviene sapere cosa farne. Una volta fredda, la cenere è ricca di calcio e fortemente alcalina: in giardino agisce soprattutto come la calce e, con moderazione, anche come fertilizzante.',
   'peat.ash.s1.title': 'Lasciala raffreddare in sicurezza',
   'peat.ash.s1.text':
     'Raccogli la cenere in un contenitore di metallo con coperchio e portala all’aperto, su una superficie non infiammabile, lontano da pareti e cataste di legna. La cenere può restare calda per diversi giorni: finché non è completamente fredda, non metterla in bidoni di plastica, sacchetti o insieme alla carta.',
@@ -2162,7 +2162,7 @@ const it: Dictionary = {
     'Il prezzo è su richiesta: dipende dalla quantità e dall’indirizzo di consegna. Inviaci una richiesta o un messaggio su WhatsApp e ti risponderemo con un preventivo. I bricchetti di torba sono disponibili a magazzino.',
   'peat.faq.q6': 'La cenere dei bricchetti di torba si può usare in giardino?',
   'peat.faq.a6':
-    'Sì, con moderazione. La cenere è ricca di calcio ({calcium}) e fortemente alcalina (pH {ph}), quindi in giardino agisce soprattutto come la calce; contiene poco potassio e poco azoto. Spargi la cenere fredda in uno strato sottile sui terreni acidi, ma non sotto le piante acidofile né sulle aiuole di patate. È più abbondante di quella del pellet di legno, quindi il cassetto della cenere va svuotato più spesso.',
+    'Sì, con moderazione. La cenere è ricca di calcio ({calcium}) e fortemente alcalina (pH {ph}), quindi in giardino agisce soprattutto come la calce; contiene poco potassio e poco azoto. Spargi la cenere fredda in uno strato sottile sui terreni acidi, ma non sotto le piante acidofile né sulle aiuole di patate. È più abbondante di quella dei bricchetti di legno, quindi il cassetto della cenere va svuotato più spesso.',
   'peat.faq.q7': 'Come conservare i bricchetti di torba?',
   'peat.faq.a7':
     'All’asciutto, al coperto e sollevati da terra, per esempio su un bancale o uno scaffale in una rimessa o nel locale caldaia. I bricchetti che assorbono umidità rendono meno calore e possono sbriciolarsi.',
