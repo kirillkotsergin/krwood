@@ -484,7 +484,7 @@ const et = {
     'Turvas on tuhandete aastate jooksul rabades ja soodes kogunenud osaliselt lagunenud taimne aines. Briketi jaoks freesitakse kuivendatud raba pealmine kiht peeneks puruks, mis kuivatatakse esmalt väljal ja seejärel tehases ning pressitakse brikettideks. Rõhu ja kuumuse mõjul seovad turba enda looduslikud ühendid osakesed kokku, nii et brikett püsib koos ilma lisanditeta. Tulemus on palju tihedam kui lahtine turvas või küttepuud — igasse kotti ja laoruumi kuupmeetrisse mahub rohkem energiat.',
   'peat.about.burn.title': 'Kuidas turbabrikett põleb',
   'peat.about.burn.text':
-    'Süüdatud brikett eraldab kõigepealt lenduvad gaasid ja põleb lühikese ereda leegiga. Kui need on ära põlenud, tekib hõõguv söekiht, mis põleb aeglaselt väljast sissepoole — see ongi pikk faas, mis soojendab ahju või katelt ühtlaselt. Kuna brikett on tihe ja ühtlane, säilitab see põledes kaua oma kuju ja soojusvõimsus püsib stabiilne. Kui pärast leekide vaibumist õhu juurdevoolu vähendada, hõõgub täis kolle mitu tundi — tootjate andmetel kuni umbes kaheksa, olenevalt ahjust ja tõmbest.',
+    'Süüdatud brikett eraldab kõigepealt lenduvad gaasid ja põleb lühikese ereda leegiga. Kui need on ära põlenud, tekib hõõguv söekiht, mis põleb aeglaselt väljast sissepoole — see ongi pikk faas, mis soojendab ahju või katelt ühtlaselt. Kuna brikett on tihe ja ühtlane, säilitab see põledes kaua oma kuju ja soojusvõimsus püsib stabiilne. Kui pärast leekide vaibumist õhu juurdevoolu vähendada, hõõgub täis kolle mitu tundi — tootjate andmetel kuni umbes 8 tundi, olenevalt ahjust ja tõmbest.',
   'peat.about.use.title': 'Kuidas turbabrikettidega kütta',
   'peat.about.use.text':
     'Süüdake tuli peenpuude või mõne halu abil ja lisage brikette siis, kui koldes on juba süsi. Laduge need hõredalt, et õhk pääseks ligi, ja sulgege õhuklapp osaliselt, kui leegid on vaibunud — mida vähem õhku, seda pikem põlemine. Turbabrikett sobib puu- või söeküttele mõeldud ahjudesse, pliitidesse, suletud kaminasüdamikesse ja tahkekütusekateldesse; pelletipõletisse see ei sobi.',
@@ -492,7 +492,7 @@ const et = {
   'peat.benefits.title': 'Turbabriketi eelised',
   'peat.benefits.b1.title': 'Pikk põlemisaeg',
   'peat.benefits.b1.text':
-    'Üks täitmine hõõgub tunde (tootjate andmetel kuni umbes kaheksa), nii et ahju võib õhtul täita ja maja püsib soojana hommikuni.',
+    'Üks täitmine hõõgub tunde (tootjate andmetel kuni umbes 8 tundi), nii et ahju võib õhtul täita ja maja püsib soojana hommikuni.',
   'peat.benefits.b2.title': 'Ilma söe terava lõhnata',
   'peat.benefits.b2.text':
     'Erinevalt kivisöest põleb turbabrikett ilma raske ja terava suitsulõhnata.',
@@ -975,7 +975,7 @@ const en: Dictionary = {
     'Peat is partly decomposed plant matter that has built up in bogs and fens over thousands of years. For briquettes, the top layer of a drained bog is milled into a fine crumb, dried first in the field and then at the factory, and pressed into briquettes. Under pressure and heat, natural compounds in the peat itself bind the particles together, so the briquette holds without additives. The result is far denser than loose peat or firewood: more energy fits into every bag and every cubic metre of storage.',
   'peat.about.burn.title': 'How it burns',
   'peat.about.burn.text':
-    'A lit briquette first gives off its volatile gases and burns with a short, bright flame. Once these have burnt away, a glowing layer of embers forms and burns slowly from the outside in — the long phase that heats the stove or boiler evenly. Because the briquette is dense and uniform, it keeps its shape for a long time as it burns, and the heat output stays steady. With the air supply turned down once the flames settle, a full firebox smoulders for several hours — up to around eight, according to manufacturers, depending on the stove and the draught.',
+    'A lit briquette first gives off its volatile gases and burns with a short, bright flame. Once these have burnt away, a glowing layer of embers forms and burns slowly from the outside in — the long phase that heats the stove or boiler evenly. Because the briquette is dense and uniform, it keeps its shape for a long time as it burns, and the heat output stays steady. With the air supply turned down once the flames settle, a full firebox smoulders for several hours — up to around 8 hours, according to manufacturers, depending on the stove and the draught.',
   'peat.about.use.title': 'How to fire with it',
   'peat.about.use.text':
     'Start the fire with kindling or a few logs and add the briquettes once there is a bed of embers. Lay them loosely so that air can reach them, and partly close the air damper when the flames have settled — less air, longer burn. Peat briquettes suit stoves, cookers, closed fireplace inserts and solid-fuel boilers built for wood or coal; they do not belong in a pellet burner.',
@@ -983,7 +983,7 @@ const en: Dictionary = {
   'peat.benefits.title': 'Advantages of peat briquettes',
   'peat.benefits.b1.title': 'Long burn time',
   'peat.benefits.b1.text':
-    'One load smoulders for hours — up to around eight, according to manufacturers — so the stove can be filled in the evening and the house stays warm until morning.',
+    'One load smoulders for hours — up to around 8 hours, according to manufacturers — so the stove can be filled in the evening and the house stays warm until morning.',
   'peat.benefits.b2.title': 'No acrid coal smell',
   'peat.benefits.b2.text': 'Unlike coal, peat briquettes burn without a heavy, acrid smoke smell.',
   'peat.benefits.b3.title': 'Low sulphur content',
@@ -1456,7 +1456,7 @@ const pl: Dictionary = {
     'Torf to częściowo rozłożona materia roślinna, która gromadziła się w torfowiskach przez tysiące lat. Do produkcji brykietów wierzchnią warstwę osuszonego torfowiska frezuje się na drobną kruszonkę, suszy najpierw na polu, a potem w zakładzie, i prasuje w brykiety. Pod wpływem ciśnienia i temperatury naturalne związki zawarte w samym torfie wiążą cząstki ze sobą, więc brykiet trzyma się bez dodatków. Jest przy tym znacznie gęstszy niż luźny torf czy drewno opałowe — w każdym worku i w każdym metrze sześciennym składziku mieści się więcej energii.',
   'peat.about.burn.title': 'Jak się pali',
   'peat.about.burn.text':
-    'Rozpalony brykiet najpierw uwalnia gazy lotne i pali się krótkim, jasnym płomieniem. Gdy się wypalą, powstaje warstwa żaru, która spala się powoli od zewnątrz do środka — to długa faza, w której piec lub kocioł nagrzewa się równomiernie. Ponieważ brykiet jest zwarty i jednolity, długo zachowuje kształt, a moc grzewcza pozostaje stabilna. Jeśli po opadnięciu płomieni przymkniesz dopływ powietrza, pełne palenisko tli się przez kilka godzin — według producentów nawet do około ośmiu, zależnie od pieca i ciągu.',
+    'Rozpalony brykiet najpierw uwalnia gazy lotne i pali się krótkim, jasnym płomieniem. Gdy się wypalą, powstaje warstwa żaru, która spala się powoli od zewnątrz do środka — to długa faza, w której piec lub kocioł nagrzewa się równomiernie. Ponieważ brykiet jest zwarty i jednolity, długo zachowuje kształt, a moc grzewcza pozostaje stabilna. Jeśli po opadnięciu płomieni przymkniesz dopływ powietrza, pełne palenisko tli się przez kilka godzin — według producentów nawet do około 8 godzin, zależnie od pieca i ciągu.',
   'peat.about.use.title': 'Jak nim palić',
   'peat.about.use.text':
     'Rozpal ogień drobnym drewnem lub kilkoma polanami i dokładaj brykiety, gdy w palenisku jest już żar. Układaj je luźno, żeby docierało do nich powietrze, a gdy płomienie opadną, częściowo przymknij przepustnicę — mniej powietrza to dłuższe palenie. Brykiet torfowy nadaje się do pieców, kuchni węglowych, zamkniętych wkładów kominkowych i kotłów na paliwo stałe przeznaczonych do drewna lub węgla; nie nadaje się do palników na pellet.',
@@ -1464,7 +1464,7 @@ const pl: Dictionary = {
   'peat.benefits.title': 'Zalety brykietu torfowego',
   'peat.benefits.b1.title': 'Długi czas palenia',
   'peat.benefits.b1.text':
-    'Jeden załadunek tli się godzinami (według producentów nawet do około ośmiu), więc piec można załadować wieczorem, a w domu jest ciepło do rana.',
+    'Jeden załadunek tli się godzinami (według producentów nawet do około 8 godzin), więc piec można załadować wieczorem, a w domu jest ciepło do rana.',
   'peat.benefits.b2.title': 'Bez ostrego zapachu węgla',
   'peat.benefits.b2.text':
     'W odróżnieniu od węgla brykiet torfowy pali się bez ciężkiego, gryzącego zapachu dymu.',
@@ -1945,7 +1945,7 @@ const it: Dictionary = {
     'La torba è materia vegetale parzialmente decomposta che si è accumulata nelle torbiere nel corso di migliaia di anni. Per i bricchetti, lo strato superficiale di una torbiera drenata viene fresato in una granella fine, essiccato prima sul campo e poi in stabilimento, e pressato in bricchetti. Con la pressione e il calore, i composti naturali della torba stessa legano le particelle tra loro, così il bricchetto resta compatto senza additivi. Il risultato è molto più denso della torba sciolta o della legna da ardere: in ogni sacco e in ogni metro cubo di magazzino c’è più energia.',
   'peat.about.burn.title': 'Come brucia',
   'peat.about.burn.text':
-    'Una volta acceso, il bricchetto rilascia prima i gas volatili e brucia con una fiamma breve e viva. Quando questi si sono consumati, si forma uno strato di brace che brucia lentamente dall’esterno verso l’interno: è la fase lunga, quella che scalda in modo uniforme la stufa o la caldaia. Essendo denso e omogeneo, il bricchetto mantiene a lungo la sua forma mentre brucia e la resa termica resta stabile. Riducendo l’aria quando le fiamme si sono calmate, un focolare pieno arde per diverse ore — fino a circa otto secondo i produttori, a seconda della stufa e del tiraggio.',
+    'Una volta acceso, il bricchetto rilascia prima i gas volatili e brucia con una fiamma breve e viva. Quando questi si sono consumati, si forma uno strato di brace che brucia lentamente dall’esterno verso l’interno: è la fase lunga, quella che scalda in modo uniforme la stufa o la caldaia. Essendo denso e omogeneo, il bricchetto mantiene a lungo la sua forma mentre brucia e la resa termica resta stabile. Riducendo l’aria quando le fiamme si sono calmate, un focolare pieno arde per diverse ore — fino a circa 8 ore secondo i produttori, a seconda della stufa e del tiraggio.',
   'peat.about.use.title': 'Come usarli',
   'peat.about.use.text':
     'Avvia il fuoco con legnetti o qualche ciocco e aggiungi i bricchetti quando c’è già un letto di brace. Disponili senza stiparli, perché l’aria possa raggiungerli, e chiudi in parte la serranda dell’aria quando le fiamme si sono calmate: meno aria significa una combustione più lunga. I bricchetti di torba sono adatti a stufe, cucine a legna, inserti per camino chiusi e caldaie a combustibile solido progettati per legna o carbone; non vanno usati nei bruciatori a pellet.',
@@ -1953,7 +1953,7 @@ const it: Dictionary = {
   'peat.benefits.title': 'Vantaggi dei bricchetti di torba',
   'peat.benefits.b1.title': 'Lunga durata di combustione',
   'peat.benefits.b1.text':
-    'Una carica arde per ore — fino a circa otto secondo i produttori — così la stufa si può caricare la sera e la casa resta calda fino al mattino.',
+    'Una carica arde per ore — fino a circa 8 ore secondo i produttori — così la stufa si può caricare la sera e la casa resta calda fino al mattino.',
   'peat.benefits.b2.title': 'Senza l’odore acre del carbone',
   'peat.benefits.b2.text':
     'A differenza del carbone, i bricchetti di torba bruciano senza un odore di fumo pesante e acre.',
