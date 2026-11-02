@@ -65,6 +65,7 @@ SITE_URL='https://krwood.ee'
 SMOKE_PATHS=(
   '/' '/en/' '/pl/' '/it/'
   '/ligniin-pelletid/' '/en/lignin-pellets/' '/pl/pellet-ligninowy/' '/it/pellet-di-lignina/'
+  '/turbabrikett/' '/en/peat-briquettes/' '/pl/brykiet-torfowy/' '/it/bricchetti-di-torba/'
   '/privacy/'
 )
 

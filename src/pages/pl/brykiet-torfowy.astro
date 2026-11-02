@@ -1,0 +1,12 @@
+---
+// Polish — /pl/brykiet-torfowy/
+import Layout from '../../layouts/Layout.astro';
+import PeatBriquettes from '../../components/PeatBriquettes.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<Layout title={t('peat.meta.title')} description={t('peat.meta.description')}>
+  <PeatBriquettes />
+</Layout>

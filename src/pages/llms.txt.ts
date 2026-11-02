@@ -53,11 +53,11 @@ const otherLanguages = (Object.keys(languages) as Lang[])
   .filter((lang) => lang !== 'en')
   .map(
     (lang) =>
-      `- ${languages[lang]}${lang === defaultLang ? ' (default)' : ''}: ${abs(routePath('home', lang))} · ${abs(routePath('ligninPellets', lang))}`,
+      `- ${languages[lang]}${lang === defaultLang ? ' (default)' : ''}: ${abs(routePath('home', lang))} · ${abs(routePath('ligninPellets', lang))} · ${abs(routePath('peatBriquettes', lang))}`,
   )
   .join('\n');
 
-const body = `# ${siteConfig.name} — ${PELLET_CERTIFICATION.name} wood pellets and lignin pellets from Estonia
+const body = `# ${siteConfig.name} — ${PELLET_CERTIFICATION.name} wood pellets, lignin pellets and peat briquettes from Estonia
 
 > ${siteConfig.legalName}: ${t('meta.description')} ${t('lignin.meta.description')}
 
@@ -101,6 +101,23 @@ ${priceLine('ligninPellets')}
 - Not ENplus certified. ${t('lignin.specs.note')}
 - Details: ${abs(routePath('ligninPellets', 'en'))}
 
+### ${t('peat.hero.title')}
+
+${t('peat.about.lead')}
+
+${list([
+  { label: t('specs.row.material'), value: t('peat.value.material') },
+  { label: t('peat.row.form'), value: t('peat.value.form') },
+  { label: t('specs.row.calorific'), value: t('peat.value.calorific') },
+  { label: t('specs.row.moisture'), value: t('peat.value.moisture') },
+  { label: t('peat.row.burn'), value: t('peat.value.burn') },
+  { label: t('peat.row.pallet'), value: t('peat.value.packaging') },
+])}
+- Price: ${t('peat.price.value').toLowerCase()}. ${t('peat.price.note')}
+- Availability: ${t('peat.stock').toLowerCase()}
+- ${t('peat.specs.note')}
+- Details: ${abs(routePath('peatBriquettes', 'en'))}
+
 ## Packaging and delivery
 
 - ${t('packaging.bags.title')}: ${t('packaging.bags.desc')}
@@ -111,6 +128,7 @@ ${priceLine('ligninPellets')}
 
 - [Wood pellets](${abs(routePath('home', 'en'))}): products, prices, packaging, FAQ and the enquiry form
 - [Lignin pellets](${abs(routePath('ligninPellets', 'en'))}): specifications, industrial applications and FAQ
+- [Peat briquettes](${abs(routePath('peatBriquettes', 'en'))}): what they are, how they burn, where to use them, specifications and FAQ; price on request
 - [Privacy policy](${abs(routePath('privacy', 'en'))})
 
 ## Other languages

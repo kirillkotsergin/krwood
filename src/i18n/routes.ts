@@ -33,6 +33,12 @@ export const routes = {
     pl: 'pellet-ligninowy',
     it: 'pellet-di-lignina',
   },
+  peatBriquettes: {
+    et: 'turbabrikett',
+    en: 'peat-briquettes',
+    pl: 'brykiet-torfowy',
+    it: 'bricchetti-di-torba',
+  },
 } as const satisfies Record<string, Record<Lang, string>>;
 
 export type RouteKey = keyof typeof routes;

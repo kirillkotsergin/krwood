@@ -69,6 +69,17 @@ visible price and the structured data cannot drift apart.
 | Graanulid 6 mm | €400 / t | 24 t — a full truck load |
 | Graanulid 8 mm | €400 / t | — |
 | Ligniini pelletid | €390 / t | — |
+| Turbabrikett | on request | — |
+
+**Peat briquettes have no published price** and are deliberately absent from
+`src/config/pricing.ts`. Their page (`PeatBriquettes.astro`) shows "price on
+request" and "in stock" as text, and carries **no `Product` node**: Google
+requires `price` in every `Offer`, so a price-less Product is a Search Console
+error (see *Products carry their own priced offer* below). The page's
+structured data is its `BreadcrumbList` and `FAQPage`. When a price exists,
+follow *Adding a priced product* and give the page a Product node the way the
+lignin page has one. `check:pricing` covers the peat pages in `ALL_PAGES`, so a
+price-less Product added there by mistake fails the check.
 
 **Prices are per metric tonne.** That unit is emitted as
 `priceSpecification.referenceQuantity` with `unitCode: TNE`, and the 6 mm
@@ -299,10 +310,10 @@ The dark gradient overlay, text colours and contrast all keep working unchanged.
 
 | Locale | Routes |
 | --- | --- |
-| Estonian (`et`) | `/` · `/ligniin-pelletid/` · `/privacy/` — default, no `/et/` prefix |
-| English (`en`) | `/en/` · `/en/lignin-pellets/` · `/en/privacy/` |
-| Polish (`pl`) | `/pl/` · `/pl/pellet-ligninowy/` · `/pl/privacy/` |
-| Italian (`it`) | `/it/` · `/it/pellet-di-lignina/` · `/it/privacy/` |
+| Estonian (`et`) | `/` · `/ligniin-pelletid/` · `/turbabrikett/` · `/privacy/` — default, no `/et/` prefix |
+| English (`en`) | `/en/` · `/en/lignin-pellets/` · `/en/peat-briquettes/` · `/en/privacy/` |
+| Polish (`pl`) | `/pl/` · `/pl/pellet-ligninowy/` · `/pl/brykiet-torfowy/` · `/pl/privacy/` |
+| Italian (`it`) | `/it/` · `/it/pellet-di-lignina/` · `/it/bricchetti-di-torba/` · `/it/privacy/` |
 
 Routing is configured by the `i18n` block in `astro.config.ts`
 (`prefixDefaultLocale: false`), whose locale list is read from `languages` in
@@ -362,8 +373,9 @@ What it cannot see is the handful of lists outside the build:
 1. `src/i18n/ui.ts` — the code in `languages`, `languageLabels`,
    `languageTags` and `ogLocales`, a full dictionary, and the `ui` export.
 2. `src/i18n/routes.ts` — a slug for every route (the type check insists).
-3. `src/pages/<code>/` — `index.astro`, `privacy.astro` and the lignin page,
-   named after its slug. Copy the Italian ones; they are three-line wrappers.
+3. `src/pages/<code>/` — `index.astro`, `privacy.astro`, the lignin page and
+   the peat briquette page, each named after its slug. Copy the Italian ones;
+   they are three-line wrappers.
 4. `public/contact.php` — `$allowedLangs`, or enquiries are labelled `ET`.
 5. `scripts/deploy.sh` — `REQUIRED` and `SMOKE_PATHS`.
 6. `scripts/check-pricing.mjs` — `PRICED_PAGES`, `ALL_PAGES`, and the new
@@ -402,6 +414,7 @@ src/
 │   ├── Footer.astro          Nav, contact, legal, social
 │   ├── LanguagePicker.astro  EE | EN | PL | IT, highlights the active locale
 │   ├── LandingPage.astro     Composes the five landing sections
+│   ├── PeatBriquettes.astro  Peat briquette page — price on request, in stock
 │   ├── PrivacyContent.astro  Shared privacy-policy body
 │   └── Logo.astro
 ├── config/

@@ -422,6 +422,152 @@ const et = {
   'lignin.cta.text':
     'Andke teada aastane kogus, tarnekoht ja kavandatav kasutusala ning saadame pakkumise koos analüüsisertifikaadiga.',
   'lignin.cta.button': 'Küsi pakkumist',
+
+  // --- Peat briquettes landing page ----------------------------------------
+  // Price on request: no amount in src/config/pricing.ts, so no Product node
+  // either — see the comment above the JSON-LD in PeatBriquettes.astro.
+  // {calorific}, {moisture}, {gas}, {equiv}, {burn} and {pelletAsh} are
+  // filled in by PeatBriquettes.astro from the values below and the pellet
+  // specs, so an answer cannot contradict the spec table.
+  //
+  // Reference figures (net calorific value), Estonian methodology for the
+  // energy performance of buildings, annex 4 "Kütuste tarbimisaine alumised
+  // kütteväärtused": peat briquettes (moisture ≤ 20 %) 4.2 kWh/kg, natural
+  // gas 9.3 kWh/m³ — https://www.riigiteataja.ee/aktilisa/1181/0201/2001/MKM_m63_lisa4.pdf
+  // 1 t = 4,200 kWh ≈ 450 m³ of gas; drier briquettes reach the 500 m³ that
+  // manufacturers quote. "Up to ~8 h" is the manufacturers' burn time.
+  'nav.peat': 'Turbabrikett',
+
+  'peat.meta.title': 'Turbabrikett laos — hind päringu alusel | KR Wood',
+  'peat.meta.description':
+    'Turbabrikett koju ja tööstusele: pikk ja ühtlane põlemine, kütteväärtus ligikaudu 4,2 kWh/kg, madal väävlisisaldus. Laos, hind päringu alusel.',
+
+  'peat.stock': 'Laos',
+  'peat.hero.title': 'Turbabrikett',
+  'peat.hero.titleAccent': 'Pikk ja ühtlane soojus kodule ja tööstusele',
+  'peat.hero.lead':
+    'Turbabrikett on kuivatatud ja suure rõhu all kokku pressitud turvas — tihe, ühtlase kujuga kütus, mis süttib alustatud tulelt kergesti ja hõõgub tunde. Üks täitmine hoiab ahju või katla soojana kogu öö.',
+  'peat.price.value': 'Päringu alusel',
+  'peat.price.note':
+    'Hind sõltub kogusest ja tarneaadressist. Saatke päring ja saadame teile pakkumise.',
+  'peat.hero.ctaPrimary': 'Küsi hinnapakkumist',
+  'peat.hero.ctaWhatsapp': 'Küsi WhatsAppis',
+  'peat.whatsappMessage': 'Tere! Sooviksin küsida turbabriketi hinda.',
+
+  'peat.row.form': 'Kuju',
+  'peat.row.burn': 'Põlemisaeg',
+  'peat.row.availability': 'Saadavus',
+  'peat.row.pallet': 'Alus',
+  'peat.value.material': 'Freesturvas',
+  'peat.value.form': 'Pressitud brikett, sideaineteta',
+  'peat.value.calorific': '≈ 4,2 kWh/kg',
+  'peat.value.moisture': '≤ 20 %',
+  'peat.value.burn': 'kuni ~8 h',
+  'peat.value.packaging': '84 pakki, kokku umbes 960 kg',
+  'peat.value.palletWeight': '≈ 960 kg',
+  'peat.fact.pallet': '84 pakki alusel',
+  'peat.value.gas': '9,3 kWh/m³',
+  'peat.value.equiv': '450–500 m³',
+
+  'peat.equiv.eyebrow': 'Energiasisaldus',
+  'peat.equiv.from': '1 tonn turbabriketti',
+  'peat.equiv.to': 'maagaasi',
+  'peat.equiv.note':
+    'Alumise kütteväärtuse järgi: turbabrikett {calorific} (niiskus {moisture}), maagaas {gas}. Kuivem brikett jõuab ülemise piiri lähedale.',
+
+  'peat.about.eyebrow': 'Toote ülevaade',
+  'peat.about.title': 'Mis on turbabrikett ja kuidas see põleb?',
+  'peat.about.lead':
+    'Turbabrikett on tahke kütus, mis valmistatakse freesturbast: turvas kuivatatakse madala niiskuseni ja pressitakse suure rõhu all ilma liimi ja muude sideaineteta. Süüdatuna põleb see alguses lühikese leegiga ja hõõgub seejärel tunde, andes ühtlast soojust.',
+  'peat.about.made.title': 'Kuidas turbabriketti valmistatakse',
+  'peat.about.made.text':
+    'Turvas on tuhandete aastate jooksul rabades ja soodes kogunenud osaliselt lagunenud taimne aines. Briketi jaoks freesitakse kuivendatud raba pealmine kiht peeneks puruks, mis kuivatatakse esmalt väljal ja seejärel tehases ning pressitakse brikettideks. Rõhu ja kuumuse mõjul seovad turba enda looduslikud ühendid osakesed kokku, nii et brikett püsib koos ilma lisanditeta. Tulemus on palju tihedam kui lahtine turvas või küttepuud — igasse kotti ja laoruumi kuupmeetrisse mahub rohkem energiat.',
+  'peat.about.burn.title': 'Kuidas turbabrikett põleb',
+  'peat.about.burn.text':
+    'Süüdatud brikett eraldab kõigepealt lenduvad gaasid ja põleb lühikese ereda leegiga. Kui need on ära põlenud, tekib hõõguv söekiht, mis põleb aeglaselt väljast sissepoole — see ongi pikk faas, mis soojendab ahju või katelt ühtlaselt. Kuna brikett on tihe ja ühtlane, säilitab see põledes kaua oma kuju ja soojusvõimsus püsib stabiilne. Kui pärast leekide vaibumist õhu juurdevoolu vähendada, hõõgub täis kolle mitu tundi — tootjate andmetel kuni umbes kaheksa, olenevalt ahjust ja tõmbest.',
+  'peat.about.use.title': 'Kuidas turbabrikettidega kütta',
+  'peat.about.use.text':
+    'Süüdake tuli peenpuude või mõne halu abil ja lisage brikette siis, kui koldes on juba süsi. Laduge need hõredalt, et õhk pääseks ligi, ja sulgege õhuklapp osaliselt, kui leegid on vaibunud — mida vähem õhku, seda pikem põlemine. Turbabrikett sobib puu- või söeküttele mõeldud ahjudesse, pliitidesse, suletud kaminasüdamikesse ja tahkekütusekateldesse; pelletipõletisse see ei sobi.',
+
+  'peat.benefits.title': 'Turbabriketi eelised',
+  'peat.benefits.b1.title': 'Pikk põlemisaeg',
+  'peat.benefits.b1.text':
+    'Üks täitmine hõõgub tunde (tootjate andmetel kuni umbes kaheksa), nii et ahju võib õhtul täita ja maja püsib soojana hommikuni.',
+  'peat.benefits.b2.title': 'Ilma söe terava lõhnata',
+  'peat.benefits.b2.text':
+    'Erinevalt kivisöest põleb turbabrikett ilma raske ja terava suitsulõhnata.',
+  'peat.benefits.b3.title': 'Madal väävlisisaldus',
+  'peat.benefits.b3.text':
+    'Turvas sisaldab enamikust kivisöe sortidest tunduvalt vähem väävlit. Vähem väävlit tähendab vähem söövitavaid sademeid — see on katlale, ahjule ja korstnale säästlikum.',
+  'peat.benefits.b4.title': 'Tuhk sobib aeda',
+  'peat.benefits.b4.text':
+    'Tuhk on mineraalirikas ja aluseline. Jahtunult võib seda õhukese kihina laotada peenardele ja murule väetise ja mullaparandajana — kui koos brikettidega pole põletatud midagi muud.',
+  'peat.benefits.b5.title': 'Palju soojust väikeses mahus',
+  'peat.benefits.b5.text':
+    'Tonn turbabriketti annab umbes sama palju soojust kui {equiv} maagaasi ning sama soojushulga juures võtavad tihedad briketid vähem laoruumi kui küttepuud.',
+
+  'peat.uses.eyebrow': 'Kasutusalad',
+  'peat.uses.title': 'Kus turbabriketti kasutada',
+  'peat.uses.subtitle':
+    'Kõikjal, kus kolle on mõeldud puu- või söeküttele — eramajast tööstusliku katlamajani.',
+  'peat.uses.home.title': 'Kodune kasutus',
+  'peat.uses.home.lead':
+    'Suurepärane kütus eramajadele ja suvilatele, eriti öösiti, kui loeb pikk ja ühtlane põlemine, mitte kiire leek.',
+  'peat.uses.home.i1': 'Ahjud ja pliidid',
+  'peat.uses.home.i2': 'Suletud kaminasüdamikud',
+  'peat.uses.home.i3': 'Tahkekütusekatlad',
+  'peat.uses.industry.title': 'Tööstus ja suurtarbijad',
+  'peat.uses.industry.lead': 'Levinud tahkekütus ettevõtetes, millel on oma katlamaja:',
+  'peat.uses.industry.i1': 'Linnufarmid',
+  'peat.uses.industry.i2': 'Kasvuhooned',
+  'peat.uses.industry.i3': 'Telliste- ja tsemenditehased',
+  'peat.uses.industry.i4': 'Piima- ja konservitööstused',
+  'peat.uses.industry.i5': 'Ujulad ja veekeskused',
+  'peat.uses.industry.i6': 'Tööstuslikud ja kohalikud katlamajad',
+  'peat.uses.industry.i7': 'Soojuselektrijaamad',
+
+  'peat.specs.title': 'Tehnilised andmed',
+  'peat.specs.subtitle':
+    'Turbabriketi tüüpilised näitajad. Küsige pakkumisega koos ka konkreetse partii andmeid.',
+  'peat.specs.note':
+    'Kütteväärtus ja niiskus on turbabriketi võrdlusväärtused Eesti hoonete energiatõhususe arvutusmetoodikast. Põlemisaeg sõltub ahjust ja tõmbest.',
+
+  'peat.faq.eyebrow': 'KKK',
+  'peat.faq.title': 'Korduma kippuvad küsimused',
+  'peat.faq.q1': 'Mis on turbabrikett?',
+  'peat.faq.a1':
+    'Turbabrikett on freesturbast valmistatud tahke kütus: turvas kuivatatakse ja pressitakse suure rõhu all tihedateks brikettideks ilma sideaineteta. Selle kütteväärtus on {calorific} ning tonn brikette annab umbes sama palju soojust kui {equiv} maagaasi.',
+  'peat.faq.q2': 'Kui kaua turbabrikett põleb?',
+  'peat.faq.a2':
+    'Kui pärast süttimist õhu juurdevoolu vähendada, hõõgub täis kolle mitu tundi — tootjate andmetel {burn}. Tegelik aeg sõltub ahjust, tõmbest ja sellest, kui täis kolle on.',
+  'peat.faq.q3': 'Kas turbabriketti saab põletada pelletikatlas?',
+  'peat.faq.a3':
+    'Ei. Pelletipõleti söödab kütust automaatselt ja vajab kindla suurusega pelleteid. Turbabrikett on mõeldud käsitsi köetavatele ahjudele, pliitidele, suletud kaminasüdamikele ja tahkekütusekateldele. Pelletikatla jaoks valige meie ENplus A1 puidugraanulid.',
+  'peat.faq.q4': 'Turbabrikett või puidugraanulid — kumb valida?',
+  'peat.faq.a4':
+    'See sõltub küttekoldest. Puidugraanulid on mõeldud automaatsetele pelletikateldele ja -põletitele ning neist jääb väga vähe tuhka ({pelletAsh}). Turbabrikett sobib käsitsi köetavatele ahjudele ja tahkekütusekateldele, kus selle eelis on pikk ja ühtlane põlemine; tuhka jääb sellest märgatavalt rohkem kui graanulitest.',
+  'peat.faq.q5': 'Kui palju turbabrikett maksab?',
+  'peat.faq.a5':
+    'Hind on päringu alusel: see sõltub kogusest ja tarneaadressist. Saatke meile päring või kirjutage WhatsAppis ning saadame pakkumise. Turbabrikett on laos.',
+  'peat.faq.q6': 'Mida teha turbabriketi tuhaga?',
+  'peat.faq.a6':
+    'Turbabriketi tuhk on mineraalirikas ja aluseline. Jahtunult võib seda õhukese kihina laotada peenardele ja murule väetise ja mullaparandajana, kui koos brikettidega pole põletatud midagi muud. Tuhka tekib rohkem kui puidugraanulitest, seega tuleb tuhasahtlit sagedamini tühjendada.',
+  'peat.faq.q7': 'Kuidas turbabriketti hoiustada?',
+  'peat.faq.a7':
+    'Hoidke brikette kuivas ja katuse all, maapinnast eemal — näiteks alusel või riiulil kuuris või katlaruumis. Niiskust imanud brikett annab vähem soojust ja võib mureneda.',
+
+  'peat.faq.q8': 'Kuidas turbabriketti pakitakse?',
+  'peat.faq.a8':
+    'Turbabrikett tarnitakse pakkidena kaubaalustel: ühel alusel on {packaging}. Pakkumise saamiseks andke teada vajalik kogus ja tarneaadress.',
+
+  'peat.cta.title': 'Vajate turbabriketti?',
+  'peat.cta.text':
+    'Andke teada vajalik kogus ja tarneaadress ning saadame hinna ja tarnetingimused. Turbabrikett on laos.',
+
+  'peat.teaser.title': 'Laos ka turbabrikett',
+  'peat.teaser.text':
+    'Ahjudele ja tahkekütusekateldele: pikk ja ühtlane põlemine kogu ööks. Hind päringu alusel.',
+  'peat.teaser.link': 'Vaata turbabriketti',
 } as const;
 
 /* -------------------------------------------------------------------------- */
@@ -779,6 +925,139 @@ const en: Dictionary = {
   'lignin.cta.text':
     'Tell us your annual tonnage, delivery point and intended application, and we will come back with a quote and a certificate of analysis.',
   'lignin.cta.button': 'Request a quote',
+
+  // --- Peat briquettes landing page ----------------------------------------
+  'nav.peat': 'Peat briquettes',
+
+  'peat.meta.title': 'Peat Briquettes in Stock — Price on Request | KR Wood',
+  'peat.meta.description':
+    'Peat briquettes for homes and industry: a long, even burn, about 4.2 kWh/kg, low sulphur and usable ash. In stock in Estonia — price on request.',
+
+  'peat.stock': 'In stock',
+  'peat.hero.title': 'Peat Briquettes',
+  'peat.hero.titleAccent': 'Long, steady heat for homes and industry',
+  'peat.hero.lead':
+    'A peat briquette is dried peat pressed under high pressure into a dense, uniform block that catches readily from a lit fire and smoulders for hours. One load keeps a stove or boiler warm through the night.',
+  'peat.price.value': 'On request',
+  'peat.price.note':
+    'The price depends on the quantity and the delivery address. Send an enquiry and we will reply with a quote.',
+  'peat.hero.ctaPrimary': 'Request a quote',
+  'peat.hero.ctaWhatsapp': 'Ask on WhatsApp',
+  'peat.whatsappMessage': 'Hello! I would like a price for peat briquettes.',
+
+  'peat.row.form': 'Form',
+  'peat.row.burn': 'Burn time',
+  'peat.row.availability': 'Availability',
+  'peat.row.pallet': 'Pallet',
+  'peat.value.material': 'Milled peat',
+  'peat.value.form': 'Pressed briquette, no binders',
+  'peat.value.calorific': '≈ 4.2 kWh/kg',
+  'peat.value.moisture': '≤ 20 %',
+  'peat.value.burn': 'up to ~8 h',
+  'peat.value.packaging': '84 packs, about 960 kg in total',
+  'peat.value.palletWeight': '≈ 960 kg',
+  'peat.fact.pallet': '84 packs per pallet',
+  'peat.value.gas': '9.3 kWh/m³',
+  'peat.value.equiv': '450–500 m³',
+
+  'peat.equiv.eyebrow': 'Energy content',
+  'peat.equiv.from': '1 tonne of peat briquettes',
+  'peat.equiv.to': 'of natural gas',
+  'peat.equiv.note':
+    'By net calorific value: peat briquettes {calorific} (moisture {moisture}), natural gas {gas}. Drier briquettes come close to the upper figure.',
+
+  'peat.about.eyebrow': 'Product overview',
+  'peat.about.title': 'What is a peat briquette and how does it burn?',
+  'peat.about.lead':
+    'A peat briquette is a solid fuel made from milled peat: the peat is dried to a low moisture content and pressed under high pressure, without glue or any other binder. Once lit, it burns with a short flame at first and then smoulders for hours, giving off steady heat.',
+  'peat.about.made.title': 'How it is made',
+  'peat.about.made.text':
+    'Peat is partly decomposed plant matter that has built up in bogs and fens over thousands of years. For briquettes, the top layer of a drained bog is milled into a fine crumb, dried first in the field and then at the factory, and pressed into briquettes. Under pressure and heat, natural compounds in the peat itself bind the particles together, so the briquette holds without additives. The result is far denser than loose peat or firewood: more energy fits into every bag and every cubic metre of storage.',
+  'peat.about.burn.title': 'How it burns',
+  'peat.about.burn.text':
+    'A lit briquette first gives off its volatile gases and burns with a short, bright flame. Once these have burnt away, a glowing layer of embers forms and burns slowly from the outside in — the long phase that heats the stove or boiler evenly. Because the briquette is dense and uniform, it keeps its shape for a long time as it burns, and the heat output stays steady. With the air supply turned down once the flames settle, a full firebox smoulders for several hours — up to around eight, according to manufacturers, depending on the stove and the draught.',
+  'peat.about.use.title': 'How to fire with it',
+  'peat.about.use.text':
+    'Start the fire with kindling or a few logs and add the briquettes once there is a bed of embers. Lay them loosely so that air can reach them, and partly close the air damper when the flames have settled — less air, longer burn. Peat briquettes suit stoves, cookers, closed fireplace inserts and solid-fuel boilers built for wood or coal; they do not belong in a pellet burner.',
+
+  'peat.benefits.title': 'Advantages of peat briquettes',
+  'peat.benefits.b1.title': 'Long burn time',
+  'peat.benefits.b1.text':
+    'One load smoulders for hours — up to around eight, according to manufacturers — so the stove can be filled in the evening and the house stays warm until morning.',
+  'peat.benefits.b2.title': 'No acrid coal smell',
+  'peat.benefits.b2.text': 'Unlike coal, peat briquettes burn without a heavy, acrid smoke smell.',
+  'peat.benefits.b3.title': 'Low sulphur content',
+  'peat.benefits.b3.text':
+    'Peat contains far less sulphur than most coal. Less sulphur means fewer corrosive deposits — gentler on the boiler, the stove and the chimney.',
+  'peat.benefits.b4.title': 'Ash for the garden',
+  'peat.benefits.b4.text':
+    'The ash is mineral-rich and alkaline. Once cold, it can be spread thinly on beds and lawns as a fertiliser and soil improver — provided nothing else was burnt with the briquettes.',
+  'peat.benefits.b5.title': 'A lot of heat in little space',
+  'peat.benefits.b5.text':
+    'A tonne of peat briquettes gives about as much heat as {equiv} of natural gas, and for the same heat the dense briquettes take up less storage space than firewood.',
+
+  'peat.uses.eyebrow': 'Applications',
+  'peat.uses.title': 'Where to use peat briquettes',
+  'peat.uses.subtitle':
+    'Wherever the firebox is built for wood or coal — from a family home to an industrial boiler house.',
+  'peat.uses.home.title': 'Homes',
+  'peat.uses.home.lead':
+    'An excellent fuel for houses and summer cottages, especially at night, when a long, even burn matters more than a quick blaze.',
+  'peat.uses.home.i1': 'Stoves and cookers',
+  'peat.uses.home.i2': 'Closed fireplace inserts',
+  'peat.uses.home.i3': 'Solid-fuel boilers',
+  'peat.uses.industry.title': 'Industry and large consumers',
+  'peat.uses.industry.lead': 'A widely used solid fuel for businesses with a boiler house of their own:',
+  'peat.uses.industry.i1': 'Poultry farms',
+  'peat.uses.industry.i2': 'Greenhouses',
+  'peat.uses.industry.i3': 'Brick and cement works',
+  'peat.uses.industry.i4': 'Dairies and canneries',
+  'peat.uses.industry.i5': 'Swimming pools and spa complexes',
+  'peat.uses.industry.i6': 'Industrial and municipal boiler houses',
+  'peat.uses.industry.i7': 'Thermal power plants',
+
+  'peat.specs.title': 'Specifications',
+  'peat.specs.subtitle':
+    'Typical values for peat briquettes. Ask for the figures of the current batch together with your quote.',
+  'peat.specs.note':
+    'Calorific value and moisture are reference values for peat briquettes from the Estonian methodology for calculating the energy performance of buildings. Burn time depends on the stove and the draught.',
+
+  'peat.faq.eyebrow': 'FAQ',
+  'peat.faq.title': 'Frequently asked questions',
+  'peat.faq.q1': 'What is a peat briquette?',
+  'peat.faq.a1':
+    'A peat briquette is a solid fuel made from milled peat, dried and pressed under high pressure into dense briquettes without any binder. Its calorific value is {calorific}, and a tonne of briquettes gives about as much heat as {equiv} of natural gas.',
+  'peat.faq.q2': 'How long does a peat briquette burn?',
+  'peat.faq.a2':
+    'With the air supply turned down after lighting, a full firebox smoulders for several hours — {burn}, according to manufacturers. The actual time depends on the stove, the draught and how full the firebox is.',
+  'peat.faq.q3': 'Can I burn peat briquettes in a pellet boiler?',
+  'peat.faq.a3':
+    'No. A pellet burner feeds fuel automatically and needs pellets of a fixed size. Peat briquettes are for manually loaded stoves, cookers, closed fireplace inserts and solid-fuel boilers. For a pellet boiler, choose our ENplus A1 wood pellets.',
+  'peat.faq.q4': 'Peat briquettes or wood pellets — which should I choose?',
+  'peat.faq.a4':
+    'It depends on the heater. Wood pellets are made for automatic pellet boilers and burners and leave very little ash ({pelletAsh}). Peat briquettes suit manually loaded stoves and solid-fuel boilers, where their long, even burn is the advantage; they leave noticeably more ash than pellets.',
+  'peat.faq.q5': 'How much do peat briquettes cost?',
+  'peat.faq.a5':
+    'The price is on request: it depends on the quantity and the delivery address. Send us an enquiry or a WhatsApp message and we will reply with a quote. Peat briquettes are in stock.',
+  'peat.faq.q6': 'What can I do with the ash?',
+  'peat.faq.a6':
+    'Peat briquette ash is mineral-rich and alkaline. Once cold, it can be spread thinly on beds and lawns as a fertiliser and soil improver, provided nothing else was burnt with the briquettes. There is more of it than with wood pellets, so the ash pan needs emptying more often.',
+  'peat.faq.q7': 'How should peat briquettes be stored?',
+  'peat.faq.a7':
+    'Keep them dry, under cover and off the ground — on a pallet or a shelf in a shed or boiler room. Briquettes that take on moisture give less heat and can crumble.',
+
+  'peat.faq.q8': 'How are the peat briquettes packed?',
+  'peat.faq.a8':
+    'Peat briquettes come in packs on pallets: one pallet holds {packaging}. For a quote, tell us the quantity you need and the delivery address.',
+
+  'peat.cta.title': 'Need peat briquettes?',
+  'peat.cta.text':
+    'Tell us how much you need and where to deliver it, and we will reply with the price and delivery terms. Peat briquettes are in stock.',
+
+  'peat.teaser.title': 'Also in stock: peat briquettes',
+  'peat.teaser.text':
+    'For stoves and solid-fuel boilers: a long, even burn through the night. Price on request.',
+  'peat.teaser.link': 'See peat briquettes',
 };
 
 /* -------------------------------------------------------------------------- */
@@ -1128,6 +1407,139 @@ const pl: Dictionary = {
   'lignin.cta.text':
     'Podaj roczny tonaż, miejsce dostawy w Polsce i planowane zastosowanie, a przyślemy ofertę hurtową wraz z certyfikatem analizy. Wysyłamy prosto od producenta z Estonii, pełnymi tirami po 24 t.',
   'lignin.cta.button': 'Zapytaj o ofertę',
+
+  // --- Peat briquettes landing page ----------------------------------------
+  'nav.peat': 'Brykiet torfowy',
+
+  'peat.meta.title': 'Brykiet torfowy — dostępny, cena na zapytanie | KR Wood',
+  'peat.meta.description':
+    'Brykiet torfowy do domu i przemysłu: długie, równe spalanie, ok. 4,2 kWh/kg, niska zawartość siarki. Dostępny od ręki w Estonii, cena na zapytanie.',
+
+  'peat.stock': 'Dostępny od ręki',
+  'peat.hero.title': 'Brykiet torfowy',
+  'peat.hero.titleAccent': 'Długie, równe ciepło dla domu i przemysłu',
+  'peat.hero.lead':
+    'Brykiet torfowy to wysuszony torf sprasowany pod wysokim ciśnieniem w zwarte bryły o jednakowym kształcie. Łatwo zajmuje się od rozpalonego ognia i tli się godzinami — jeden załadunek utrzymuje ciepło w piecu lub kotle przez całą noc.',
+  'peat.price.value': 'Na zapytanie',
+  'peat.price.note': 'Cena zależy od ilości i adresu dostawy. Wyślij zapytanie, a przygotujemy ofertę.',
+  'peat.hero.ctaPrimary': 'Zapytaj o cenę',
+  'peat.hero.ctaWhatsapp': 'Zapytaj na WhatsAppie',
+  'peat.whatsappMessage': 'Dzień dobry! Chciałbym zapytać o cenę brykietu torfowego.',
+
+  'peat.row.form': 'Postać',
+  'peat.row.burn': 'Czas palenia',
+  'peat.row.availability': 'Dostępność',
+  'peat.row.pallet': 'Paleta',
+  'peat.value.material': 'Torf frezowy',
+  'peat.value.form': 'Prasowany brykiet bez lepiszczy',
+  'peat.value.calorific': '≈ 4,2 kWh/kg',
+  'peat.value.moisture': '≤ 20 %',
+  'peat.value.burn': 'do ~8 h',
+  'peat.value.packaging': '84 opakowania, łącznie ok. 960 kg',
+  'peat.value.palletWeight': '≈ 960 kg',
+  'peat.fact.pallet': '84 opakowania na palecie',
+  'peat.value.gas': '9,3 kWh/m³',
+  'peat.value.equiv': '450–500 m³',
+
+  'peat.equiv.eyebrow': 'Wartość energetyczna',
+  'peat.equiv.from': '1 tona brykietu torfowego',
+  'peat.equiv.to': 'gazu ziemnego',
+  'peat.equiv.note':
+    'Według wartości opałowej: brykiet torfowy {calorific} (wilgotność {moisture}), gaz ziemny {gas}. Suchszy brykiet zbliża się do górnej granicy.',
+
+  'peat.about.eyebrow': 'Opis produktu',
+  'peat.about.title': 'Czym jest brykiet torfowy i jak się pali?',
+  'peat.about.lead':
+    'Brykiet torfowy to paliwo stałe z torfu frezowego: torf suszy się do niskiej wilgotności i prasuje pod wysokim ciśnieniem, bez kleju i innych lepiszczy. Po rozpaleniu najpierw pali się krótkim płomieniem, a potem tli się godzinami, oddając równe ciepło.',
+  'peat.about.made.title': 'Jak powstaje',
+  'peat.about.made.text':
+    'Torf to częściowo rozłożona materia roślinna, która gromadziła się w torfowiskach przez tysiące lat. Do produkcji brykietów wierzchnią warstwę osuszonego torfowiska frezuje się na drobną kruszonkę, suszy najpierw na polu, a potem w zakładzie, i prasuje w brykiety. Pod wpływem ciśnienia i temperatury naturalne związki zawarte w samym torfie wiążą cząstki ze sobą, więc brykiet trzyma się bez dodatków. Jest przy tym znacznie gęstszy niż luźny torf czy drewno opałowe — w każdym worku i w każdym metrze sześciennym składziku mieści się więcej energii.',
+  'peat.about.burn.title': 'Jak się pali',
+  'peat.about.burn.text':
+    'Rozpalony brykiet najpierw uwalnia gazy lotne i pali się krótkim, jasnym płomieniem. Gdy się wypalą, powstaje warstwa żaru, która spala się powoli od zewnątrz do środka — to długa faza, w której piec lub kocioł nagrzewa się równomiernie. Ponieważ brykiet jest zwarty i jednolity, długo zachowuje kształt, a moc grzewcza pozostaje stabilna. Jeśli po opadnięciu płomieni przymkniesz dopływ powietrza, pełne palenisko tli się przez kilka godzin — według producentów nawet do około ośmiu, zależnie od pieca i ciągu.',
+  'peat.about.use.title': 'Jak nim palić',
+  'peat.about.use.text':
+    'Rozpal ogień drobnym drewnem lub kilkoma polanami i dokładaj brykiety, gdy w palenisku jest już żar. Układaj je luźno, żeby docierało do nich powietrze, a gdy płomienie opadną, częściowo przymknij przepustnicę — mniej powietrza to dłuższe palenie. Brykiet torfowy nadaje się do pieców, kuchni węglowych, zamkniętych wkładów kominkowych i kotłów na paliwo stałe przeznaczonych do drewna lub węgla; nie nadaje się do palników na pellet.',
+
+  'peat.benefits.title': 'Zalety brykietu torfowego',
+  'peat.benefits.b1.title': 'Długi czas palenia',
+  'peat.benefits.b1.text':
+    'Jeden załadunek tli się godzinami (według producentów nawet do około ośmiu), więc piec można załadować wieczorem, a w domu jest ciepło do rana.',
+  'peat.benefits.b2.title': 'Bez ostrego zapachu węgla',
+  'peat.benefits.b2.text':
+    'W odróżnieniu od węgla brykiet torfowy pali się bez ciężkiego, gryzącego zapachu dymu.',
+  'peat.benefits.b3.title': 'Niska zawartość siarki',
+  'peat.benefits.b3.text':
+    'Torf zawiera znacznie mniej siarki niż większość gatunków węgla. Mniej siarki to mniej korozyjnych osadów — kocioł, piec i komin dłużej pozostają w dobrym stanie.',
+  'peat.benefits.b4.title': 'Popiół do ogrodu',
+  'peat.benefits.b4.text':
+    'Popiół jest bogaty w minerały i ma odczyn zasadowy. Po wystygnięciu można go rozsypywać cienką warstwą na grządkach i trawniku jako nawóz i środek poprawiający glebę — o ile razem z brykietem nie spalano niczego innego.',
+  'peat.benefits.b5.title': 'Dużo ciepła w małej objętości',
+  'peat.benefits.b5.text':
+    'Tona brykietu torfowego daje mniej więcej tyle ciepła co {equiv} gazu ziemnego, a przy tej samej ilości ciepła zwarte brykiety zajmują mniej miejsca w składziku niż drewno opałowe.',
+
+  'peat.uses.eyebrow': 'Zastosowanie',
+  'peat.uses.title': 'Gdzie stosować brykiet torfowy',
+  'peat.uses.subtitle':
+    'Wszędzie tam, gdzie palenisko jest przeznaczone do drewna lub węgla — od domu jednorodzinnego po przemysłową kotłownię.',
+  'peat.uses.home.title': 'Gospodarstwa domowe',
+  'peat.uses.home.lead':
+    'Świetne paliwo do domów i domków letniskowych, szczególnie na noc, gdy liczy się długie i równe spalanie, a nie szybki płomień.',
+  'peat.uses.home.i1': 'Piece i kuchnie węglowe',
+  'peat.uses.home.i2': 'Zamknięte wkłady kominkowe',
+  'peat.uses.home.i3': 'Kotły na paliwo stałe',
+  'peat.uses.industry.title': 'Przemysł i duzi odbiorcy',
+  'peat.uses.industry.lead': 'Popularne paliwo stałe w firmach z własną kotłownią:',
+  'peat.uses.industry.i1': 'Fermy drobiu',
+  'peat.uses.industry.i2': 'Szklarnie',
+  'peat.uses.industry.i3': 'Cegielnie i cementownie',
+  'peat.uses.industry.i4': 'Mleczarnie i zakłady konserwowe',
+  'peat.uses.industry.i5': 'Baseny i kompleksy rekreacyjne',
+  'peat.uses.industry.i6': 'Kotłownie przemysłowe i komunalne',
+  'peat.uses.industry.i7': 'Elektrociepłownie',
+
+  'peat.specs.title': 'Dane techniczne',
+  'peat.specs.subtitle':
+    'Typowe wartości dla brykietu torfowego. Wraz z ofertą poproś o dane bieżącej partii.',
+  'peat.specs.note':
+    'Wartość opałowa i wilgotność to wartości referencyjne dla brykietu torfowego z estońskiej metodyki obliczania charakterystyki energetycznej budynków. Czas palenia zależy od pieca i ciągu.',
+
+  'peat.faq.eyebrow': 'FAQ',
+  'peat.faq.title': 'Najczęściej zadawane pytania',
+  'peat.faq.q1': 'Czym jest brykiet torfowy?',
+  'peat.faq.a1':
+    'Brykiet torfowy to paliwo stałe z torfu frezowego, wysuszonego i sprasowanego pod wysokim ciśnieniem w zwarte brykiety bez lepiszczy. Jego wartość opałowa wynosi {calorific}, a tona brykietu daje mniej więcej tyle ciepła co {equiv} gazu ziemnego.',
+  'peat.faq.q2': 'Jak długo pali się brykiet torfowy?',
+  'peat.faq.a2':
+    'Jeśli po rozpaleniu przymkniesz dopływ powietrza, pełne palenisko tli się przez kilka godzin — według producentów {burn}. Rzeczywisty czas zależy od pieca, ciągu i stopnia wypełnienia paleniska.',
+  'peat.faq.q3': 'Czy brykiet torfowy można spalać w kotle na pellet?',
+  'peat.faq.a3':
+    'Nie. Palnik pelletowy podaje paliwo automatycznie i wymaga granulatu o określonej wielkości. Brykiet torfowy jest przeznaczony do ręcznie ładowanych pieców, kuchni węglowych, zamkniętych wkładów kominkowych i kotłów na paliwo stałe. Do kotła na pellet wybierz nasz pellet drzewny ENplus A1.',
+  'peat.faq.q4': 'Brykiet torfowy czy pellet drzewny — co wybrać?',
+  'peat.faq.a4':
+    'To zależy od urządzenia grzewczego. Pellet drzewny jest przeznaczony do automatycznych kotłów i palników pelletowych i zostawia bardzo mało popiołu ({pelletAsh}). Brykiet torfowy sprawdza się w ręcznie ładowanych piecach i kotłach na paliwo stałe, gdzie jego zaletą jest długie, równe spalanie; popiołu zostaje z niego wyraźnie więcej niż z pelletu.',
+  'peat.faq.q5': 'Ile kosztuje brykiet torfowy?',
+  'peat.faq.a5':
+    'Cena jest na zapytanie: zależy od ilości i adresu dostawy. Wyślij nam zapytanie lub wiadomość na WhatsAppie, a odpowiemy ofertą. Brykiet torfowy jest dostępny od ręki.',
+  'peat.faq.q6': 'Co zrobić z popiołem?',
+  'peat.faq.a6':
+    'Popiół z brykietu torfowego jest bogaty w minerały i ma odczyn zasadowy. Po wystygnięciu można go rozsypywać cienką warstwą na grządkach i trawniku jako nawóz i środek poprawiający glebę, o ile razem z brykietem nie spalano niczego innego. Popiołu jest więcej niż z pelletu drzewnego, więc popielnik trzeba częściej opróżniać.',
+  'peat.faq.q7': 'Jak przechowywać brykiet torfowy?',
+  'peat.faq.a7':
+    'W suchym miejscu, pod dachem i nie bezpośrednio na ziemi — na palecie lub regale w szopie albo w kotłowni. Brykiet, który nasiąknie wilgocią, daje mniej ciepła i może się kruszyć.',
+
+  'peat.faq.q8': 'Jak pakowany jest brykiet torfowy?',
+  'peat.faq.a8':
+    'Brykiet torfowy dostarczamy w opakowaniach na paletach: jedna paleta to {packaging}. Aby otrzymać ofertę, podaj potrzebną ilość i adres dostawy.',
+
+  'peat.cta.title': 'Potrzebujesz brykietu torfowego?',
+  'peat.cta.text':
+    'Podaj potrzebną ilość i adres dostawy, a prześlemy cenę i warunki dostawy. Brykiet torfowy jest dostępny od ręki.',
+
+  'peat.teaser.title': 'Dostępny także brykiet torfowy',
+  'peat.teaser.text':
+    'Do pieców i kotłów na paliwo stałe: długie, równe spalanie przez całą noc. Cena na zapytanie.',
+  'peat.teaser.link': 'Zobacz brykiet torfowy',
 };
 
 /* -------------------------------------------------------------------------- */
@@ -1483,6 +1895,140 @@ const it: Dictionary = {
   'lignin.cta.text':
     'Indicaci il fabbisogno annuo in tonnellate, il luogo di consegna e l’impiego previsto: ti invieremo un preventivo insieme al certificato di analisi.',
   'lignin.cta.button': 'Richiedi un preventivo',
+
+  // --- Peat briquettes landing page ----------------------------------------
+  'nav.peat': 'Bricchetti di torba',
+
+  'peat.meta.title': 'Bricchetti di torba disponibili — KR Wood Estonia',
+  'peat.meta.description':
+    'Bricchetti di torba per casa e industria: combustione lunga e regolare, circa 4,2 kWh/kg, basso tenore di zolfo. Disponibili in Estonia, prezzo su richiesta.',
+
+  'peat.stock': 'Disponibili a magazzino',
+  'peat.hero.title': 'Bricchetti di torba',
+  'peat.hero.titleAccent': 'Calore lungo e costante per casa e industria',
+  'peat.hero.lead':
+    'Il bricchetto di torba è torba essiccata e pressata ad alta pressione in un blocco compatto e regolare, che prende fuoco facilmente da un fuoco già avviato e arde lentamente per ore. Una sola carica mantiene calde stufa o caldaia per tutta la notte.',
+  'peat.price.value': 'Su richiesta',
+  'peat.price.note':
+    'Il prezzo dipende dalla quantità e dall’indirizzo di consegna. Inviaci una richiesta e ti risponderemo con un preventivo.',
+  'peat.hero.ctaPrimary': 'Richiedi un preventivo',
+  'peat.hero.ctaWhatsapp': 'Chiedi su WhatsApp',
+  'peat.whatsappMessage': 'Buongiorno! Vorrei un preventivo per i bricchetti di torba.',
+
+  'peat.row.form': 'Forma',
+  'peat.row.burn': 'Durata di combustione',
+  'peat.row.availability': 'Disponibilità',
+  'peat.row.pallet': 'Bancale',
+  'peat.value.material': 'Torba fresata',
+  'peat.value.form': 'Bricchetto pressato, senza leganti',
+  'peat.value.calorific': '≈ 4,2 kWh/kg',
+  'peat.value.moisture': '≤ 20 %',
+  'peat.value.burn': 'fino a ~8 h',
+  'peat.value.packaging': '84 confezioni, circa 960 kg in totale',
+  'peat.value.palletWeight': '≈ 960 kg',
+  'peat.fact.pallet': '84 confezioni per bancale',
+  'peat.value.gas': '9,3 kWh/m³',
+  'peat.value.equiv': '450–500 m³',
+
+  'peat.equiv.eyebrow': 'Contenuto energetico',
+  'peat.equiv.from': '1 tonnellata di bricchetti di torba',
+  'peat.equiv.to': 'di gas naturale',
+  'peat.equiv.note':
+    'In base al potere calorifico inferiore: bricchetti di torba {calorific} (umidità {moisture}), gas naturale {gas}. I bricchetti più secchi si avvicinano al valore superiore.',
+
+  'peat.about.eyebrow': 'Panoramica del prodotto',
+  'peat.about.title': 'Che cos’è il bricchetto di torba e come brucia?',
+  'peat.about.lead':
+    'Il bricchetto di torba è un combustibile solido ricavato dalla torba fresata: la torba viene essiccata fino a una bassa umidità e pressata ad alta pressione, senza colla né altri leganti. Una volta acceso, brucia prima con una fiamma breve e poi arde lentamente per ore, cedendo un calore costante.',
+  'peat.about.made.title': 'Come si produce',
+  'peat.about.made.text':
+    'La torba è materia vegetale parzialmente decomposta che si è accumulata nelle torbiere nel corso di migliaia di anni. Per i bricchetti, lo strato superficiale di una torbiera drenata viene fresato in una granella fine, essiccato prima sul campo e poi in stabilimento, e pressato in bricchetti. Con la pressione e il calore, i composti naturali della torba stessa legano le particelle tra loro, così il bricchetto resta compatto senza additivi. Il risultato è molto più denso della torba sciolta o della legna da ardere: in ogni sacco e in ogni metro cubo di magazzino c’è più energia.',
+  'peat.about.burn.title': 'Come brucia',
+  'peat.about.burn.text':
+    'Una volta acceso, il bricchetto rilascia prima i gas volatili e brucia con una fiamma breve e viva. Quando questi si sono consumati, si forma uno strato di brace che brucia lentamente dall’esterno verso l’interno: è la fase lunga, quella che scalda in modo uniforme la stufa o la caldaia. Essendo denso e omogeneo, il bricchetto mantiene a lungo la sua forma mentre brucia e la resa termica resta stabile. Riducendo l’aria quando le fiamme si sono calmate, un focolare pieno arde per diverse ore — fino a circa otto secondo i produttori, a seconda della stufa e del tiraggio.',
+  'peat.about.use.title': 'Come usarli',
+  'peat.about.use.text':
+    'Avvia il fuoco con legnetti o qualche ciocco e aggiungi i bricchetti quando c’è già un letto di brace. Disponili senza stiparli, perché l’aria possa raggiungerli, e chiudi in parte la serranda dell’aria quando le fiamme si sono calmate: meno aria significa una combustione più lunga. I bricchetti di torba sono adatti a stufe, cucine a legna, inserti per camino chiusi e caldaie a combustibile solido progettati per legna o carbone; non vanno usati nei bruciatori a pellet.',
+
+  'peat.benefits.title': 'Vantaggi dei bricchetti di torba',
+  'peat.benefits.b1.title': 'Lunga durata di combustione',
+  'peat.benefits.b1.text':
+    'Una carica arde per ore — fino a circa otto secondo i produttori — così la stufa si può caricare la sera e la casa resta calda fino al mattino.',
+  'peat.benefits.b2.title': 'Senza l’odore acre del carbone',
+  'peat.benefits.b2.text':
+    'A differenza del carbone, i bricchetti di torba bruciano senza un odore di fumo pesante e acre.',
+  'peat.benefits.b3.title': 'Basso tenore di zolfo',
+  'peat.benefits.b3.text':
+    'La torba contiene molto meno zolfo della maggior parte dei carboni. Meno zolfo significa meno depositi corrosivi: caldaia, stufa e canna fumaria si conservano meglio.',
+  'peat.benefits.b4.title': 'Cenere per l’orto',
+  'peat.benefits.b4.text':
+    'La cenere è ricca di minerali e alcalina. Una volta fredda, si può spargere in uno strato sottile su aiuole e prato come fertilizzante e ammendante, purché insieme ai bricchetti non sia stato bruciato nient’altro.',
+  'peat.benefits.b5.title': 'Tanto calore in poco spazio',
+  'peat.benefits.b5.text':
+    'Una tonnellata di bricchetti di torba dà all’incirca lo stesso calore di {equiv} di gas naturale e, a parità di calore, i bricchetti compatti occupano meno spazio della legna da ardere.',
+
+  'peat.uses.eyebrow': 'Impieghi',
+  'peat.uses.title': 'Dove usare i bricchetti di torba',
+  'peat.uses.subtitle':
+    'Ovunque ci sia un focolare progettato per legna o carbone: dalla casa privata alla centrale termica industriale.',
+  'peat.uses.home.title': 'Uso domestico',
+  'peat.uses.home.lead':
+    'Un ottimo combustibile per case e seconde case, soprattutto di notte, quando conta una combustione lunga e regolare più di una fiamma veloce.',
+  'peat.uses.home.i1': 'Stufe e cucine a legna',
+  'peat.uses.home.i2': 'Inserti per camino chiusi',
+  'peat.uses.home.i3': 'Caldaie a combustibile solido',
+  'peat.uses.industry.title': 'Industria e grandi utenze',
+  'peat.uses.industry.lead': 'Un combustibile solido diffuso nelle aziende con una propria centrale termica:',
+  'peat.uses.industry.i1': 'Allevamenti avicoli',
+  'peat.uses.industry.i2': 'Serre',
+  'peat.uses.industry.i3': 'Fornaci di laterizi e cementifici',
+  'peat.uses.industry.i4': 'Caseifici e conservifici',
+  'peat.uses.industry.i5': 'Piscine e centri benessere',
+  'peat.uses.industry.i6': 'Centrali termiche industriali e comunali',
+  'peat.uses.industry.i7': 'Centrali termoelettriche',
+
+  'peat.specs.title': 'Dati tecnici',
+  'peat.specs.subtitle':
+    'Valori tipici dei bricchetti di torba. Insieme al preventivo, chiedici i dati del lotto attuale.',
+  'peat.specs.note':
+    'Potere calorifico e umidità sono valori di riferimento per i bricchetti di torba, tratti dalla metodologia estone per il calcolo della prestazione energetica degli edifici. La durata di combustione dipende dalla stufa e dal tiraggio.',
+
+  'peat.faq.eyebrow': 'FAQ',
+  'peat.faq.title': 'Domande frequenti',
+  'peat.faq.q1': 'Che cos’è il bricchetto di torba?',
+  'peat.faq.a1':
+    'Il bricchetto di torba è un combustibile solido ricavato dalla torba fresata, essiccata e pressata ad alta pressione in bricchetti compatti senza leganti. Il suo potere calorifico è di {calorific} e una tonnellata di bricchetti dà all’incirca lo stesso calore di {equiv} di gas naturale.',
+  'peat.faq.q2': 'Quanto dura la combustione di un bricchetto di torba?',
+  'peat.faq.a2':
+    'Riducendo l’aria dopo l’accensione, un focolare pieno arde per diverse ore — {burn} secondo i produttori. La durata effettiva dipende dalla stufa, dal tiraggio e da quanto è pieno il focolare.',
+  'peat.faq.q3': 'Si possono bruciare i bricchetti di torba in una caldaia a pellet?',
+  'peat.faq.a3':
+    'No. Il bruciatore a pellet alimenta il combustibile in automatico e richiede pellet di dimensioni definite. I bricchetti di torba sono pensati per stufe, cucine a legna, inserti per camino chiusi e caldaie a combustibile solido caricate a mano. Per una caldaia a pellet scegli il nostro pellet di legno ENplus A1.',
+  'peat.faq.q4': 'Bricchetti di torba o pellet di legno: cosa scegliere?',
+  'peat.faq.a4':
+    'Dipende dall’apparecchio. Il pellet di legno è fatto per caldaie e bruciatori a pellet automatici e lascia pochissima cenere ({pelletAsh}). I bricchetti di torba sono adatti a stufe e caldaie a combustibile solido caricate a mano, dove il loro vantaggio è la combustione lunga e regolare; lasciano però sensibilmente più cenere del pellet.',
+  'peat.faq.q5': 'Quanto costano i bricchetti di torba?',
+  'peat.faq.a5':
+    'Il prezzo è su richiesta: dipende dalla quantità e dall’indirizzo di consegna. Inviaci una richiesta o un messaggio su WhatsApp e ti risponderemo con un preventivo. I bricchetti di torba sono disponibili a magazzino.',
+  'peat.faq.q6': 'Cosa fare con la cenere?',
+  'peat.faq.a6':
+    'La cenere dei bricchetti di torba è ricca di minerali e alcalina. Una volta fredda, si può spargere in uno strato sottile su aiuole e prato come fertilizzante e ammendante, purché insieme ai bricchetti non sia stato bruciato nient’altro. È più abbondante di quella del pellet di legno, quindi il cassetto della cenere va svuotato più spesso.',
+  'peat.faq.q7': 'Come conservare i bricchetti di torba?',
+  'peat.faq.a7':
+    'All’asciutto, al coperto e sollevati da terra, per esempio su un bancale o uno scaffale in una rimessa o nel locale caldaia. I bricchetti che assorbono umidità rendono meno calore e possono sbriciolarsi.',
+
+  'peat.faq.q8': 'Come sono confezionati i bricchetti di torba?',
+  'peat.faq.a8':
+    'I bricchetti di torba sono forniti in confezioni su bancale: un bancale contiene {packaging}. Per un preventivo, indicaci la quantità di cui hai bisogno e l’indirizzo di consegna.',
+
+  'peat.cta.title': 'Ti servono bricchetti di torba?',
+  'peat.cta.text':
+    'Indicaci la quantità di cui hai bisogno e dove consegnarla: ti invieremo il prezzo e le condizioni di consegna. I bricchetti di torba sono disponibili a magazzino.',
+
+  'peat.teaser.title': 'Disponibili anche i bricchetti di torba',
+  'peat.teaser.text':
+    'Per stufe e caldaie a combustibile solido: una combustione lunga e regolare per tutta la notte. Prezzo su richiesta.',
+  'peat.teaser.link': 'Scopri i bricchetti di torba',
 };
 
 /* -------------------------------------------------------------------------- */

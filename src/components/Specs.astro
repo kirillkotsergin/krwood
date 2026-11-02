@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations, anchorLink } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, anchorLink, routePath } from '../i18n/utils';
 import type { ProductKey } from '../config/pricing';
 import { pelletSpecRows, ligninSpecRows, type SpecRow } from '../config/specs';
 import PriceTag from './PriceTag.astro';
@@ -259,5 +259,39 @@ const isLoneLast = (index: number) =>
         ))
       }
     </div>
+
+    <!--
+      Peat briquettes have no published price, so they get a link to their
+      own page rather than a priced card in the grid above.
+    -->
+    <aside
+      data-animate
+      class="mx-auto mt-10 flex max-w-5xl flex-col items-start gap-5 rounded-3xl border border-forest-200 bg-forest-100/40 p-7 sm:flex-row sm:items-center sm:justify-between sm:gap-8 xl:max-w-none"
+    >
+      <div>
+        <!-- The title already says "in stock" in every language. -->
+        <h3 class="text-xl">{t('peat.teaser.title')}</h3>
+        <p class="mt-1 text-[0.9375rem] leading-relaxed text-stone-600">{t('peat.teaser.text')}</p>
+      </div>
+      <a
+        href={routePath('peatBriquettes', lang)}
+        class="group inline-flex shrink-0 items-center gap-2 rounded-full bg-forest-700 px-6 py-3 text-sm font-bold text-white transition-all duration-300 hover:scale-[1.02] hover:bg-forest-600 hover:shadow-lg active:scale-100"
+      >
+        {t('peat.teaser.link')}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-4 transition-transform duration-300 group-hover:translate-x-1"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </a>
+    </aside>
   </div>
 </section>

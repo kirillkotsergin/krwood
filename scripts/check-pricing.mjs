@@ -35,9 +35,18 @@ const PRICED_PAGES = {
   'it/pellet-di-lignina/index.html': 1,
 };
 
-/** Every page, including those that only carry the business's offer catalogue. */
+/**
+ * Every page, including those that only carry the business's offer catalogue.
+ * The peat briquette pages are here and not in PRICED_PAGES: their price is on
+ * request, so they show none — but any Product node they carry must still be
+ * priced, which is what keeps a price-less Product from slipping onto them.
+ */
 const ALL_PAGES = [
   ...Object.keys(PRICED_PAGES),
+  'turbabrikett/index.html',
+  'en/peat-briquettes/index.html',
+  'pl/brykiet-torfowy/index.html',
+  'it/bricchetti-di-torba/index.html',
   'privacy/index.html',
   'en/privacy/index.html',
   'pl/privacy/index.html',
