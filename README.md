@@ -38,7 +38,7 @@ in `<head>` together, across all three locales.
 | Field | Value |
 | --- | --- |
 | `legalName` | KR-Wood OÜ |
-| `phone` / `phoneHref` | `+372 5020 078` / `+3725020078` |
+| `phone` / `phoneHref` | `+372 5258 200` / `+3725258200` |
 | `email` | krwood@krwood.ee |
 | `address` | Saha tee 18d, Loo, 74201, Harjumaa |
 | `registryCode` | 14459624 |

@@ -80,9 +80,9 @@ export const siteConfig: SiteConfig = {
 
   email: 'krwood@krwood.ee',
 
-  phone: '+372 5020 078',
-  phoneHref: '+3725020078',
-  whatsapp: '3725020078',
+  phone: '+372 5258 200',
+  phoneHref: '+3725258200',
+  whatsapp: '3725258200',
 
   address: {
     street: 'Saha tee 18d',
