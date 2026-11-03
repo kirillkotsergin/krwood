@@ -26,6 +26,7 @@ import {
   pelletSpecRows,
   pelletPackagingRow,
   ligninSpecRows,
+  peatSpecRows,
   PELLET_CERTIFICATION,
   type SpecRow,
 } from '../config/specs';
@@ -106,15 +107,8 @@ ${priceLine('ligninPellets')}
 
 ${t('peat.about.lead')}
 
-${list([
-  { label: t('specs.row.material'), value: t('peat.value.material') },
-  { label: t('peat.row.form'), value: t('peat.value.form') },
-  { label: t('specs.row.calorific'), value: t('peat.value.calorific') },
-  { label: t('specs.row.moisture'), value: t('peat.value.moisture') },
-  { label: t('peat.row.burn'), value: t('peat.value.burn') },
-  { label: t('peat.row.pallet'), value: t('peat.value.packaging') },
-])}
-- Price: ${t('peat.price.value').toLowerCase()}. ${t('peat.price.note')}
+${list(peatSpecRows(t))}
+${priceLine('peatBriquettes')} (one pallet, 1000 kg)
 - Availability: ${t('peat.stock').toLowerCase()}
 - ${t('peat.specs.note')}
 - Ash: ${t('peat.ash.lead')} Manufacturer’s analysis: ${peatAsh.map((row) => `${t(row.label)} ${formatAshValue(row, 'en')}`).join('; ')}.
@@ -130,7 +124,7 @@ ${list([
 
 - [Wood pellets](${abs(routePath('home', 'en'))}): products, prices, packaging, FAQ and the enquiry form
 - [Lignin pellets](${abs(routePath('ligninPellets', 'en'))}): specifications, industrial applications and FAQ
-- [Peat briquettes](${abs(routePath('peatBriquettes', 'en'))}): what they are, how they burn, where to use them, specifications and FAQ; price on request
+- [Peat briquettes](${abs(routePath('peatBriquettes', 'en'))}): what they are, how they burn, where to use them, specifications, price and FAQ
 - [Privacy policy](${abs(routePath('privacy', 'en'))})
 
 ## Other languages

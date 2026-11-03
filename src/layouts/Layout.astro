@@ -12,7 +12,7 @@ import {
 import { languageTags, ogLocales, defaultLang } from '../i18n/ui';
 import { siteConfig } from '../config/site';
 import { buildLocalBusinessSchema } from '../config/schema';
-import { pelletSpecRows, pelletPackagingRow, ligninSpecRows } from '../config/specs';
+import { pelletSpecRows, pelletPackagingRow, ligninSpecRows, peatSpecRows } from '../config/specs';
 // The same hashed asset the lignin page shows. There is no photo of the wood
 // pellets yet; add one to src/assets/ and pass it below the same way.
 import ligninPhoto from '../assets/lignin-pellets.webp';
@@ -51,10 +51,11 @@ const alternates = noindex ? [] : getAlternateLinks(Astro.url, Astro.site);
 const ogImage = new URL('/images/og-image.png', origin).href;
 
 // Where each product can be enquired about, in the visitor's locale. The two
-// pellet diameters live in the landing page's product cards; lignin has a
-// page of its own, with a per-locale slug.
+// pellet diameters live in the landing page's product cards; lignin and peat
+// each have a page of their own, with a per-locale slug.
 const landingUrl = new URL(localizePath('/', lang), origin).href;
 const ligninUrl = new URL(routePath('ligninPellets', lang), origin).href;
+const peatUrl = new URL(routePath('peatBriquettes', lang), origin).href;
 
 // Spec rows for `additionalProperty` — the same rows the visible tables show,
 // with the diameter first and, for the wood pellets, both packaging formats.
@@ -101,6 +102,14 @@ const jsonLd = buildLocalBusinessSchema({
       // Not ENplus certified — no hasCertification.
       properties: [diameterRow(t('lignin.value.diameter')), ...ligninSpecRows(t)],
       image: new URL(ligninPhoto.src, origin).href,
+    },
+    {
+      key: 'peatBriquettes',
+      name: t('peat.hero.title'),
+      description: t('peat.meta.description'),
+      url: peatUrl,
+      material: t('peat.value.material'),
+      properties: peatSpecRows(t),
     },
   ],
 });

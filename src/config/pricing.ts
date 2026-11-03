@@ -8,7 +8,8 @@
  *
  * Prices are **per metric tonne**, quoted in euros. `24 t` is a full truck
  * load (see `packaging.delivery.spec3` in src/i18n/ui.ts), which is what the
- * wholesale threshold on the 6 mm pellet refers to.
+ * wholesale threshold on the 6 mm pellet refers to. A pallet of peat
+ * briquettes weighs 1000 kg, so its per-tonne price is the pallet price.
  */
 
 import type { Lang, TranslationKey } from '../i18n/ui';
@@ -46,12 +47,14 @@ export interface ProductPricing {
 }
 
 /** Every product that has a published price. */
-export type ProductKey = 'pellet6mm' | 'pellet8mm' | 'ligninPellets';
+export type ProductKey = 'pellet6mm' | 'pellet8mm' | 'ligninPellets' | 'peatBriquettes';
 
 export const pricing: Record<ProductKey, ProductPricing> = {
   pellet6mm: { amount: 400, minOrderTons: 24 },
   pellet8mm: { amount: 400, minOrderTons: null },
   ligninPellets: { amount: 390, minOrderTons: null },
+  // The owner's price, 03.11.2026 — one pallet, 84 packs.
+  peatBriquettes: { amount: 420, minOrderTons: null },
 };
 
 /**
@@ -63,6 +66,7 @@ export const PRODUCT_IDS: Record<ProductKey, string> = {
   pellet6mm: `${siteConfig.url}/#product-pellet-6mm`,
   pellet8mm: `${siteConfig.url}/#product-pellet-8mm`,
   ligninPellets: `${siteConfig.url}/#product-lignin-pellets`,
+  peatBriquettes: `${siteConfig.url}/#product-peat-briquettes`,
 };
 
 /**

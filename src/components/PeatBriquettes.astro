@@ -8,9 +8,9 @@
  * equivalent) are dictionary values too, filled into the running text with
  * `fillPlaceholders`, so the hero, the spec table and the FAQ cannot disagree.
  *
- * The price is on request and the product is in stock. Neither has a number
- * behind it, so nothing here touches src/config/pricing.ts — see the note
- * above the JSON-LD for what that means for the structured data.
+ * The price comes from src/config/pricing.ts (`peatBriquettes`), like every
+ * other product's: <PriceTag> shows it, the Product node's Offer carries it
+ * and the FAQ answer quotes it, so the three cannot disagree.
  */
 import {
   getLangFromUrl,
@@ -21,7 +21,17 @@ import {
 } from '../i18n/utils';
 import { siteConfig, whatsappUrl } from '../config/site';
 import { peatAsh, formatAshValue, ashValue } from '../config/peatAsh';
+import { pricing, formatPrice, vatSentence, PRODUCT_IDS } from '../config/pricing';
+import {
+  ORGANIZATION_ID,
+  buildAdditionalProperties,
+  buildOffer,
+  buildReviewNodes,
+} from '../config/schema';
+import { peatSpecRows, type SpecRow } from '../config/specs';
+import { languageTags } from '../i18n/ui';
 import Faq from './Faq.astro';
+import PriceTag from './PriceTag.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -51,6 +61,10 @@ const figures = {
   // Wood briquettes, for the "peat or wood briquettes" answer — the same
   // Estonian reference table as the peat figure.
   woodCalorific: t('peat.value.woodCalorific'),
+  // The FAQ's price answer — the same figures <PriceTag> shows.
+  price: formatPrice(pricing.peatBriquettes.amount, lang),
+  perTon: t('price.perTon'),
+  vatNote: vatSentence(t),
 };
 const fill = (text: string) => fillPlaceholders(text, figures);
 
@@ -97,15 +111,12 @@ const uses = [
   },
 ];
 
-const specRows = [
-  { label: t('specs.row.material'), value: t('peat.value.material') },
-  { label: t('peat.row.form'), value: t('peat.value.form') },
-  { label: t('specs.row.calorific'), value: figures.calorific, highlight: true },
-  { label: t('specs.row.moisture'), value: figures.moisture },
-  { label: t('peat.row.burn'), value: figures.burn },
-  { label: t('peat.row.pallet'), value: figures.packaging },
+// The same rows as the Product node's additionalProperty, plus availability.
+// The price is left to <PriceTag> in the hero: a second "Price" row here
+// would be a second price for `check:pricing` to account for.
+const specRows: (SpecRow & { highlight?: boolean; inStock?: boolean })[] = [
+  ...peatSpecRows(t).map((row) => ({ ...row, highlight: row.value === figures.calorific })),
   { label: t('peat.row.availability'), value: t('peat.stock'), inStock: true },
-  { label: t('price.label'), value: t('peat.price.value') },
 ];
 
 const ashSteps = [
@@ -137,20 +148,26 @@ const faq = [
 /* Structured data                                                    */
 /* ------------------------------------------------------------------ */
 
-/*
- * No `Product` node, deliberately. Google requires `price` in every Offer of
- * a product snippet, and a Product with no Offer at all is just as invalid —
- * Search Console reports both as errors (see "Products carry their own priced
- * offer" in the README), and `npm run check:pricing` fails the build output
- * for the same reason. A price on request has no number to put there, so the
- * page carries the breadcrumb here and the FAQPage from <Faq>.
- *
- * Once a price is published: add `peatBriquettes` to src/config/pricing.ts,
- * render <PriceTag product="peatBriquettes" /> in place of the "on request"
- * block, and add a Product node built the way LigninPellets.astro builds its
- * own — `offers: buildOffer('peatBriquettes', pageUrl)`, with
- * `availability: InStock` in that offer.
- */
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  // The same stable id the business's offer catalogue uses, so this page and
+  // the catalogue describe one product rather than two.
+  '@id': PRODUCT_IDS.peatBriquettes,
+  name: t('peat.hero.title'),
+  description: t('peat.meta.description'),
+  url: pageUrl,
+  category: 'Solid fuel / Peat briquettes',
+  material: t('peat.value.material'),
+  inLanguage: languageTags[lang],
+  brand: { '@id': ORGANIZATION_ID },
+  additionalProperty: buildAdditionalProperties(peatSpecRows(t)),
+  // Price, currency, VAT and InStock — see buildOffer in src/config/schema.ts.
+  offers: buildOffer('peatBriquettes', pageUrl),
+  // Emits nothing while there are no real reviews; see src/config/reviews.ts.
+  ...buildReviewNodes('peatBriquettes'),
+};
+
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -221,18 +238,14 @@ const breadcrumbSchema = {
           {t('peat.hero.lead')}
         </p>
 
-        <!-- Price on request -->
-        <div
+        <!-- bg-white under the tag's translucent gradient: on this dark hero it
+             would otherwise blend with the forest green. -->
+        <PriceTag
+          product="peatBriquettes"
+          class="mt-8 bg-white sm:max-w-sm"
           data-animate
           style="--animate-delay:200ms"
-          class="mt-8 flex flex-col gap-2 rounded-2xl bg-white/[0.06] p-5 ring-1 ring-inset ring-white/15 sm:flex-row sm:items-center sm:gap-6"
-        >
-          <p class="shrink-0">
-            <span class="block text-xs font-bold uppercase tracking-wider text-stone-400">{t('price.label')}</span>
-            <span class="mt-1 block text-2xl font-extrabold text-white">{t('peat.price.value')}</span>
-          </p>
-          <p class="text-sm leading-relaxed text-stone-300">{t('peat.price.note')}</p>
-        </div>
+        />
 
         <div data-animate style="--animate-delay:240ms" class="mt-8 flex flex-col gap-3 sm:flex-row">
           <a
@@ -696,4 +709,5 @@ const breadcrumbSchema = {
   </section>
 </article>
 
+<script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />
 <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />

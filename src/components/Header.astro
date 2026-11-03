@@ -6,13 +6,16 @@ import LanguagePicker from './LanguagePicker.astro';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Anchor items point at sections of the landing page; the lignin entry is a
-// real sub-page, so its href is a localized path rather than an anchor.
+// Anchor items point at sections of the landing page; the lignin and peat
+// entries are real sub-pages, so their hrefs are localized paths.
+// `wideOnly` items leave the desktop bar below xl to make room for the rest;
+// the mobile menu always lists all of them.
 const navItems = [
-  { href: anchorLink('features', lang), label: t('nav.features') },
+  { href: anchorLink('features', lang), label: t('nav.features'), wideOnly: true },
   { href: anchorLink('specs', lang), label: t('nav.specs') },
-  { href: anchorLink('packaging', lang), label: t('nav.packaging') },
+  { href: anchorLink('packaging', lang), label: t('nav.packaging'), wideOnly: true },
   { href: routePath('ligninPellets', lang), label: t('nav.lignin') },
+  { href: routePath('peatBriquettes', lang), label: t('nav.peat') },
   { href: anchorLink('contact', lang), label: t('nav.contact') },
 ];
 
@@ -28,8 +31,8 @@ const contactHref = anchorLink('contact', lang);
     Space is tight at two widths, both measured with all four languages:
     a 360px phone (logo, four language pills and the menu button) and a
     1024px screen (the full nav plus the actions). The compact picker, the
-    lg-only padding below and the CTA arrow appearing from xl are what make
-    each fit. Below 360px the wordmark gives way and the icon stays.
+    lg-only padding below, the CTA arrow appearing from xl and the two
+    `wideOnly` nav items appearing from xl are what make each fit. Below 360px the wordmark gives way and the icon stays.
   -->
   <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-5 sm:px-8 lg:h-20 lg:gap-4">
     <!-- Logo -->
@@ -46,10 +49,10 @@ const contactHref = anchorLink('contact', lang);
       <ul class="flex items-center gap-1">
         {
           navItems.map((item) => (
-            <li>
+            <li class={item.wideOnly ? 'max-xl:hidden' : undefined}>
               <a
                 href={item.href}
-                class="group relative block rounded-lg px-2.5 py-2 text-sm font-semibold text-stone-600 transition-colors duration-200 hover:text-forest-800 xl:px-3.5"
+                class="group relative block whitespace-nowrap rounded-lg px-2.5 py-2 text-sm font-semibold text-stone-600 transition-colors duration-200 hover:text-forest-800 xl:px-3.5"
               >
                 {item.label}
                 <span class="absolute inset-x-2.5 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full bg-wood-500 transition-transform duration-300 group-hover:scale-x-100 xl:inset-x-3.5" />

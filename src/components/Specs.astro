@@ -1,6 +1,6 @@
 ---
-import { getLangFromUrl, useTranslations, anchorLink, routePath } from '../i18n/utils';
-import type { ProductKey } from '../config/pricing';
+import { getLangFromUrl, useTranslations, anchorLink, routePath, fillPlaceholders } from '../i18n/utils';
+import { pricing, formatPrice, vatSentence, type ProductKey } from '../config/pricing';
 import { pelletSpecRows, ligninSpecRows, type SpecRow } from '../config/specs';
 import PriceTag from './PriceTag.astro';
 
@@ -30,6 +30,13 @@ interface Product {
 // Shared with the JSON-LD — see src/config/specs.ts.
 const pelletRows = pelletSpecRows(t);
 const ligninRows = ligninSpecRows(t);
+
+// The teaser quotes the peat price from src/config/pricing.ts.
+const peatTeaser = fillPlaceholders(t('peat.teaser.text'), {
+  price: formatPrice(pricing.peatBriquettes.amount, lang),
+  perTon: t('price.perTon'),
+  vatNote: vatSentence(t),
+});
 
 const products: Product[] = [
   {
@@ -261,8 +268,8 @@ const isLoneLast = (index: number) =>
     </div>
 
     <!--
-      Peat briquettes have no published price, so they get a link to their
-      own page rather than a priced card in the grid above.
+      Peat briquettes get a link to their own page rather than a card in the
+      grid above: the grid compares pellets, and the teaser quotes the price.
     -->
     <aside
       data-animate
@@ -271,7 +278,7 @@ const isLoneLast = (index: number) =>
       <div>
         <!-- The title already says "in stock" in every language. -->
         <h3 class="text-xl">{t('peat.teaser.title')}</h3>
-        <p class="mt-1 text-[0.9375rem] leading-relaxed text-stone-600">{t('peat.teaser.text')}</p>
+        <p class="mt-1 text-[0.9375rem] leading-relaxed text-stone-600">{peatTeaser}</p>
       </div>
       <a
         href={routePath('peatBriquettes', lang)}

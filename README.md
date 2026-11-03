@@ -69,17 +69,17 @@ visible price and the structured data cannot drift apart.
 | Graanulid 6 mm | €400 / t | 24 t — a full truck load |
 | Graanulid 8 mm | €400 / t | — |
 | Ligniini pelletid | €390 / t | — |
-| Turbabrikett | on request | — |
+| Turbabrikett | €420 / t | — |
 
-**Peat briquettes have no published price** and are deliberately absent from
-`src/config/pricing.ts`. Their page (`PeatBriquettes.astro`) shows "price on
-request" and "in stock" as text, and carries **no `Product` node**: Google
-requires `price` in every `Offer`, so a price-less Product is a Search Console
-error (see *Products carry their own priced offer* below). The page's
-structured data is its `BreadcrumbList` and `FAQPage`. When a price exists,
-follow *Adding a priced product* and give the page a Product node the way the
-lignin page has one. `check:pricing` covers the peat pages in `ALL_PAGES`, so a
-price-less Product added there by mistake fails the check.
+**Peat briquettes: €420 per pallet**, which is one tonne (84 packs, 1000 kg),
+so it fits the per-tonne scheme below unchanged. Price set by the owner on
+3 November 2026; until then it was "on request" and the page had no `Product`
+node. Now the page shows `<PriceTag>` in its hero, carries a `Product` node with
+`buildOffer('peatBriquettes', …)` (same `@id` as in the offer catalogue), and
+the FAQ answer and the landing-page teaser quote the amount through `{price}`
+placeholders, so changing the number in `src/config/pricing.ts` updates all of
+them. The spec table has no price row on purpose: `check:pricing` counts every
+visible "Price" label, and the page is listed with exactly one.
 
 **Prices are per metric tonne.** That unit is emitted as
 `priceSpecification.referenceQuantity` with `unitCode: TNE`, and the 6 mm
@@ -405,7 +405,9 @@ from `/en/privacy/` lands on `/pl/privacy/`, not the homepage.
 ```
 src/
 ├── components/
-│   ├── Header.astro          Sticky backdrop-blur nav + mobile hamburger
+│   ├── Header.astro          Sticky backdrop-blur nav + mobile hamburger; Benefits
+│   │                         and Packaging leave the bar below xl (1280px) so the
+│   │                         lignin and peat links fit at 1024px
 │   ├── Hero.astro            Headline, CTAs, key figures
 │   ├── Features.astro        4-up icon grid (inline SVG)
 │   ├── Specs.astro           6 mm / 8 mm product cards with spec tables
@@ -414,7 +416,7 @@ src/
 │   ├── Footer.astro          Nav, contact, legal, social
 │   ├── LanguagePicker.astro  EE | EN | PL | IT, highlights the active locale
 │   ├── LandingPage.astro     Composes the five landing sections
-│   ├── PeatBriquettes.astro  Peat briquette page — price on request, in stock
+│   ├── PeatBriquettes.astro  Peat briquette page — €420 / t, in stock
 │   ├── PrivacyContent.astro  Shared privacy-policy body
 │   └── Logo.astro
 ├── config/

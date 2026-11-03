@@ -64,3 +64,15 @@ export function ligninSpecRows(t: Translate): SpecRow[] {
     { label: t('lignin.row.origin'), value: t('lignin.value.origin') },
   ];
 }
+
+/** Peat briquette rows, in the order the page's spec table shows them. */
+export function peatSpecRows(t: Translate): SpecRow[] {
+  return [
+    { label: t('specs.row.material'), value: t('peat.value.material') },
+    { label: t('peat.row.form'), value: t('peat.value.form') },
+    { label: t('specs.row.calorific'), value: t('peat.value.calorific') },
+    { label: t('specs.row.moisture'), value: t('peat.value.moisture') },
+    { label: t('peat.row.burn'), value: t('peat.value.burn') },
+    { label: t('peat.row.pallet'), value: t('peat.value.packaging') },
+  ];
+}

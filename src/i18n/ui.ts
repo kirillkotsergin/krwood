@@ -424,11 +424,11 @@ const et = {
   'lignin.cta.button': 'Küsi pakkumist',
 
   // --- Peat briquettes landing page ----------------------------------------
-  // Price on request: no amount in src/config/pricing.ts, so no Product node
-  // either — see the comment above the JSON-LD in PeatBriquettes.astro.
   // {calorific}, {moisture}, {gas}, {equiv}, {burn}, {woodCalorific}, {packaging},
   // {calcium} and {ph} are filled in by PeatBriquettes.astro from the values
   // below and src/config/peatAsh.ts, so an answer cannot contradict the tables.
+  // {price}, {perTon} and {vatNote} come from src/config/pricing.ts — in the
+  // FAQ via PeatBriquettes.astro, in the teaser via Specs.astro.
   //
   // Reference figures (net calorific value), Estonian methodology for the
   // energy performance of buildings, annex 4 "Kütuste tarbimisaine alumised
@@ -439,21 +439,18 @@ const et = {
   // manufacturers quote. "Up to ~8 h" is the manufacturers' burn time.
   'nav.peat': 'Turbabrikett',
 
-  'peat.meta.title': 'Turbabrikett laos — hind päringu alusel | KR Wood',
+  'peat.meta.title': 'Turbabrikett laos — pikk ja ühtlane põlemine | KR Wood',
   'peat.meta.description':
-    'Turbabrikett koju ja tööstusele: pikk ja ühtlane põlemine, kütteväärtus ligikaudu 4,2 kWh/kg, madal väävlisisaldus. Laos, hind päringu alusel.',
+    'Turbabrikett koju ja tööstusele: pikk ja ühtlane põlemine, kütteväärtus ligikaudu 4,2 kWh/kg, madal väävlisisaldus. Laos, kaubaalusel 1000 kg.',
 
   'peat.stock': 'Laos',
   'peat.hero.title': 'Turbabrikett',
   'peat.hero.titleAccent': 'Pikk ja ühtlane soojus kodule ja tööstusele',
   'peat.hero.lead':
     'Turbabrikett on kuivatatud ja suure rõhu all kokku pressitud turvas — tihe, ühtlase kujuga kütus, mis süttib alustatud tulelt kergesti ja hõõgub tunde. Üks täitmine hoiab ahju või katla soojana kogu öö.',
-  'peat.price.value': 'Päringu alusel',
-  'peat.price.note':
-    'Hind sõltub kogusest ja tarneaadressist. Saatke päring ja saadame teile pakkumise.',
-  'peat.hero.ctaPrimary': 'Küsi hinnapakkumist',
+  'peat.hero.ctaPrimary': 'Küsi pakkumist',
   'peat.hero.ctaWhatsapp': 'Küsi WhatsAppis',
-  'peat.whatsappMessage': 'Tere! Sooviksin küsida turbabriketi hinda.',
+  'peat.whatsappMessage': 'Tere! Sooviksin tellida turbabriketti.',
 
   'peat.row.form': 'Kuju',
   'peat.row.burn': 'Põlemisaeg',
@@ -590,7 +587,7 @@ const et = {
     'Mõlemad sobivad käsitsi köetavatele ahjudele ja tahkekütusekateldele. Puitbrikett annab kilogrammi kohta veidi rohkem soojust ({woodCalorific}, turbabrikett {calorific}), põleb kuumema ja kiirema leegiga ning sellest jääb vähe tuhka. Turbabrikett hõõgub kauem ja ühtlasemalt, nii et see sobib eriti ööseks; tuhka jääb sellest märgatavalt rohkem. Paljud kombineerivad: puitbrikett kiireks soojenemiseks, turbabrikett pika ja ühtlase soojuse hoidmiseks.',
   'peat.faq.q5': 'Kui palju turbabrikett maksab?',
   'peat.faq.a5':
-    'Hind on päringu alusel: see sõltub kogusest ja tarneaadressist. Saatke meile päring või kirjutage WhatsAppis ning saadame pakkumise. Turbabrikett on laos.',
+    'Turbabrikett maksab {price} {perTon} — see on üks kaubaalus ({packaging}). {vatNote} Täpse pakkumise saamiseks andke teada soovitud kogus ja tarneaadress. Turbabrikett on laos.',
   'peat.faq.q6': 'Kas turbabriketi tuhka võib aias kasutada?',
   'peat.faq.a6':
     'Jah, mõõdukalt. Tuhk on kaltsiumirikas ({calcium}) ja tugevalt aluseline (pH {ph}), nii et aias toimib see eelkõige lubjana; kaaliumi ja lämmastikku on selles vähe. Puistake jahtunud tuhka õhukese kihina happelisele mullale, kuid mitte happelist mulda armastavate taimede ega kartulite alla. Tuhka tekib rohkem kui puitbrikettidest, seega tuleb tuhasahtlit sagedamini tühjendada.',
@@ -608,7 +605,7 @@ const et = {
 
   'peat.teaser.title': 'Laos ka turbabrikett',
   'peat.teaser.text':
-    'Ahjudele ja tahkekütusekateldele: pikk ja ühtlane põlemine kogu ööks. Hind päringu alusel.',
+    'Ahjudele ja tahkekütusekateldele: pikk ja ühtlane põlemine kogu ööks. Hind {price} {perTon}. {vatNote}',
   'peat.teaser.link': 'Vaata turbabriketti',
 } as const;
 
@@ -971,21 +968,18 @@ const en: Dictionary = {
   // --- Peat briquettes landing page ----------------------------------------
   'nav.peat': 'Peat briquettes',
 
-  'peat.meta.title': 'Peat Briquettes in Stock — Price on Request | KR Wood',
+  'peat.meta.title': 'Peat Briquettes in Stock — Long, Even Burn | KR Wood',
   'peat.meta.description':
-    'Peat briquettes for homes and industry: a long, even burn, about 4.2 kWh/kg, low sulphur and usable ash. In stock in Estonia — price on request.',
+    'Peat briquettes for homes and industry: a long, even burn, about 4.2 kWh/kg, low sulphur and usable ash. In stock in Estonia, 1000 kg per pallet.',
 
   'peat.stock': 'In stock',
   'peat.hero.title': 'Peat Briquettes',
   'peat.hero.titleAccent': 'Long, steady heat for homes and industry',
   'peat.hero.lead':
     'A peat briquette is dried peat pressed under high pressure into a dense, uniform block that catches readily from a lit fire and smoulders for hours. One load keeps a stove or boiler warm through the night.',
-  'peat.price.value': 'On request',
-  'peat.price.note':
-    'The price depends on the quantity and the delivery address. Send an enquiry and we will reply with a quote.',
   'peat.hero.ctaPrimary': 'Request a quote',
   'peat.hero.ctaWhatsapp': 'Ask on WhatsApp',
-  'peat.whatsappMessage': 'Hello! I would like a price for peat briquettes.',
+  'peat.whatsappMessage': 'Hello! I would like to order peat briquettes.',
 
   'peat.row.form': 'Form',
   'peat.row.burn': 'Burn time',
@@ -1116,7 +1110,7 @@ const en: Dictionary = {
     'Both suit manually loaded stoves and solid-fuel boilers. Wood briquettes give a little more heat per kilogram ({woodCalorific}, against {calorific} for peat), burn hotter and faster with a livelier flame, and leave little ash. Peat briquettes smoulder longer and more evenly, which makes them the better choice for the night, but they leave noticeably more ash. Many people combine the two: wood briquettes to heat up quickly, peat briquettes to hold the heat for hours.',
   'peat.faq.q5': 'How much do peat briquettes cost?',
   'peat.faq.a5':
-    'The price is on request: it depends on the quantity and the delivery address. Send us an enquiry or a WhatsApp message and we will reply with a quote. Peat briquettes are in stock.',
+    'Peat briquettes cost {price} {perTon} — one pallet ({packaging}). {vatNote} For an exact quote, tell us the quantity you need and the delivery address. Peat briquettes are in stock.',
   'peat.faq.q6': 'Can peat briquette ash be used in the garden?',
   'peat.faq.a6':
     'Yes, in moderation. The ash is rich in calcium ({calcium}) and strongly alkaline (pH {ph}), so in the garden it works mainly like lime; it holds little potassium or nitrogen. Spread cold ash thinly on acidic soil, but not under acid-loving plants or on potato beds. There is more of it than with wood briquettes, so the ash pan needs emptying more often.',
@@ -1134,7 +1128,7 @@ const en: Dictionary = {
 
   'peat.teaser.title': 'Also in stock: peat briquettes',
   'peat.teaser.text':
-    'For stoves and solid-fuel boilers: a long, even burn through the night. Price on request.',
+    'For stoves and solid-fuel boilers: a long, even burn through the night. {price} {perTon}. {vatNote}',
   'peat.teaser.link': 'See peat briquettes',
 };
 
@@ -1489,20 +1483,18 @@ const pl: Dictionary = {
   // --- Peat briquettes landing page ----------------------------------------
   'nav.peat': 'Brykiet torfowy',
 
-  'peat.meta.title': 'Brykiet torfowy — dostępny, cena na zapytanie | KR Wood',
+  'peat.meta.title': 'Brykiet torfowy — dostępny od ręki w Estonii | KR Wood',
   'peat.meta.description':
-    'Brykiet torfowy do domu i przemysłu: długie, równe spalanie, ok. 4,2 kWh/kg, niska zawartość siarki. Dostępny od ręki w Estonii, cena na zapytanie.',
+    'Brykiet torfowy do domu i przemysłu: długie, równe spalanie, ok. 4,2 kWh/kg, niska zawartość siarki. Dostępny od ręki w Estonii, 1000 kg na palecie.',
 
   'peat.stock': 'Dostępny od ręki',
   'peat.hero.title': 'Brykiet torfowy',
   'peat.hero.titleAccent': 'Długie, równe ciepło dla domu i przemysłu',
   'peat.hero.lead':
     'Brykiet torfowy to wysuszony torf sprasowany pod wysokim ciśnieniem w zwarte bryły o jednakowym kształcie. Łatwo zajmuje się od rozpalonego ognia i tli się godzinami — jeden załadunek utrzymuje ciepło w piecu lub kotle przez całą noc.',
-  'peat.price.value': 'Na zapytanie',
-  'peat.price.note': 'Cena zależy od ilości i adresu dostawy. Wyślij zapytanie, a przygotujemy ofertę.',
-  'peat.hero.ctaPrimary': 'Zapytaj o cenę',
+  'peat.hero.ctaPrimary': 'Zapytaj o ofertę',
   'peat.hero.ctaWhatsapp': 'Zapytaj na WhatsAppie',
-  'peat.whatsappMessage': 'Dzień dobry! Chciałbym zapytać o cenę brykietu torfowego.',
+  'peat.whatsappMessage': 'Dzień dobry! Chciałbym zamówić brykiet torfowy.',
 
   'peat.row.form': 'Postać',
   'peat.row.burn': 'Czas palenia',
@@ -1634,7 +1626,7 @@ const pl: Dictionary = {
     'Oba nadają się do ręcznie ładowanych pieców i kotłów na paliwo stałe. Brykiet drzewny daje nieco więcej ciepła z kilograma ({woodCalorific} wobec {calorific} dla torfowego), pali się goręcej i szybciej, żywszym płomieniem, i zostawia mało popiołu. Brykiet torfowy tli się dłużej i równiej, dlatego lepiej sprawdza się na noc, ale popiołu zostaje z niego wyraźnie więcej. Wiele osób łączy oba: drzewny, by szybko nagrzać dom, torfowy, by utrzymać ciepło przez wiele godzin.',
   'peat.faq.q5': 'Ile kosztuje brykiet torfowy?',
   'peat.faq.a5':
-    'Cena jest na zapytanie: zależy od ilości i adresu dostawy. Wyślij nam zapytanie lub wiadomość na WhatsAppie, a odpowiemy ofertą. Brykiet torfowy jest dostępny od ręki.',
+    'Brykiet torfowy kosztuje {price} {perTon}, czyli za jedną paletę ({packaging}). {vatNote} Aby otrzymać dokładną ofertę, podaj potrzebną ilość i adres dostawy. Brykiet torfowy jest dostępny od ręki.',
   'peat.faq.q6': 'Czy popiół z brykietu torfowego można stosować w ogrodzie?',
   'peat.faq.a6':
     'Tak, z umiarem. Popiół jest bogaty w wapń ({calcium}) i silnie zasadowy (pH {ph}), więc w ogrodzie działa przede wszystkim jak wapno; potasu i azotu zawiera niewiele. Rozsypuj zimny popiół cienką warstwą na kwaśnej glebie, ale nie pod rośliny lubiące kwaśne podłoże i nie na grządki ziemniaków. Popiołu jest więcej niż z brykietu drzewnego, więc popielnik trzeba częściej opróżniać.',
@@ -1652,7 +1644,7 @@ const pl: Dictionary = {
 
   'peat.teaser.title': 'Dostępny także brykiet torfowy',
   'peat.teaser.text':
-    'Do pieców i kotłów na paliwo stałe: długie, równe spalanie przez całą noc. Cena na zapytanie.',
+    'Do pieców i kotłów na paliwo stałe: długie, równe spalanie przez całą noc. Cena: {price} {perTon}. {vatNote}',
   'peat.teaser.link': 'Zobacz brykiet torfowy',
 };
 
@@ -2015,19 +2007,16 @@ const it: Dictionary = {
 
   'peat.meta.title': 'Bricchetti di torba disponibili — KR Wood Estonia',
   'peat.meta.description':
-    'Bricchetti di torba per casa e industria: combustione lunga e regolare, circa 4,2 kWh/kg, basso tenore di zolfo. Disponibili in Estonia, prezzo su richiesta.',
+    'Bricchetti di torba per casa e industria: combustione lunga e regolare, circa 4,2 kWh/kg, basso tenore di zolfo. Disponibili in Estonia, 1000 kg per bancale.',
 
   'peat.stock': 'Disponibili a magazzino',
   'peat.hero.title': 'Bricchetti di torba',
   'peat.hero.titleAccent': 'Calore lungo e costante per casa e industria',
   'peat.hero.lead':
     'Il bricchetto di torba è torba essiccata e pressata ad alta pressione in un blocco compatto e regolare, che prende fuoco facilmente da un fuoco già avviato e arde lentamente per ore. Una sola carica mantiene calde stufa o caldaia per tutta la notte.',
-  'peat.price.value': 'Su richiesta',
-  'peat.price.note':
-    'Il prezzo dipende dalla quantità e dall’indirizzo di consegna. Inviaci una richiesta e ti risponderemo con un preventivo.',
   'peat.hero.ctaPrimary': 'Richiedi un preventivo',
   'peat.hero.ctaWhatsapp': 'Chiedi su WhatsApp',
-  'peat.whatsappMessage': 'Buongiorno! Vorrei un preventivo per i bricchetti di torba.',
+  'peat.whatsappMessage': 'Buongiorno! Vorrei ordinare i bricchetti di torba.',
 
   'peat.row.form': 'Forma',
   'peat.row.burn': 'Durata di combustione',
@@ -2159,7 +2148,7 @@ const it: Dictionary = {
     'Entrambi sono adatti a stufe e caldaie a combustibile solido caricate a mano. I bricchetti di legno danno un po’ più di calore per chilogrammo ({woodCalorific}, contro {calorific} della torba), bruciano più caldi e più in fretta, con una fiamma più viva, e lasciano poca cenere. I bricchetti di torba ardono più a lungo e in modo più uniforme, quindi sono la scelta migliore per la notte, ma lasciano sensibilmente più cenere. Molti li combinano: legno per scaldare in fretta, torba per mantenere il calore per ore.',
   'peat.faq.q5': 'Quanto costano i bricchetti di torba?',
   'peat.faq.a5':
-    'Il prezzo è su richiesta: dipende dalla quantità e dall’indirizzo di consegna. Inviaci una richiesta o un messaggio su WhatsApp e ti risponderemo con un preventivo. I bricchetti di torba sono disponibili a magazzino.',
+    'I bricchetti di torba costano {price} {perTon}, cioè un bancale ({packaging}). {vatNote} Per un preventivo preciso, indicaci la quantità desiderata e l’indirizzo di consegna. I bricchetti di torba sono disponibili a magazzino.',
   'peat.faq.q6': 'La cenere dei bricchetti di torba si può usare in giardino?',
   'peat.faq.a6':
     'Sì, con moderazione. La cenere è ricca di calcio ({calcium}) e fortemente alcalina (pH {ph}), quindi in giardino agisce soprattutto come la calce; contiene poco potassio e poco azoto. Spargi la cenere fredda in uno strato sottile sui terreni acidi, ma non sotto le piante acidofile né sulle aiuole di patate. È più abbondante di quella dei bricchetti di legno, quindi il cassetto della cenere va svuotato più spesso.',
@@ -2177,7 +2166,7 @@ const it: Dictionary = {
 
   'peat.teaser.title': 'Disponibili anche i bricchetti di torba',
   'peat.teaser.text':
-    'Per stufe e caldaie a combustibile solido: una combustione lunga e regolare per tutta la notte. Prezzo su richiesta.',
+    'Per stufe e caldaie a combustibile solido: una combustione lunga e regolare per tutta la notte. Prezzo: {price} {perTon}. {vatNote}',
   'peat.teaser.link': 'Scopri i bricchetti di torba',
 };
 
