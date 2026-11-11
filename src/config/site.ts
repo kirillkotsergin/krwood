@@ -106,7 +106,8 @@ export const siteConfig: SiteConfig = {
 
   // The warehouse building, from the Estonian address register (Maa-amet
   // In-ADS, building ME00966727), 11.11.2026. The register now lists the
-  // building as "Saha põik 4"; "Saha tee 18d" is its previous address.
+  // building as "Saha põik 4"; "Saha tee 18d" is its previous address. The
+  // owner keeps Saha tee 18d on the site (decided 11.11.2026).
   geo: { latitude: 59.430213, longitude: 24.956551 },
   priceRange: '',
 

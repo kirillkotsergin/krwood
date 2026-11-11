@@ -185,7 +185,7 @@ const et = {
   'packaging.bigbag.spec3': 'Põhjaluuk tühjendamiseks',
   'packaging.delivery.title': 'Tarne ja eksport',
   'packaging.delivery.desc':
-    'Kohaletoimetamine kogu Eestis, sh Tallinnas ja Harjumaal, ning Baltikumis. Kauba saab ka ise peale võtta meie laost Loos, Tallinna külje all. Ekspordime konteinerite ja täisautokoormustega ka mujale Euroopasse.',
+    'Kohaletoimetamine kogu Eestis, sh Tallinnas ja Harjumaal, ning Baltikumis. Kauba saab ka ise peale võtta meie laost Loos, Tallinna külje all. Ekspordime konteinerite ja täisautokoormustega ka mis tahes muusse riiki.',
   'packaging.delivery.spec1': 'Tarne üle Eesti',
   'packaging.delivery.spec2': 'Baltikum ja EL',
   'packaging.delivery.spec3': 'Täisautokoormused 24 t',
@@ -214,7 +214,7 @@ const et = {
     'Hoidke pelleteid kuivas: niiskus kahjustab pelleteid ja vähendab nende kütteväärtust. Meie alused on kile all ja ilmastikukindlad, kuid avatud kotte ja Big Bage tasub hoida siseruumis või katuse all.',
   'faq.q6': 'Kuhu te pelleteid tarnite?',
   'faq.a6':
-    'Toimetame pelletid kohale üle Eesti, sealhulgas Tallinnasse ja kogu Harjumaale, ning Baltikumis. Kauba saab ka ise peale võtta meie laost Loos, Tallinna külje all. Ekspordime ka konteinerite ja täisautokoormustega (24 t) mujale Euroopasse.',
+    'Toimetame pelletid kohale üle Eesti, sealhulgas Tallinnasse ja kogu Harjumaale, ning Baltikumis. Kauba saab ka ise peale võtta meie laost Loos, Tallinna külje all. Ekspordime ka konteinerite ja täisautokoormustega (24 t) mis tahes riiki.',
   'faq.q7': 'Kas pelletid sisaldavad lisaaineid?',
   'faq.a7':
     'Ei. Pelletid pressitakse värskest okaspuidu saepurust (mänd, kuusk) ilma liimide, sideainete ja keemiliste lisaaineteta — see on 100% looduslik ja taastuv kütus.',
@@ -633,7 +633,7 @@ type Dictionary = Record<TranslationKey, string>;
 const en: Dictionary = {
   'meta.title': 'Premium Wood Pellets ENplus A1 | KR Wood Estonia',
   'meta.description':
-    'ENplus A1 certified wood pellets, 6 mm and 8 mm. High heat output, low ash, 100% natural softwood. Delivery across Estonia, the Baltics and the EU.',
+    'ENplus A1 certified wood pellets, 6 mm and 8 mm. High heat output, low ash, 100% natural softwood. Delivery across Estonia and export to any country.',
   'meta.ogAlt': 'KR Wood premium wood pellets',
 
   'a11y.skipToContent': 'Skip to main content',
@@ -739,9 +739,9 @@ const en: Dictionary = {
   'packaging.bigbag.spec3': 'Bottom discharge spout',
   'packaging.delivery.title': 'Delivery and export',
   'packaging.delivery.desc':
-    'Delivery throughout Estonia, including Tallinn and Harju County, and the Baltics — or collect from our warehouse in Loo, just outside Tallinn. We also export by container and full truckload across Europe.',
+    'Delivery throughout Estonia, including Tallinn and Harju County, and the Baltics — or collect from our warehouse in Loo, just outside Tallinn. We also export by container and full truckload to any country.',
   'packaging.delivery.spec1': 'Estonia-wide delivery',
-  'packaging.delivery.spec2': 'Baltics and EU',
+  'packaging.delivery.spec2': 'Export worldwide',
   'packaging.delivery.spec3': 'Full truckloads, 24 t',
   'packaging.cta': 'Request a price quote',
 
@@ -764,7 +764,7 @@ const en: Dictionary = {
     'Keep pellets dry: moisture damages pellets and lowers their calorific value. Our pallets are shrink-wrapped and weatherproof, but opened bags and Big Bags are best kept indoors or under a roof.',
   'faq.q6': 'Where do you deliver wood pellets?',
   'faq.a6':
-    'We deliver throughout Estonia, Tallinn and Harju County included, and the Baltics, and export by container and full truckload (24 t) across Europe. You can also collect from our warehouse in Loo, just outside Tallinn.',
+    'We deliver throughout Estonia, Tallinn and Harju County included, and the Baltics, and export by container and full truckload (24 t) to any country. You can also collect from our warehouse in Loo, just outside Tallinn.',
   'faq.q7': 'Do the pellets contain additives?',
   'faq.a7':
     'No. The pellets are pressed from fresh softwood sawdust (pine, spruce) with no glues, binding agents or chemical additives — a 100% natural, renewable fuel.',
@@ -1145,9 +1145,9 @@ const en: Dictionary = {
 /* -------------------------------------------------------------------------- */
 
 const pl: Dictionary = {
-  'meta.title': 'Pellet drzewny premium ENplus A1 | KR Wood Estonia',
+  'meta.title': 'Pellet drzewny ENplus A1 z dostawą do Polski | KR Wood',
   'meta.description':
-    'Pellet drzewny ENplus A1, 6 mm i 8 mm. Wysoka wartość opałowa, niska zawartość popiołu, 100% naturalne drewno iglaste. Dostawa na terenie UE.',
+    'Pellet drzewny ENplus A1 z Estonii, 6 mm i 8 mm. Wysoka wartość opałowa, niska zawartość popiołu, 100% drewno iglaste. Dostawa do Polski i całej UE.',
   'meta.ogAlt': 'KR Wood pellet drzewny premium',
 
   'a11y.skipToContent': 'Przejdź do treści głównej',
@@ -1252,11 +1252,11 @@ const pl: Dictionary = {
   'packaging.bigbag.spec1': 'Worek 1000 kg',
   'packaging.bigbag.spec2': 'Uchwyty do podnoszenia',
   'packaging.bigbag.spec3': 'Wysyp dolny',
-  'packaging.delivery.title': 'Dostawa i eksport',
+  'packaging.delivery.title': 'Dostawa do Polski i eksport',
   'packaging.delivery.desc':
-    'Dostawa na terenie całej Estonii i krajów bałtyckich, a także odbiór własny z naszego magazynu w Loo pod Tallinnem. Eksportujemy również w kontenerach i pełnych ładunkach samochodowych do całej Europy.',
-  'packaging.delivery.spec1': 'Dostawa w całej Estonii',
-  'packaging.delivery.spec2': 'Kraje bałtyckie i UE',
+    'Dostarczamy pellet do Polski i do każdego innego kraju, w kontenerach i pełnymi ładunkami samochodowymi. Na terenie Estonii i krajów bałtyckich dowozimy na miejsce, możliwy jest też odbiór własny z naszego magazynu w Loo pod Tallinnem.',
+  'packaging.delivery.spec1': 'Dostawa do Polski',
+  'packaging.delivery.spec2': 'Estonia, kraje bałtyckie i UE',
   'packaging.delivery.spec3': 'Pełne ładunki 24 t',
   'packaging.cta': 'Zapytaj o wycenę',
 
@@ -1279,7 +1279,7 @@ const pl: Dictionary = {
     'Pellet trzeba chronić przed wilgocią: wilgoć niszczy pellet i obniża jego wartość opałową. Nasze palety są foliowane i odporne na warunki atmosferyczne, ale otwarte worki i big bagi najlepiej trzymać w pomieszczeniu lub pod dachem.',
   'faq.q6': 'Dokąd dostarczacie pellet drzewny?',
   'faq.a6':
-    'Dostarczamy na terenie całej Estonii i krajów bałtyckich, a w kontenerach i pełnymi ładunkami (24 t) eksportujemy do całej Europy. Możliwy jest też odbiór własny z naszego magazynu w Loo pod Tallinnem.',
+    'Dostarczamy pellet drzewny do Polski i do każdego innego kraju, w kontenerach i pełnymi ładunkami (24 t). Na terenie Estonii i krajów bałtyckich dowozimy na miejsce, możliwy jest też odbiór własny z naszego magazynu w Loo pod Tallinnem.',
   'faq.q7': 'Czy pellet zawiera dodatki?',
   'faq.a7':
     'Nie. Pellet jest prasowany ze świeżych trocin drewna iglastego (sosna, świerk), bez klejów, środków wiążących i dodatków chemicznych — to w 100% naturalne, odnawialne paliwo.',
@@ -1773,7 +1773,7 @@ const it: Dictionary = {
   'packaging.bigbag.spec3': 'Scarico dal fondo',
   'packaging.delivery.title': 'Consegna in Italia e in Europa',
   'packaging.delivery.desc':
-    'Consegniamo in Italia, in container e a carico completo, così come in Estonia, nei Paesi baltici e nel resto d’Europa. È possibile anche il ritiro presso il nostro magazzino di Loo, alle porte di Tallinn.',
+    'Consegniamo in Italia, in container e a carico completo, così come in Estonia, nei Paesi baltici e in qualsiasi altro paese. È possibile anche il ritiro presso il nostro magazzino di Loo, alle porte di Tallinn.',
   'packaging.delivery.spec1': 'Consegna in Italia',
   'packaging.delivery.spec2': 'Estonia, Paesi baltici e UE',
   'packaging.delivery.spec3': 'Bilico completo da 24 t',
@@ -1798,7 +1798,7 @@ const it: Dictionary = {
     'Il pellet va tenuto all’asciutto: l’umidità lo danneggia e ne riduce il potere calorifico. I nostri bancali sono cellofanati e protetti dalle intemperie, ma i sacchi aperti e i big bag vanno conservati al chiuso o sotto una tettoia.',
   'faq.q6': 'Dove consegnate il pellet di legno?',
   'faq.a6':
-    'Consegniamo in Italia, in container e a carico completo (24 t), così come in Estonia, nei Paesi baltici e nel resto d’Europa. È possibile anche il ritiro presso il nostro magazzino di Loo, alle porte di Tallinn.',
+    'Consegniamo in Italia, in container e a carico completo (24 t), così come in Estonia, nei Paesi baltici e in qualsiasi altro paese. È possibile anche il ritiro presso il nostro magazzino di Loo, alle porte di Tallinn.',
   'faq.q7': 'Il pellet contiene additivi?',
   'faq.a7':
     'No. Il pellet è prodotto con segatura fresca di conifera (pino, abete rosso), senza colle, leganti o additivi chimici: un combustibile naturale al 100% e rinnovabile.',

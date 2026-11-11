@@ -48,13 +48,19 @@ in `<head>` together, across all three locales.
 | `profiles` | Äriregister and inforegister.ee entries — JSON-LD `sameAs` only, not in the footer |
 
 The address register (Maa-amet In-ADS) now lists the building as **Saha põik 4**
-and keeps **Saha tee 18d** as its previous address. The site still uses Saha
-tee 18d; if the owner switches, change `address.street` here and the same
-address in Google Business Profile and anywhere else it is published.
+and keeps **Saha tee 18d** as its previous address. The owner decided on
+11.11.2026 to keep **Saha tee 18d** on the site. If that ever changes, edit
+`address.street` here and the same address in Google Business Profile and
+anywhere else it is published, so the three never disagree.
 
 Customers can **collect from the warehouse in Loo** (owner, 11.11.2026). The
 delivery card, the "where do you deliver" FAQ answer and the peat page's
 closing call to action say so in every language.
+
+**Wood pellets ship to any country**, Poland and Italy included (owner,
+11.11.2026). The Polish landing page names Poland in its title, description,
+delivery card and FAQ; the Italian one already led with Italy. Peat
+briquettes make no export promise — the owner has not confirmed one.
 
 Two fields are still unset and degrade gracefully:
 
