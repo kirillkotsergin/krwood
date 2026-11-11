@@ -14,7 +14,6 @@ import {
   localizePath,
   fillPlaceholders,
 } from '../i18n/utils';
-import { languageTags } from '../i18n/ui';
 import { siteConfig } from '../config/site';
 import {
   ORGANIZATION_ID,
@@ -196,7 +195,6 @@ const productSchema = {
   url: pageUrl,
   category: 'Biofuel / Industrial raw material',
   material: t('lignin.value.origin'),
-  inLanguage: languageTags[lang],
   brand: { '@id': ORGANIZATION_ID },
   manufacturer: { '@id': ORGANIZATION_ID },
   additionalProperty: buildAdditionalProperties(specRows),
@@ -209,6 +207,8 @@ const productSchema = {
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
+  // Referenced by the page's WebPage node (Layout.astro) as its `breadcrumb`.
+  '@id': `${pageUrl}#breadcrumb`,
   itemListElement: [
     {
       '@type': 'ListItem',

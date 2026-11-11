@@ -61,7 +61,7 @@ const otherLanguages = (Object.keys(languages) as Lang[])
 
 const body = `# ${siteConfig.name} — ${PELLET_CERTIFICATION.name} wood pellets, lignin pellets and peat briquettes from Estonia
 
-> ${siteConfig.legalName}: ${t('meta.description')} ${t('lignin.meta.description')}
+> ${siteConfig.legalName}: ${t('meta.description')} ${t('lignin.meta.description')} ${t('peat.meta.description')}
 
 Generated from the same data as ${siteConfig.domain}, so every figure below matches the website.
 

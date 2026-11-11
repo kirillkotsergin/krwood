@@ -29,7 +29,6 @@ import {
   buildReviewNodes,
 } from '../config/schema';
 import { peatSpecRows, type SpecRow } from '../config/specs';
-import { languageTags } from '../i18n/ui';
 import Faq from './Faq.astro';
 import PriceTag from './PriceTag.astro';
 
@@ -159,7 +158,6 @@ const productSchema = {
   url: pageUrl,
   category: 'Solid fuel / Peat briquettes',
   material: t('peat.value.material'),
-  inLanguage: languageTags[lang],
   brand: { '@id': ORGANIZATION_ID },
   additionalProperty: buildAdditionalProperties(peatSpecRows(t)),
   // Price, currency, VAT and InStock — see buildOffer in src/config/schema.ts.
@@ -171,6 +169,8 @@ const productSchema = {
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
+  // Referenced by the page's WebPage node (Layout.astro) as its `breadcrumb`.
+  '@id': `${pageUrl}#breadcrumb`,
   itemListElement: [
     {
       '@type': 'ListItem',

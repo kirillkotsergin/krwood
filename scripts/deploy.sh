@@ -78,9 +78,10 @@ SMOKE_PATHS=(
 # and nothing in a build log or a 200-only smoke test will tell you it did.
 # Search Console will, six weeks later.
 #
-# All of these were measured on 2026-09-23, right after the .htaccess rewrite
-# that collapsed them. A rule added above them that inserts one more hop is a
-# regression even though every URL still ends at 200, so it fails the deploy.
+# All of these were measured on 2026-09-23 (and tightened on 2026-11-11), right
+# after the .htaccess rewrites that collapsed them. A rule added above them that
+# inserts one more hop is a regression even though every URL still ends at
+# 200, so it fails the deploy.
 REDIRECT_CHECKS=(
   "$SITE_URL/ligniin-pelletid|1|$SITE_URL/ligniin-pelletid/"
   "$SITE_URL/index.html|1|$SITE_URL/"
@@ -89,11 +90,14 @@ REDIRECT_CHECKS=(
   "$SITE_URL/en/lignin-pellets|1|$SITE_URL/en/lignin-pellets/"
   "$SITE_URL/sitemap.xml|1|$SITE_URL/sitemap-index.xml"
 
-  # Crossing both scheme and host costs exactly two: one hop to https + apex,
-  # one for the trailing slash. Three means the HTTPS force and the www strip
-  # have come apart into sequential rules again, which is how this started.
-  "http://www.krwood.ee/ligniin-pelletid|2|$SITE_URL/ligniin-pelletid/"
-  "http://www.krwood.ee/lignin-pellets|2|$SITE_URL/ligniin-pelletid/"
+  # Crossing scheme and host costs one hop too, since 2026-11-11: the moved
+  # URLs are matched before the origin rules, and a slashless directory gets
+  # https, apex and slash in a single redirect. Two means those rules have
+  # been reordered or split again.
+  "http://www.krwood.ee/ligniin-pelletid|1|$SITE_URL/ligniin-pelletid/"
+  "http://www.krwood.ee/lignin-pellets|1|$SITE_URL/ligniin-pelletid/"
+  "http://krwood.ee/en|1|$SITE_URL/en/"
+  "https://www.krwood.ee/sitemap.xml|1|$SITE_URL/sitemap-index.xml"
 )
 
 # A path that does not exist must 404, not redirect. If the trailing-slash
@@ -353,6 +357,15 @@ TMPDIR_LOCAL="$(mktemp -d)"
 LOCAL_TAR="$TMPDIR_LOCAL/dist.tar.gz"
 trap 'rm -rf "$TMPDIR_LOCAL"' EXIT
 
+# What the search engines see before this deploy replaces it: the IndexNow
+# step at the end submits only the URLs whose lastmod differs from this. If
+# the snapshot fails, that step falls back to submitting every URL.
+LIVE_SITEMAP="$TMPDIR_LOCAL/live-sitemap.json"
+if [ "$DRY_RUN" -eq 0 ]; then
+  node "$PROJECT_ROOT/scripts/indexnow.mjs" --snapshot "$LIVE_SITEMAP" 2>&1 | sed 's/^/    /' \
+    || warn "No snapshot of the live sitemap; IndexNow will be sent every URL."
+fi
+
 tar -czf "$LOCAL_TAR" -C "$DIST" .
 info "archive ................. $(du -h "$LOCAL_TAR" | cut -f1)"
 
@@ -448,7 +461,7 @@ fi
 # ---------------------------------------------------------------------------
 
 step "Notifying IndexNow"
-node "$PROJECT_ROOT/scripts/indexnow.mjs" 2>&1 | sed 's/^/    /' \
+node "$PROJECT_ROOT/scripts/indexnow.mjs" --since "$LIVE_SITEMAP" 2>&1 | sed 's/^/    /' \
   || warn "IndexNow submission failed; the deploy itself is fine. Retry with: node scripts/indexnow.mjs"
 
 printf '\n%sDeployed.%s %s is live.\n' "$C_OK" "$C_OFF" "$SITE_URL"

@@ -192,18 +192,40 @@ export function buildProduct(product: SchemaProduct): Record<string, unknown> {
   };
 }
 
+/** The one `WebSite` node, referenced by every page's `WebPage`. */
+export const WEBSITE_ID = `${siteConfig.url}/#website`;
+
+/**
+ * `priceRange` for the business: the cheapest to the dearest product, per
+ * tonne, from src/config/pricing.ts — so it follows a price change by itself.
+ * `siteConfig.priceRange`, when set, overrides it.
+ */
+export function buildPriceRange(): string {
+  if (siteConfig.priceRange !== '') return siteConfig.priceRange;
+  const amounts = Object.values(pricing).map((entry) => entry.amount);
+  const low = Math.min(...amounts);
+  const high = Math.max(...amounts);
+  const span = low === high ? `${low}` : `${low}–${high}`;
+  return `${span} ${PRICE_CURRENCY}/t`;
+}
+
 export interface SchemaOptions {
-  /** Localised page description. */
+  /**
+   * Description of the business. The same on every page of a locale: this
+   * node is one entity site-wide, and what a single page is about belongs
+   * on that page's `WebPage` node instead.
+   */
   description: string;
-  /** Absolute canonical URL of the current page. */
-  pageUrl: string;
   /** Absolute URL of the social preview image. */
   imageUrl: string;
   /** Absolute URL of the logo. */
   logoUrl: string;
-  /** BCP 47 tag of the current page, e.g. "et-EE". */
-  locale: string;
-  /** Localised product entries for the offer catalogue. */
+  /**
+   * Localised product entries for the offer catalogue. Pass them only on
+   * the landing page, which shows all four products and their prices; any
+   * other page gets no catalogue, because Google requires marked-up products
+   * to be visible on the page that carries them.
+   */
   products: SchemaProduct[];
   /** Localised heading for the offer catalogue, e.g. "Tooted". */
   offerCatalogName: string;
@@ -218,12 +240,13 @@ export function buildLocalBusinessSchema(options: SchemaOptions): Record<string,
     '@id': ORGANIZATION_ID,
 
     // --- Identity ---------------------------------------------------------
+    // No mainEntityOfPage and no inLanguage: the first would claim the
+    // business is what every page is about, product pages included, and the
+    // second is not a property of Organization at all.
     name: siteConfig.name,
     legalName: siteConfig.legalName,
     description: options.description,
     url: siteConfig.url,
-    mainEntityOfPage: options.pageUrl,
-    inLanguage: options.locale,
 
     logo: {
       '@type': 'ImageObject',
@@ -298,15 +321,22 @@ export function buildLocalBusinessSchema(options: SchemaOptions): Record<string,
     // --- Products ---------------------------------------------------------
     // Every catalogue entry is a priced Offer wrapping a Product that carries
     // its own priced Offer, so neither node is ever missing `offers` or
-    // `price` however a consumer walks the graph.
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: options.offerCatalogName,
-      itemListElement: options.products.map((product) => ({
-        ...buildOffer(product.key, product.url),
-        itemOffered: buildProduct(product),
-      })),
-    },
+    // `price` however a consumer walks the graph. Landing page only — see
+    // `products` in SchemaOptions.
+    ...(options.products.length > 0
+      ? {
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: options.offerCatalogName,
+            itemListElement: options.products.map((product) => ({
+              ...buildOffer(product.key, product.url),
+              itemOffered: buildProduct(product),
+            })),
+          },
+        }
+      : {}),
+
+    priceRange: buildPriceRange(),
 
     // Recommended fields are emitted only when the data is actually known —
     // an empty or invented value is worse than an absent one.
@@ -319,7 +349,64 @@ export function buildLocalBusinessSchema(options: SchemaOptions): Record<string,
           },
         }
       : {}),
-    ...(siteConfig.priceRange !== '' ? { priceRange: siteConfig.priceRange } : {}),
     ...(socialLinks.length > 0 ? { sameAs: socialLinks.map((link) => link.url) } : {}),
+  };
+}
+
+/**
+ * The site itself. Google reads `name` and `alternateName` from this node
+ * for the site name shown above a result.
+ */
+export function buildWebSiteSchema(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': WEBSITE_ID,
+    url: `${siteConfig.url}/`,
+    name: siteConfig.name,
+    alternateName: siteConfig.legalName,
+    publisher: { '@id': ORGANIZATION_ID },
+    inLanguage: Object.values(languageTags),
+  };
+}
+
+export interface WebPageOptions {
+  /** Absolute canonical URL. */
+  url: string;
+  /** The page's <title>. */
+  name: string;
+  /** The page's meta description. */
+  description: string;
+  /** BCP 47 tag of the page. */
+  locale: string;
+  /** Absolute URL of the page's preview image. */
+  imageUrl: string;
+  /** `@id` of what the page is about — the product, on a product page. */
+  mainEntityId?: string;
+  /** `@id` of the page's BreadcrumbList, where it has one. */
+  breadcrumbId?: string;
+}
+
+/**
+ * The page as a page: what it is called, what it says, which language it is
+ * in and what it is about. This is where the per-page facts live, so the
+ * business node can stay the same everywhere.
+ */
+export function buildWebPageSchema(options: WebPageOptions): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${options.url}#webpage`,
+    url: options.url,
+    name: options.name,
+    description: options.description,
+    inLanguage: options.locale,
+    isPartOf: { '@id': WEBSITE_ID },
+    publisher: { '@id': ORGANIZATION_ID },
+    primaryImageOfPage: { '@type': 'ImageObject', url: options.imageUrl },
+    ...(options.mainEntityId !== undefined
+      ? { mainEntity: { '@id': options.mainEntityId } }
+      : { about: { '@id': ORGANIZATION_ID } }),
+    ...(options.breadcrumbId !== undefined ? { breadcrumb: { '@id': options.breadcrumbId } } : {}),
   };
 }

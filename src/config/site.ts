@@ -58,7 +58,9 @@ export interface SiteConfig {
   geo: { latitude: number; longitude: number } | null;
   /**
    * Google's LocalBusiness guidance lists `priceRange` as recommended.
-   * Free text: '€€', 'Quote on request', etc. Empty string omits it.
+   * Free text: '€€', 'Quote on request', etc. Empty string (the default)
+   * derives it from src/config/pricing.ts — '390–420 EUR/t' — see
+   * buildPriceRange() in src/config/schema.ts.
    */
   priceRange: string;
   /** Year the company was founded, or null to show only the current year. */

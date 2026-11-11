@@ -5,6 +5,8 @@
  *   1. Every Schema.org `Product` node, on every page, has an `offers` object
  *      carrying a numeric `price` and `priceCurrency: EUR`. These are the two
  *      fields Search Console reports as "Missing field" when they are absent.
+ *      And each page marks up exactly the products it shows — see
+ *      `expectedProducts()` below.
  *   2. Every product page in every locale renders a visible price, with the
  *      unit, and the wholesale note wherever the price has a minimum order.
  *
@@ -39,7 +41,7 @@ const PRICED_PAGES = {
   'it/bricchetti-di-torba/index.html': 1,
 };
 
-/** Every page, including those that only carry the business's offer catalogue. */
+/** Every page, including those that must carry no product at all. */
 const ALL_PAGES = [
   ...Object.keys(PRICED_PAGES),
   'privacy/index.html',
@@ -48,6 +50,29 @@ const ALL_PAGES = [
   'it/privacy/index.html',
   '404.html',
 ];
+
+/** PRODUCT_IDS in src/config/pricing.ts. */
+const ID = {
+  pellet6mm: 'https://krwood.ee/#product-pellet-6mm',
+  pellet8mm: 'https://krwood.ee/#product-pellet-8mm',
+  lignin: 'https://krwood.ee/#product-lignin-pellets',
+  peat: 'https://krwood.ee/#product-peat-briquettes',
+};
+
+/**
+ * Which products each page may mark up — exactly the ones it shows. Google
+ * requires marked-up products to be visible on the page, so the business's
+ * four-product catalogue is on the landing pages only, a product page marks
+ * up its own product, and the privacy and 404 pages carry none.
+ */
+function expectedProducts(page) {
+  if (/^((en|pl|it)\/)?index\.html$/.test(page)) {
+    return [ID.pellet6mm, ID.pellet8mm, ID.lignin, ID.peat];
+  }
+  if (/lign/.test(page)) return [ID.lignin];
+  if (/(turba|peat|torf|torba)/.test(page)) return [ID.peat];
+  return [];
+}
 
 const PRICE_LABELS = ['Hind', 'Price', 'Cena', 'Prezzo'];
 const PRICE_UNITS = ['tonni kohta', 'per tonne', 'za tonę', 'a tonnellata'];
@@ -97,7 +122,11 @@ console.log('Structured data');
 for (const page of ALL_PAGES) {
   const products = collectProducts(jsonLdBlocks(read(page)));
 
-  if (products.length === 0) fail(page, 'no Product nodes at all');
+  const want = expectedProducts(page);
+  const have = [...new Set(products.map((product) => product['@id']))].sort();
+  if (JSON.stringify(have) !== JSON.stringify([...want].sort())) {
+    fail(page, `marks up ${JSON.stringify(have)}, expected ${JSON.stringify([...want].sort())}`);
+  }
 
   for (const product of products) {
     const offer = product.offers;

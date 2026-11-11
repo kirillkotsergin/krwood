@@ -119,8 +119,9 @@ ratings than there are reviews to back it.
 ### Adding a priced product
 
 1. Add an entry to `pricing` and to `PRODUCT_IDS` in `src/config/pricing.ts`.
-2. Add it to the `products` array in `src/layouts/Layout.astro`, so it joins
-   the business's `hasOfferCatalog`.
+2. Add it to the `catalogue` array in `src/layouts/Layout.astro`, so it joins
+   the business's `hasOfferCatalog` on the landing page, and add its id to
+   `expectedProducts()` in `scripts/check-pricing.mjs`.
 3. Render `<PriceTag product="yourKey" />` wherever the product is shown.
 4. `npm run build && npm run check:pricing`.
 
@@ -145,18 +146,38 @@ Verified in the build output and live:
 
 | | |
 | --- | --- |
-| hreflang | `et` / `en` / `pl` / `it` + `x-default`, language-only (no region subtags, which would exclude speakers outside that country). Identical in the HTML and the sitemap |
-| Canonicals | Self-referencing on all 12 indexable pages |
+| hreflang | `et` / `en` / `pl` / `it` + `x-default`, language-only (no region subtags, which would exclude speakers outside that country). Identical in the HTML and the sitemap. `x-default` is **English** (`xDefaultLang` in `src/i18n/ui.ts`): it is the version for a visitor whose language the site lacks, and a buyer in Latvia or Germany reads English, not Estonian |
+| Canonicals | Self-referencing on all 16 indexable pages |
+| Robots meta | `index, follow, max-snippet:-1, max-image-preview:large` on every indexable page — full snippets are what AI answers quote from |
 | Titles | ≤60 chars, keyword-first, unique |
 | Descriptions | ≤158 chars, unique |
 | Headings | Exactly one H1 per page, no skipped levels |
 | `404.html` | `noindex, follow`, no canonical, no hreflang, excluded from the sitemap |
-| Sitemap | `/sitemap-index.xml`, `lastmod` on every URL, `/sitemap.xml` 301s to it |
-| Social | `og:image` is a **1200×630 PNG** — SVG is not rendered by Facebook, LinkedIn or X |
+| Sitemap | `/sitemap-index.xml`, `/sitemap.xml` 301s to it. `lastmod` is when the page last **changed**, not when it was built — see below |
+| Social | `og:image` is **1200×630** raster — SVG is not rendered by Facebook, LinkedIn or X. The lignin pages use a JPEG crop of their product photo (made at build time in `Layout.astro`); the rest use `public/images/og-image.png`. `og:locale:alternate` lists the other three locales |
+| Icons | `favicon.svg` is the source; `favicon.ico` (16/32/48) and `apple-touch-icon.png` (180, full-bleed) are rendered from it by `node scripts/make-icons.mjs` and committed. Re-run after changing the SVG |
 | Search engine verification | `google-site-verification` and Bing's `msvalidate.01` meta tags in `src/layouts/Layout.astro` |
 | FAQ | Wood pellets on the landing page, lignin on its own page, each with `FAQPage` JSON-LD mirroring the visible text. Shared `src/components/Faq.astro`; prices and specs are filled in from config |
 | `/llms.txt` | Plain-text summary for AI assistants, generated at build time by `src/pages/llms.txt.ts` from the same translations and config as the pages |
-| IndexNow | `scripts/indexnow.mjs` submits every sitemap URL after each successful deploy (Bing, which also feeds ChatGPT search). The key file `public/<key>.txt` must stay in place |
+| IndexNow | `scripts/indexnow.mjs` submits the **changed** URLs after each successful deploy (Bing, which also feeds ChatGPT search). The key file `public/<key>.txt` must stay in place |
+
+### `lastmod` and IndexNow: only what changed
+
+Stamping all sixteen URLs with the build time on every deploy told search
+engines that everything had changed, every time; Google stops trusting a
+`lastmod` like that, and Bing asks for only changed URLs over IndexNow.
+
+- **`lastmod`** — at build time `lastmodFor()` in `astro.config.ts` hashes
+  each built page (ignoring the fingerprinted `/_astro/` names and the
+  generator tag) and keeps the previous date while the hash is unchanged.
+  Hashes and dates live in **`sitemap-lastmod.json`**, which the build
+  rewrites when a page changes. **Commit it** with the change: without it the
+  next build, on any machine, dates every page as new.
+- **IndexNow** — `deploy.sh` saves the live sitemap's `lastmod`s before the
+  upload (`indexnow.mjs --snapshot`), and after the deploy submits only the
+  URLs that are new, have a different `lastmod`, or were removed
+  (`indexnow.mjs --since`). Nothing changed → nothing is sent. If the snapshot
+  cannot be taken it falls back to every URL.
 
 ### The host's AI-crawler block, and the override for it
 
@@ -259,9 +280,24 @@ the site does, but it is not legal advice.
 `src/config/schema.ts` builds a `LocalBusiness` node (a subtype of
 `Organization`, so it satisfies both). It carries `legalName`, `vatID`,
 `taxID`, a `PostalAddress`, `openingHoursSpecification`, a `ContactPoint`, an
-`areaServed` list and a localised `hasOfferCatalog` for all three products.
+`areaServed` list and `priceRange` (derived from `pricing.ts`: `390–420 EUR/t`).
 The `@id` is a stable `https://krwood.ee/#organization` so every page and
-locale references one entity.
+locale references one entity — which is why its `description` is the
+business's own (`meta.description`), the same on every page of a locale, and
+why it has no `mainEntityOfPage`.
+
+Every indexable page adds two more nodes:
+
+| Node | Carries |
+| --- | --- |
+| `WebSite` (`/#website`) | `name` "KR Wood", `alternateName` "KR-Wood OÜ" — what Google shows as the site name |
+| `WebPage` (`<url>#webpage`) | The page's own title, description, language and preview image. On the lignin and peat pages `mainEntity` points at that page's `Product` and `breadcrumb` at its `BreadcrumbList`; elsewhere `about` points at the business |
+
+**Products are marked up only where they are shown.** The four-product
+`hasOfferCatalog` is on the landing pages only (they show all four prices);
+the lignin and peat pages each carry their own `Product`; the privacy and 404
+pages carry none. Google requires marked-up content to be visible on the
+page. `npm run check:pricing` fails if a page marks up any other set.
 
 Validate after changes:
 [validator.schema.org](https://validator.schema.org/) ·
@@ -286,10 +322,12 @@ construction:
 `npm run check:pricing` walks every built page and fails if any `Product`
 node anywhere in the graph is missing an offer, a numeric price or `EUR`.
 
-Two optional properties are deliberately absent because the values aren't
-known: **`geo`** (latitude/longitude — wrong coordinates are worse than none)
-and **`priceRange`**. Google's Rich Results Test flags both as
-*recommended*, not errors.
+Still absent because the values aren't known: **`geo`** (latitude/longitude
+— wrong coordinates are worse than none; `siteConfig.geo`), **`sameAs`**
+(fill `siteConfig.social`, ideally plus the Äriregister page and the Google
+Business Profile), and a product **`image`** for the 6 mm, 8 mm and peat
+products — Google's merchant listings require one, and there are no photos
+yet. Rich Results Test flags `geo` and `sameAs` as *recommended*, not errors.
 
 ### Hero image
 
@@ -430,7 +468,7 @@ src/
 public/                       Copied verbatim into dist/
 ├── .htaccess                 Apache: HTTPS, caching, compression, CSP
 ├── contact.php               Form handler (the only dynamic endpoint)
-├── favicon.svg
+├── favicon.svg               Icon source; favicon.ico and apple-touch-icon.png are made from it
 ├── robots.txt
 └── images/
 ```

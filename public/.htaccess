@@ -43,23 +43,11 @@ Options -Indexes
   # Let Let's Encrypt / cPanel AutoSSL validate without interference.
   RewriteRule ^\.well-known/ - [L]
 
-  # ---- Canonical origin: https://krwood.ee, reached in ONE hop -----------
-  # The host is named literally rather than reflected from %{HTTP_HOST}.
-  # Reflecting it made http://www.krwood.ee/x a three-hop chain (https-www ->
-  # non-www -> trailing slash) and let a forged Host header turn this into an
-  # open redirect. Every hop is a chance for Googlebot to time out, which is
-  # what a GSC "Redirect error" is usually reporting.
+  # ---- Known moved URLs --------------------------------------------------
+  # These come before the origin rules below. Every target is an absolute
+  # https://krwood.ee URL, so a request on http:// or www. lands on the final
+  # page in one hop instead of first being sent to https + apex.
 
-  # Not secure -> canonical origin, dropping any www. in the same hop.
-  RewriteCond %{HTTPS} !=on
-  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
-  RewriteRule ^ https://krwood.ee%{REQUEST_URI} [R=301,L]
-
-  # Already secure but on www. -> canonical origin.
-  RewriteCond %{HTTP_HOST} ^www\. [NC]
-  RewriteRule ^ https://krwood.ee%{REQUEST_URI} [R=301,L]
-
-  # --- Legacy slug redirects ---------------------------------------------
   # The lignin pages briefly used the English slug in every language. Both
   # rules are anchored, so /en/lignin-pellets/ (still the live English URL)
   # is not caught by either. Targets are absolute so the hop can never be
@@ -73,6 +61,33 @@ Options -Indexes
 
   # Crawlers and audit tools probe /sitemap.xml; ours is a sitemap index.
   RewriteRule ^sitemap\.xml$ https://krwood.ee/sitemap-index.xml [R=301,L]
+
+  # ---- Canonical origin: https://krwood.ee, reached in ONE hop -----------
+  # The host is named literally rather than reflected from %{HTTP_HOST}.
+  # Reflecting it made http://www.krwood.ee/x a three-hop chain (https-www ->
+  # non-www -> trailing slash) and let a forged Host header turn this into an
+  # open redirect. Every hop is a chance for Googlebot to time out, which is
+  # what a GSC "Redirect error" is usually reporting.
+
+  # A page directory asked for without its trailing slash, on http:// or on
+  # www. -> the canonical URL with the slash, in the same single hop. Without
+  # this, http://krwood.ee/en went to https://krwood.ee/en first and only then
+  # to /en/ via the trailing-slash rule at the foot: two hops.
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.+[^/])$ https://krwood.ee/$1/ [R=301,L]
+
+  # Not secure -> canonical origin, dropping any www. in the same hop.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://krwood.ee%{REQUEST_URI} [R=301,L]
+
+  # Already secure but on www. -> canonical origin.
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^ https://krwood.ee%{REQUEST_URI} [R=301,L]
 
   # ---- Trailing slash ----------------------------------------------------
   # Astro's `directory` build format makes every page a directory, so the
@@ -224,8 +239,10 @@ ErrorDocument 404 /404.html
   AddType font/woff2 .woff2
   AddType application/manifest+json .webmanifest
   # llms.txt, robots.txt and the IndexNow key are UTF-8 (≥, –, €); without a
-  # charset some clients guess Latin-1 and garble them.
-  AddCharset UTF-8 .txt
+  # charset some clients guess Latin-1 and garble them. The pages and the
+  # sitemap are UTF-8 too: the header says so before any byte is parsed,
+  # rather than leaving it to <meta charset> or the XML declaration.
+  AddCharset UTF-8 .txt .html .xml
 </IfModule>
 
 # --------------------------------------------------------------------------

@@ -2,16 +2,27 @@
 import '@fontsource-variable/inter';
 import '../styles/global.css';
 
+import { getImage } from 'astro:assets';
+
 import {
   getLangFromUrl,
   useTranslations,
   getAlternateLinks,
   localizePath,
   routePath,
+  stripLocale,
+  findRouteKey,
+  type Lang,
 } from '../i18n/utils';
-import { languageTags, ogLocales, defaultLang } from '../i18n/ui';
+import { languageTags, ogLocales, xDefaultLang } from '../i18n/ui';
 import { siteConfig } from '../config/site';
-import { buildLocalBusinessSchema } from '../config/schema';
+import { PRODUCT_IDS } from '../config/pricing';
+import {
+  buildLocalBusinessSchema,
+  buildWebSiteSchema,
+  buildWebPageSchema,
+  type SchemaProduct,
+} from '../config/schema';
 import { pelletSpecRows, pelletPackagingRow, ligninSpecRows, peatSpecRows } from '../config/specs';
 // The same hashed asset the lignin page shows. There is no photo of the wood
 // pellets yet; add one to src/assets/ and pass it below the same way.
@@ -47,8 +58,54 @@ const origin = Astro.site ?? new URL(Astro.url.origin);
 const canonical = new URL(Astro.url.pathname, origin).href;
 const alternates = noindex ? [] : getAlternateLinks(Astro.url, Astro.site);
 
+// Which page this is, in any locale: 'home', 'ligninPellets', ... The 404
+// page maps to nothing.
+const routeKey = noindex ? undefined : findRouteKey(stripLocale(Astro.url.pathname));
+
 // Raster, not SVG: Facebook, LinkedIn and X do not render SVG link previews.
-const ogImage = new URL('/images/og-image.png', origin).href;
+// A page with a photo of its own product previews with that photo, cropped
+// to the 1200×630 the networks expect and re-encoded as JPEG, which every
+// link-preview fetcher reads (WebP is not universal yet).
+interface OgImage {
+  url: string;
+  width: number;
+  height: number;
+  type: string;
+  alt: string;
+}
+
+let og: OgImage = {
+  url: new URL('/images/og-image.png', origin).href,
+  width: 1200,
+  height: 630,
+  type: 'image/png',
+  alt: t('meta.ogAlt'),
+};
+
+if (routeKey === 'ligninPellets') {
+  const crop = await getImage({
+    src: ligninPhoto,
+    width: 1200,
+    height: 630,
+    fit: 'cover',
+    format: 'jpg',
+    quality: 82,
+  });
+  og = {
+    url: new URL(crop.src, origin).href,
+    width: 1200,
+    height: 630,
+    type: 'image/jpeg',
+    alt: t('lignin.meta.imageAlt'),
+  };
+}
+
+const ogImage = og.url;
+
+// Every other locale, for og:locale:alternate.
+const otherOgLocales = (Object.keys(ogLocales) as Lang[])
+  .filter((code) => code !== lang)
+  .map((code) => ogLocales[code]);
 
 // Where each product can be enquired about, in the visitor's locale. The two
 // pellet diameters live in the landing page's product cards; lignin and peat
@@ -66,53 +123,82 @@ const pelletProperties = (diameter: string) => [
   ...pelletSpecRows(t),
 ];
 
-// Schema.org LocalBusiness — see src/config/schema.ts
-const jsonLd = buildLocalBusinessSchema({
-  description: pageDescription,
-  pageUrl: canonical,
-  imageUrl: ogImage,
+// The four products, as the landing page shows them. Only the landing page
+// carries this catalogue — see `products` in src/config/schema.ts. The lignin
+// and peat pages each mark up their own product instead.
+const catalogue: SchemaProduct[] = [
+  {
+    key: 'pellet6mm',
+    name: t('specs.d6.title'),
+    description: t('specs.d6.desc'),
+    url: `${landingUrl}#pellet-6mm`,
+    material: t('specs.value.material'),
+    properties: pelletProperties('6 mm'),
+    enplusCertified: true,
+  },
+  {
+    key: 'pellet8mm',
+    name: t('specs.d8.title'),
+    description: t('specs.d8.desc'),
+    url: `${landingUrl}#pellet-8mm`,
+    material: t('specs.value.material'),
+    properties: pelletProperties('8 mm'),
+    enplusCertified: true,
+  },
+  {
+    key: 'ligninPellets',
+    name: t('lignin.hero.title'),
+    description: t('lignin.meta.description'),
+    url: ligninUrl,
+    material: t('lignin.value.origin'),
+    // Not ENplus certified — no hasCertification.
+    properties: [diameterRow(t('lignin.value.diameter')), ...ligninSpecRows(t)],
+    image: new URL(ligninPhoto.src, origin).href,
+  },
+  {
+    key: 'peatBriquettes',
+    name: t('peat.hero.title'),
+    description: t('peat.meta.description'),
+    url: peatUrl,
+    material: t('peat.value.material'),
+    properties: peatSpecRows(t),
+  },
+];
+
+// Schema.org LocalBusiness — see src/config/schema.ts. The description is
+// the business's, not the page's, so the entity reads the same on every page.
+const businessSchema = buildLocalBusinessSchema({
+  description: t('meta.description'),
+  imageUrl: new URL('/images/og-image.png', origin).href,
   logoUrl: new URL('/favicon.svg', origin).href,
-  locale: languageTags[lang],
   offerCatalogName: t('specs.eyebrow'),
-  products: [
-    {
-      key: 'pellet6mm',
-      name: t('specs.d6.title'),
-      description: t('specs.d6.desc'),
-      url: `${landingUrl}#pellet-6mm`,
-      material: t('specs.value.material'),
-      properties: pelletProperties('6 mm'),
-      enplusCertified: true,
-    },
-    {
-      key: 'pellet8mm',
-      name: t('specs.d8.title'),
-      description: t('specs.d8.desc'),
-      url: `${landingUrl}#pellet-8mm`,
-      material: t('specs.value.material'),
-      properties: pelletProperties('8 mm'),
-      enplusCertified: true,
-    },
-    {
-      key: 'ligninPellets',
-      name: t('lignin.hero.title'),
-      description: t('lignin.meta.description'),
-      url: ligninUrl,
-      material: t('lignin.value.origin'),
-      // Not ENplus certified — no hasCertification.
-      properties: [diameterRow(t('lignin.value.diameter')), ...ligninSpecRows(t)],
-      image: new URL(ligninPhoto.src, origin).href,
-    },
-    {
-      key: 'peatBriquettes',
-      name: t('peat.hero.title'),
-      description: t('peat.meta.description'),
-      url: peatUrl,
-      material: t('peat.value.material'),
-      properties: peatSpecRows(t),
-    },
-  ],
+  products: routeKey === 'home' ? catalogue : [],
 });
+
+// What each product page is about. The ids match the Product nodes those
+// pages emit, and the BreadcrumbList id the same components give theirs.
+const mainEntityId =
+  routeKey === 'ligninPellets'
+    ? PRODUCT_IDS.ligninPellets
+    : routeKey === 'peatBriquettes'
+      ? PRODUCT_IDS.peatBriquettes
+      : undefined;
+
+const jsonLd = noindex
+  ? [businessSchema]
+  : [
+      businessSchema,
+      buildWebSiteSchema(),
+      buildWebPageSchema({
+        url: canonical,
+        name: pageTitle,
+        description: pageDescription,
+        locale: languageTags[lang],
+        imageUrl: ogImage,
+        mainEntityId,
+        breadcrumbId: mainEntityId !== undefined ? `${canonical}#breadcrumb` : undefined,
+      }),
+    ];
 ---
 
 <!doctype html>
@@ -132,10 +218,27 @@ const jsonLd = buildLocalBusinessSchema({
     <meta name="description" content={pageDescription} />
 
     {noindex && <meta name="robots" content="noindex, follow" />}
+    {/* Full-length snippets and large image previews: what AI answers and Discover quote from */}
+    {
+      !noindex && (
+        <meta
+          name="robots"
+          content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+        />
+      )
+    }
     {!noindex && <link rel="canonical" href={canonical} />}
 
+    {/*
+      favicon.ico for the clients that ask for /favicon.ico directly and do
+      not read <link> (Bing, some AI chat citations); sizes="32x32" keeps
+      browsers that understand SVG on the SVG. iOS ignores an SVG
+      apple-touch-icon, hence the PNG. Both are generated from favicon.svg by
+      scripts/make-icons.mjs.
+    */}
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#1c5c41" />
 
     {/* Locale alternates — omitted on noindex pages */}
@@ -149,7 +252,7 @@ const jsonLd = buildLocalBusinessSchema({
         <link
           rel="alternate"
           hreflang="x-default"
-          href={new URL(localizePath(Astro.url.pathname, defaultLang), origin).href}
+          href={new URL(localizePath(Astro.url.pathname, xDefaultLang), origin).href}
         />
       )
     }
@@ -161,17 +264,26 @@ const jsonLd = buildLocalBusinessSchema({
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={ogLocales[lang]} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:alt" content={t('meta.ogAlt')} />
+    {
+      !noindex &&
+        otherOgLocales.map((code) => <meta property="og:locale:alternate" content={code} />)
+    }
+    <meta property="og:image" content={og.url} />
+    <meta property="og:image:width" content={String(og.width)} />
+    <meta property="og:image:height" content={String(og.height)} />
+    <meta property="og:image:type" content={og.type} />
+    <meta property="og:image:alt" content={og.alt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={og.url} />
+    <meta name="twitter:image:alt" content={og.alt} />
 
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {
+      jsonLd.map((node) => (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(node)} />
+      ))
+    }
 
     {/*
       Marks the document as JS-capable before first paint, so scroll-reveal

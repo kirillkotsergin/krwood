@@ -51,6 +51,14 @@ export const ogLocales = {
 
 export const defaultLang = 'et' as const;
 
+/**
+ * The locale `hreflang="x-default"` points at — the version for a visitor
+ * whose language the site does not have. English, not the default locale:
+ * a buyer in Latvia, Lithuania, Finland or Germany reads English, not
+ * Estonian. Read by Layout.astro and the sitemap in astro.config.ts.
+ */
+export const xDefaultLang = 'en' as const;
+
 export type Lang = keyof typeof languages;
 
 /* -------------------------------------------------------------------------- */
@@ -395,7 +403,7 @@ const et = {
   // {price}, {perTon}, {vatNote} and the spec placeholders are filled in by
   // LigninPellets.astro from src/config/pricing.ts and the values above.
   'lignin.faq.eyebrow': 'KKK',
-  'lignin.faq.title': 'Korduma kippuvad küsimused',
+  'lignin.faq.title': 'Korduma kippuvad küsimused ligniini pelletite kohta',
   'lignin.faq.q1': 'Mis on ligniini pelletid?',
   'lignin.faq.a1':
     'Ligniini pelletid on 8 mm läbimõõduga pelletid, mis on pressitud ligniinist — looduslikust polümeerist, mis seob puidukiud omavahel ja annab puidule jäikuse. Ligniin eraldatakse tselluloositööstuse ja biorafineerimise kõrvalsaadusena ning see sisaldab kilogrammi kohta rohkem energiat kui teda ümbritsev tselluloos.',
@@ -572,7 +580,7 @@ const et = {
   'peat.ash.row.ph': 'pH',
 
   'peat.faq.eyebrow': 'KKK',
-  'peat.faq.title': 'Korduma kippuvad küsimused',
+  'peat.faq.title': 'Korduma kippuvad küsimused turbabriketi kohta',
   'peat.faq.q1': 'Mis on turbabrikett?',
   'peat.faq.a1':
     'Turbabrikett on freesturbast valmistatud tahke kütus: turvas kuivatatakse ja pressitakse suure rõhu all tihedateks brikettideks ilma sideaineteta. Selle kütteväärtus on {calorific} ning tonn brikette annab umbes sama palju soojust kui {equiv} maagaasi.',
@@ -937,7 +945,7 @@ const en: Dictionary = {
     'Oil spill cleanup — lignin acts as a hydrophobic sorbent, binding hydrocarbons on water and in soil',
 
   'lignin.faq.eyebrow': 'FAQ',
-  'lignin.faq.title': 'Frequently asked questions',
+  'lignin.faq.title': 'Frequently asked questions about lignin pellets',
   'lignin.faq.q1': 'What are lignin pellets?',
   'lignin.faq.a1':
     'Lignin pellets are 8 mm pellets pressed from lignin — the natural polymer that binds wood fibres together and makes wood rigid. Lignin is recovered as a by-product of pulp and biorefinery processes, and it carries more energy per kilogram than the cellulose around it.',
@@ -1095,7 +1103,7 @@ const en: Dictionary = {
   'peat.ash.row.ph': 'pH',
 
   'peat.faq.eyebrow': 'FAQ',
-  'peat.faq.title': 'Frequently asked questions',
+  'peat.faq.title': 'Frequently asked questions about peat briquettes',
   'peat.faq.q1': 'What is a peat briquette?',
   'peat.faq.a1':
     'A peat briquette is a solid fuel made from milled peat, dried and pressed under high pressure into dense briquettes without any binder. Its calorific value is {calorific}, and a tonne of briquettes gives about as much heat as {equiv} of natural gas.',
@@ -1452,7 +1460,7 @@ const pl: Dictionary = {
     'Usuwanie wycieków ropy — lignina działa jako sorbent hydrofobowy, wiążąc węglowodory na wodzie i w glebie',
 
   'lignin.faq.eyebrow': 'FAQ',
-  'lignin.faq.title': 'Najczęściej zadawane pytania',
+  'lignin.faq.title': 'Najczęściej zadawane pytania o pellet ligninowy',
   'lignin.faq.q1': 'Czym jest pellet ligninowy?',
   'lignin.faq.a1':
     'Pellet ligninowy to pellet o średnicy 8 mm sprasowany z ligniny — naturalnego polimeru, który spaja włókna drewna i nadaje mu sztywność. Lignina jest pozyskiwana jako produkt uboczny przemysłu celulozowego i biorafinerii i zawiera więcej energii w kilogramie niż otaczająca ją celuloza.',
@@ -1611,7 +1619,7 @@ const pl: Dictionary = {
   'peat.ash.row.ph': 'pH',
 
   'peat.faq.eyebrow': 'FAQ',
-  'peat.faq.title': 'Najczęściej zadawane pytania',
+  'peat.faq.title': 'Najczęściej zadawane pytania o brykiet torfowy',
   'peat.faq.q1': 'Czym jest brykiet torfowy?',
   'peat.faq.a1':
     'Brykiet torfowy to paliwo stałe z torfu frezowego, wysuszonego i sprasowanego pod wysokim ciśnieniem w zwarte brykiety bez lepiszczy. Jego wartość opałowa wynosi {calorific}, a tona brykietu daje mniej więcej tyle ciepła co {equiv} gazu ziemnego.',
@@ -1974,7 +1982,7 @@ const it: Dictionary = {
     'Bonifica degli sversamenti di petrolio: la lignina agisce da assorbente idrofobo e trattiene gli idrocarburi in acqua e nel suolo',
 
   'lignin.faq.eyebrow': 'FAQ',
-  'lignin.faq.title': 'Domande frequenti',
+  'lignin.faq.title': 'Domande frequenti sul pellet di lignina',
   'lignin.faq.q1': 'Che cos’è il pellet di lignina?',
   'lignin.faq.a1':
     'Il pellet di lignina è un pellet da 8 mm di diametro ottenuto pressando la lignina, il polimero naturale che lega tra loro le fibre del legno e lo rende rigido. La lignina si recupera come sottoprodotto dell’industria della cellulosa e delle bioraffinerie e contiene più energia per chilogrammo della cellulosa che la circonda.',
@@ -2133,7 +2141,7 @@ const it: Dictionary = {
   'peat.ash.row.ph': 'pH',
 
   'peat.faq.eyebrow': 'FAQ',
-  'peat.faq.title': 'Domande frequenti',
+  'peat.faq.title': 'Domande frequenti sui bricchetti di torba',
   'peat.faq.q1': 'Che cos’è il bricchetto di torba?',
   'peat.faq.a1':
     'Il bricchetto di torba è un combustibile solido ricavato dalla torba fresata, essiccata e pressata ad alta pressione in bricchetti compatti senza leganti. Il suo potere calorifico è di {calorific} e una tonnellata di bricchetti dà all’incirca lo stesso calore di {equiv} di gas naturale.',
