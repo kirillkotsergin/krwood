@@ -52,8 +52,8 @@ export interface SiteConfig {
   vatNumber: string;
   /**
    * Decimal coordinates of the yard. Recommended by Google for LocalBusiness
-   * results. Left null until the real values are known — a pin on the wrong
-   * building is worse than no pin.
+   * results. null omits them — a pin on the wrong building is worse than no
+   * pin, so take them from the address register, not a guess on a map.
    */
   geo: { latitude: number; longitude: number } | null;
   /**
@@ -66,6 +66,13 @@ export interface SiteConfig {
   /** Year the company was founded, or null to show only the current year. */
   foundedYear: number | null;
   openingHours: OpeningHoursConfig;
+  /**
+   * Pages about the company on other sites — registry and directory entries.
+   * Emitted in the JSON-LD `sameAs` (with the social profiles), which is how
+   * search engines and AI assistants tie this site to the registered company.
+   * Not shown in the footer: they are not profiles a visitor would follow.
+   */
+  profiles: readonly string[];
   /** Leave a value empty to hide that profile everywhere. */
   social: {
     facebook: string;
@@ -97,8 +104,10 @@ export const siteConfig: SiteConfig = {
   registryCode: '14459624',
   vatNumber: 'EE102060728',
 
-  // TODO: fill in from Google Maps (right-click the yard -> copy coordinates).
-  geo: null,
+  // The warehouse building, from the Estonian address register (Maa-amet
+  // In-ADS, building ME00966727), 11.11.2026. The register now lists the
+  // building as "Saha põik 4"; "Saha tee 18d" is its previous address.
+  geo: { latitude: 59.430213, longitude: 24.956551 },
   priceRange: '',
 
   // Set this once you know it and the footer shows "2018–2026" instead of
@@ -110,6 +119,11 @@ export const siteConfig: SiteConfig = {
     opens: '09:00',
     closes: '17:00',
   },
+
+  profiles: [
+    'https://ariregister.rik.ee/est/company/14459624',
+    'https://www.inforegister.ee/14459624-KR-WOOD-OU/',
+  ],
 
   // TODO: add the real profile URLs. Empty values are filtered out, so no
   // dead links appear in the footer and no junk reaches `sameAs` in JSON-LD.

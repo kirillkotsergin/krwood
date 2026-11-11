@@ -44,12 +44,23 @@ in `<head>` together, across all three locales.
 | `registryCode` | 14459624 |
 | `vatNumber` | EE102060728 |
 | `openingHours` | Mon–Fri 09:00–17:00 |
+| `geo` | 59.430213, 24.956551 — the warehouse building, from the address register (In-ADS) |
+| `profiles` | Äriregister and inforegister.ee entries — JSON-LD `sameAs` only, not in the footer |
+
+The address register (Maa-amet In-ADS) now lists the building as **Saha põik 4**
+and keeps **Saha tee 18d** as its previous address. The site still uses Saha
+tee 18d; if the owner switches, change `address.street` here and the same
+address in Google Business Profile and anywhere else it is published.
+
+Customers can **collect from the warehouse in Loo** (owner, 11.11.2026). The
+delivery card, the "where do you deliver" FAQ answer and the peat page's
+closing call to action say so in every language.
 
 Two fields are still unset and degrade gracefully:
 
-- **`social.*`** — empty strings. The footer's social row is hidden entirely
-  and `sameAs` is omitted from the JSON-LD, so no dead links ship. Fill in the
-  real profile URLs and both reappear automatically.
+- **`social.*`** — empty strings. The footer's social row is hidden entirely,
+  so no dead links ship, and `sameAs` carries only `profiles`. Fill in the
+  real profile URLs and both pick them up automatically.
 - **`foundedYear`** — `null`, so the footer shows only the current year. Set it
   to a number and the copyright renders as a range (`2018–2026`).
 
@@ -322,12 +333,11 @@ construction:
 `npm run check:pricing` walks every built page and fails if any `Product`
 node anywhere in the graph is missing an offer, a numeric price or `EUR`.
 
-Still absent because the values aren't known: **`geo`** (latitude/longitude
-— wrong coordinates are worse than none; `siteConfig.geo`), **`sameAs`**
-(fill `siteConfig.social`, ideally plus the Äriregister page and the Google
-Business Profile), and a product **`image`** for the 6 mm, 8 mm and peat
+`geo` and `sameAs` come from `siteConfig.geo` and `siteConfig.profiles` (plus
+any `social` URL). Add the Google Business Profile URL to `profiles` once it
+exists. Still absent: a product **`image`** for the 6 mm, 8 mm and peat
 products — Google's merchant listings require one, and there are no photos
-yet. Rich Results Test flags `geo` and `sameAs` as *recommended*, not errors.
+yet.
 
 ### Hero image
 

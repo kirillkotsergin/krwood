@@ -231,6 +231,9 @@ export interface SchemaOptions {
   offerCatalogName: string;
 }
 
+/** Other pages that are this business: social profiles, then registry entries. */
+const sameAs = [...socialLinks.map((link) => link.url), ...siteConfig.profiles];
+
 export function buildLocalBusinessSchema(options: SchemaOptions): Record<string, unknown> {
   const { address, openingHours } = siteConfig;
 
@@ -349,7 +352,8 @@ export function buildLocalBusinessSchema(options: SchemaOptions): Record<string,
           },
         }
       : {}),
-    ...(socialLinks.length > 0 ? { sameAs: socialLinks.map((link) => link.url) } : {}),
+    // Social profiles plus registry and directory entries (siteConfig.profiles).
+    ...(sameAs.length > 0 ? { sameAs } : {}),
   };
 }
 

@@ -67,10 +67,10 @@ export type Lang = keyof typeof languages;
 
 const et = {
   // --- SEO / document meta -------------------------------------------------
-  'meta.title': 'Premium puidugraanulid ENplus A1 | KR Wood Eesti',
+  'meta.title': 'Pelletid (puidugraanulid) ENplus A1 | KR Wood Eesti',
   'meta.description':
-    'ENplus A1 puidugraanulid 6 mm ja 8 mm. Kõrge kütteväärtus, madal tuhasisaldus, 100% looduslik okaspuit. Tarne üle Eesti ja Baltikumi.',
-  'meta.ogAlt': 'KR Wood premium puidugraanulid',
+    'ENplus A1 pelletid ehk puidugraanulid 6 mm ja 8 mm. Kõrge kütteväärtus, madal tuhasisaldus, 100% okaspuit. Tarne üle Eesti või pealevõtt Loo laost.',
+  'meta.ogAlt': 'KR Wood premium pelletid',
 
   // --- Accessibility -------------------------------------------------------
   'a11y.skipToContent': 'Liigu põhisisu juurde',
@@ -89,7 +89,7 @@ const et = {
 
   // --- Hero ----------------------------------------------------------------
   'hero.badge': 'ENplus® A1 sertifitseeritud',
-  'hero.title': 'Premium puidugraanulid',
+  'hero.title': 'Premium pelletid',
   'hero.titleAccent': 'Teie kodu soojaks',
   'hero.subtitle':
     '100% looduslik okaspuit ilma liimide ja keemiliste lisaaineteta. Kõrge kütteväärtus, madal tuhasisaldus ja ühtlane kvaliteet — soojus, mis hoiab kokku nii Teie raha kui ka loodust.',
@@ -109,7 +109,7 @@ const et = {
   'features.eyebrow': 'Miks KR Wood',
   'features.title': 'Puhas soojus, millele saate kindel olla',
   'features.subtitle':
-    'Meie graanulid pressitakse värskest okaspuidu saepurust ilma sideaineteta. Iga partii läbib kvaliteedikontrolli, et Teie katel töötaks tõrgeteta kogu kütteperioodi.',
+    'Meie pelletid pressitakse värskest okaspuidu saepurust ilma sideaineteta. Iga partii läbib kvaliteedikontrolli, et Teie katel töötaks tõrgeteta kogu kütteperioodi.',
   'features.heat.title': 'Kõrge kütteväärtus',
   'features.heat.text':
     'Üle 4,9 kWh/kg tähendab rohkem soojust iga koti kohta ja märgatavalt väiksemat kütusekulu kogu hooaja jooksul.',
@@ -125,13 +125,13 @@ const et = {
 
   // --- Specifications ------------------------------------------------------
   'specs.eyebrow': 'Tooted',
-  'specs.title': 'Graanulid ja tehnilised näitajad',
+  'specs.title': 'Pelletid ja tehnilised näitajad',
   'specs.subtitle':
     'ENplus A1 puidugraanulid kahes läbimõõdus, 6 mm ja 8 mm, ning tööstuslikuks kasutuseks mõeldud 8 mm ligniini pelletid. Valige toode vastavalt oma katlale ja kasutusotstarbele.',
-  'specs.d6.title': 'Graanulid 6 mm',
+  'specs.d6.title': 'Pelletid 6 mm',
   'specs.d6.desc': 'Universaalne valik kodukateldele, pelletikaminatele ja väiksematele süsteemidele.',
   'specs.d6.badge': 'Populaarseim',
-  'specs.d8.title': 'Graanulid 8 mm',
+  'specs.d8.title': 'Pelletid 8 mm',
   'specs.d8.desc': 'Sobib suurematele katlamajadele, tööstuslikele põletitele ja mahukale tarbimisele.',
   'specs.d8.badge': 'Tööstuslik',
   'specs.lignin.title': 'Ligniini pelletid 8 mm',
@@ -185,7 +185,7 @@ const et = {
   'packaging.bigbag.spec3': 'Põhjaluuk tühjendamiseks',
   'packaging.delivery.title': 'Tarne ja eksport',
   'packaging.delivery.desc':
-    'Kohaletoimetamine kogu Eestis ja Baltikumis. Ekspordime konteinerite ja täisautokoormustega ka mujale Euroopasse.',
+    'Kohaletoimetamine kogu Eestis, sh Tallinnas ja Harjumaal, ning Baltikumis. Kauba saab ka ise peale võtta meie laost Loos, Tallinna külje all. Ekspordime konteinerite ja täisautokoormustega ka mujale Euroopasse.',
   'packaging.delivery.spec1': 'Tarne üle Eesti',
   'packaging.delivery.spec2': 'Baltikum ja EL',
   'packaging.delivery.spec3': 'Täisautokoormused 24 t',
@@ -196,28 +196,28 @@ const et = {
   // are filled in by LandingFaq.astro from src/config/pricing.ts and the
   // values above.
   'faq.eyebrow': 'KKK',
-  'faq.title': 'Korduma kippuvad küsimused puidugraanulite kohta',
-  'faq.q1': 'Kas valida 6 mm või 8 mm graanulid?',
+  'faq.title': 'Korduma kippuvad küsimused pelletite kohta',
+  'faq.q1': 'Kas valida 6 mm või 8 mm pelletid?',
   'faq.a1':
-    'Mõlemad on sama ENplus A1 kvaliteediga: kütteväärtus {calorific}, tuhasisaldus {ash} ja niiskusesisaldus {moisture}. Erinevus on läbimõõdus. 6 mm graanulid on universaalne valik kodukateldele, pelletikaminatele ja väiksematele süsteemidele, 8 mm graanulid sobivad suurematele katlamajadele, tööstuslikele põletitele ja mahukale tarbimisele. Kahtluse korral kontrollige, millist läbimõõtu Teie katla tootja soovitab.',
+    'Mõlemad on sama ENplus A1 kvaliteediga: kütteväärtus {calorific}, tuhasisaldus {ash} ja niiskusesisaldus {moisture}. Erinevus on läbimõõdus. 6 mm pelletid on universaalne valik kodukateldele, pelletikaminatele ja väiksematele süsteemidele, 8 mm pelletid sobivad suurematele katlamajadele, tööstuslikele põletitele ja mahukale tarbimisele. Kahtluse korral kontrollige, millist läbimõõtu Teie katla tootja soovitab.',
   'faq.q2': 'Mida tähendab ENplus A1?',
   'faq.a2':
-    'ENplus on Euroopa puidugraanulite kvaliteedisertifikaat ja A1 on selle kõrgeim kvaliteediklass. See tähendab ühtlast läbimõõtu, kõrget tihedust, madalat tuhasisaldust ja minimaalset peenosakeste sisaldust — graanulid põlevad puhtalt ning katel ja korsten püsivad puhtana.',
-  'faq.q3': 'Mis on puidugraanulite hind?',
+    'ENplus on Euroopa puidugraanulite kvaliteedisertifikaat ja A1 on selle kõrgeim kvaliteediklass. See tähendab ühtlast läbimõõtu, kõrget tihedust, madalat tuhasisaldust ja minimaalset peenosakeste sisaldust — pelletid põlevad puhtalt ning katel ja korsten püsivad puhtana.',
+  'faq.q3': 'Mis on pelletite hind?',
   'faq.a3':
-    '6 mm ENplus A1 puidugraanulid maksavad {price6} {perTon} (hulgihind tellimustele alates {min} tonnist) ja 8 mm graanulid {price8} {perTon}. {vatNote} Täpse pakkumise saamiseks andke teada soovitud kogus, pakend ja tarneaadress.',
+    '6 mm ENplus A1 pelletid maksavad {price6} {perTon} (hulgihind tellimustele alates {min} tonnist) ja 8 mm pelletid {price8} {perTon}. {vatNote} Täpse pakkumise saamiseks andke teada soovitud kogus, pakend ja tarneaadress.',
   'faq.q4': 'Kas osta 15 kg kotid või Big Bag?',
   'faq.a4':
     '15 kg kotid tarnitakse alustel: 65 kotti, kokku 975 kg alusel, termokile all ja ilmastikukindlalt. Neid on mugav käsitseda ja ladustada, mistõttu sobivad need ideaalselt eramajadele. 1000 kg Big Bag on tõstesangade ja põhjaluugiga suurkott ning parim valik suurema koguse soodsaks ladustamiseks.',
-  'faq.q5': 'Kuidas puidugraanuleid hoida?',
+  'faq.q5': 'Kuidas pelleteid hoida?',
   'faq.a5':
-    'Hoidke graanuleid kuivas: niiskus kahjustab graanuleid ja vähendab nende kütteväärtust. Meie alused on kile all ja ilmastikukindlad, kuid avatud kotte ja Big Bage tasub hoida siseruumis või katuse all.',
-  'faq.q6': 'Kuhu te puidugraanuleid tarnite?',
+    'Hoidke pelleteid kuivas: niiskus kahjustab pelleteid ja vähendab nende kütteväärtust. Meie alused on kile all ja ilmastikukindlad, kuid avatud kotte ja Big Bage tasub hoida siseruumis või katuse all.',
+  'faq.q6': 'Kuhu te pelleteid tarnite?',
   'faq.a6':
-    'Toimetame graanulid kohale üle Eesti ja Baltikumis. Ekspordime ka konteinerite ja täisautokoormustega (24 t) mujale Euroopasse.',
-  'faq.q7': 'Kas graanulid sisaldavad lisaaineid?',
+    'Toimetame pelletid kohale üle Eesti, sealhulgas Tallinnasse ja kogu Harjumaale, ning Baltikumis. Kauba saab ka ise peale võtta meie laost Loos, Tallinna külje all. Ekspordime ka konteinerite ja täisautokoormustega (24 t) mujale Euroopasse.',
+  'faq.q7': 'Kas pelletid sisaldavad lisaaineid?',
   'faq.a7':
-    'Ei. Graanulid pressitakse värskest okaspuidu saepurust (mänd, kuusk) ilma liimide, sideainete ja keemiliste lisaaineteta — see on 100% looduslik ja taastuv kütus.',
+    'Ei. Pelletid pressitakse värskest okaspuidu saepurust (mänd, kuusk) ilma liimide, sideainete ja keemiliste lisaaineteta — see on 100% looduslik ja taastuv kütus.',
 
   // --- Contact -------------------------------------------------------------
   'contact.eyebrow': 'Kontakt',
@@ -254,11 +254,11 @@ const et = {
   'contact.info.country': 'Eesti',
   'contact.whatsapp': 'Kirjuta WhatsAppis',
   'contact.whatsappMessage':
-    'Tere! Sooviksin küsida pakkumist puidugraanulite kohta.',
+    'Tere! Sooviksin küsida pakkumist pelletite kohta.',
 
   // --- Footer --------------------------------------------------------------
   'footer.tagline':
-    'Premium puidugraanulid Eestist. ENplus A1 kvaliteet, usaldusväärne tarne ja aus hinnastamine.',
+    'Premium pelletid Eestist. ENplus A1 kvaliteet, usaldusväärne tarne ja aus hinnastamine.',
   'footer.navTitle': 'Navigatsioon',
   'footer.contactTitle': 'Kontakt',
   'footer.legalTitle': 'Õiguslik teave',
@@ -609,7 +609,7 @@ const et = {
 
   'peat.cta.title': 'Vajate turbabriketti?',
   'peat.cta.text':
-    'Andke teada vajalik kogus ja tarneaadress ning saadame hinna ja tarnetingimused. Turbabrikett on laos.',
+    'Andke teada vajalik kogus ja tarneaadress ning saadame hinna ja tarnetingimused. Turbabrikett on laos, kauba saab ka ise peale võtta meie laost Loos, Tallinna külje all.',
 
   'peat.teaser.title': 'Laos ka turbabrikett',
   'peat.teaser.text':
@@ -739,7 +739,7 @@ const en: Dictionary = {
   'packaging.bigbag.spec3': 'Bottom discharge spout',
   'packaging.delivery.title': 'Delivery and export',
   'packaging.delivery.desc':
-    'Delivery throughout Estonia and the Baltics. We also export by container and full truckload across Europe.',
+    'Delivery throughout Estonia, including Tallinn and Harju County, and the Baltics — or collect from our warehouse in Loo, just outside Tallinn. We also export by container and full truckload across Europe.',
   'packaging.delivery.spec1': 'Estonia-wide delivery',
   'packaging.delivery.spec2': 'Baltics and EU',
   'packaging.delivery.spec3': 'Full truckloads, 24 t',
@@ -764,7 +764,7 @@ const en: Dictionary = {
     'Keep pellets dry: moisture damages pellets and lowers their calorific value. Our pallets are shrink-wrapped and weatherproof, but opened bags and Big Bags are best kept indoors or under a roof.',
   'faq.q6': 'Where do you deliver wood pellets?',
   'faq.a6':
-    'We deliver throughout Estonia and the Baltics, and export by container and full truckload (24 t) across Europe.',
+    'We deliver throughout Estonia, Tallinn and Harju County included, and the Baltics, and export by container and full truckload (24 t) across Europe. You can also collect from our warehouse in Loo, just outside Tallinn.',
   'faq.q7': 'Do the pellets contain additives?',
   'faq.a7':
     'No. The pellets are pressed from fresh softwood sawdust (pine, spruce) with no glues, binding agents or chemical additives — a 100% natural, renewable fuel.',
@@ -1132,7 +1132,7 @@ const en: Dictionary = {
 
   'peat.cta.title': 'Need peat briquettes?',
   'peat.cta.text':
-    'Tell us how much you need and where to deliver it, and we will reply with the price and delivery terms. Peat briquettes are in stock.',
+    'Tell us how much you need and where to deliver it, and we will reply with the price and delivery terms. Peat briquettes are in stock, and you can also collect them from our warehouse in Loo, just outside Tallinn.',
 
   'peat.teaser.title': 'Also in stock: peat briquettes',
   'peat.teaser.text':
@@ -1254,7 +1254,7 @@ const pl: Dictionary = {
   'packaging.bigbag.spec3': 'Wysyp dolny',
   'packaging.delivery.title': 'Dostawa i eksport',
   'packaging.delivery.desc':
-    'Dostawa na terenie całej Estonii i krajów bałtyckich. Eksportujemy również w kontenerach i pełnych ładunkach samochodowych do całej Europy.',
+    'Dostawa na terenie całej Estonii i krajów bałtyckich, a także odbiór własny z naszego magazynu w Loo pod Tallinnem. Eksportujemy również w kontenerach i pełnych ładunkach samochodowych do całej Europy.',
   'packaging.delivery.spec1': 'Dostawa w całej Estonii',
   'packaging.delivery.spec2': 'Kraje bałtyckie i UE',
   'packaging.delivery.spec3': 'Pełne ładunki 24 t',
@@ -1279,7 +1279,7 @@ const pl: Dictionary = {
     'Pellet trzeba chronić przed wilgocią: wilgoć niszczy pellet i obniża jego wartość opałową. Nasze palety są foliowane i odporne na warunki atmosferyczne, ale otwarte worki i big bagi najlepiej trzymać w pomieszczeniu lub pod dachem.',
   'faq.q6': 'Dokąd dostarczacie pellet drzewny?',
   'faq.a6':
-    'Dostarczamy na terenie całej Estonii i krajów bałtyckich, a w kontenerach i pełnymi ładunkami (24 t) eksportujemy do całej Europy.',
+    'Dostarczamy na terenie całej Estonii i krajów bałtyckich, a w kontenerach i pełnymi ładunkami (24 t) eksportujemy do całej Europy. Możliwy jest też odbiór własny z naszego magazynu w Loo pod Tallinnem.',
   'faq.q7': 'Czy pellet zawiera dodatki?',
   'faq.a7':
     'Nie. Pellet jest prasowany ze świeżych trocin drewna iglastego (sosna, świerk), bez klejów, środków wiążących i dodatków chemicznych — to w 100% naturalne, odnawialne paliwo.',
@@ -1648,7 +1648,7 @@ const pl: Dictionary = {
 
   'peat.cta.title': 'Potrzebujesz brykietu torfowego?',
   'peat.cta.text':
-    'Podaj potrzebną ilość i adres dostawy, a prześlemy cenę i warunki dostawy. Brykiet torfowy jest dostępny od ręki.',
+    'Podaj potrzebną ilość i adres dostawy, a prześlemy cenę i warunki dostawy. Brykiet torfowy jest dostępny od ręki, możliwy jest też odbiór własny z magazynu w Loo pod Tallinnem.',
 
   'peat.teaser.title': 'Dostępny także brykiet torfowy',
   'peat.teaser.text':
@@ -1773,7 +1773,7 @@ const it: Dictionary = {
   'packaging.bigbag.spec3': 'Scarico dal fondo',
   'packaging.delivery.title': 'Consegna in Italia e in Europa',
   'packaging.delivery.desc':
-    'Consegniamo in Italia, in container e a carico completo, così come in Estonia, nei Paesi baltici e nel resto d’Europa.',
+    'Consegniamo in Italia, in container e a carico completo, così come in Estonia, nei Paesi baltici e nel resto d’Europa. È possibile anche il ritiro presso il nostro magazzino di Loo, alle porte di Tallinn.',
   'packaging.delivery.spec1': 'Consegna in Italia',
   'packaging.delivery.spec2': 'Estonia, Paesi baltici e UE',
   'packaging.delivery.spec3': 'Bilico completo da 24 t',
@@ -1798,7 +1798,7 @@ const it: Dictionary = {
     'Il pellet va tenuto all’asciutto: l’umidità lo danneggia e ne riduce il potere calorifico. I nostri bancali sono cellofanati e protetti dalle intemperie, ma i sacchi aperti e i big bag vanno conservati al chiuso o sotto una tettoia.',
   'faq.q6': 'Dove consegnate il pellet di legno?',
   'faq.a6':
-    'Consegniamo in Italia, in container e a carico completo (24 t), così come in Estonia, nei Paesi baltici e nel resto d’Europa.',
+    'Consegniamo in Italia, in container e a carico completo (24 t), così come in Estonia, nei Paesi baltici e nel resto d’Europa. È possibile anche il ritiro presso il nostro magazzino di Loo, alle porte di Tallinn.',
   'faq.q7': 'Il pellet contiene additivi?',
   'faq.a7':
     'No. Il pellet è prodotto con segatura fresca di conifera (pino, abete rosso), senza colle, leganti o additivi chimici: un combustibile naturale al 100% e rinnovabile.',
@@ -2170,7 +2170,7 @@ const it: Dictionary = {
 
   'peat.cta.title': 'Ti servono bricchetti di torba?',
   'peat.cta.text':
-    'Indicaci la quantità di cui hai bisogno e dove consegnarla: ti invieremo il prezzo e le condizioni di consegna. I bricchetti di torba sono disponibili a magazzino.',
+    'Indicaci la quantità di cui hai bisogno e dove consegnarla: ti invieremo il prezzo e le condizioni di consegna. I bricchetti di torba sono disponibili a magazzino, con possibilità di ritiro presso il nostro magazzino di Loo, alle porte di Tallinn.',
 
   'peat.teaser.title': 'Disponibili anche i bricchetti di torba',
   'peat.teaser.text':
